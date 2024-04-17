@@ -6,6 +6,7 @@ import AboutWorking from '../components/AboutWorking.vue'
 import PreviewShop from '../components/PreviewShop.vue'
 import Trend from '../components/Trend.vue'
 import ContestCom from '../components/ContestCom.vue'
+import MoreCompetitions from '@/components/MoreCompetitions.vue'
 </script>
 s
 <template>
@@ -17,7 +18,7 @@ s
     <PreviewShop />
     <Trend />
      <ContestCom />
-
+    <MoreCompetitions/>
   </main>
 </template>
 А
