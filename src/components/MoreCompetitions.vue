@@ -194,6 +194,13 @@ export default {
 
   margin-left: 89px;
   margin-bottom: 58px;
+
+  transition: .4s;
+}
+
+.more-competitions__btn:hover{
+  background: var(--lightBege);
+  color: black;
 }
 
 .more-competitions__img-coin--left {
