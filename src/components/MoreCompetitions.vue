@@ -1,6 +1,8 @@
 <template>
-  <section class="more-competitions">
-    <div @scroll="setVisible" class="more-competitions__body">
+  <section 
+  class="more-competitions">
+    <div 
+    class="more-competitions__body " ref="body">
       <h2 class="more-competitions__title">
         Еще больше конкурсов
         <span class="more-competitions__span">от Солярика </span>
@@ -12,7 +14,9 @@
         alt=""
         class="more-competitions__img"
       />
-      <div class="more-competitions__text-wrap">
+      <div 
+      :class="{ animate: animated }"
+      class="more-competitions__text-wrap">
         <p class="more-competitions__text">
           Хочешь всегда быть
           <span class="more-competitions__span more-competitions__span--center"
@@ -24,7 +28,10 @@
           >
         </p>
       </div>
-      <div class="more-competitions__text-wrap-bottom">
+      <div
+        :class="{ animate: animated }"
+        class="more-competitions__text-wrap-bottom"
+      >
         <img
           class="more-competitions__img-bottom"
           src="../assets/image/more-competitions/text-wrap-bottom.png"
@@ -42,7 +49,9 @@
         alt=""
       />
       <button class="more-competitions__btn">Подписаться на чат-бот</button>
-      <div class="more-competitions__img-tg">
+      <div 
+      :class="{ animate: animated }"
+      class="more-competitions__img-tg">
         <a href="#" class="more-competitions__link-tg">
           <svg
             width="140"
@@ -68,80 +77,36 @@
 
 <!-- Анимация появления text-wrap (на макете сначала появляется солярик, потом этот блок) -->
 <script>
-// import { ref, onMounted } from "vue";
-// import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// export default {
-//   setup() {
-//     const visible = ref(true);
-
-//     const useEffect = () => {
-//       gsap.from(".more-competitions__text-wrap", {
-//         opacity: 0,
-//         y: 800,
-//         duration: 0.4,
-
-//         scrollTrigger: {
-//           trigger: ".more-competitions__text-wrap",
-//         },
-//       });
-//       gsap.from(".more-competitions__text-wrap-bottom", {
-//         opacity: 0,
-//         y: 800,
-//         duration: 0.4,
-//         scrollTrigger: {
-//           trigger: ".more-competitions__text-wrap",
-//         },
-//       });
-//     };
-
-//     onMounted(useEffect);
-
-//     return {
-//       visible,
-//     };
-//   },
-// };
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 
 export default {
   setup() {
-    const hoverPath = (isHovered) => {
-      if (isHovered) {
-        // Действия при наведении
-        // Используйте ref для доступа к элементам DOM
-        pathWrap.value.style.fill = "var(--white)";
-        pathTg.value.style.fill = "blue";
-      } else {
-        // Действия при покидании
-        pathWrap.value.style.fill = "#1f2a3e";
-        pathTg.value.style.fill = "initial";
+    const animated = ref(false);
+
+    const setVisible = () => {
+      const elementPosition = document
+        .querySelector(".more-competitions__text-wrap")
+        .getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (elementPosition.top < windowHeight * 0.75) {
+        animated.value = true;
+        window.removeEventListener("scroll", setVisible);
       }
     };
 
-    const hoverTg = (isHovered) => {
-      if (isHovered) {
-        // Действия при наведении
-        pathTg.value.style.fill = "blue";
-        pathWrap.value.style.fill = "var(--white)";
-      } else {
-        // Действия при покидании
-        pathTg.value.style.fill = "initial";
-        pathWrap.value.style.fill = "#1f2a3e";
-      }
-    };
+    onMounted(() => {
+      setVisible();
+      window.addEventListener("scroll", setVisible);
+    });
 
-    const pathWrap = ref(null);
-    const pathTg = ref(null);
+    onUnmounted(() => {
+      window.removeEventListener("scroll", setVisible);
+    });
 
     return {
-      hoverPath,
-      hoverTg,
-      pathWrap,
-      pathTg,
+      animated,
+      setVisible,
     };
   },
 };
@@ -167,6 +132,7 @@ export default {
   margin: auto;
   box-sizing: border-box;
 }
+
 
 .more-competitions__title {
   font-family: var(--font-family);
@@ -199,8 +165,8 @@ export default {
   background-color: var(--white);
 
   border-radius: 16px;
-
-  transition: 0.4s;
+  opacity: 0;
+  transition: 0.6s;
 }
 
 .more-competitions__text {
@@ -217,8 +183,8 @@ export default {
   top: 381px;
   right: 493px;
   transform: translate(0, 60px);
-
-  transition: 0.4s;
+  opacity: 0;
+  transition: 0.6s;
 }
 
 .more-competitions__img {
@@ -277,18 +243,33 @@ export default {
   position: absolute;
   top: 407px;
   right: 17px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #fff;
 
   cursor: pointer;
+  opacity: 0;
+  transition: opacity .6s;
+}
 
-  transition: 0.4s;
+.more-competitions__img-tg:hover {
+  background-color: blue;
+  color: white;
+}
+
+.more-competitions__link-tg:hover {
+  color: white;
 }
 
 .more-competitions__link-tg {
-  color: #1F2A3E;
+  color: #1f2a3e;
   transition: 0.4s;
 }
 
-
+.animate {
+  opacity: 1;
+}
 
 /* Примерный адаптив на планшеты */
 
@@ -319,17 +300,13 @@ export default {
 
     top: 143px;
     right: 42px;
-
   }
 
   .more-competitions__img-tg {
     width: 45px;
     top: 272px;
     right: 85px;
-
-
   }
-
 
   .more-competitions__text {
     font-size: 16px;
