@@ -7,6 +7,7 @@ import PreviewShop from '../components/PreviewShop.vue'
 import Trend from '../components/Trend.vue'
 import ContestCom from '../components/ContestCom.vue'
 import MoreCompetitions from '@/components/MoreCompetitions.vue'
+import SolarisFAQ from "../components/SolarisFAQ.vue"
 </script>
 s
 <template>
@@ -19,6 +20,7 @@ s
     <Trend />
      <ContestCom />
     <MoreCompetitions/>
+    <SolarisFAQ/>
   </main>
 </template>
 А
