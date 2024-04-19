@@ -75,7 +75,6 @@
   </section>
 </template>
 
-<!-- Анимация появления text-wrap (на макете сначала появляется солярик, потом этот блок) -->
 <script>
 import { ref, onMounted, onUnmounted } from "vue";
 
