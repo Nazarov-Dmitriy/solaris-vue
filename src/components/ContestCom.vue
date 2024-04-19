@@ -10,8 +10,8 @@
         <div class="content__list">
           <div class="contest__item">
             <div class="contest__item-wraper">
-              <p class="contest__item-subtitle p1">{{ item.title }}</p>
-              <p class="contest__item-publication p2">{{ item.content }}</p>
+              <p class="contest__item-subtitle p1">{{ item.subtitle }}</p>
+              <p class="contest__item-publication p2">{{ item.publication }}</p>
             </div>
             <button
               @click="toggleContent(index)"
@@ -51,25 +51,26 @@ const isButtonActive = ref(false);
 const isContentActive = ref(false);
 const faqItems = ref([
   {
-    title: "Название конкурса",
-    content:
+    subtitle: "Название конкурса",
+    publication:
       "Дата публикации ",
   },
   {
-    title: "Название конкурса",
-    content:
+    subtitle: "Название конкурса",
+    publication:
       "Дата публикации ",
   },
   {
-    title: "Название конкурса",
-    content:
+    subtitle: "Название конкурса",
+    publication:
       "Дата публикации ",
   },
   {
-    title: "Название конкурса",
-    content:
+    subtitle: "Название конкурса",
+    publication:
       "Дата публикации ",
   },
+  
  
   
 ]);
