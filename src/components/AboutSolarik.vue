@@ -1,7 +1,7 @@
 <template>
     <section class="about-solaric">
         <div class="about-solaric__header">
-            <img src="../assets/solaric.svg" alt="" class="about-solaric-icon">
+            <img src="../assets/icon/solaric.svg" alt="" class="about-solaric-icon">
             <div>
                 <h2 class="h2">Солярики</h2>
                 <p class="h3">Школьная криптовалюта</p>

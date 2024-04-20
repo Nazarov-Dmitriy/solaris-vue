@@ -13,7 +13,7 @@
                     <img src="" alt="" class="preview-show-img">
                     <div class="preview-show__card-footer">
                         <p class="preview-show__card-subtitle p1">Сертификат АНТИДВОЙКА</p>
-                        <p class="preview-show__card-cost h2"> 200<img src="../assets/valute.svg" alt="icon valute"
+                        <p class="preview-show__card-cost h2"> 200<img src="../assets/icon/valute.svg" alt="icon valute"
                                 class="preview-show__card-icon"></p>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                     <div class="preview-show__card-footer">
                         <p class="preview-show__card-subtitle p1">Стикеры
                             с Соляриком</p>
-                        <p class="preview-show__card-cost h2"> 50<img src="../assets/valute.svg" alt="icon valute"
+                        <p class="preview-show__card-cost h2"> 50<img src="../assets/icon/valute.svg" alt="icon valute"
                                 class="preview-show__card-icon"></p>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                     <div class="preview-show__card-footer">
                         <p class="preview-show__card-subtitle p1">Значек
                             Соляриса</p>
-                        <p class="preview-show__card-cost h2">70 <img src="../assets/valute.svg" alt="icon valute"
+                        <p class="preview-show__card-cost h2">70 <img src="../assets/icon/valute.svg" alt="icon valute"
                                 class="preview-show__card-icon"></p>
                     </div>
                 </div>
