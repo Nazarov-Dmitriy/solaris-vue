@@ -8,6 +8,9 @@ import Trend from '../components/Trend.vue'
 import ContestCom from '../components/ContestCom.vue'
 import MoreCompetitions from '@/components/MoreCompetitions.vue'
 import SolarisFAQ from "../components/SolarisFAQ.vue"
+import Reviews from '@/components/Reviews.vue'
+import FeedbackForm from '@/components/FeedbackForm.vue'
+import Footer from '@/components/Footer.vue'
 </script>
 s
 <template>
@@ -21,6 +24,9 @@ s
      <ContestCom />
     <MoreCompetitions/>
     <SolarisFAQ/>
+    <Reviews/>
+    <FeedbackForm/>
+    <Footer/>
   </main>
 </template>
 А
