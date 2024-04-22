@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const textWrapBottom = document.querySelector(
     ".more-competitions__text-wrap-bottom"
   );
+  
   const img = document.querySelector(".more-competitions__img");
   const imgTg = document.querySelector(".more-competitions__img-tg");
 
