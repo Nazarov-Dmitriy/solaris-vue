@@ -1,9 +1,16 @@
 <template>
-    <section class="feedback">
+    <section class="feedback" :class="{feedback_background__animate: feedbackAnimated}">
         <div class="feedback__container">
             <div class="feedback__wrap"> 
-                <h2 class="feedback__title h2">Отзывы и предложения</h2>
-                <img src="../assets/image/feedbackform/solaric.png" alt="Солярик" class="feedback__img">
+                <h2 
+                class="feedback__title h2" 
+                :class="{feedback__animate: feedbackAnimated}"
+                >Отзывы и предложения</h2>
+                <img 
+                src="../assets/image/feedbackform/solaric.png" 
+                alt="Солярик" 
+                class="feedback__img"
+                :class="{feedback__animate: feedbackAnimated}">
             </div>
             <div class="feedback__form__container">
                 <form class="form">
@@ -83,12 +90,49 @@
     </section>
 </template>
 
-<script setup>
+<script>
+import { ref, onMounted, onUnmounted } from "vue";
+
+export default {
+  setup() {
+    const feedbackAnimated = ref(false);
+
+    const setVisible = () => {
+      const elementPosition = document
+        .querySelector(".feedback")
+        .getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (elementPosition.top < windowHeight * 0.3) {
+        feedbackAnimated.value = true;
+        window.removeEventListener("scroll", setVisible);
+      }
+    };
+
+    onMounted(() => {
+      setVisible();
+      window.addEventListener("scroll", setVisible);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("scroll", setVisible);
+    });
+
+    return {
+      feedbackAnimated,
+      setVisible,
+    };
+  },
+};
+
 </script>
 
 <style>
 .feedback {
-    background-color: var(--dark);
+  background: var(--dark);
+}
+.feedback_background__animate{
+  background: radial-gradient(28.05% 57.68% at 26.94% 50%, var(--roseBege) 0%, var(--dark) 100%);
 }
 .feedback__container {
     max-width: 1440px;
@@ -116,7 +160,8 @@
 }
 .feedback__title {
     color: var(--white);
-
+    transform: translateY(300%);
+    
     @media (max-width: 991px){
         font-size: 24px;
         line-height: 36px;
@@ -124,6 +169,13 @@
 }
 .feedback__img {
   width: 61%;
+  opacity: 0;
+  transform: translateY(100%);
+}
+.feedback__animate{
+  opacity: 1;
+  transition: all 1.5s;
+  transform: translateY(0%);
 }
 .feedback__form__container {
     width: 49%;

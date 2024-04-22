@@ -6,6 +6,7 @@
         </h2>
         <img 
         class="reviews__img" 
+        :class="{ reviews__animate: reviewsAnimated }"
         src="../assets/image/reviews/reviews.png" 
         alt="Солярик">
     </div>
@@ -103,7 +104,40 @@
   </section>
 </template>
 
-<script setup>
+<script>
+import { ref, onMounted, onUnmounted } from "vue";
+
+export default {
+  setup() {
+    const reviewsAnimated = ref(false);
+
+    const setVisible = () => {
+      const elementPosition = document
+        .querySelector(".reviews")
+        .getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (elementPosition.top < windowHeight * 0.3) {
+        reviewsAnimated.value = true;
+        window.removeEventListener("scroll", setVisible);
+      }
+    };
+
+    onMounted(() => {
+      setVisible();
+      window.addEventListener("scroll", setVisible);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("scroll", setVisible);
+    });
+
+    return {
+      reviewsAnimated,
+      setVisible,
+    };
+  },
+};
 </script>
 
 <style>
@@ -140,6 +174,8 @@
   width: calc(100% + 60px);
   margin-left: -60px;
   margin-top: -30px;
+  opacity: 0;
+  transform: translateX(-100%);
   
   @media (max-width: 991px){
     margin-left: -40px;
@@ -153,6 +189,12 @@
     margin-top: 0px;
   }
 }
+.reviews__animate{
+  opacity: 1;
+  transition: all 1.5s;
+  transform: translateX(0%);
+}
+
 .reviews__cards {
   display: grid;
   gap: 14px;
