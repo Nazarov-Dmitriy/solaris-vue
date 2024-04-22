@@ -2,41 +2,88 @@
   <section>
     <div class="contest">
       <h2 class="contest__title h2">Конкурсы сегодняшнего дня</h2>
-      <div
-        v-for="(item, index) in faqItems"
-        :key="index"
-        class="contest-container"
-      >
+      <div class="contest-container">
         <div class="content__list">
+          
           <div class="contest__item">
             <div class="contest__item-wraper">
-              <p class="contest__item-subtitle p1">{{ item.subtitle }}</p>
-              <p class="contest__item-publication p2">{{ item.publication }}</p>
+              <p class="contest__item-subtitle p1">Название конкурса</p>
+              <p class="contest__item-publication p2">Дата публикации</p>
             </div>
-            <button
-              @click="toggleContent(index)"
-              :class="{
-                'solaris__item-btn--current': isButtonActive === index,
-              }"
-              class="contest__item-btn"
-            >
-              <i 
-              :class="{ 'arrow-right--current': isButtonActive === index }"
-              class="arrow-right"></i>
+            <button class="contest__item-btn">
+              <i class="arrow-right"></i>
             </button>
           </div>
+          <div class="contest__item">
+            <div class="contest__item-wraper">
+              <p class="contest__item-subtitle p1">Название конкурса</p>
+              <p class="contest__item-publication p2">Дата публикации</p>
+            </div>
+            <button class="contest__item-btn">
+              <i class="arrow-right"></i>
+            </button>
           </div>
-        <div 
-        :class="{ 'solaris-faq-content--current': isContentActive === index }"
-        class="contest-content">
-          <h3 class="contest-content__title h3">Название конкурса</h3>
+          <div class="contest__item">
+            <div class="contest__item-wraper">
+              <p class="contest__item-subtitle p1">Название конкурса</p>
+              <p class="contest__item-publication p2">Дата публикации</p>
+            </div>
+            <button class="contest__item-btn">
+              <i class="arrow-right"></i>
+            </button>
+          </div>
+          <div class="contest__item">
+            <div class="contest__item-wraper">
+              <p class="contest__item-subtitle p1">Название конкурса</p>
+              <p class="contest__item-publication p2">Дата публикации</p>
+            </div>
+            <button class="contest__item-btn">
+              <i class="arrow-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="contest-content">
+          <h3 class="contest-content__title h3">Название конкурса1</h3>
           <div class="contest-content__subtitle">
             <p class="contest-content__subtitle-text p2">Направление</p>
             <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
           </div>
           <p class="contest-content__description p2">
             Идейные соображения высшего порядка, а также постоянный
-            количественный рост
+            оличественный рост
+          </p>
+        </div>
+        <div class="contest-content">
+          <h3 class="contest-content__title h3">Название конкурса2</h3>
+          <div class="contest-content__subtitle">
+            <p class="contest-content__subtitle-text p2">Направление</p>
+            <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
+          </div>
+          <p class="contest-content__description p2">
+            Идейные соображения высшего порядка, а также постоянный
+            оличественный рост
+          </p>
+        </div>
+        <div class="contest-content">
+          <h3 class="contest-content__title h3">Название конкурса3</h3>
+          <div class="contest-content__subtitle">
+            <p class="contest-content__subtitle-text p2">Направление</p>
+            <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
+          </div>
+          <p class="contest-content__description p2">
+            Идейные соображения высшего порядка, а также постоянный
+            оличественный рост
+          </p>
+        </div>
+        <div class="contest-content">
+          <h3 class="contest-content__title h3">Название конкурса4</h3>
+          <div class="contest-content__subtitle">
+            <p class="contest-content__subtitle-text p2">Направление</p>
+            <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
+          </div>
+          <p class="contest-content__description p2">
+            Идейные соображения высшего порядка, а также постоянный
+            оличественный рост
           </p>
         </div>
       </div>
@@ -45,54 +92,38 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+document.addEventListener("DOMContentLoaded", function () {
+  const contestBtns = document.querySelectorAll(".contest__item-btn");
+  const contestContent = document.querySelectorAll(".contest-content");
+  const arrowRights = document.querySelectorAll(".arrow-right");
 
-const isButtonActive = ref(false);
-const isContentActive = ref(false);
-const faqItems = ref([
-  {
-    subtitle: "Название конкурса",
-    publication:
-      "Дата публикации ",
-  },
-  {
-    subtitle: "Название конкурса",
-    publication:
-      "Дата публикации ",
-  },
-  {
-    subtitle: "Название конкурса",
-    publication:
-      "Дата публикации ",
-  },
-  {
-    subtitle: "Название конкурса",
-    publication:
-      "Дата публикации ",
-  },
-  
- 
-  
-]);
+  let activeBtnIndex = null;
 
-function toggleContent(index) {
-  isButtonActive.value = index;
+  contestBtns.forEach((btn, index) => {
+    btn.addEventListener("click", function (event) {
+      event.preventDefault();
 
-  if (isContentActive === index) {
-    isContentActive.value = null;
-  } else {
-    isContentActive.value = index;
-  }
-}
+      if (activeBtnIndex !== null) {
+        contestBtns[activeBtnIndex].classList.remove(
+          "contest__item-btn--current"
+        );
+        arrowRights[activeBtnIndex].classList.remove("arrow-right--current");
+        contestContent[activeBtnIndex].classList.remove(
+          "contest-content--visible"
+        );
+      }
+
+      btn.classList.add("contest__item-btn--current");
+      arrowRights[index].classList.add("arrow-right--current");
+      contestContent[index].classList.add("contest-content--visible");
+
+      activeBtnIndex = index;
+    });
+  });
+});
 </script>
 
 <style>
-
-.solaris-faq-content--current{
-    display: flex;
-    flex-direction: column;
-}
-
 .contest {
   max-width: 1440px;
   padding: 80px 60px;
@@ -146,6 +177,17 @@ function toggleContent(index) {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: .4s;
+}
+
+.contest__item-btn--current {
+  border-radius: 100px;
+  border: none;
+  width: 32px;
+  height: 32px;
+  background: #dda06b;
+  color: var(--white);
+  transform: translateX(40px);
 }
 
 .arrow-right {
@@ -159,12 +201,29 @@ function toggleContent(index) {
   left: -1px;
 }
 
+.arrow-right--current {
+  border: solid var(--white);
+  border-width: 0 1.5px 1.5px 0;
+  transform: scale(1.5) rotate(-45deg);
+}
+
 .contest-content {
   max-width: 653px;
   height: fit-content;
   border: 2px solid var(--roseBege);
   background: var(--lightBege);
   display: none;
+  opacity: 0;
+  transition: 0.4s;
+  transition: opacity 0.4s ease;
+}
+
+.contest-content--visible {
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .contest-content__title {
