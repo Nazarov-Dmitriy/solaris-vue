@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="trend-container-img">
-                <img src="../assets/trend.png" class="trend-main-img" alt="img">
+                <img src="../assets/image/trend/trend.png" class="trend-main-img" alt="img">
             </div>
 
         </div>

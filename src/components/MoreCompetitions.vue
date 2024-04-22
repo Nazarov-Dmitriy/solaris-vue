@@ -1,31 +1,23 @@
 <template>
-  <section 
-  class="more-competitions">
-    <div 
-    class="more-competitions__body " ref="body">
+  <section class="more-competitions">
+    <div class="more-competitions__body" ref="body">
       <h2 class="more-competitions__title">
         Еще больше конкурсов
-        <span class="more-competitions__span">от Солярика </span>
-        <span class="more-competitions__span">в телеграмм - канале</span>
+        <span>от Солярика </span>
+        <span>в телеграмм - канале</span>
       </h2>
 
       <img
-        src="../assets/image/more-competitions/Солярик_утвержденный 5 (1).png"
+        src="../assets/image/more-competitions/hare.png"
         alt=""
         class="more-competitions__img"
       />
-      <div 
-      :class="{ animate: animated }"
-      class="more-competitions__text-wrap">
+      <div :class="{ animate: animated }" class="more-competitions__text-wrap">
         <p class="more-competitions__text">
           Хочешь всегда быть
-          <span class="more-competitions__span more-competitions__span--center"
-            >в курсе событий?</span
-          >
+          <span>в курсе событий?</span>
           Подпишись на наш чат-бот в
-          <span class="more-competitions__span more-competitions__span--center"
-            >телеграмм!</span
-          >
+          <span>телеграмм!</span>
         </p>
       </div>
       <div
@@ -48,13 +40,11 @@
         src="../assets/image/more-competitions/coin.png"
         alt=""
       />
-      <button class="more-competitions__btn">Подписаться на чат-бот</button>
-      <div 
-      :class="{ animate: animated }"
-      class="more-competitions__img-tg">
+      <button class="more-competitions__btn btn">Подписаться на чат-бот</button>
+      <div :class="{ animate: animated }" class="more-competitions__img-tg">
         <a href="#" class="more-competitions__link-tg">
           <svg
-            width="140"
+            width="142"
             height="140"
             viewBox="0 0 140 140"
             fill="currentColor"
@@ -76,42 +66,37 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from "vue";
+document.addEventListener("DOMContentLoaded", function () {
+  const textWrap = document.querySelector(".more-competitions__text-wrap");
+  const textWrapBottom = document.querySelector(
+    ".more-competitions__text-wrap-bottom"
+  );
+  const img = document.querySelector(".more-competitions__img");
+  const imgTg = document.querySelector(".more-competitions__img-tg");
 
-export default {
-  setup() {
-    const animated = ref(false);
+  function setVisible() {
+    const elementPosition = textWrap.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-    const setVisible = () => {
-      const elementPosition = document
-        .querySelector(".more-competitions__text-wrap")
-        .getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    if (elementPosition.top < windowHeight * 0.75) {
+      textWrap.classList.add("animate");
+      textWrapBottom.classList.add("animate");
+      img.classList.add("animate");
+      imgTg.classList.add("animate");
 
-      if (elementPosition.top < windowHeight * 0.75) {
-        animated.value = true;
-        window.removeEventListener("scroll", setVisible);
-      }
-    };
-
-    onMounted(() => {
-      setVisible();
-      window.addEventListener("scroll", setVisible);
-    });
-
-    onUnmounted(() => {
       window.removeEventListener("scroll", setVisible);
-    });
+    }
+  }
 
-    return {
-      animated,
-      setVisible,
-    };
-  },
-};
+  window.addEventListener("scroll", setVisible);
+});
 </script>
 
 <style>
+.more-competitions__img-tg.animate {
+  opacity: 1;
+  transform: translateY(20px);
+}
 .more-competitions {
   background: radial-gradient(
     65% 65% at 70% 47%,
@@ -119,6 +104,7 @@ export default {
     rgb(48, 58, 76) 100%
   );
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .more-competitions__body {
@@ -131,7 +117,6 @@ export default {
   margin: auto;
   box-sizing: border-box;
 }
-
 
 .more-competitions__title {
   font-family: var(--font-family);
@@ -146,12 +131,13 @@ export default {
   padding-bottom: 242px;
 }
 
-.more-competitions__span {
+.more-competitions__title span {
   display: block;
 }
 
-.more-competitions__span--center {
+.more-competitions__text span {
   text-align: center;
+  display: block;
 }
 
 .more-competitions__text-wrap {
@@ -159,8 +145,10 @@ export default {
   top: 264px;
   right: 512px;
 
+  max-width: 400px;
+
   transform: translate(0, 60px);
-  padding: 16px 79px;
+  padding: 16px 80px;
   background-color: var(--white);
 
   border-radius: 16px;
@@ -217,11 +205,6 @@ export default {
   transition: 0.4s;
 }
 
-.more-competitions__btn:hover {
-  background: var(--lightBege);
-  color: black;
-}
-
 .more-competitions__img-coin--left {
   width: 167px;
   height: 166px;
@@ -240,25 +223,19 @@ export default {
 
 .more-competitions__img-tg {
   position: absolute;
-  top: 407px;
-  right: 17px;
-  width: 140px;
-  height: 140px;
+  top: 400px;
+  right: 21px;
+  background-color: var(--white);
   border-radius: 50%;
-  background-color: #fff;
-
+  width: 140px;
+  height: 130px;
   cursor: pointer;
   opacity: 0;
-  transition: opacity .6s;
+  transition: opacity 0.6s;
 }
 
-.more-competitions__img-tg:hover {
-  background-color: blue;
-  color: white;
-}
-
-.more-competitions__link-tg:hover {
-  color: white;
+.more-competitions__img-tg svg {
+  transform: scale(1.03);
 }
 
 .more-competitions__link-tg {
