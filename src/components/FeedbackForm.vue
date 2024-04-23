@@ -30,6 +30,14 @@
                         </svg>                    
                     </span>
                   </div>
+                  <!-- <div class="form__error">
+                    <span class="form__icon__error">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 15H13V17H11V15ZM11 7H13V13H11V7ZM12 2C6.47 2 2 6.5 2 12C2 14.6522 3.05357 17.1957 4.92893 19.0711C5.85752 19.9997 6.95991 20.7362 8.17317 21.2388C9.38642 21.7413 10.6868 22 12 22C14.6522 22 17.1957 20.9464 19.0711 19.0711C20.9464 17.1957 22 14.6522 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM12 20C9.87827 20 7.84344 19.1571 6.34315 17.6569C4.84285 16.1566 4 14.1217 4 12C4 9.87827 4.84285 7.84344 6.34315 6.34315C7.84344 4.84285 9.87827 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12C20 14.1217 19.1571 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20Z" fill="#DE4700"/>
+                      </svg>                    
+                    </span>
+                    <p class="form__text__error">Поле заполнено некорректно</p>
+                  </div> -->
 
                   <div class="form__wrapper">
                     
@@ -49,6 +57,14 @@
                           </svg>                      
                         </span>
                       </div>
+                      <!-- <div class="form__error">
+                        <span class="form__icon__error">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 15H13V17H11V15ZM11 7H13V13H11V7ZM12 2C6.47 2 2 6.5 2 12C2 14.6522 3.05357 17.1957 4.92893 19.0711C5.85752 19.9997 6.95991 20.7362 8.17317 21.2388C9.38642 21.7413 10.6868 22 12 22C14.6522 22 17.1957 20.9464 19.0711 19.0711C20.9464 17.1957 22 14.6522 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM12 20C9.87827 20 7.84344 19.1571 6.34315 17.6569C4.84285 16.1566 4 14.1217 4 12C4 9.87827 4.84285 7.84344 6.34315 6.34315C7.84344 4.84285 9.87827 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12C20 14.1217 19.1571 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20Z" fill="#DE4700"/>
+                          </svg>                    
+                        </span>
+                        <p class="form__text__error">Поле заполнено некорректно</p>
+                      </div> -->
                     </div>
 
                     <div class="form__wrapper__half">
@@ -68,6 +84,14 @@
                           </svg>                                                  
                         </span>
                       </div>
+                      <!-- <div class="form__error">
+                        <span class="form__icon__error">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 15H13V17H11V15ZM11 7H13V13H11V7ZM12 2C6.47 2 2 6.5 2 12C2 14.6522 3.05357 17.1957 4.92893 19.0711C5.85752 19.9997 6.95991 20.7362 8.17317 21.2388C9.38642 21.7413 10.6868 22 12 22C14.6522 22 17.1957 20.9464 19.0711 19.0711C20.9464 17.1957 22 14.6522 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM12 20C9.87827 20 7.84344 19.1571 6.34315 17.6569C4.84285 16.1566 4 14.1217 4 12C4 9.87827 4.84285 7.84344 6.34315 6.34315C7.84344 4.84285 9.87827 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12C20 14.1217 19.1571 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20Z" fill="#DE4700"/>
+                          </svg>                    
+                        </span>
+                        <p class="form__text__error">Поле заполнено некорректно</p>
+                      </div> -->
                     </div>
   
                   </div>
@@ -78,10 +102,18 @@
                     name="text"
                     id="author-text" 
                     placeholder="Напишите ваше сообщение"></textarea>
+                    <!-- <div class="form__error">
+                      <span class="form__icon__error">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M11 15H13V17H11V15ZM11 7H13V13H11V7ZM12 2C6.47 2 2 6.5 2 12C2 14.6522 3.05357 17.1957 4.92893 19.0711C5.85752 19.9997 6.95991 20.7362 8.17317 21.2388C9.38642 21.7413 10.6868 22 12 22C14.6522 22 17.1957 20.9464 19.0711 19.0711C20.9464 17.1957 22 14.6522 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7362 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM12 20C9.87827 20 7.84344 19.1571 6.34315 17.6569C4.84285 16.1566 4 14.1217 4 12C4 9.87827 4.84285 7.84344 6.34315 6.34315C7.84344 4.84285 9.87827 4 12 4C14.1217 4 16.1566 4.84285 17.6569 6.34315C19.1571 7.84344 20 9.87827 20 12C20 14.1217 19.1571 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20Z" fill="#DE4700"/>
+                        </svg>                    
+                      </span>
+                      <p class="form__text__error">Поле заполнено некорректно</p>
+                    </div> -->
 
                   <div class="form__footer">
                     <button class="form__button botton btn">Отправить вопрос</button>
-                    <p class="form__footer__text">Нажимая кнопку «Отправить сообщение», я соглашаюсь с <a href="#" class="form__footer__link p2">Политикой обработки персональных данных.</a></p>
+                    <p class="form__footer__text">Нажимая кнопку «Отправить сообщение», я соглашаюсь с <a href="#" class="form__footer__link p2">Политикой обработки персональных данных</a></p>
                   </div>
 
                 </form>
@@ -133,6 +165,10 @@ export default {
 }
 .feedback_background__animate{
   background: radial-gradient(28.05% 57.68% at 26.94% 50%, var(--roseBege) 0%, var(--dark) 100%);
+  
+  @media (max-width: 576px){
+    background: radial-gradient(50% 25% at 50% 25%, var(--roseBege) 0%, var(--dark) 100%);
+  }
 }
 .feedback__container {
     max-width: 1440px;
@@ -143,13 +179,12 @@ export default {
     justify-content: space-between;
         
     @media (max-width: 991px){
-        padding-left: 40px;
-        padding-right: 40px;
+        padding: 64px 40px 64px 40px;
       }
     
       @media (max-width: 576px){
-        padding-left: 16px;
-        padding-right: 16px;
+        padding: 40px 16px 40px 16px;
+        flex-direction: column;
       }
 }
 .feedback__wrap {
@@ -157,20 +192,39 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 576px){
+    width: 100%;
+  }
 }
+
 .feedback__title {
     color: var(--white);
     transform: translateY(300%);
+    text-align: center;
     
     @media (max-width: 991px){
         font-size: 24px;
         line-height: 36px;
+        margin-bottom: 100px;
+    }
+
+    @media (max-width: 576px){
+      margin-bottom: 12px;
     }
 }
 .feedback__img {
   width: 61%;
   opacity: 0;
   transform: translateY(100%);
+
+  @media (max-width: 1158px){
+    width: 90%;
+  }
+
+  @media (max-width: 576px){
+    width: 71%;
+  }
 }
 .feedback__animate{
   opacity: 1;
@@ -179,6 +233,10 @@ export default {
 }
 .feedback__form__container {
     width: 49%;
+
+    @media (max-width: 576px){
+      width: 100%;
+    }
 }
 .form {
     display: flex;
@@ -186,12 +244,21 @@ export default {
     box-sizing: border-box;
     width: 100%;
     padding-top: 15px;
+
+    @media (max-width: 991px){
+      padding-top: 0px;
+    }
 }
 .form__wrapper{
   display: flex;
   justify-content: space-between;
   gap: 16px;
   width: 100%;
+
+  @media (max-width: 1158px){
+    flex-direction: column;
+    gap: 0px;
+  }
 }
 .form__wrapper__half{
 width: 100%;
@@ -206,8 +273,7 @@ width: 100%;
     position: relative;
     width: 100%;
 }
-.form__input,
-.form__textarea {
+.form__input{
     box-sizing: border-box;
     border: 2px solid #CBA05E;
     padding: 14px 14px;
@@ -218,11 +284,22 @@ width: 100%;
     margin-bottom: 8px;
     margin-top: 8px;
 }
-.form__input::placeholder{
+.form__input:hover{
+  background-color: var(--lightBege);
+}
+.form__input:focus{
+  background-color: var(--white);
+}
+.form__input::placeholder,
+.form__input:focus::placeholder{
     color: #CBA05E;
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
+}
+.form__input:-webkit-autofill{
+  -webkit-text-fill-color: #CBA05E !important;
+  box-shadow:inset 0 0 0 1000px var(--white);
 }
 .form__input__icon {
     position: absolute;
@@ -238,17 +315,59 @@ width: 100%;
     resize: none;
     height: 194px;
     font-family: "Inter", sans-serif;
-  }
+}
+
+/*----------------------------СТИЛИ ДЛЯ ОШИБОК------------------------------*/
+
+.form__error {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.form__icon__error {
+  width: 24px;
+  height: 24px;
+}
+.form__text__error {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--orange);  
+}
+
+.form__input__error {
+  border: 2px solid var(--orange);
+}
+
+.form__input__error:focus {
+  border: 2px solid #CBA05E;
+}
+
+.form__label__error{
+  color: var(--orange);
+}
+
 .form__footer {
   display: flex;
   align-items: center;
   gap: 24px;
   margin-top: 32px;
+
+  @media (max-width: 1158px){
+    flex-direction: column-reverse;
+    margin-top: 16px;
+  }
 }
 .form__button {
   white-space: nowrap;
   padding: 16px 28px;
 
+  @media (max-width: 1158px){
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 .form__footer__text {
   font-weight: 400;
@@ -258,5 +377,19 @@ width: 100%;
 }
 .form__footer__link{
   color: var(--white);
+
+  @media (max-width: 1158px){
+    font-size: 14px;
+  }
+
+  @media (max-width: 576px){
+    font-size: 12px;
+  }
+}
+.form__footer__link:hover{
+  color: var(--roseBege);
+}
+.form__footer__link:active{
+  color: var(--orange);
 }
 </style>
