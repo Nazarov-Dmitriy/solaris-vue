@@ -1,6 +1,6 @@
 <template>
   <section class="more-competitions">
-    <div class="more-competitions__body" ref="body">
+    <div class="more-competitions__body" >
       <h2 class="more-competitions__title">
         Еще больше конкурсов
         <span>от Солярика </span>
@@ -12,7 +12,7 @@
         alt=""
         class="more-competitions__img"
       />
-      <div :class="{ animate: animated }" class="more-competitions__text-wrap">
+      <div class="more-competitions__text-wrap">
         <p class="more-competitions__text">
           Хочешь всегда быть
           <span>в курсе событий?</span>
@@ -20,10 +20,7 @@
           <span>телеграмм!</span>
         </p>
       </div>
-      <div
-        :class="{ animate: animated }"
-        class="more-competitions__text-wrap-bottom"
-      >
+      <div class="more-competitions__text-wrap-bottom">
         <img
           class="more-competitions__img-bottom"
           src="../assets/image/more-competitions/text-wrap-bottom.png"
@@ -41,7 +38,7 @@
         alt=""
       />
       <button class="more-competitions__btn btn">Подписаться на чат-бот</button>
-      <div :class="{ animate: animated }" class="more-competitions__img-tg">
+      <div class="more-competitions__img-tg">
         <a href="#" class="more-competitions__link-tg">
           <svg
             width="142"
@@ -154,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   border-radius: 16px;
   opacity: 0;
-  transition: 0.6s;
+  transition: 1.5s;
 }
 
 .more-competitions__text {
@@ -172,7 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
   right: 493px;
   transform: translate(0, 60px);
   opacity: 0;
-  transition: 0.6s;
+  transition: 1.5s;
+
 }
 
 .more-competitions__img {
@@ -232,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
   height: 130px;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.6s;
+  transition: opacity 1.5s;
 }
 
 .more-competitions__img-tg svg {
