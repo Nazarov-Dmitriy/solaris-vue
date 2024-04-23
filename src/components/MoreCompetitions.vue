@@ -8,7 +8,7 @@
       </h2>
 
       <img
-        src="../assets/image/more-competitions/Солярик_утвержденный 5 (1).png"
+        src="../assets/image/more-competitions/hare.png"
         alt=""
         class="more-competitions__img"
       />
