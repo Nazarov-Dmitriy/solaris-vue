@@ -205,6 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
   border: solid var(--white);
   border-width: 0 1.5px 1.5px 0;
   transform: scale(1.5) rotate(-45deg);
+  margin-right: 1px;
 }
 
 .contest-content {
@@ -215,6 +216,8 @@ document.addEventListener("DOMContentLoaded", function () {
   display: none;
   opacity: 0;
   transition: 0.4s;
+  transform: translateX(40px);
+
   transition: opacity 0.4s ease;
 }
 
