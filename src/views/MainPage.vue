@@ -12,13 +12,13 @@ import SolarisFAQ from "../components/SolarisFAQ.vue"
 s
 <template>
   <main class="main-page">
-    <Header />
+    <!-- <Header />
     <Inro />
     <AboutSolarik />
     <AboutWorking />
     <PreviewShop />
     <Trend />
-     <ContestCom />
+     <ContestCom /> -->
     <MoreCompetitions/>
     <SolarisFAQ/>
   </main>
