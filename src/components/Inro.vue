@@ -3,10 +3,9 @@
         <div class="intro">
             <div class="intro__description">
                 <h1 class="intro__title h1">
-                    Двигайся к своей мечте вместе с Соляриком!
+                    Общее и дополнительное образование вместе с Соляриком!
                 </h1>
-                <p class="intro__text p1">Непрерывная система мотивации школьников к учебе, спорту труду и творчеству.
-                    Регестрируйся и получи первые Солярики</p>
+                <p class="intro__text p1">Муниципальное автономное общеобразовательное учреждение «Лицей «Солярис» – одно из современных и крупнейших учреждений Саратовской области</p>
             </div>
             <div class="intro__form-container">
                 <form action="" class="intro__form">
@@ -14,6 +13,8 @@
                     <input type="text" class="intro__input p2" placeholder="Пароль">
                     <button class="btn">Воити в кабинет</button>
                     <button class="btn-text">Забыли пароль?</button>
+                    <img class="into__bg-rays" src="../assets/image/animation-main/rays.svg" alt="rays">
+                    <img class="into__bg-hare" src="../assets/image/animation-main/hare.svg" alt="hare">
                 </form>
             </div>
         </div>
@@ -27,7 +28,8 @@
 <style>
 .wrap-container {
     width: 100%;
-    background: var(--dark)
+    background: var(--dark);
+    overflow: hidden;
 }
 
 .intro {
@@ -37,7 +39,21 @@
     display: flex;
     justify-content: space-between;
     min-height: 668px;
-    box-sizing: border-box
+    box-sizing: border-box;
+    position: relative;
+    z-index: 0;
+
+}
+
+.intro:before{
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 250px;
+    width: 100%;
+    height: 100%;    
+    background: radial-gradient(circle farthest-side at 50% 50%, rgba(221, 160, 107, 1) 0%, rgba(31, 42, 62, 1) 100%);
+    z-index: -1;
 }
 
 .intro__description {
@@ -67,6 +83,42 @@
     flex-direction: column;
     gap: 24px;
     align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+.into__bg-rays {
+    position:absolute;
+    width: 546px;
+    height: 650px;
+    top: -231px;
+    left: -374px;
+    z-index: -1;
+    rotate: -24deg;
+}
+
+.into__bg-hare {
+    position:absolute;
+    width: 379px;
+    height: 384px;
+    top: -110px;
+    left: -304px;
+    z-index: -1;
+    rotate: -24deg;
+}
+
+.intro__form::after{
+    content:'';
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: var(--dark);
+    z-index: -1;
 }
 
 .intro__input {
