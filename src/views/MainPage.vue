@@ -15,22 +15,20 @@ import Footer from '@/components/Footer.vue'
 s
 <template>
   <main class="main-page">
-     <Header />
+    <Header />
     <Inro />
     <AboutSolarik />
     <AboutWorking />
-    <PreviewShop /> 
+    <PreviewShop />
     <Trend />
-     <ContestCom />
-    <MoreCompetitions/>
-    <SolarisFAQ/>
-    <Reviews/>
-    <FeedbackForm/>
-    <Footer/>
-    <SolarisFAQ/> 
+    <ContestCom />
+    <MoreCompetitions />
+    <SolarisFAQ />
+    <Reviews />
+    <FeedbackForm />
+    <Footer />
   </main>
 </template>
-А
+
 <style>
-.main-page {}
 </style>
