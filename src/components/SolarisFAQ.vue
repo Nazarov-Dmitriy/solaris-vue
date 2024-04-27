@@ -6,48 +6,84 @@
         <div class="solaris-faq__list">
           <div class="solaris-faq__item">
             <div class="solaris-faq__item-wraper">
-              <p class="solaris-faq__item-subtitle p1">Название конкурса</p>
+              <p class="solaris-faq__item-subtitle p1">
+                Как получить доступ к личному кабинету?
+              </p>
             </div>
             <button class="solaris-faq__item-btn">
               <i class="arrow-right faq-arrow-right"></i>
             </button>
+            <div class="solaris-faq-content">
+              <p class="solaris-faq__description p2">
+                Доступ к личному кабинету выдает классный руководитель учащегося
+                с лицее «Солярис».
+              </p>
+            </div>
           </div>
           <div class="solaris-faq__item">
             <div class="solaris-faq__item-wraper">
-              <p class="solaris-faq__item-subtitle p1">Название конкурса</p>
+              <p class="solaris-faq__item-subtitle p1">
+                Часто задаваемый вопрос?
+              </p>
             </div>
             <button class="solaris-faq__item-btn">
               <i class="arrow-right faq-arrow-right"></i>
             </button>
+            <div class="solaris-faq-content">
+              <p class="solaris-faq__description p2">
+                Доступ к личному кабинету выдает классный руководитель учащегося
+                с лицее «Солярис».
+              </p>
+            </div>
           </div>
           <div class="solaris-faq__item">
             <div class="solaris-faq__item-wraper">
-              <p class="solaris-faq__item-subtitle p1">Название конкурса</p>
+              <p class="solaris-faq__item-subtitle p1">
+                Часто задаваемый вопрос?
+              </p>
             </div>
             <button class="solaris-faq__item-btn">
               <i class="arrow-right faq-arrow-right"></i>
             </button>
+            <div class="solaris-faq-content">
+              <p class="solaris-faq__description p2">
+                Доступ к личному кабинету выдает классный руководитель учащегося
+                с лицее «Солярис».
+              </p>
+            </div>
           </div>
           <div class="solaris-faq__item">
             <div class="solaris-faq__item-wraper">
-              <p class="solaris-faq__item-subtitle p1">Название конкурса</p>
+              <p class="solaris-faq__item-subtitle p1">
+                Часто задаваемый вопрос?
+              </p>
             </div>
             <button class="solaris-faq__item-btn">
               <i class="arrow-right faq-arrow-right"></i>
             </button>
+            <div class="solaris-faq-content">
+              <p class="solaris-faq__description p2">
+                Доступ к личному кабинету выдает классный руководитель учащегося
+                с лицее «Солярис».
+              </p>
+            </div>
           </div>
-        </div>
-        <div class="solaris-faq-content">
-          <p class="solaris-faq__description p2">Текст1</p>
-        </div>
-        <div class="solaris-faq-content">
-          <p class="solaris-faq__description p2">Текст2</p>
-        </div>
-        <div class="solaris-faq-content">
-          <p class="solaris-faq__description p2">Текст3</p>
-        </div>
-        <div class="solaris-faq-content">
-          <p class="solaris-faq__description p2">Текст4</p>
+          <div class="solaris-faq__item">
+            <div class="solaris-faq__item-wraper">
+              <p class="solaris-faq__item-subtitle p1">
+                Часто задаваемый вопрос?
+              </p>
+            </div>
+            <button class="solaris-faq__item-btn">
+              <i class="arrow-right faq-arrow-right"></i>
+            </button>
+            <div class="solaris-faq-content">
+              <p class="solaris-faq__description p2">
+                Доступ к личному кабинету выдает классный руководитель учащегося
+                с лицее «Солярис».
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -142,6 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
   background: #dda06b;
   color: var(--white);
   transform: translateX(40px) scale(1.15);
+  transition: 0.4s;
 }
 
 .faq-arrow-right {
@@ -188,5 +225,96 @@ document.addEventListener("DOMContentLoaded", function () {
 .faq-content--visible {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: -33px;
+  left: 608px;
+}
+
+/* Адаптив для планшетов */
+
+@media (max-width: 900px) {
+  .solaris-faq__title {
+    font-size: 24px;
+  }
+
+  .solaris-faq-container {
+    display: block;
+  }
+
+  .faq-content--visible {
+    position: static;
+    transform: translate(0);
+  }
+
+  .solaris-faq__item-btn {
+    transform: rotate(270deg);
+  }
+  .solaris__item-btn--current {
+    transform: translate(0) rotate(90deg) scale(1);
+  }
+  .solaris-faq__item-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+  }
+  .solaris__item-btn--current {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .solaris-faq__item {
+    display: block;
+  }
+
+  .solaris-faq-content{
+    margin-top: 33px;
+  }
+
+  .faq-arrow-right{
+    left: -2px;
+  }
+}
+
+/* адаптив на мобилки */
+@media (max-width: 500px) {
+  .solaris-faq-container {
+    max-width: 320px;
+  }
+
+  .solaris-faq__item {
+    display: block;
+  }
+
+  .faq-arrow-right{
+    left: -2px;
+  }
+ 
+
+  .solaris-faq__title {
+    line-height: 150%;
+    text-align: center;
+  }
+
+  .solaris-faq-content {
+    min-width: auto;
+    min-width: 288px;
+  }
+
+  .solaris-faq__item-btn {
+    min-width: 32px;
+    min-height: 32px;
+    right: -40px;
+  }
+  .solaris__item-btn--current {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 0;
+    right: -40px;
+  }
 }
 </style>

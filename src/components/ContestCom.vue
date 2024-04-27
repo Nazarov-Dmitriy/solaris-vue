@@ -203,7 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
   border: solid var(--white);
   border-width: 0 1.5px 1.5px 0;
   transform: scale(1.5) rotate(-45deg);
-  margin-right: 1px;
 }
 
 .contest-content {

@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* Примерный адаптив на планшеты */
 
-@media (max-width: 1240px) {
+@media (max-width: 1200px) {
   .more-competitions__body {
     max-width: 770px;
   }
@@ -265,7 +265,10 @@ document.addEventListener("DOMContentLoaded", function () {
     max-width: 385px;
   }
 
-  .more-competitions__span {
+  .more-competitions__title span{
+    display: block;
+  }
+  .more-competitions span {
     display: inline;
   }
 
@@ -274,13 +277,22 @@ document.addEventListener("DOMContentLoaded", function () {
     height: 219px;
 
     top: 143px;
-    right: 42px;
+    right: 0;
   }
 
   .more-competitions__img-tg {
     width: 45px;
-    top: 272px;
-    right: 85px;
+    top: 252px;
+    height: 40px;
+    right: 41px;
+  }
+
+  .more-competitions__img-tg svg{
+    width: 45px;
+    height: auto;
+    border-radius: 50%;
+    transform: scale(1.08);
+    overflow: hidden;
   }
 
   .more-competitions__text {
@@ -290,14 +302,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   .more-competitions__text-wrap {
     font-size: 14px;
-    right: 260px;
+    right: 251px;
     top: 66px;
     padding: 16px 57px;
   }
 
   .more-competitions__text-wrap-bottom {
     top: 147px;
-    right: 243px;
+    right: 231px;
   }
 
   .more-competitions__img-coin--left {
@@ -307,6 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
   .more-competitions__img-coin--right {
     width: 37px;
     bottom: 29px;
+    
   }
 
   .more-competitions__btn {
@@ -341,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   .more-competitions__img {
-    top: 352px;
+    top: 354px;
     left: 0;
   }
 
@@ -350,7 +363,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   .more-competitions__img-tg {
-    top: 480px;
+    top: 463px;
     right: 33px;
   }
 
