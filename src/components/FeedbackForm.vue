@@ -1,6 +1,6 @@
 <template>
-    <section class="feedback" :class="{feedback_background__animate: feedbackAnimated}">
-        <div class="feedback__container">
+    <section class="feedback">
+        <div class="feedback__container" :class="{feedback_background__animate: feedbackAnimated}">
             <div class="feedback__wrap"> 
                 <h2 
                 class="feedback__title h2" 
@@ -163,30 +163,51 @@ export default {
 .feedback {
   background: var(--dark);
 }
-.feedback_background__animate{
-  background: radial-gradient(28.05% 57.68% at 26.94% 50%, var(--roseBege) 0%, var(--dark) 100%);
-  
-  @media (max-width: 576px){
-    background: radial-gradient(50% 25% at 50% 25%, var(--roseBege) 0%, var(--dark) 100%);
-  }
-}
 .feedback__container {
     max-width: 1440px;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 80px 60px 80px 60px;
+    padding: 80px 60px;
     display: flex;
     justify-content: space-between;
-        
+
     @media (max-width: 991px){
-        padding: 64px 40px 64px 40px;
+        padding: 64px 40px;
       }
     
       @media (max-width: 576px){
-        padding: 40px 16px 40px 16px;
+        padding: 40px 16px;
         flex-direction: column;
       }
 }
+.feedback_background__animate{
+  position: relative;
+  z-index: 0;
+}
+
+.feedback_background__animate:before{
+  background: radial-gradient(25% 50% at 28% 50%, var(--roseBege) 0%, var(--dark) 100%);
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;    
+  z-index: -1;
+}
+
+@media (max-width: 991px){
+  .feedback_background__animate:before{
+    background: radial-gradient(40% 50% at 25% 50%, var(--roseBege) 0%, var(--dark) 100%);
+  }
+}
+
+@media (max-width: 576px){
+  .feedback_background__animate:before{
+    background: radial-gradient(50% 25% at 50% 25%, var(--roseBege) 0%, var(--dark) 100%);
+  }
+}
+
 .feedback__wrap {
   width: 50%;
   display: flex;

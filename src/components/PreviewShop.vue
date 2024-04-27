@@ -1,103 +1,215 @@
 <template>
-    <section class="preview-show-container">
-        <div class="preview-show">
-            <div class="preview-show__description">
-                <h2 class="preview-show-title h2">На что потратить Солярики?</h2>
-                <p class="preview-show-text p2">Идейные соображения высшего порядка, а также постоянный количественный
-                    рост и сфера нашей активности в значительной степени обуславливает создание соответствующий условий
-                    активизации. </p>
-
+    <section class="previewshop">
+        <div class="previewshop__container">
+            <div class="previewshop__description">
+                <img 
+                class="previewshop__img" 
+                :class="{previewshop__img__animated: previewShopAnimated}"
+                src="../assets/image/previewshop/solaric.png" 
+                alt="Солярик">
+                <h2 class="previewshop__title h2">На что потратить Солярики?</h2>
+                <p class="previewshop__text p2" :class="{previewshop__text__animate: previewShopAnimated}">Продукция магазина представляет собой награды и поощрения, помогающие учащимся ощутить удовлетворение от достижений и продемонстрировать прогресс в Лицее «Солярис». Надеемся, что эти вознаграждения будут вдохновлять и стимулировать их на дальнейшие успехи и развитие.</p>
             </div>
-            <div class="preview-show__list">
-                <div class="preview-show__card">
-                    <img src="" alt="" class="preview-show-img">
-                    <div class="preview-show__card-footer">
-                        <p class="preview-show__card-subtitle p1">Сертификат АНТИДВОЙКА</p>
-                        <p class="preview-show__card-cost h2"> 200<img src="../assets/icon/valute.svg" alt="icon valute"
-                                class="preview-show__card-icon"></p>
+            <div class="previewshop__list">
+                <div class="previewshop__card">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Сертификат АНТИДВОЙКА</p>
+                        <p class="previewshop__card-cost h2"> 200<img src="../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
                     </div>
                 </div>
-                <div class="preview-show__card">
-                    <img src="" alt="" class="preview-show-img">
-                    <div class="preview-show__card-footer">
-                        <p class="preview-show__card-subtitle p1">Стикеры
+                <div class="previewshop__card">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Стикеры
                             с Соляриком</p>
-                        <p class="preview-show__card-cost h2"> 50<img src="../assets/icon/valute.svg" alt="icon valute"
-                                class="preview-show__card-icon"></p>
+                        <p class="previewshop__card-cost h2"> 50<img src="../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
                     </div>
                 </div>
-                <div class="preview-show__card">
-                    <img src="" alt="" class="preview-show-img">
-                    <div class="preview-show__card-footer">
-                        <p class="preview-show__card-subtitle p1">Значек
+                <div class="previewshop__card">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Значек
                             Соляриса</p>
-                        <p class="preview-show__card-cost h2">70 <img src="../assets/icon/valute.svg" alt="icon valute"
-                                class="preview-show__card-icon"></p>
+                        <p class="previewshop__card-cost h2">70 <img src="../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
                     </div>
                 </div>
             </div>
-            <button class="preview-show-btn p31">Показать еще товары</button>
+            <button class="previewshop-btn btn">Показать еще товары</button>
         </div>
     </section>
 </template>
 
-<script setup>
+<script>
+import { ref, onMounted, onUnmounted } from "vue";
+
+export default {
+  setup() {
+    const previewShopAnimated = ref(false);
+
+    const setVisible = () => {
+      const elementPosition = document
+        .querySelector(".previewshop")
+        .getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      if (elementPosition.top < windowHeight * 0.3) {
+        previewShopAnimated.value = true;
+        window.removeEventListener("scroll", setVisible);
+      }
+    };
+
+    onMounted(() => {
+      setVisible();
+      window.addEventListener("scroll", setVisible);
+    });
+
+    onUnmounted(() => {
+      window.removeEventListener("scroll", setVisible);
+    });
+
+    return {
+      previewShopAnimated,
+      setVisible,
+    };
+  },
+};
 </script>
 
 <style>
-.preview-show-container {
+.previewshop {
     width: 100%;
-    background: var(--dark)
+    background: var(--dark);
 }
 
-.preview-show {
+.previewshop__container {
     max-width: 1440px;
     margin: auto;
-    padding: 74px 60px 48px 60px;
+    padding: 65px 60px 80px 60px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
-    box-sizing: border-box
+    box-sizing: border-box;
+
+    @media (max-width: 991px){
+        padding: 40px;
+      }
+    
+      @media (max-width: 576px){
+        padding: 40px 16px;
+      }
 }
 
-.preview-show__description {
+.previewshop__description {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding-left: 510px;
+    padding-left: 34%;
+    margin-bottom: 148px;
+    position: relative;
+    z-index: 0;
+
+    @media (max-width: 991px){
+        padding-left: 300px;
+        margin-bottom: 54px;
+    }
+
+    @media (max-width: 675px){
+        padding-left: 0px;
+        padding-top: 68px;
+        margin-bottom: 24px;
+    }
 }
 
-.preview-show-title {
+.previewshop__img{
+    position: absolute;
+    top: -65px;
+    left: -38%;
+    z-index: -1;
+    width: 90%;
+    opacity: 0;
+    transform: translateY(-100%);
+    
+    @media (max-width: 991px){
+        top: -40px;
+    }
+
+    @media (max-width: 675px){
+        left: -34%;
+        min-width: 332px;
+    }
+
+    @media (max-width: 416px){
+        left: -130px;
+    }
+}
+
+.previewshop__img__animated{
+    opacity: 1;
+    transition: all 1.5s;
+    transform: translateY(0%);
+}
+
+.previewshop__title {
     color: var(--white);
     max-width: 500px;
+    margin-bottom: 48px;
+
+    @media (max-width: 991px){
+        font-size: 24px;
+        line-height: 36px;
+        margin-bottom: 16px;
+    }
 }
 
-.preview-show-text {
+.previewshop__text {
     color: var(--white);
+    opacity: 0 ;
+}
+.previewshop__text__animate{
+    opacity: 1;
+    transition: all 1.5s;
 }
 
-.preview-show__list {
+.previewshop__list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
+    margin-bottom: 30px;
+
+    @media (max-width: 675px){
+        grid-template-columns: 1fr;
+    }
 }
 
-.preview-show__card {
-    display: grid;
+.previewshop__card {
     padding: 24px;
     border: 2px solid var(--roseBege);
-    gap: 16px;
+
+    @media (max-width: 991px){
+        padding: 16px;
+    }
 }
 
-.preview-show-img {
+.previewshop-img {
     width: 100%;
     height: 380px;
     border: 2px solid var(--roseBege);
     position: relative;
     box-sizing: border-box;
+    margin-bottom: 16px;
+
+    @media (max-width: 991px){
+        height: 198px;
+    }
+
+    @media (max-width: 675px){
+        height: 256px;
+    }
 }
 
-.preview-show-img::before {
+.previewshop-img::before {
     content: '';
     position: absolute;
     top: 0;
@@ -107,44 +219,76 @@
     background: var(--lightBege);
 }
 
-.preview-show__card-footer {
+.previewshop__card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 1182px){
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
-.preview-show__card-subtitle {
+.previewshop__card-subtitle {
     color: var(--white);
-    max-width: 228px;
+
+    @media (max-width: 991px){
+        margin-bottom: 10px;
+        height: 60px;
+    }
+
+    @media (max-width: 675px){
+        height: auto;
+    }
 }
 
-.preview-show__card-cost {
+.previewshop__card-cost {
     display: flex;
     align-items: center;
     color: var(--roseBege);
+
+    @media (max-width: 991px){
+        font-size: 24px;
+        line-height: 36px;
+    }
 }
 
-.preview-show__card-icon {
+.previewshop__card-icon {
     margin-left: 8px;
+
+    @media (max-width: 991px){
+        width: 25px;
+    }
 }
 
-.preview-show-btn {
+.previewshop-btn {
     padding: 16px;
     border: 2px solid var(--roseBege);
-    color: var(--roseBege);
-    background: transparent;
     width: 210px;
     margin: auto;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 991px){
+        width: 336px;
+    }
+
+    @media (max-width: 576px){
+        width: 100%;
+        text-align: center;
+    }
 }
 
-.preview-show-btn:hover {
+.previewshop-btn:hover {
     border: 2px solid var(--roseBege);
     color: var(--white);
     background: var(--roseBege);
 }
 
-.preview-show-btn:active {
+.previewshop-btn:active {
     border: 2px solid var(--gray);
     color: var(--dark);
     background: var(--roseBege);
