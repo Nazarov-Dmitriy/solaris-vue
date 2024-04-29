@@ -260,7 +260,7 @@
 }
 
 /* адаптив для планшетов */
-@media (max-width: 900px) {
+@media (max-width: 991px) {
   .trend__list {
     display: flex;
     flex-direction: column;
@@ -316,7 +316,7 @@
 }
 
 /* адаптив для мобилок */
-@media (max-width: 500px) {
+@media (max-width: 576px) {
   .trend {
     gap: 40px;
   }

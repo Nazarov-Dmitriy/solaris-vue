@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /* Адаптив для планшетов */
 
-@media (max-width: 900px) {
+@media (max-width: 991px) {
   .solaris-faq__title {
     font-size: 24px;
   }
@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 /* адаптив на мобилки */
-@media (max-width: 500px) {
+@media (max-width: 576px) {
   .solaris-faq-container {
     max-width: 320px;
   }
