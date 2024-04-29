@@ -4,7 +4,7 @@
       <h2 class="contest__title h2">Конкурсы сегодняшнего дня</h2>
       <div class="contest-container">
         <div class="content__list">
-          
+
           <div class="contest__item">
             <div class="contest__item-wraper">
               <p class="contest__item-subtitle p1">Название конкурса</p>
@@ -237,6 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
   gap: 16px;
   padding: 16px;
 }
+
 .contest-content__subtitle-text,
 .contest-content__subtitle-start {
   background: var(--roseBege);
