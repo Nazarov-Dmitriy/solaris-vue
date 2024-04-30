@@ -122,6 +122,8 @@ body,
     box-sizing: border-box;
     height: 56px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 .btn:hover {
@@ -137,7 +139,7 @@ body,
 }
 
 .btn-text {
-    border:none;
+    border: none;
     background: transparent;
     color: var(--roseBege);
     font-weight: 500;
@@ -157,6 +159,3 @@ body,
     border-bottom: 2px solid var(--orange);
     color: var(--orange);
 }
-
-
-
