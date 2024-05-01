@@ -18,6 +18,7 @@
           </ul>
         </nav>
         <button class="btn btn-login">ВХОД</button>
+        <span class="header-line"></span>
       </div>
       <button class="btn btn-login">ВХОД</button>
       <div class="burger-menu">
@@ -52,12 +53,14 @@ window.addEventListener('resize', () => {
 
 <style>
 .header__container {
-  display: fixed;
-  position: relative;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  background: var(--white)
 }
 
 .header {
-  padding: 20px 60px;
+  padding: 16px 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -70,7 +73,6 @@ window.addEventListener('resize', () => {
     border-bottom: 2px solid var(--roseBege);
     padding: 8px 0;
     margin: 0 60px;
-
   }
 
   @media (max-width: 991px) {
@@ -113,36 +115,78 @@ window.addEventListener('resize', () => {
   }
 }
 
+.header-menu nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+
+  @media (max-width: 1200px) {
+    width: calc(100% - 32px);
+    justify-content: center;
+    padding-top: 40px;
+
+  }
+
+  @media (max-width: 576px) {
+    order: 1;
+    width: calc(100% - 32px);
+    border-bottom: 2px solid var(--roseBege);
+    padding-top: 0;
+    padding-bottom: 16px;
+  }
+}
+
 .header-menu .btn {
   display: none;
 
   @media (max-width: 1200px) {
-    display: block
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 576px) {
+    margin-bottom: 0;
   }
 }
 
+.header-line {
+  @media (max-width: 1200px) {
+    width: calc(100% - 120px);
+    border-bottom: 2px solid var(--roseBege);
+    margin-top: -40px;
+  }
+
+  @media (max-width: 991px) {
+    width: calc(100% - 80px);
+  }
+
+  @media (max-width: 576px) {
+    display: none;
+  }
+}
+
+
 .header-menu--active {
   display: flex;
-  padding-bottom: 16px;
   box-sizing: border-box;
 
   @media (max-width: 1200px) {
     position: absolute;
-    top: 95px;
+    background: var(--white);
     flex-direction: column;
     left: 0;
     right: 0;
+    top: 62px;
     gap: 40px;
-    width: calc(100% - 120px);
-    border-bottom: 2px solid var(--roseBege);
-    margin: 0 60px;
+    width: 100%;
   }
 
   @media (max-width: 576px) {
+    width: 100%;
+    top: 47px;
+    padding-top: 20px;
     gap: 20px;
-    top: 59px;
-    margin: 0 16px;
-    width: calc(100% - 32px);
   }
 }
 
@@ -254,11 +298,9 @@ window.addEventListener('resize', () => {
   transition: bottom .3s, transform .3s .15s;
 }
 
-@media (max-width: 576px) {
-  .header-menu nav {
-    order: 1;
-  }
 
+
+@media (max-width: 576px) {
   .burger {
     width: 22px;
     height: 24px;

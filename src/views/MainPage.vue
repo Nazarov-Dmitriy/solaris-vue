@@ -1,6 +1,6 @@
 <script setup>
 import Header from '../components/Header.vue'
-// import Inro from '../components/Inro.vue'
+import Inro from '../components/Inro.vue'
 // import AboutSolarik from '../components/AboutSolarik.vue'
 // import AboutWorking from '../components/AboutWorking.vue'
 // import PreviewShop from '../components/PreviewShop.vue'
