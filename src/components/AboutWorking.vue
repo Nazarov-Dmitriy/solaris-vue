@@ -104,7 +104,7 @@
                     </clipPath>
                 </defs>
             </svg>
-            <svg class="about-working__img"  :class="{about_working__img__animate: aboutWorkingAnimated}" width="578" height="486" viewBox="0 0 578 486" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="about-working__img" width="578" height="486" viewBox="0 0 578 486" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g opacity="0.5">
                     <rect x="109.824" y="248.356" width="244" height="243" rx="121.5" transform="rotate(-48.0716 109.824 248.356)" fill="#FFF2DE"/>
                     <rect x="109.824" y="248.356" width="244" height="243" rx="121.5" transform="rotate(-48.0716 109.824 248.356)" stroke="#DDA06B" stroke-width="4"/>
@@ -116,39 +116,21 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from "vue";
+document.addEventListener("DOMContentLoaded", function () {
+  const aboutWorkingImg = document.querySelector(".about-working__img");
 
-export default {
-  setup() {
-    const aboutWorkingAnimated = ref(false);
+  function setVisible() {
+    const elementPosition = aboutWorkingImg.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-    const setVisible = () => {
-      const elementPosition = document
-        .querySelector(".about-working__img")
-        .getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    if (elementPosition.top < windowHeight * 0.5) {
+        aboutWorkingImg.classList.add("about_working__img__animate");
 
-      if (elementPosition.top < windowHeight * 0.5) {
-        aboutWorkingAnimated.value = true;
-        window.removeEventListener("scroll", setVisible);
-      }
-    };
-
-    onMounted(() => {
-      setVisible();
-      window.addEventListener("scroll", setVisible);
-    });
-
-    onUnmounted(() => {
       window.removeEventListener("scroll", setVisible);
-    });
-
-    return {
-      aboutWorkingAnimated,
-      setVisible,
-    };
-  },
-};
+    }
+  }
+  window.addEventListener("scroll", setVisible);
+});
 </script>
 
 <style>

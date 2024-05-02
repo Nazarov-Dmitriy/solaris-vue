@@ -1,16 +1,14 @@
 <template>
     <section class="feedback">
-        <div class="feedback__container" :class="{feedback_background__animate: feedbackAnimated}">
+        <div class="feedback__container">
             <div class="feedback__wrap"> 
                 <h2 
                 class="feedback__title h2" 
-                :class="{feedback__animate: feedbackAnimated}"
                 >Отзывы и предложения</h2>
                 <img 
                 src="../assets/image/feedbackform/solaric.png" 
                 alt="Солярик" 
-                class="feedback__img"
-                :class="{feedback__animate: feedbackAnimated}">
+                class="feedback__img">
             </div>
             <div class="feedback__form__container">
                 <form class="form">
@@ -123,40 +121,26 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from "vue";
+document.addEventListener("DOMContentLoaded", function () {
+  const feedback = document.querySelector(".feedback");
+  const feedbackContainer = document.querySelector(".feedback__container");
+  const feedbackTitle = document.querySelector(".feedback__title");
+  const feedbackImg = document.querySelector(".feedback__img");
 
-export default {
-  setup() {
-    const feedbackAnimated = ref(false);
+  function setVisible() {
+    const elementPosition = feedback.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-    const setVisible = () => {
-      const elementPosition = document
-        .querySelector(".feedback")
-        .getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    if (elementPosition.top < windowHeight * 0.3) {
+      feedbackContainer.classList.add("feedback_background__animate");
+      feedbackTitle.classList.add("feedback__animate");
+      feedbackImg.classList.add("feedback__animate");
 
-      if (elementPosition.top < windowHeight * 0.3) {
-        feedbackAnimated.value = true;
-        window.removeEventListener("scroll", setVisible);
-      }
-    };
-
-    onMounted(() => {
-      setVisible();
-      window.addEventListener("scroll", setVisible);
-    });
-
-    onUnmounted(() => {
       window.removeEventListener("scroll", setVisible);
-    });
-
-    return {
-      feedbackAnimated,
-      setVisible,
-    };
-  },
-};
-
+    }
+  }
+  window.addEventListener("scroll", setVisible);
+});
 </script>
 
 <style>
