@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .previewshop__img__animated{
     opacity: 1;
-    transition: all 1.5s;
+    transition: ease-out 1s;
     transform: translateY(0%);
 }
 
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 .previewshop__text__animate{
     opacity: 1;
-    transition: all 1.5s;
+    transition: ease-out 1s;
 }
 
 .previewshop__list {

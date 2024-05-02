@@ -255,9 +255,6 @@ document.addEventListener("DOMContentLoaded", function () {
     bottom: calc(100% / 6 - 150px);
     right: 0px;
     width: calc(100% / 3 + 100px);
-    transition: 1.5s;
-    transform-origin: center center;
-    transform-box: fill-box;
 
     @media (max-width: 991px){
         bottom: calc(100% / 6 - 250px);
@@ -272,6 +269,6 @@ document.addEventListener("DOMContentLoaded", function () {
     transform-box: fill-box;
     transform: rotate(125deg);
     -webkit-transform: rotate(125);
-    transition: 1.5s;
+    transition: ease-out 1s;
 }
 </style>

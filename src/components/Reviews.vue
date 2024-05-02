@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 .reviews__animate{
   opacity: 1;
-  transition: all 1.5s;
+  transition: ease-out 1s;
   transform: translateX(0%);
 }
 

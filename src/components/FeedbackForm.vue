@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 .feedback__animate{
   opacity: 1;
-  transition: all 1.5s;
+  transition: ease-out 1s;
   transform: translateY(0%);
 }
 .feedback__form__container {
@@ -321,8 +321,6 @@ width: 100%;
     height: 194px;
     font-family: "Inter", sans-serif;
 }
-
-/*----------------------------СТИЛИ ДЛЯ ОШИБОК------------------------------*/
 
 .form__error {
   display: flex;
