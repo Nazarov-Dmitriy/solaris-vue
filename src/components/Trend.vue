@@ -1,22 +1,24 @@
 <template>
   <section class="trend-container">
     <div class="trend">
-      <img
-        src="../assets/image/trend/trend-coin.png"
-        alt=""
-        class="trend__img"
-      />
-      <img
-        src="../assets/image/trend/trend-coin.png"
-        alt=""
-        class="trend__img"
-      />
-      <img
-        src="../assets/image/trend/trend-coin.png"
-        alt=""
-        class="trend__img"
-      />
       <div class="trend__content">
+        <div class="trend__coin">
+          <img
+            src="../assets/image/trend/trend-coin.png"
+            alt=""
+            class="trend__coin-img"
+          />
+          <img
+            src="../assets/image/trend/trend-coin.png"
+            alt=""
+            class="trend__coin-img"
+          />
+          <img
+            src="../assets/image/trend/trend-coin.png"
+            alt=""
+            class="trend__coin-img"
+          />
+        </div>
         <p class="trend__text p1">
           В лицее каждую неделю проводятся конкурсы по различным направлениям,
           учитывая пожелания и инициативы всех участников образовательного
@@ -123,25 +125,16 @@
   position: relative;
 }
 
+.trend__coin {
+  position: relative;
+  top: 30%;
+}
+
 .trend__img {
   width: 248px;
   position: absolute;
   top: 0;
   left: 0;
-}
-
-.trend__img:nth-child(1) {
-  top: 30px;
-  transform: scale(1.37) translateY(205px) translateX(35px);
-}
-.trend__img:nth-child(2) {
-  bottom: 0;
-  width: 167px;
-  transform: translateY(521px) translateX(258px) scale(1.35) rotate(9deg);
-}
-.trend__img:nth-child(3) {
-  transform: translateY(606px) translateX(113px) scale(1.35) rotate(-81deg);
-  width: 95px;
 }
 
 .trend__content {
@@ -150,10 +143,41 @@
   width: 100%;
   padding: 110px 60px 0 60px;
   box-sizing: border-box;
+  position: relative;
 }
 
+.trend__coin {
+  position: absolute;
+  top: 39%;
+  left: 0%;
+}
+
+.trend__coin-img {
+  position: absolute;
+}
+
+.trend__coin-img:nth-child(1) {
+  top: -1px;
+  left: 10px;
+}
+
+.trend__coin-img:nth-child(2) {
+  top: 251px;
+  left: 267px;
+  width: 167px;
+  transform: scale(1.33) rotate(17deg);
+}
+.trend__coin-img:nth-child(3) {
+  top: 342px;
+  left: 120px;
+  width: 95px;
+  transform: scale(1.33) rotate(17deg) rotate(-73deg);
+}
 .trend__text {
-  max-width: 425px;
+  max-width: 31%;
+  position: relative;
+  z-index: 2;
+  margin-right: 20px;
 }
 
 .trend__list {
@@ -161,6 +185,7 @@
   gap: 16px;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  max-width: 70%;
   max-height: 576px;
   overflow-y: auto;
   -ms-overflow-style: none;
@@ -182,7 +207,6 @@
 
 .trend-item {
   min-height: 260px;
-  /* width: 100%; */
   height: 100%;
   position: relative;
   grid-row: span 2;
@@ -259,6 +283,44 @@
   height: 0;
 }
 
+@media (max-width: 1293px) {
+  .trend-item-btn {
+    font-size: 24px;
+  }
+
+  .trend-subtitle {
+    font-size: 40px;
+  }
+
+  .trend__coin-img:nth-child(1) {
+    top: 5px;
+    left: -35px;
+  }
+
+  .trend__coin-img:nth-child(2) {
+    top: 251px;
+    left: 207px;
+  }
+  .trend__coin-img:nth-child(3) {
+    top: 342px;
+    left: 60px;
+  }
+}
+
+@media (max-width: 1025px) {
+  .trend-item-btn {
+    font-size: 20px;
+  }
+
+  .trend-subtitle {
+    font-size: 36px;
+  }
+
+  .trend__text {
+    font-size: 18px;
+  }
+}
+
 /* адаптив для планшетов */
 @media (max-width: 991px) {
   .trend__list {
@@ -279,6 +341,9 @@
     text-align: center;
   }
 
+  .trend__text {
+    width: 100%;
+  }
   .trend-item:not(:last-child) {
     margin-bottom: 19px;
   }
@@ -287,6 +352,7 @@
     max-width: 336px;
     margin-left: 40px;
     margin-top: 64px;
+    font-family: var(--font-family);
   }
 
   .trend-item-btn {
@@ -301,17 +367,56 @@
     height: 149px;
   }
 
-  .trend__img:nth-child(1){
-    width: 167px;
-    transform: translate(1);
+  .trend__coin {
+    top: 0;
+    right: 0;
   }
-  .trend__img:nth-child(2){
-    transform: translateX(201px) translateY(461px) scale(1.5) rotate(35deg);
-    width: 112px;
+
+  .trend__coin-img:nth-child(1) {
+    top: 233px;
+    left: 0;
+    width: 230px;
   }
-  .trend__img:nth-child(3){
-    transform: translateX(71px) translateY(511px) scale(1.5) rotate(-54deg);
-    width: 63px;
+
+  .trend__coin-img:nth-child(2) {
+    top: 379px;
+    left: 190px;
+    width: 154px;
+  }
+  .trend__coin-img:nth-child(3) {
+    top: 481px;
+    left: 70px;
+    width: 91px;
+    transform: scale(1.33) rotate(17deg) rotate(-73deg);
+  }
+}
+
+@media (max-width: 688px) {
+  .trend-item-btn {
+    font-size: 16px;
+  }
+
+  .trend__coin-img:nth-child(1) {
+    top: 233px;
+    left: -20px;
+    width: 230px;
+  }
+
+  .trend__coin-img:nth-child(2) {
+    top: 379px;
+    left: 150px;
+    width: 154px;
+  }
+  .trend__coin-img:nth-child(3) {
+    top: 481px;
+    left: 40px;
+    width: 91px;
+    transform: scale(1.33) rotate(17deg) rotate(-73deg);
+  }
+}
+@media (max-width: 636px) {
+  .trend__text {
+    font-size: 16px;
   }
 }
 
@@ -319,34 +424,47 @@
 @media (max-width: 576px) {
   .trend {
     gap: 40px;
+    margin: 0 auto;
   }
   .trend__content {
     display: flex;
     align-items: center;
     flex-direction: column;
     padding: 0;
+    
+
   }
   .trend__list {
     max-width: 300px;
     width: 100%;
     margin-right: 0;
     margin-top: 19px;
+    gap: 0;
   }
   .trend__content {
     width: 100%;
     height: 100%;
   }
   .trend__text {
-    max-width: 288px;
-    margin-bottom: 16px;
-  }
-  .trend-item {
-    /* width: 100%; */
-  }
-  .trend__text {
     margin: 0;
     padding-top: 40px;
+    width: 100%;
+    max-width: 304px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+    color: #1f2a3e;
   }
+
+  .trend-item-btn {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 150%;
+    color: #1f2a3e;
+  }
+ 
 
   .trend-container-img {
     height: 91px;
@@ -356,16 +474,43 @@
     min-height: auto;
   }
 
-  .trend__img:nth-child(1){
+  .trend__coin{
+    position: relative;
+    width: 100%;
+    
+  }
+
+  .trend__coin-img:nth-child(1) {
     display: none;
   }
-  .trend__img:nth-child(2){
+  .trend__coin-img:nth-child(2) {
     display: none;
   }
-  .trend__img:nth-child(3){
+  .trend__coin-img:nth-child(3) {
     top: 0;
-    left: 0;
-    transform: translateX(312px) translateY(10px) rotate(-65deg) scale(1.4);
+    left: 63%;
+    width: 70px;
+    transform: translateX(48%) rotate(-60deg);
+  }
+}
+
+
+@media (max-width: 310px){
+  .trend__text{
+    font-size: 14px;
+    max-width: 205px
+  }
+
+  .trend__list{
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .trend-item-btn{
+    font-size: 14px;
+  }
+  .trend__coin-img:nth-child(3) {
+    width: 50px;
   }
 }
 </style>

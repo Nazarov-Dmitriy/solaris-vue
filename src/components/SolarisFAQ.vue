@@ -137,13 +137,14 @@ document.addEventListener("DOMContentLoaded", function () {
   display: flex;
   justify-content: space-between;
   position: relative;
+  width: 100%;
 }
 
 .solaris-faq__list {
   display: flex;
   flex-direction: column;
   max-width: 589px;
-  width: 100%;
+  width: 46%;
   gap: 30px;
 }
 
@@ -161,8 +162,6 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .solaris-faq__item-btn {
-  width: 24px;
-  height: 24px;
   border-radius: 100%;
   border: 1px solid var(--dark);
   background: var(--white);
@@ -171,6 +170,11 @@ document.addEventListener("DOMContentLoaded", function () {
   align-items: center;
   cursor: pointer;
   transition: 0.4s;
+  padding: 9px;
+}
+
+.solaris-faq__item-btn:focus {
+  outline: none;
 }
 
 .solaris__item-btn--current {
@@ -196,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
   border: solid var(--white);
   border-width: 0 1.5px 1.5px 0;
   transform: scale(1.25) rotate(-45deg) translate(1px, 1px);
-  margin-right: 17%;
+  margin-right: 50%;
 }
 
 .solaris-faq-content {
@@ -227,12 +231,17 @@ document.addEventListener("DOMContentLoaded", function () {
   flex-direction: column;
   position: absolute;
   top: -33px;
-  left: 608px;
+  left: 110%;
+  min-width: 100%;
 }
 
 /* Адаптив для планшетов */
 
-@media (max-width: 991px) {
+@media (max-width: 800px) {
+  .solaris-faq {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
   .solaris-faq__title {
     font-size: 24px;
   }
@@ -246,6 +255,9 @@ document.addEventListener("DOMContentLoaded", function () {
     transform: translate(0);
   }
 
+  .solaris-faq__list {
+    width: 100%;
+  }
   .solaris-faq__item-btn {
     transform: rotate(270deg);
   }
@@ -270,51 +282,61 @@ document.addEventListener("DOMContentLoaded", function () {
     display: block;
   }
 
-  .solaris-faq-content{
+  .solaris-faq-content {
     margin-top: 33px;
   }
 
-  .faq-arrow-right{
+  .faq-arrow-right {
     left: -2px;
+  }
+
+  .solaris-faq__list {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
 /* адаптив на мобилки */
 @media (max-width: 576px) {
-  .solaris-faq-container {
+  .solaris-faq {
     max-width: 320px;
+    padding: 0 16px;
+  }
+
+  .solaris-faq__description {
+    word-wrap: break-word;
   }
 
   .solaris-faq__item {
     display: block;
   }
 
-  .faq-arrow-right{
+  .faq-arrow-right {
     left: -2px;
   }
- 
 
   .solaris-faq__title {
     line-height: 150%;
     text-align: center;
+    margin-top: 40px;
   }
 
   .solaris-faq-content {
     min-width: auto;
-    min-width: 288px;
   }
 
-  .solaris-faq__item-btn {
-    min-width: 32px;
-    min-height: 32px;
-    right: -40px;
-  }
-  .solaris__item-btn--current {
-    width: 32px;
-    height: 32px;
+  /* .solaris__item-btn--current {
     position: absolute;
     top: 0;
-    right: -40px;
+    right: 0px;
+  } */
+
+  .solaris-faq__item-subtitle {
+    max-width: 100%;
+  }
+
+  .faq-arrow-right--current {
+    margin-right: 32%;
   }
 }
 </style>
