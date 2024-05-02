@@ -6,7 +6,6 @@
         </h2>
         <img 
         class="reviews__img" 
-        :class="{ reviews__animate: reviewsAnimated }"
         src="../assets/image/reviews/reviews.png" 
         alt="Солярик">
     </div>
@@ -105,39 +104,22 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from "vue";
+document.addEventListener("DOMContentLoaded", function () {
+  const reviews = document.querySelector(".reviews");
+  const reviewsImg = document.querySelector(".reviews__img");
 
-export default {
-  setup() {
-    const reviewsAnimated = ref(false);
+  function setVisible() {
+    const elementPosition = reviews.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-    const setVisible = () => {
-      const elementPosition = document
-        .querySelector(".reviews")
-        .getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    if (elementPosition.top < windowHeight * 0.3) {
+      reviewsImg.classList.add("reviews__animate");
 
-      if (elementPosition.top < windowHeight * 0.3) {
-        reviewsAnimated.value = true;
-        window.removeEventListener("scroll", setVisible);
-      }
-    };
-
-    onMounted(() => {
-      setVisible();
-      window.addEventListener("scroll", setVisible);
-    });
-
-    onUnmounted(() => {
       window.removeEventListener("scroll", setVisible);
-    });
-
-    return {
-      reviewsAnimated,
-      setVisible,
-    };
-  },
-};
+    }
+  }
+  window.addEventListener("scroll", setVisible);
+});
 </script>
 
 <style>
@@ -191,7 +173,7 @@ export default {
 }
 .reviews__animate{
   opacity: 1;
-  transition: all 1.5s;
+  transition: ease-out 1s;
   transform: translateX(0%);
 }
 
