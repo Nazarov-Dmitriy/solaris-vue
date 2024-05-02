@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .more-competitions__text-wrap-bottom {
   position: absolute;
   top: 381px;
-  right: 493px;
+  right: 491px;
   transform: translate(0, 60px);
   opacity: 0;
   transition: 1.5s;
@@ -256,6 +256,12 @@ document.addEventListener("DOMContentLoaded", function () {
   opacity: 1;
 }
 
+@media (max-width: 1230px){
+  .more-competitions__img-coin--left{
+    left: 78px;
+  }
+}
+
 /* Примерный адаптив на планшеты */
 
 @media (max-width: 1200px) {
@@ -339,6 +345,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 }
 
+@media (max-width: 685px){
+  .more-competitions__img-coin--right{
+    left: 49%;
+  }
+}
+
 /* Примерный адаптив на мобилки */
 
 @media (max-width: 650px) {
@@ -360,7 +372,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   .more-competitions__text-wrap-bottom {
     top: 244px;
-    right: -18px;
+    right: -21px;
   }
 
   .more-competitions__img {
