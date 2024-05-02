@@ -2,7 +2,7 @@
   <div class="header__container">
     <div class="header">
       <div class="header-logo">
-        <img src="../assets/icon/logo.svg" alt="">
+        <img src="../../assets/icon/logo.svg" alt="">
       </div>
       <div class="header-menu">
         <nav>

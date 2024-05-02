@@ -14,8 +14,8 @@
                     <input type="text" class="intro__input p2" placeholder="Пароль">
                     <button class="btn">Воити в кабинет</button>
                     <button class="btn-text">Забыли пароль?</button>
-                    <img class="into__bg-rays" src="../assets/image/animation-main/rays.svg" alt="rays">
-                    <img class="into__bg-hare" src="../assets/image/animation-main/hare.svg" alt="hare">
+                    <img class="into__bg-rays" src="../../assets/image/animation-main/rays.svg" alt="rays">
+                    <img class="into__bg-hare" src="../../assets/image/animation-main/hare.svg" alt="hare">
                 </form>
             </div>
         </div>

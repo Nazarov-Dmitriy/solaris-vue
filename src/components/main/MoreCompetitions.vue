@@ -8,7 +8,7 @@
       </h2>
 
       <img
-        src="../assets/image/more-competitions/hare.png"
+        src="../../assets/image/more-competitions/hare.png"
         alt=""
         class="more-competitions__img"
       />
@@ -23,18 +23,18 @@
       <div class="more-competitions__text-wrap-bottom">
         <img
           class="more-competitions__img-bottom"
-          src="../assets/image/more-competitions/text-wrap-bottom.png"
+          src="../../assets/image/more-competitions/text-wrap-bottom.png"
           alt=""
         />
       </div>
       <img
         class="more-competitions__img-coin more-competitions__img-coin--left"
-        src="../assets/image/more-competitions/coin.png"
+        src="../../assets/image/more-competitions/coin.png"
         alt=""
       />
       <img
         class="more-competitions__img-coin more-competitions__img-coin--right"
-        src="../assets/image/more-competitions/coin.png"
+        src="../../assets/image/more-competitions/coin.png"
         alt=""
       />
       <button class="more-competitions__btn btn">Подписаться на чат-бот</button>
@@ -68,18 +68,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const textWrapBottom = document.querySelector(
     ".more-competitions__text-wrap-bottom"
   );
+  const moreCompetitions = document.querySelector('.more-competitions');
   
-  const img = document.querySelector(".more-competitions__img");
+  // const img = document.querySelector(".more-competitions__img");
   const imgTg = document.querySelector(".more-competitions__img-tg");
 
   function setVisible() {
-    const elementPosition = textWrap.getBoundingClientRect();
+    const elementPosition = moreCompetitions.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
-    if (elementPosition.top < windowHeight * 0.75) {
+    if (elementPosition.top <= windowHeight * 0.3) {
       textWrap.classList.add("animate");
       textWrapBottom.classList.add("animate");
-      img.classList.add("animate");
+      // img.classList.add("animate");
       imgTg.classList.add("animate");
 
       window.removeEventListener("scroll", setVisible);
@@ -87,7 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.addEventListener("scroll", setVisible);
+  setVisible();
 });
+
 </script>
 
 <style>
@@ -166,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .more-competitions__text-wrap-bottom {
   position: absolute;
   top: 381px;
-  right: 493px;
+  right: 491px;
   transform: translate(0, 60px);
   opacity: 0;
   transition: 1.5s;
@@ -202,6 +205,10 @@ document.addEventListener("DOMContentLoaded", function () {
   margin-bottom: 58px;
 
   transition: 0.4s;
+}
+
+.more-competitions__btn:focus{
+  outline: none;
 }
 
 .more-competitions__img-coin--left {
@@ -242,8 +249,20 @@ document.addEventListener("DOMContentLoaded", function () {
   transition: 0.4s;
 }
 
+.more-competitions__link-tg:focus{
+  outline: none;
+}
+
+
+
 .animate {
   opacity: 1;
+}
+
+@media (max-width: 1230px){
+  .more-competitions__img-coin--left{
+    left: 78px;
+  }
 }
 
 /* Примерный адаптив на планшеты */
@@ -329,6 +348,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 }
 
+@media (max-width: 685px){
+  .more-competitions__img-coin--right{
+    left: 49%;
+  }
+}
+
 /* Примерный адаптив на мобилки */
 
 @media (max-width: 650px) {
@@ -350,7 +375,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   .more-competitions__text-wrap-bottom {
     top: 244px;
-    right: -18px;
+    right: -21px;
   }
 
   .more-competitions__img {
