@@ -68,18 +68,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const textWrapBottom = document.querySelector(
     ".more-competitions__text-wrap-bottom"
   );
+  const moreCompetitions = document.querySelector('.more-competitions');
   
-  const img = document.querySelector(".more-competitions__img");
+  // const img = document.querySelector(".more-competitions__img");
   const imgTg = document.querySelector(".more-competitions__img-tg");
 
   function setVisible() {
-    const elementPosition = textWrap.getBoundingClientRect();
+    const elementPosition = moreCompetitions.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
-    if (elementPosition.top < windowHeight * 0.75) {
+    if (elementPosition.top <= windowHeight * 0.3) {
       textWrap.classList.add("animate");
       textWrapBottom.classList.add("animate");
-      img.classList.add("animate");
+      // img.classList.add("animate");
       imgTg.classList.add("animate");
 
       window.removeEventListener("scroll", setVisible);
@@ -87,7 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   window.addEventListener("scroll", setVisible);
+  setVisible();
 });
+
 </script>
 
 <style>
