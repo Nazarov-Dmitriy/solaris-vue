@@ -15,18 +15,18 @@ import Footer from '@/components/Footer.vue'
 s
 <template>
   <main class="main-page">
-    <Header />
-    <Inro />
-    <AboutSolarik />
-    <AboutWorking />
-    <PreviewShop />
+    <!-- <Header /> -->
+    <!-- <Inro /> -->
+    <!-- <AboutSolarik /> -->
+    <!-- <AboutWorking /> -->
+    <!-- <PreviewShop /> -->
     <Trend />
-    <ContestCom />
-    <MoreCompetitions />
+    <!-- <ContestCom /> 
+    <MoreCompetitions /> 
     <SolarisFAQ />
     <Reviews />
     <FeedbackForm />
-    <Footer />
+    <Footer /> -->
   </main>
 </template>
 

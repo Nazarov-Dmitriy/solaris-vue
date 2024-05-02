@@ -204,6 +204,10 @@ document.addEventListener("DOMContentLoaded", function () {
   transition: 0.4s;
 }
 
+.more-competitions__btn:focus{
+  outline: none;
+}
+
 .more-competitions__img-coin--left {
   width: 167px;
   height: 166px;
@@ -241,6 +245,12 @@ document.addEventListener("DOMContentLoaded", function () {
   color: #1f2a3e;
   transition: 0.4s;
 }
+
+.more-competitions__link-tg:focus{
+  outline: none;
+}
+
+
 
 .animate {
   opacity: 1;
