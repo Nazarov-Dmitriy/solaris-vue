@@ -179,6 +179,7 @@
   position: relative;
   z-index: 2;
   margin-right: 20px;
+  color: var(--dark);
 }
 
 .trend__list {
@@ -247,6 +248,7 @@
   border: 2px solid var(--roseBege);
   cursor: pointer;
   width: 100%;
+  color: var(--dark);
 }
 
 .trend-item-btn:hover {

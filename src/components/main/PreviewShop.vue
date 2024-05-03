@@ -36,6 +36,32 @@
                                 class="previewshop__card-icon"></p>
                     </div>
                 </div>
+                <div class="previewshop__card previewshop__card__hidden">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Сертификат АНТИДВОЙКА</p>
+                        <p class="previewshop__card-cost h2"> 200<img src="../../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
+                    </div>
+                </div>
+                <div class="previewshop__card previewshop__card__hidden">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Стикеры
+                            с Соляриком</p>
+                        <p class="previewshop__card-cost h2"> 50<img src="../../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
+                    </div>
+                </div>
+                <div class="previewshop__card previewshop__card__hidden">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Значек
+                            Соляриса</p>
+                        <p class="previewshop__card-cost h2">70 <img src="../../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
+                    </div>
+                </div>
             </div>
             <button class="previewshop-btn btn">Показать еще товары</button>
         </div>
@@ -60,6 +86,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   window.addEventListener("scroll", setVisible);
+
+  const button = document.querySelector('.previewshop-btn');
+  const previewshopCard = document.querySelectorAll('.previewshop__card__hidden');
+
+    button.addEventListener('click', function () {
+        previewshopCard.forEach(function(card) {
+            card.classList.remove("previewshop__card__hidden");
+        })
+  });
 });
 </script>
 
@@ -171,10 +206,14 @@ document.addEventListener("DOMContentLoaded", function () {
 .previewshop__card {
     padding: 24px;
     border: 2px solid var(--roseBege);
-
+    display: block;
     @media (max-width: 991px){
         padding: 16px;
     }
+}
+
+.previewshop__card__hidden{
+    display: none;
 }
 
 .previewshop-img {

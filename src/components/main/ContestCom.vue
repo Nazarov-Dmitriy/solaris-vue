@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   arr.forEach(item => {
-    console.log(item);
     let elem = `
     <div class="item-container">
         <div class="contest__item">
@@ -210,8 +209,6 @@ document.addEventListener("DOMContentLoaded", function () {
   opacity: 0;
   transition: 0.4s;
   transition: opacity 0.4s ease;
-  position: absolute;
-  right: 0px;
 }
 
 .contest-content--visible {

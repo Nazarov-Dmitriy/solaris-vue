@@ -4,7 +4,7 @@
             <img src="../../assets/icon/solaric.svg" alt="" class="about-solaric-icon">
             <div>
                 <h2 class="about-solaric-title h2">Солярики</h2>
-                <p class="h3">Школьная криптовалюта</p>
+                <p class="about-solaric-subtitle h3">Школьная криптовалюта</p>
             </div>
         </div>
         <p class="about-solaric__text p2">Солярик - официальный талисман и маскот нашего лицея. Внедрение криптовалюты
@@ -67,8 +67,14 @@ document.addEventListener("DOMContentLoaded", function () {
     height: 95px;
 }
 
+.about-solaric-title,
+.about-solaric-subtitle{
+    color: var(--dark);
+}
+
 .about-solaric__text {
     max-width: 64%;
+    color: var(--dark);
 }
 
 .about-solaric__coin {
