@@ -1,5 +1,5 @@
 <template>
-  <section class="reviews">
+  <section class="reviews" id="reviews">
     <div class="reviews__wrap">
         <h2 class="reviews__title h2">
           Отзывы
@@ -130,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
+  scroll-margin: 88px;
 
   @media (max-width: 991px){
     padding-left: 40px;

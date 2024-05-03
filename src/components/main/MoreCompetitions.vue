@@ -1,5 +1,5 @@
 <template>
-  <section class="more-competitions">
+  <section class="more-competitions" id="moreCompetitions">
     <div class="more-competitions__body" >
       <h2 class="more-competitions__title">
         Еще больше конкурсов
@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   overflow: hidden;
   box-sizing: border-box;
+  scroll-margin: 88px;
 }
 
 .more-competitions__body {

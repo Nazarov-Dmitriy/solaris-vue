@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="solarisFaq">
     <div class="solaris-faq">
       <h2 class="solaris-faq__title h2">Часто задаваемые вопросы</h2>
       <div class="solaris-faq-container">
@@ -123,9 +123,9 @@ document.addEventListener("DOMContentLoaded", function () {
 .solaris-faq {
   max-width: 1440px;
   padding: 80px 60px;
-
   margin: auto;
   box-sizing: border-box;
+  scroll-margin: 88px;
 }
 
 .solaris-faq__title {

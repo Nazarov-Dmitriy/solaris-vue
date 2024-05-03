@@ -11,19 +11,19 @@
     
                 <div class="footer__nav-wrap">
                     <ul class="footer__nav-wrap__list">
-                        <li class="footer__text500"><a href="#" class="footer__link">О&nbsp;проекте</a></li>
-                        <li class="footer__text500"><a href="#" class="footer__link">Cолярики</a></li>
-                        <li class="footer__text500"><a href="#" class="footer__link">Магазин</a></li>
+                        <li class="footer__text500"><a href="#intro" class="footer__link">О&nbsp;проекте</a></li>
+                        <li class="footer__text500"><a href="#aboutSolaric" class="footer__link">Cолярики</a></li>
+                        <li class="footer__text500"><a href="#previewshop" class="footer__link">Магазин</a></li>
                     </ul>
                     <ul class="footer__nav-wrap__list">
-                        <li class="footer__text500"><a href="#" class="footer__link">Направления</a></li>
-                        <li class="footer__text500"><a href="#" class="footer__link">Конкурсы</a></li>
-                        <li class="footer__text500"><a href="#" class="footer__link">Чат-бот</a></li>
+                        <li class="footer__text500"><a href="#trend" class="footer__link">Направления</a></li>
+                        <li class="footer__text500"><a href="#contest" class="footer__link">Конкурсы</a></li>
+                        <li class="footer__text500"><a href="#moreCompetitions" class="footer__link">Чат-бот</a></li>
                     </ul>
                     <ul class="footer__nav-wrap__list">
-                        <li class="footer__text500"><a href="#" class="footer__link">Вопросы</a></li>
-                        <li class="footer__text500"><a href="#" class="footer__link">Отзывы</a></li>
-                        <li class="footer__text500"><a href="#" class="footer__link">Написать&nbsp;нам</a></li>
+                        <li class="footer__text500"><a href="#solarisFaq" class="footer__link">Вопросы</a></li>
+                        <li class="footer__text500"><a href="#reviews" class="footer__link">Отзывы</a></li>
+                        <li class="footer__text500"><a href="#feedback" class="footer__link">Написать&nbsp;нам</a></li>
                     </ul>
                 </div>
     
@@ -117,7 +117,7 @@
             <div class="footer__info-wrap">
                 
                 <div class="footer__sot-wrap">
-                    <a href="#" target="_blank">
+                    <a href="https://grant.obr.so/" target="_blank">
                         <img src="../../assets/icon/footer/sot.svg" alt="СОТ" class="footer__sot__img">
                     </a>
                     <p class="footer__sot__text footer__text p2">Победитель конкурса СОТ-2023 <span>Номинация: «Особые образовательные потребности»</span></p>

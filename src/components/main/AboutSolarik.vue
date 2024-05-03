@@ -1,5 +1,5 @@
 <template>
-    <section class="about-solaric">
+    <section class="about-solaric" id="aboutSolaric">
         <div class="about-solaric__header">
             <img src="../../assets/icon/solaric.svg" alt="" class="about-solaric-icon">
             <div>

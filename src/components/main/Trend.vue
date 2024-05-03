@@ -1,5 +1,5 @@
 <template>
-  <section class="trend-container">
+  <section class="trend-container" id="trend">
     <div class="trend">
       <div class="trend__content">
         <div class="trend__coin">
@@ -110,6 +110,7 @@
 .trend-container {
   width: 100%;
   background: var(--lightBege);
+  scroll-margin: 88px;
 }
 
 .trend {

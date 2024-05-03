@@ -1,5 +1,5 @@
 <template>
-    <section class="wrap-container">
+    <section class="wrap-container" id="intro">
         <div class="intro">
             <div class="intro__description">
                 <h1 class="intro__title h1 ">
@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     background: var(--dark);
     overflow: hidden;
     padding-top: 88px;
+    scroll-margin: 88px;
 }
 
 .intro {

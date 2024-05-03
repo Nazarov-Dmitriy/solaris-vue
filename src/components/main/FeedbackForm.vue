@@ -1,5 +1,5 @@
 <template>
-    <section class="feedback">
+    <section class="feedback" id="feedback">
         <div class="feedback__container">
             <div class="feedback__wrap"> 
                 <h2 
@@ -146,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <style>
 .feedback {
   background: var(--dark);
+  scroll-margin: 88px;
 }
 .feedback__container {
     max-width: 1440px;

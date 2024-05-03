@@ -1,5 +1,5 @@
 <template>
-    <section class="previewshop">
+    <section class="previewshop" id="previewshop">
         <div class="previewshop__container">
             <div class="previewshop__description">
                 <img 
@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .previewshop {
     width: 100%;
     background: var(--dark);
+    scroll-margin: 88px;
 }
 
 .previewshop__container {

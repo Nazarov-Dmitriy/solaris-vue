@@ -7,14 +7,14 @@
       <div class="header-menu">
         <nav>
           <ul class="header__list">
-            <li class="botton"><a href='#' class="header__link">О проекте</a></li>
-            <li class="botton"><a href='#' class="header__link">Cолярики</a></li>
-            <li class="botton"><a href='#' class="header__link">Магазин</a></li>
-            <li class="botton"><a href='#' class="header__link">Конкурсы</a></li>
-            <li class="botton"><a href='#' class="header__link">Чат-бот</a></li>
-            <li class="botton"><a href='#' class="header__link">Вопросы</a></li>
-            <li class="botton"><a href='#' class="header__link">Отзывы</a></li>
-            <li class="botton"><a href='#' class="header__link">Написать нам</a></li>
+            <li class="botton"><a href='#intro' class="header__link">О проекте</a></li>
+            <li class="botton"><a href='#aboutSolaric' class="header__link">Cолярики</a></li>
+            <li class="botton"><a href='#previewshop' class="header__link">Магазин</a></li>
+            <li class="botton"><a href='#contest' class="header__link">Конкурсы</a></li>
+            <li class="botton"><a href='#moreCompetitions' class="header__link">Чат-бот</a></li>
+            <li class="botton"><a href='#solarisFaq' class="header__link">Вопросы</a></li>
+            <li class="botton"><a href='#reviews' class="header__link">Отзывы</a></li>
+            <li class="botton"><a href='#feedback' class="header__link">Написать нам</a></li>
           </ul>
         </nav>
         <button class="btn btn-login">ВХОД</button>
@@ -39,6 +39,16 @@ document.addEventListener("DOMContentLoaded", function () {
     menu.classList.toggle("header-menu--active")
     header.classList.toggle("header__burger-menu")
   })
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+ 
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+    });
+  });
 });
 
 window.addEventListener('resize', () => {

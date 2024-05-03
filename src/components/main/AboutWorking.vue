@@ -161,6 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .about-working-title {
     text-align: center;
     margin-bottom: 48px;
+    color: var(--dark);
 
     @media (max-width: 991px){
         font-size: 24px;
@@ -239,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
     line-height: 150%;
     text-align: center;
     margin: auto;
+    color: var(--dark);
 }
 
 .about-working__card-subtitle span{
@@ -248,6 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .about-working__card-text {
     text-align: center;
+    color: var(--dark);
 }
 .about-working__img__back,
 .about-working__img{
