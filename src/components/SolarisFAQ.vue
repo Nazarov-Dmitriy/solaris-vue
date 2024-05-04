@@ -95,13 +95,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const faqContent = document.querySelectorAll(".solaris-faq-content");
   const arrowRights = document.querySelectorAll(".faq-arrow-right");
 
-  let activeBtnIndex = null;
+  let activeBtnIndex = false;
 
   faqBtns.forEach((btn, index) => {
     btn.addEventListener("click", function (event) {
       event.preventDefault();
-
-      if (activeBtnIndex !== null) {
+      console.log(activeBtnIndex);
+     
+      btn.classList.toggle("solaris__item-btn--current");
+      arrowRights[index].classList.toggle("faq-arrow-right--current");
+      faqContent[index].classList.toggle("faq-content--visible");
+      if (activeBtnIndex !== false && activeBtnIndex !== index) {
         faqBtns[activeBtnIndex].classList.remove("solaris__item-btn--current");
         arrowRights[activeBtnIndex].classList.remove(
           "faq-arrow-right--current"
@@ -109,11 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         faqContent[activeBtnIndex].classList.remove("faq-content--visible");
       }
 
-      btn.classList.add("solaris__item-btn--current");
-      arrowRights[index].classList.add("faq-arrow-right--current");
-      faqContent[index].classList.add("faq-content--visible");
-
-      activeBtnIndex = index;
+      activeBtnIndex = activeBtnIndex === index ? false : index;
     });
   });
 });
@@ -235,9 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
   min-width: 100%;
 }
 
-/* Адаптив для планшетов */
-
-@media (max-width: 800px) {
+@media (max-width: 991px) {
   .solaris-faq {
     padding-left: 40px;
     padding-right: 40px;
@@ -258,11 +256,11 @@ document.addEventListener("DOMContentLoaded", function () {
   .solaris-faq__list {
     width: 100%;
   }
-  .solaris-faq__item-btn {
-    transform: rotate(270deg);
-  }
+
   .solaris__item-btn--current {
-    transform: translate(0) rotate(90deg) scale(1);
+    -webkit-transform: translate(0) scale(1);
+    -ms-transform: translate(0) scale(1);
+    transform: translate(0) scale(1);
   }
   .solaris-faq__item-btn {
     position: absolute;
@@ -277,6 +275,16 @@ document.addEventListener("DOMContentLoaded", function () {
     position: absolute;
     top: 0;
     right: 0;
+  }
+
+  .faq-arrow-right {
+    transform: rotate(-45deg);
+  }
+
+  .faq-arrow-right--current {
+    margin-top: -7px;
+    margin-right: -1px;
+    transform: rotate(130deg) scale(1.5);
   }
   .solaris-faq__item {
     display: block;
@@ -286,20 +294,14 @@ document.addEventListener("DOMContentLoaded", function () {
     margin-top: 33px;
   }
 
-  .faq-arrow-right {
-    left: -2px;
-  }
-
   .solaris-faq__list {
     width: 100%;
     max-width: 100%;
   }
 }
 
-/* адаптив на мобилки */
 @media (max-width: 576px) {
   .solaris-faq {
-    max-width: 320px;
     padding: 0 16px;
   }
 
@@ -312,7 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   .faq-arrow-right {
-    left: -2px;
+    left: -1px;
   }
 
   .solaris-faq__title {
@@ -325,18 +327,12 @@ document.addEventListener("DOMContentLoaded", function () {
     min-width: auto;
   }
 
-  /* .solaris__item-btn--current {
-    position: absolute;
-    top: 0;
-    right: 0px;
-  } */
-
   .solaris-faq__item-subtitle {
     max-width: 100%;
   }
 
   .faq-arrow-right--current {
-    margin-right: 32%;
+    margin-right: 0;
   }
 }
 </style>

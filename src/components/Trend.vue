@@ -467,7 +467,8 @@
  
 
   .trend-container-img {
-    height: 91px;
+    /* height: 91px; */
+    height: 100%;
   }
 
   .trend-item {

@@ -3,8 +3,8 @@
     <div class="contest">
       <h2 class="contest__title h2">Конкурсы сегодняшнего дня</h2>
       <div class="contest-container">
-        <div class="content__list">
 
+        <div class="item-container">
           <div class="contest__item">
             <div class="contest__item-wraper">
               <p class="contest__item-subtitle p1">Название конкурса</p>
@@ -14,85 +14,111 @@
               <i class="arrow-right"></i>
             </button>
           </div>
-          <div class="contest__item">
-            <div class="contest__item-wraper">
-              <p class="contest__item-subtitle p1">Название конкурса</p>
-              <p class="contest__item-publication p2">Дата публикации</p>
+          <div class="contest-content">
+            <h3 class="contest-content__title h3">Название конкурса1</h3>
+            <div class="contest-content__subtitle">
+              <p class="contest-content__subtitle-text p2">Направление</p>
+              <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
             </div>
-            <button class="contest__item-btn">
-              <i class="arrow-right"></i>
-            </button>
-          </div>
-          <div class="contest__item">
-            <div class="contest__item-wraper">
-              <p class="contest__item-subtitle p1">Название конкурса</p>
-              <p class="contest__item-publication p2">Дата публикации</p>
-            </div>
-            <button class="contest__item-btn">
-              <i class="arrow-right"></i>
-            </button>
-          </div>
-          <div class="contest__item">
-            <div class="contest__item-wraper">
-              <p class="contest__item-subtitle p1">Название конкурса</p>
-              <p class="contest__item-publication p2">Дата публикации</p>
-            </div>
-            <button class="contest__item-btn">
-              <i class="arrow-right"></i>
-            </button>
+            <p class="contest-content__description p2">
+              Идейные соображения высшего порядка, а также постоянный
+              оличественный рост
+            </p>
           </div>
         </div>
-        <div class="contest-content">
-          <h3 class="contest-content__title h3">Название конкурса1</h3>
-          <div class="contest-content__subtitle">
-            <p class="contest-content__subtitle-text p2">Направление</p>
-            <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
-          </div>
-          <p class="contest-content__description p2">
-            Идейные соображения высшего порядка, а также постоянный
-            оличественный рост
-          </p>
-        </div>
-        <div class="contest-content">
-          <h3 class="contest-content__title h3">Название конкурса2</h3>
-          <div class="contest-content__subtitle">
-            <p class="contest-content__subtitle-text p2">Направление</p>
-            <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
-          </div>
-          <p class="contest-content__description p2">
-            Идейные соображения высшего порядка, а также постоянный
-            оличественный рост
-          </p>
-        </div>
-        <div class="contest-content">
-          <h3 class="contest-content__title h3">Название конкурса3</h3>
-          <div class="contest-content__subtitle">
-            <p class="contest-content__subtitle-text p2">Направление</p>
-            <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
-          </div>
-          <p class="contest-content__description p2">
-            Идейные соображения высшего порядка, а также постоянный
-            оличественный рост
-          </p>
-        </div>
-        <div class="contest-content">
-          <h3 class="contest-content__title h3">Название конкурса4</h3>
-          <div class="contest-content__subtitle">
-            <p class="contest-content__subtitle-text p2">Направление</p>
-            <p class="contest-content__subtitle-start p2">начало 01.05.2024</p>
-          </div>
-          <p class="contest-content__description p2">
-            Идейные соображения высшего порядка, а также постоянный
-            оличественный рост
-          </p>
-        </div>
+
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+let arr = [
+  {
+    title: 'Название конкурса',
+    date_publication: "Дата публикации",
+    direction: 'Нарпавление',
+    start_date: '01.05.2024',
+    descption: "Идейные соображения высшего порядка, а также постоянный количественный рост "
+  },
+  {
+    title: 'Название конкурса2',
+    date_publication: "Дата публикации",
+    direction: 'Нарпавление',
+    start_date: '01.05.2024',
+    descption: "Идейные соображения высшего порядка, а также постоянный количественный рост "
+  },
+  {
+    title: 'Название конкурса3',
+    date_publication: "Дата публикации",
+    direction: 'Нарпавление',
+    start_date: '01.05.2024',
+    descption: "Идейные соображения высшего порядка, а также постоянный количественный рост "
+  },
+  {
+    title: 'Название конкурса4',
+    date_publication: "Дата публикации",
+    direction: 'Нарпавление',
+    start_date: '01.05.2024',
+    descption: "Идейные соображения высшего порядка, а также постоянный количественный рост "
+  },
+]
+
+
 document.addEventListener("DOMContentLoaded", function () {
+  let container = document.querySelector('.contest-container')
+  let title = document.querySelector(".contest__title");
+
+
+  arr.forEach(item => {
+    console.log(item);
+    let elem = `
+    <div class="item-container">
+        <div class="contest__item">
+          <div class="contest__item-wraper">
+            <p class="contest__item-subtitle p1">${item.title}</p>
+            <p class="contest__item-publication p2">${item.date_publication}</p>
+          </div>
+          <button class="contest__item-btn">
+            <i class="arrow-right"></i>
+          </button>
+        </div>
+        <div class="contest-content">
+          <h3 class="contest-content__title h3">${item.title}</h3>
+          <div class="contest-content__subtitle">
+            <p class="contest-content__subtitle-text p2">${item.direction}</p>
+            <p class="contest-content__subtitle-start p2">${item.start_date}</p>
+          </div>
+          <p class="contest-content__description p2">${item.descption}
+          </p>
+        </div>
+    </div>
+    `
+    container.insertAdjacentHTML("beforeEnd", elem);
+    changeClass();
+
+  })
+
+
+  window.addEventListener('resize', () => {
+    changeClass()
+  })
+
+  changeClass()
+
+  function changeClass() {
+    if (window.innerWidth <= 991) {
+      title.classList.remove("h2")
+      title.classList.add("h3")
+    }
+
+    if (window.innerWidth >= 991) {
+      title.classList.remove("h3")
+      title.classList.add("h2")
+    }
+  }
+
+
   const contestBtns = document.querySelectorAll(".contest__item-btn");
   const contestContent = document.querySelectorAll(".contest-content");
   const arrowRights = document.querySelectorAll(".arrow-right");
@@ -127,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
 .contest {
   max-width: 1440px;
   padding: 80px 60px;
-
   margin: auto;
   box-sizing: border-box;
 }
@@ -139,16 +164,15 @@ document.addEventListener("DOMContentLoaded", function () {
 .contest-container {
   margin-top: 48px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
+  gap: 24px;
 }
 
-.content__list {
+.item-container {
   display: flex;
-  flex-direction: column;
-  max-width: 589px;
+  gap: 75px;
   width: 100%;
-  gap: 30px;
 }
 
 .contest__item {
@@ -156,15 +180,8 @@ document.addEventListener("DOMContentLoaded", function () {
   align-items: center;
   justify-content: space-between;
   color: var(--dark);
-}
-
-.contest__item-subtitle {
-  margin-right: 20px;
-  min-width: 225px;
-}
-
-.contest__item-publication {
-  margin-right: 25px;
+  width: 44.6%;
+  height: fit-content;
 }
 
 .contest__item-btn {
@@ -180,16 +197,6 @@ document.addEventListener("DOMContentLoaded", function () {
   transition: .4s;
 }
 
-.contest__item-btn--current {
-  border-radius: 100px;
-  border: none;
-  width: 32px;
-  height: 32px;
-  background: #dda06b;
-  color: var(--white);
-  transform: translateX(40px);
-}
-
 .arrow-right {
   border: solid var(--dark);
   border-width: 0 1.5px 1.5px 0;
@@ -201,6 +208,16 @@ document.addEventListener("DOMContentLoaded", function () {
   left: -1px;
 }
 
+.contest__item-btn--current {
+  border-radius: 100px;
+  border: none;
+  width: 32px;
+  height: 32px;
+  background: #dda06b;
+  color: var(--white);
+  transform: translateX(40px);
+}
+
 .arrow-right--current {
   border: solid var(--white);
   border-width: 0 1.5px 1.5px 0;
@@ -208,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .contest-content {
-  max-width: 653px;
+  max-width: 49.5%;
   height: fit-content;
   border: 2px solid var(--roseBege);
   background: var(--lightBege);
@@ -222,7 +239,6 @@ document.addEventListener("DOMContentLoaded", function () {
   opacity: 1;
   display: flex;
   flex-direction: column;
-
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
@@ -248,5 +264,53 @@ document.addEventListener("DOMContentLoaded", function () {
 .contest-content__description {
   padding: 16px;
   color: var(--dark);
+}
+
+@media (max-width: 991px) {
+  .contest {
+    padding: 64px 40px;
+  }
+
+  .contest-container {
+    gap: 20px;
+  }
+
+  .item-container {
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  .contest__item {
+    width: 100%;
+  }
+
+  .arrow-right {
+    rotate: 270deg;
+    top: 2px;
+    left: 0;
+  }
+
+  .contest__item-btn--current {
+    transform: none;
+    rotate: 135deg;
+    width: 24px;
+    height: 24px;
+  }
+
+  .arrow-right--current {
+    transform: none;
+    top: 1px;
+    left: -1px;
+  }
+
+  .contest-content {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .contest {
+    padding: 40px 16px;
+  }
 }
 </style>
