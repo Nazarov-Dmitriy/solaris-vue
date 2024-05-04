@@ -114,7 +114,7 @@
                     </div>
 
                   <div class="form__footer">
-                    <input type="submit" class="form__button botton btn" value="Отправить"/>
+                    <input type="submit" class="form__button button btn" value="Отправить"/>
                     <p class="form__footer__text">Нажимая кнопку «Отправить», я соглашаюсь с <a href="#" class="form__footer__link p2">Политикой обработки персональных данных</a></p>
                   </div>
 
