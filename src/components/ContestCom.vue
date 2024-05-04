@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="contest">
+    <div class="contest" id="contest">
       <h2 class="contest__title h2">Конкурсы сегодняшнего дня</h2>
       <div class="contest-container">
 
@@ -10,9 +10,10 @@
               <p class="contest__item-subtitle p1">Название конкурса</p>
               <p class="contest__item-publication p2">Дата публикации</p>
             </div>
-            <button class="contest__item-btn">
-              <i class="arrow-right"></i>
-            </button>
+              <svg class="contest__item-btn" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#1F2A3E"/>
+                <path d="M14 22L20 16L14 10" stroke="#1F2A3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
           </div>
           <div class="contest-content">
             <h3 class="contest-content__title h3">Название конкурса1</h3>
@@ -71,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   arr.forEach(item => {
-    console.log(item);
     let elem = `
     <div class="item-container">
         <div class="contest__item">
@@ -79,9 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
             <p class="contest__item-subtitle p1">${item.title}</p>
             <p class="contest__item-publication p2">${item.date_publication}</p>
           </div>
-          <button class="contest__item-btn">
-            <i class="arrow-right"></i>
-          </button>
+            <svg class="contest__item-btn" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#1F2A3E"/>
+              <path d="M14 22L20 16L14 10" stroke="#1F2A3E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
         <div class="contest-content">
           <h3 class="contest-content__title h3">${item.title}</h3>
@@ -121,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const contestBtns = document.querySelectorAll(".contest__item-btn");
   const contestContent = document.querySelectorAll(".contest-content");
-  const arrowRights = document.querySelectorAll(".arrow-right");
 
   let activeBtnIndex = null;
 
@@ -133,14 +133,12 @@ document.addEventListener("DOMContentLoaded", function () {
         contestBtns[activeBtnIndex].classList.remove(
           "contest__item-btn--current"
         );
-        arrowRights[activeBtnIndex].classList.remove("arrow-right--current");
         contestContent[activeBtnIndex].classList.remove(
           "contest-content--visible"
         );
       }
 
       btn.classList.add("contest__item-btn--current");
-      arrowRights[index].classList.add("arrow-right--current");
       contestContent[index].classList.add("contest-content--visible");
 
       activeBtnIndex = index;
@@ -155,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
   padding: 80px 60px;
   margin: auto;
   box-sizing: border-box;
+  scroll-margin: 88px;
 }
 
 .contest__title {
@@ -173,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
   display: flex;
   gap: 75px;
   width: 100%;
+  position: relative;
 }
 
 .contest__item {
@@ -185,43 +185,19 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .contest__item-btn {
-  width: 24px;
-  height: 24px;
-  border-radius: 100%;
-  border: 1px solid var(--dark);
-  background: var(--white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
   transition: .4s;
 }
 
-.arrow-right {
-  border: solid var(--dark);
-  border-width: 0 1.5px 1.5px 0;
-  padding: 3px;
-  display: inline-block;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  position: relative;
-  left: -1px;
-}
-
 .contest__item-btn--current {
-  border-radius: 100px;
-  border: none;
-  width: 32px;
-  height: 32px;
-  background: #dda06b;
-  color: var(--white);
+  fill: var(--roseBege);
   transform: translateX(40px);
 }
-
-.arrow-right--current {
-  border: solid var(--white);
-  border-width: 0 1.5px 1.5px 0;
-  transform: scale(1.5) rotate(-45deg);
+.contest__item-btn--current rect{
+  stroke: var(--roseBege);
+}
+.contest__item-btn--current path{
+  stroke: var(--white);
 }
 
 .contest-content {
@@ -283,34 +259,31 @@ document.addEventListener("DOMContentLoaded", function () {
   .contest__item {
     width: 100%;
   }
-
-  .arrow-right {
-    rotate: 270deg;
-    top: 2px;
-    left: 0;
+  .contest__item-btn{
+    rotate: -90deg;
   }
 
   .contest__item-btn--current {
     transform: none;
-    rotate: 135deg;
-    width: 24px;
-    height: 24px;
-  }
-
-  .arrow-right--current {
-    transform: none;
-    top: 1px;
-    left: -1px;
+    rotate: 90deg;
   }
 
   .contest-content {
     max-width: 100%;
+    position: static;
   }
 }
 
 @media (max-width: 576px) {
   .contest {
     padding: 40px 16px;
+  }
+
+  .contest-content__subtitle {
+      flex-direction: column;
+      padding: 8px;
+      gap: 8px;
+      align-items: flex-start;
   }
 }
 </style>
