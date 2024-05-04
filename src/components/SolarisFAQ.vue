@@ -200,29 +200,6 @@
   </section>
 </template>
 <script setup>
-// document.addEventListener("DOMContentLoaded", function () {
-//   const faqBtns = document.querySelectorAll(".solaris-faq__item-btn");
-//   const faqContent = document.querySelectorAll(".solaris-faq-content");
-//   let activeBtnIndex = null;
-
-//   faqBtns.forEach((btn, index) => {
-//     btn.addEventListener("click", (event) => {
-//       event.preventDefault();
-//       if (activeBtnIndex !== null) {
-//         faqBtns[activeBtnIndex].classList.toggle("solaris__item-btn--current");
-//         faqContent[activeBtnIndex].classList.remove("faq-content--visible");
-//       }
-
-//       btn.classList.toggle("solaris__item-btn--current");
-//       if (btn.classList.contains("solaris__item-btn--current")) {
-//         faqContent[index].classList.add("faq-content--visible");
-//       } else {
-//         faqContent[index].classList.remove("faq-content--visible");
-//       }
-//       activeBtnIndex = activeBtnIndex === index ? null : index
-//     });
-//   });
-// });
 document.addEventListener("DOMContentLoaded", function () {
   const faqBtns = document.querySelectorAll(".solaris-faq__item-btn");
   const faqContent = document.querySelectorAll(".solaris-faq-content");
