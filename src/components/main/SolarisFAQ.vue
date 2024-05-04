@@ -100,8 +100,12 @@ document.addEventListener("DOMContentLoaded", function () {
   faqBtns.forEach((btn, index) => {
     btn.addEventListener("click", function (event) {
       event.preventDefault();
+      console.log(activeBtnIndex);
 
-      if (activeBtnIndex !== null) {
+      btn.classList.toggle("solaris__item-btn--current");
+      arrowRights[index].classList.toggle("faq-arrow-right--current");
+      faqContent[index].classList.toggle("faq-content--visible");
+      if (activeBtnIndex !== false && activeBtnIndex !== index) {
         faqBtns[activeBtnIndex].classList.remove("solaris__item-btn--current");
         arrowRights[activeBtnIndex].classList.remove(
           "faq-arrow-right--current"
@@ -109,11 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         faqContent[activeBtnIndex].classList.remove("faq-content--visible");
       }
 
-      btn.classList.add("solaris__item-btn--current");
-      arrowRights[index].classList.add("faq-arrow-right--current");
-      faqContent[index].classList.add("faq-content--visible");
-
-      activeBtnIndex = index;
+      activeBtnIndex = activeBtnIndex === index ? false : index;
     });
   });
 });
