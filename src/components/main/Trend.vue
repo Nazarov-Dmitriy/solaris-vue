@@ -1,20 +1,20 @@
 <template>
-  <section class="trend-container">
+  <section class="trend-container" id="trend">
     <div class="trend">
       <div class="trend__content">
         <div class="trend__coin">
           <img
-            src="../assets/image/trend/trend-coin.png"
+            src="../../assets/image/trend/trend-coin.png"
             alt=""
             class="trend__coin-img"
           />
           <img
-            src="../assets/image/trend/trend-coin.png"
+            src="../../assets/image/trend/trend-coin.png"
             alt=""
             class="trend__coin-img"
           />
           <img
-            src="../assets/image/trend/trend-coin.png"
+            src="../../assets/image/trend/trend-coin.png"
             alt=""
             class="trend__coin-img"
           />
@@ -28,7 +28,7 @@
           <h2 class="trend-subtitle h2">Направления</h2>
           <div class="trend-item">
             <img
-              src="../assets/image/trend/trendName.png"
+              src="../../assets/image/trend/trendName.png"
               alt=""
               class="trend-img"
             />
@@ -37,7 +37,7 @@
           </div>
           <div class="trend-item">
             <img
-              src="../assets/image/trend/trendName.png"
+              src="../../assets/image/trend/trendName.png"
               alt=""
               class="trend-img"
             />
@@ -45,7 +45,7 @@
           </div>
           <div class="trend-item">
             <img
-              src="../assets/image/trend/trendName.png"
+              src="../../assets/image/trend/trendName.png"
               alt=""
               class="trend-img"
             />
@@ -54,7 +54,7 @@
           </div>
           <div class="trend-item">
             <img
-              src="../assets/image/trend/trendName.png"
+              src="../../assets/image/trend/trendName.png"
               alt=""
               class="trend-img"
             />
@@ -62,7 +62,7 @@
           </div>
           <div class="trend-item">
             <img
-              src="../assets/image/trend/trendName.png"
+              src="../../assets/image/trend/trendName.png"
               alt=""
               class="trend-img"
             />
@@ -70,7 +70,7 @@
           </div>
           <div class="trend-item">
             <img
-              src="../assets/image/trend/trendName.png"
+              src="../../assets/image/trend/trendName.png"
               alt=""
               class="trend-img"
             />
@@ -78,7 +78,7 @@
           </div>
           <div class="trend-item">
             <img
-              src="../assets/image/trend/trendName.png"
+              src="../../assets/image/trend/trendName.png"
               alt=""
               class="trend-img"
             />
@@ -86,7 +86,7 @@
           </div>
           <div class="trend-item">
             <img
-              src="../assets/image/trend/trendName.png"
+              src="../../assets/image/trend/trendName.png"
               alt=""
               class="trend-img"
             />
@@ -96,7 +96,7 @@
       </div>
       <div class="trend-container-img">
         <img
-          src="../assets/image/trend/trend.png"
+          src="../../assets/image/trend/trend.png"
           class="trend-main-img"
           alt="img"
         />
@@ -110,6 +110,7 @@
 .trend-container {
   width: 100%;
   background: var(--lightBege);
+  scroll-margin: 88px;
 }
 
 .trend {
@@ -178,6 +179,7 @@
   position: relative;
   z-index: 2;
   margin-right: 20px;
+  color: var(--dark);
 }
 
 .trend__list {
@@ -246,6 +248,7 @@
   border: 2px solid var(--roseBege);
   cursor: pointer;
   width: 100%;
+  color: var(--dark);
 }
 
 .trend-item-btn:hover {
@@ -266,7 +269,7 @@
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  background-image: url("../assets/trend.png");
+  background-image: url("../../assets/trend.png");
 }
 
 .trend-container-img::-webkit-scrollbar {

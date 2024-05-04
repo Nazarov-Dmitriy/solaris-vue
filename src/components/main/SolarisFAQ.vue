@@ -1,5 +1,5 @@
 <template>
-  <section id="solarifFaq">
+  <section id="solarisFaq">
     <div class="solaris-faq">
       <h2 class="solaris-faq__title h2">Часто задаваемые вопросы</h2>
       <div class="solaris-faq-container">
@@ -10,187 +10,77 @@
                 Как получить доступ к личному кабинету?
               </p>
             </div>
-            <!-- <i class="arrow-right faq-arrow-right"></i> -->
-            <svg
-              class="solaris-faq__item-btn"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="31"
-                height="31"
-                rx="15.5"
-                stroke="#1F2A3E"
-              />
-              <path
-                d="M14 22L20 16L14 10"
-                stroke="#1F2A3E"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <button class="solaris-faq__item-btn">
+              <i class="arrow-right faq-arrow-right"></i>
+            </button>
             <div class="solaris-faq-content">
               <p class="solaris-faq__description p2">
                 Доступ к личному кабинету выдает классный руководитель учащегося
-                с лицее «Солярис».1
+                с лицее «Солярис».
               </p>
             </div>
           </div>
           <div class="solaris-faq__item">
             <div class="solaris-faq__item-wraper">
               <p class="solaris-faq__item-subtitle p1">
-                Как получить доступ к личному кабинету?
+                Часто задаваемый вопрос?
               </p>
             </div>
-            <!-- <i class="arrow-right faq-arrow-right"></i> -->
-            <svg
-              class="solaris-faq__item-btn"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="31"
-                height="31"
-                rx="15.5"
-                stroke="#1F2A3E"
-              />
-              <path
-                d="M14 22L20 16L14 10"
-                stroke="#1F2A3E"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <button class="solaris-faq__item-btn">
+              <i class="arrow-right faq-arrow-right"></i>
+            </button>
             <div class="solaris-faq-content">
               <p class="solaris-faq__description p2">
                 Доступ к личному кабинету выдает классный руководитель учащегося
-                с лицее «Солярис».2
+                с лицее «Солярис».
               </p>
             </div>
           </div>
           <div class="solaris-faq__item">
             <div class="solaris-faq__item-wraper">
               <p class="solaris-faq__item-subtitle p1">
-                Как получить доступ к личному кабинету?
+                Часто задаваемый вопрос?
               </p>
             </div>
-            <!-- <i class="arrow-right faq-arrow-right"></i> -->
-            <svg
-              class="solaris-faq__item-btn"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="31"
-                height="31"
-                rx="15.5"
-                stroke="#1F2A3E"
-              />
-              <path
-                d="M14 22L20 16L14 10"
-                stroke="#1F2A3E"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <button class="solaris-faq__item-btn">
+              <i class="arrow-right faq-arrow-right"></i>
+            </button>
             <div class="solaris-faq-content">
               <p class="solaris-faq__description p2">
                 Доступ к личному кабинету выдает классный руководитель учащегося
-                с лицее «Солярис».3
+                с лицее «Солярис».
               </p>
             </div>
           </div>
           <div class="solaris-faq__item">
             <div class="solaris-faq__item-wraper">
               <p class="solaris-faq__item-subtitle p1">
-                Как получить доступ к личному кабинету?
+                Часто задаваемый вопрос?
               </p>
             </div>
-            <!-- <i class="arrow-right faq-arrow-right"></i> -->
-            <svg
-              class="solaris-faq__item-btn"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="31"
-                height="31"
-                rx="15.5"
-                stroke="#1F2A3E"
-              />
-              <path
-                d="M14 22L20 16L14 10"
-                stroke="#1F2A3E"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <button class="solaris-faq__item-btn">
+              <i class="arrow-right faq-arrow-right"></i>
+            </button>
             <div class="solaris-faq-content">
               <p class="solaris-faq__description p2">
                 Доступ к личному кабинету выдает классный руководитель учащегося
-                с лицее «Солярис».4
+                с лицее «Солярис».
               </p>
             </div>
           </div>
           <div class="solaris-faq__item">
             <div class="solaris-faq__item-wraper">
               <p class="solaris-faq__item-subtitle p1">
-                Как получить доступ к личному кабинету?
+                Часто задаваемый вопрос?
               </p>
             </div>
-            <!-- <i class="arrow-right faq-arrow-right"></i> -->
-            <svg
-              class="solaris-faq__item-btn"
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="31"
-                height="31"
-                rx="15.5"
-                stroke="#1F2A3E"
-              />
-              <path
-                d="M14 22L20 16L14 10"
-                stroke="#1F2A3E"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <button class="solaris-faq__item-btn">
+              <i class="arrow-right faq-arrow-right"></i>
+            </button>
             <div class="solaris-faq-content">
               <p class="solaris-faq__description p2">
                 Доступ к личному кабинету выдает классный руководитель учащегося
-                с лицее «Солярис».5
+                с лицее «Солярис».
               </p>
             </div>
           </div>
@@ -199,20 +89,27 @@
     </div>
   </section>
 </template>
-<script setup>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
   const faqBtns = document.querySelectorAll(".solaris-faq__item-btn");
   const faqContent = document.querySelectorAll(".solaris-faq-content");
+  const arrowRights = document.querySelectorAll(".faq-arrow-right");
+
   let activeBtnIndex = false;
 
   faqBtns.forEach((btn, index) => {
     btn.addEventListener("click", function (event) {
       event.preventDefault();
+      console.log(activeBtnIndex);
 
       btn.classList.toggle("solaris__item-btn--current");
+      arrowRights[index].classList.toggle("faq-arrow-right--current");
       faqContent[index].classList.toggle("faq-content--visible");
       if (activeBtnIndex !== false && activeBtnIndex !== index) {
         faqBtns[activeBtnIndex].classList.remove("solaris__item-btn--current");
+        arrowRights[activeBtnIndex].classList.remove(
+          "faq-arrow-right--current"
+        );
         faqContent[activeBtnIndex].classList.remove("faq-content--visible");
       }
 
@@ -266,18 +163,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .solaris-faq__item-btn {
   border-radius: 100%;
-  border: none;
+  border: 1px solid var(--dark);
   background: var(--white);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: 0.4s;
-  /* padding: 9px; */
-}
-
-.solaris-faq__item-btn--current path {
-  stroke: var(--white);
+  padding: 9px;
 }
 
 .solaris-faq__item-btn:focus {
@@ -285,16 +178,29 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .solaris__item-btn--current {
-  fill: var(--roseBege);
-  transform: translateX(40px);
+  border: none;
+  background: #dda06b;
+  color: var(--white);
+  transform: translateX(40px) scale(1.15);
+  transition: 0.4s;
 }
 
-.solaris__item-btn--current rect {
-  stroke: var(--roseBege);
+.faq-arrow-right {
+  border: solid var(--dark);
+  border-width: 0 1.5px 1.5px 0;
+  padding: 3px;
+  display: inline-block;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  position: relative;
+  left: -1px;
 }
 
-.solaris__item-btn--current path {
-  stroke: var(--white);
+.faq-arrow-right--current {
+  border: solid var(--white);
+  border-width: 0 1.5px 1.5px 0;
+  transform: scale(1.25) rotate(-45deg) translate(1px, 1px);
+  margin-right: 50%;
 }
 
 .solaris-faq-content {
@@ -362,7 +268,6 @@ document.addEventListener("DOMContentLoaded", function () {
     right: 0;
     width: 32px;
     height: 32px;
-    transform: rotate(-90deg);
   }
   .solaris__item-btn--current {
     width: 32px;
@@ -370,7 +275,10 @@ document.addEventListener("DOMContentLoaded", function () {
     position: absolute;
     top: 0;
     right: 0;
-    transform: rotate(90deg);
+  }
+
+  .faq-arrow-right {
+    transform: rotate(-45deg);
   }
 
   .faq-arrow-right--current {
@@ -405,9 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
     display: block;
   }
 
-  .faq-arrow-right {
-    left: -1px;
-  }
+  
 
   .solaris-faq__title {
     line-height: 150%;
@@ -423,8 +329,6 @@ document.addEventListener("DOMContentLoaded", function () {
     max-width: 100%;
   }
 
-  .faq-arrow-right--current {
-    margin-right: 0;
-  }
+
 }
 </style>

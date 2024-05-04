@@ -1,6 +1,6 @@
 <template>
-  <section class="more-competitions">
-    <div class="more-competitions__body">
+  <section class="more-competitions" id="moreCompetitions">
+    <div class="more-competitions__body" >
       <h2 class="more-competitions__title">
         Еще больше конкурсов
         <span>от Солярика </span>
@@ -8,7 +8,7 @@
       </h2>
 
       <img
-        src="../assets/image/more-competitions/hare.png"
+        src="../../assets/image/more-competitions/hare.png"
         alt=""
         class="more-competitions__img"
       />
@@ -23,18 +23,18 @@
       <div class="more-competitions__text-wrap-bottom">
         <img
           class="more-competitions__img-bottom"
-          src="../assets/image/more-competitions/text-wrap-bottom.png"
+          src="../../assets/image/more-competitions/text-wrap-bottom.png"
           alt=""
         />
       </div>
       <img
         class="more-competitions__img-coin more-competitions__img-coin--left"
-        src="../assets/image/more-competitions/coin.png"
+        src="../../assets/image/more-competitions/coin.png"
         alt=""
       />
       <img
         class="more-competitions__img-coin more-competitions__img-coin--right"
-        src="../assets/image/more-competitions/coin.png"
+        src="../../assets/image/more-competitions/coin.png"
         alt=""
       />
       <button class="more-competitions__btn btn">Подписаться на чат-бот</button>
@@ -69,7 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ".more-competitions__text-wrap-bottom"
   );
   const moreCompetitions = document.querySelector('.more-competitions');
-  const img = document.querySelector(".more-competitions__img");
+  
+  // const img = document.querySelector(".more-competitions__img");
   const imgTg = document.querySelector(".more-competitions__img-tg");
 
   function setVisible() {
@@ -105,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   overflow: hidden;
   box-sizing: border-box;
+  scroll-margin: 88px;
 }
 
 .more-competitions__body {
@@ -172,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
   transform: translate(0, 60px);
   opacity: 0;
   transition: 1.5s;
+
 }
 
 .more-competitions__img {
@@ -205,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
   transition: 0.4s;
 }
 
-.more-competitions__btn:focus {
+.more-competitions__btn:focus{
   outline: none;
 }
 
@@ -247,16 +250,18 @@ document.addEventListener("DOMContentLoaded", function () {
   transition: 0.4s;
 }
 
-.more-competitions__link-tg:focus {
+.more-competitions__link-tg:focus{
   outline: none;
 }
+
+
 
 .animate {
   opacity: 1;
 }
 
-@media (max-width: 1230px) {
-  .more-competitions__img-coin--left {
+@media (max-width: 1230px){
+  .more-competitions__img-coin--left{
     left: 78px;
   }
 }
@@ -280,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
     max-width: 385px;
   }
 
-  .more-competitions__title span {
+  .more-competitions__title span{
     display: block;
   }
   .more-competitions span {
@@ -302,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
     right: 41px;
   }
 
-  .more-competitions__img-tg svg {
+  .more-competitions__img-tg svg{
     width: 45px;
     height: auto;
     border-radius: 50%;
@@ -334,6 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
   .more-competitions__img-coin--right {
     width: 37px;
     bottom: 29px;
+    
   }
 
   .more-competitions__btn {
@@ -343,8 +349,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 }
 
-@media (max-width: 685px) {
-  .more-competitions__img-coin--right {
+@media (max-width: 685px){
+  .more-competitions__img-coin--right{
     left: 49%;
   }
 }

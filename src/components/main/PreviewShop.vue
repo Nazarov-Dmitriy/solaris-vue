@@ -1,21 +1,20 @@
 <template>
-    <section class="previewshop">
+    <section class="previewshop" id="previewshop">
         <div class="previewshop__container">
             <div class="previewshop__description">
                 <img 
                 class="previewshop__img" 
-                :class="{previewshop__img__animated: previewShopAnimated}"
-                src="../assets/image/previewshop/solaric.png" 
+                src="../../assets/image/previewshop/solaric.png" 
                 alt="Солярик">
                 <h2 class="previewshop__title h2">На что потратить Солярики?</h2>
-                <p class="previewshop__text p2" :class="{previewshop__text__animate: previewShopAnimated}">Продукция магазина представляет собой награды и поощрения, помогающие учащимся ощутить удовлетворение от достижений и продемонстрировать прогресс в Лицее «Солярис». Надеемся, что эти вознаграждения будут вдохновлять и стимулировать их на дальнейшие успехи и развитие.</p>
+                <p class="previewshop__text p2">Продукция магазина представляет собой награды и поощрения, помогающие учащимся ощутить удовлетворение от достижений и продемонстрировать прогресс в Лицее «Солярис». Надеемся, что эти вознаграждения будут вдохновлять и стимулировать их на дальнейшие успехи и развитие.</p>
             </div>
             <div class="previewshop__list">
                 <div class="previewshop__card">
                     <img src="" alt="" class="previewshop-img">
                     <div class="previewshop__card-footer">
                         <p class="previewshop__card-subtitle p1">Сертификат АНТИДВОЙКА</p>
-                        <p class="previewshop__card-cost h2"> 200<img src="../assets/icon/valute.svg" alt="icon valute"
+                        <p class="previewshop__card-cost h2"> 200<img src="../../assets/icon/valute.svg" alt="icon valute"
                                 class="previewshop__card-icon"></p>
                     </div>
                 </div>
@@ -24,7 +23,7 @@
                     <div class="previewshop__card-footer">
                         <p class="previewshop__card-subtitle p1">Стикеры
                             с Соляриком</p>
-                        <p class="previewshop__card-cost h2"> 50<img src="../assets/icon/valute.svg" alt="icon valute"
+                        <p class="previewshop__card-cost h2"> 50<img src="../../assets/icon/valute.svg" alt="icon valute"
                                 class="previewshop__card-icon"></p>
                     </div>
                 </div>
@@ -33,7 +32,33 @@
                     <div class="previewshop__card-footer">
                         <p class="previewshop__card-subtitle p1">Значек
                             Соляриса</p>
-                        <p class="previewshop__card-cost h2">70 <img src="../assets/icon/valute.svg" alt="icon valute"
+                        <p class="previewshop__card-cost h2">70 <img src="../../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
+                    </div>
+                </div>
+                <div class="previewshop__card previewshop__card__hidden">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Сертификат АНТИДВОЙКА</p>
+                        <p class="previewshop__card-cost h2"> 200<img src="../../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
+                    </div>
+                </div>
+                <div class="previewshop__card previewshop__card__hidden">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Стикеры
+                            с Соляриком</p>
+                        <p class="previewshop__card-cost h2"> 50<img src="../../assets/icon/valute.svg" alt="icon valute"
+                                class="previewshop__card-icon"></p>
+                    </div>
+                </div>
+                <div class="previewshop__card previewshop__card__hidden">
+                    <img src="" alt="" class="previewshop-img">
+                    <div class="previewshop__card-footer">
+                        <p class="previewshop__card-subtitle p1">Значек
+                            Соляриса</p>
+                        <p class="previewshop__card-cost h2">70 <img src="../../assets/icon/valute.svg" alt="icon valute"
                                 class="previewshop__card-icon"></p>
                     </div>
                 </div>
@@ -44,45 +69,40 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted } from "vue";
+document.addEventListener("DOMContentLoaded", function () {
+  const previewshop = document.querySelector(".previewshop");
+  const previewshopImg = document.querySelector(".previewshop__img");
+  const previewshopText = document.querySelector(".previewshop__text");
 
-export default {
-  setup() {
-    const previewShopAnimated = ref(false);
+  function setVisible() {
+    const elementPosition = previewshop.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-    const setVisible = () => {
-      const elementPosition = document
-        .querySelector(".previewshop")
-        .getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+    if (elementPosition.top < windowHeight * 0.3) {
+        previewshopImg.classList.add("previewshop__img__animated");
+        previewshopText.classList.add("previewshop__text__animate");
 
-      if (elementPosition.top < windowHeight * 0.3) {
-        previewShopAnimated.value = true;
-        window.removeEventListener("scroll", setVisible);
-      }
-    };
-
-    onMounted(() => {
-      setVisible();
-      window.addEventListener("scroll", setVisible);
-    });
-
-    onUnmounted(() => {
       window.removeEventListener("scroll", setVisible);
-    });
+    }
+  }
+  window.addEventListener("scroll", setVisible);
 
-    return {
-      previewShopAnimated,
-      setVisible,
-    };
-  },
-};
+  const button = document.querySelector('.previewshop-btn');
+  const previewshopCard = document.querySelectorAll('.previewshop__card__hidden');
+
+    button.addEventListener('click', function () {
+        previewshopCard.forEach(function(card) {
+            card.classList.remove("previewshop__card__hidden");
+        })
+  });
+});
 </script>
 
 <style>
 .previewshop {
     width: 100%;
     background: var(--dark);
+    scroll-margin: 88px;
 }
 
 .previewshop__container {
@@ -147,7 +167,7 @@ export default {
 
 .previewshop__img__animated{
     opacity: 1;
-    transition: all 1.5s;
+    transition: ease-out 1s;
     transform: translateY(0%);
 }
 
@@ -169,7 +189,7 @@ export default {
 }
 .previewshop__text__animate{
     opacity: 1;
-    transition: all 1.5s;
+    transition: ease-out 1s;
 }
 
 .previewshop__list {
@@ -186,10 +206,14 @@ export default {
 .previewshop__card {
     padding: 24px;
     border: 2px solid var(--roseBege);
-
+    display: block;
     @media (max-width: 991px){
         padding: 16px;
     }
+}
+
+.previewshop__card__hidden{
+    display: none;
 }
 
 .previewshop-img {
