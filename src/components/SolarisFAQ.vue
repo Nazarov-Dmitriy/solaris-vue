@@ -420,13 +420,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   .solaris-faq__item-subtitle {
-    max-width: 90%;
+    max-width: 100%;
   }
 
   .faq-arrow-right--current {
     margin-right: 0;
   }
-
- 
 }
 </style>

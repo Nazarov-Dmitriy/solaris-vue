@@ -324,7 +324,6 @@
   }
 }
 
-/* адаптив для планшетов */
 @media (max-width: 991px) {
   .trend__list {
     display: flex;
@@ -423,7 +422,6 @@
   }
 }
 
-/* адаптив для мобилок */
 @media (max-width: 576px) {
   .trend {
     gap: 40px;
@@ -434,12 +432,10 @@
     align-items: center;
     flex-direction: column;
     padding: 0;
-    
-
   }
   .trend__list {
-    max-width: 300px;
-    width: 100%;
+    max-width: 100%;
+    width: 90%;
     margin-right: 0;
     margin-top: 19px;
     gap: 0;
@@ -452,7 +448,7 @@
     margin: 0;
     padding-top: 40px;
     width: 100%;
-    max-width: 304px;
+    max-width: 90%;
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 20px;
@@ -467,10 +463,8 @@
     line-height: 150%;
     color: #1f2a3e;
   }
- 
 
   .trend-container-img {
-    /* height: 91px; */
     height: 100%;
   }
 
@@ -478,10 +472,9 @@
     min-height: auto;
   }
 
-  .trend__coin{
+  .trend__coin {
     position: relative;
     width: 100%;
-    
   }
 
   .trend__coin-img:nth-child(1) {
@@ -495,26 +488,6 @@
     left: 63%;
     width: 70px;
     transform: translateX(48%) rotate(-60deg);
-  }
-}
-
-
-@media (max-width: 310px){
-  .trend__text{
-    font-size: 14px;
-    max-width: 205px
-  }
-
-  .trend__list{
-    max-width: 200px;
-    margin: 0 auto;
-  }
-
-  .trend-item-btn{
-    font-size: 14px;
-  }
-  .trend__coin-img:nth-child(3) {
-    width: 50px;
   }
 }
 </style>
