@@ -143,4 +143,10 @@ export default {
         justify-content: space-between;
     }
 }
+
+@media (max-width: 576px) {
+    .cabinet-header {
+        padding: 8px 16px;
+    }
+}
 </style>
