@@ -434,8 +434,8 @@
     padding: 0;
   }
   .trend__list {
-    max-width: 300px;
-    width: 100%;
+    max-width: 100%;
+    width: 90%;
     margin-right: 0;
     margin-top: 19px;
     gap: 0;
@@ -448,7 +448,7 @@
     margin: 0;
     padding-top: 40px;
     width: 100%;
-    max-width: 304px;
+    max-width: 90%;
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 20px;
