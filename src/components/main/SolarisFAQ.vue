@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const faqContent = document.querySelectorAll(".solaris-faq-content");
   const arrowRights = document.querySelectorAll(".faq-arrow-right");
 
-  let activeBtnIndex = null;
+  let activeBtnIndex = false;
 
   faqBtns.forEach((btn, index) => {
     btn.addEventListener("click", function (event) {
