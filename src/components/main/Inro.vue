@@ -12,16 +12,20 @@
                 <form action="" class="intro__form">
                     <input type="text" class="intro__input p2" placeholder="Логин">
                     <input type="text" class="intro__input p2" placeholder="Пароль">
-                    <button class="btn">Воити в кабинет</button>
+                    <button class="btn" @click="$router.push('/cabinet-student')">Воити в кабинет</button>
                     <button type="button" class="intro__form__btn btn-text">Забыли пароль?</button>
                     <img class="into__bg-rays" src="../../assets/image/animation-main/rays.svg" alt="rays">
                     <img class="into__bg-hare" src="../../assets/image/animation-main/hare.svg" alt="hare">
                     <div class="intro__modal">
-                        <svg class="intro__modal__close" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <line x1="6.06066" y1="6.21313" x2="26.2132" y2="26.3657" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                            <line x1="5" y1="26.1525" x2="25.1525" y2="5.99993" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                        <svg class="intro__modal__close" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <line x1="6.06066" y1="6.21313" x2="26.2132" y2="26.3657" stroke="white" stroke-width="1.5"
+                                stroke-linecap="round" />
+                            <line x1="5" y1="26.1525" x2="25.1525" y2="5.99993" stroke="white" stroke-width="1.5"
+                                stroke-linecap="round" />
                         </svg>
-                        <p class="intro__modal__text p1">Если вы забыли пароль от своего личного кабинета, то обратитесь к вашему классному руководителю.</p>
+                        <p class="intro__modal__text p1">Если вы забыли пароль от своего личного кабинета, то обратитесь
+                            к вашему классному руководителю.</p>
                     </div>
                 </form>
             </div>
@@ -207,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
     margin-bottom: 8px;
 }
 
-.intro__modal{
+.intro__modal {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -220,19 +224,19 @@ document.addEventListener("DOMContentLoaded", function () {
     z-index: -1;
 }
 
-.intro__modal__visible{
+.intro__modal__visible {
     opacity: 1;
     z-index: 2;
 }
 
-.intro__modal__close{
+.intro__modal__close {
     position: absolute;
     top: 24px;
     right: 24px;
     cursor: pointer;
 }
 
-.intro__modal__text{
+.intro__modal__text {
     color: var(--roseBege);
 }
 
@@ -422,14 +426,14 @@ document.addEventListener("DOMContentLoaded", function () {
         z-index: 1;
     }
 
-    .intro__modal{
+    .intro__modal {
         height: 392px;
         top: 30%;
     }
 }
 
 @media (max-width: 376px) {
-    .intro__modal{
+    .intro__modal {
         height: 392px;
         top: 38%;
     }
