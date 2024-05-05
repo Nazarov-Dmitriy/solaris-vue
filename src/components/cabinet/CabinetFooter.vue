@@ -58,6 +58,7 @@ export default {
 <style >
 .cabinet-footer {
     background-color: var(--lightBege);
+    flex-grow: 2;
 }
 .cabinet-footer p{
     color: var(--dark);
