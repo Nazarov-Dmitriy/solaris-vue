@@ -2,11 +2,13 @@
     <div class="cabinet-header__container">
         <div class="cabinet-header">
             <div class="cabinet-header__info">
-                <div class="cabinet-header__logo-wraper">
-                    <img src="../../assets/icon/cabinet-header/logo_cabinet.svg" class="cabinet-header__logo" alt="
+                <!-- <div class="cabinet-header__logo-wraper"> -->
+                    <a  class="cabinet-header__logo-wraper" href="/cabinet-student">
+                        <img src="../../assets/icon/cabinet-header/logo_cabinet.svg" class="cabinet-header__logo" alt="
                         icon-logo">
-                    <p class="cabinet-header__logo-text p2-phone">Кабинет ученика</p>
-                </div>
+                        <p class="cabinet-header__logo-text p2-phone">Кабинет ученика</p>
+                    </a>
+                <!-- </div> -->
                 <div class="cabinet-header__student-info">
                     <div class="cabinet-header__notification">
                         <p class="cabinet-header__notification-count p2-phone">1</p>

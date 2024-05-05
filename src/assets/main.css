@@ -55,6 +55,7 @@ button {
   padding: 0;
   text-align: start;
   font: inherit;
+  text-decoration: none;
 }
 
 html,
