@@ -17,5 +17,7 @@ import CabinetProfile from '../components/cabinet/CabinetProfile.vue'
 .cabinet-container{
     min-height: 100vh;
     background-color: var(--dark);
+    display: flex;
+    flex-direction: column;
 }
 </style>
