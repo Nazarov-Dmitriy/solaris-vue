@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   const moreCompetitions = document.querySelector('.more-competitions');
   
-  // const img = document.querySelector(".more-competitions__img");
   const imgTg = document.querySelector(".more-competitions__img-tg");
 
   function setVisible() {
@@ -80,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (elementPosition.top <= windowHeight * 0.3) {
       textWrap.classList.add("animate");
       textWrapBottom.classList.add("animate");
-      // img.classList.add("animate");
       imgTg.classList.add("animate");
 
       window.removeEventListener("scroll", setVisible);

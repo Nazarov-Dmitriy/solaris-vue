@@ -1,15 +1,15 @@
 <template>
     <div class="cabinet-container">
         <CabinetHeader />
+        <CabinetShopBalance />
         <CabinetShop />
-        <CabinetFooter />
     </div>
 </template>
 
 <script setup>
 
 import CabinetHeader from '../components/cabinet/CabinetHeader.vue'
-import CabinetFooter from '../components/cabinet/CabinetFooter.vue'
+import CabinetShopBalance from '../components/cabinet/CabinetShopBalance.vue'
 import CabinetShop from '../components/cabinet/CabinetShop.vue'
 </script>
 

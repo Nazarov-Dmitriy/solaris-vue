@@ -20,7 +20,7 @@
                 <ul class="cabinet-header__list">
                     <li class="botton"><a href='#' class="cabinet-header__link"><img
                                 src="../../assets/icon/cabinet-header/contest.svg" alt="icon-contest">Конкурсы</a></li>
-                    <li class="botton"><a href='#' class="cabinet-header__link"><img
+                    <li class="botton"><a href='/cabinet-shop' class="cabinet-header__link"><img
                                 src="../../assets/icon/cabinet-header/сart.svg" alt="icon-shop">Магазин</a>
                     </li>
                     <li class="botton"><a href='#' class="cabinet-header__link"><img
@@ -30,10 +30,7 @@
         </div>
     </div>
 </template>
-<script>
-export default {
-
-}
+<script setup>
 </script>
 <style>
 .cabinet-header__container {
@@ -55,7 +52,6 @@ export default {
     gap: 24px
 }
 
-.cabinet-header__logo-wraper {}
 
 .cabinet-header__logo {
     width: 101px;
@@ -103,8 +99,6 @@ export default {
     font-size: 16px;
     color: var(--roseBege);
 }
-
-.cabinet-header__nav {}
 
 .cabinet-header__list {
     list-style-type: none;
