@@ -8,9 +8,9 @@
 
 <script setup>
 
-import CabinetHeader from '../components/cabinet/CabinetHeader.vue'
-import CabinetShopBalance from '../components/cabinet/CabinetShopBalance.vue'
-import CabinetShop from '../components/cabinet/CabinetShop.vue'
+import CabinetHeader from '../components/cabinetStudent/CabinetHeader.vue'
+import CabinetShopBalance from '../components/cabinetStudent/shop/CabinetShopBalance.vue'
+import CabinetShop from '../components/cabinetStudent/shop/CabinetShop.vue'
 </script>
 
 <style>

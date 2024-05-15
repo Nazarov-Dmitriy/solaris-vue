@@ -20,12 +20,12 @@
             </div>
             <div class="cabinet-header__nav">
                 <ul class="cabinet-header__list">
-                    <li class="botton"><a href='#' class="cabinet-header__link"><img
+                    <li class="botton"><a href='/cabinet-contests' class="cabinet-header__link"><img
                                 src="../../assets/icon/cabinet-header/contest.svg" alt="icon-contest">Конкурсы</a></li>
                     <li class="botton"><a href='/cabinet-shop' class="cabinet-header__link"><img
                                 src="../../assets/icon/cabinet-header/сart.svg" alt="icon-shop">Магазин</a>
                     </li>
-                    <li class="botton"><a href='#' class="cabinet-header__link"><img
+                    <li class="botton"><a href='/cabinet-sales' class="cabinet-header__link"><img
                                 src="../../assets/icon/cabinet-header/сart.svg" alt="icon-cart">Покупки</a></li>
                 </ul>
             </div>

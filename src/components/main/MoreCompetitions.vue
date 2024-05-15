@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const imgTg = document.querySelector(".more-competitions__img-tg");
 
   function setVisible() {
-    const elementPosition = moreCompetitions.getBoundingClientRect();
+    const elementPosition = moreCompetitions?.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
-    if (elementPosition.top <= windowHeight * 0.3) {
+    if (elementPosition?.top <= windowHeight * 0.3) {
       textWrap.classList.add("animate");
       textWrapBottom.classList.add("animate");
       imgTg.classList.add("animate");

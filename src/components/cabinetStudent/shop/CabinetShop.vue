@@ -24,7 +24,10 @@
     </section>
 </template>
 <script setup>
-import img from '../../assets/image/cabinet/image.png'
+import { useRouter, useRoute } from 'vue-router'
+import img from '@/assets/image/cabinet/image.png'
+const router = useRouter()
+
 let arr = [
     {
         title: "Сертификат АНТИДВОЙКА",
@@ -76,6 +79,15 @@ document.addEventListener("DOMContentLoaded", function () {
        `;
         container.insertAdjacentHTML("beforeEnd", elem);
     });
+
+    document.querySelectorAll('.shop-item').forEach(item => {
+        item.addEventListener('click', () => {
+            // router.push({ path: 'cabinet-shop-card' })
+            router.push('/cabinet-shop-card');
+        })
+    })
+
+
 });
 
 </script>
@@ -115,15 +127,15 @@ document.addEventListener("DOMContentLoaded", function () {
     background: var(--lightBege)
 }
 
-.shop-item:hover .shop-subtitle{
+.shop-item:hover .shop-subtitle {
     color: var(--dark)
 }
 
-.shop-item:hover .shop-price-wraper{
+.shop-item:hover .shop-price-wraper {
     color: var(--dark)
 }
 
-.shop-item:hover .shop-icon path{
+.shop-item:hover .shop-icon path {
     fill: var(--dark)
 }
 

@@ -1,23 +1,19 @@
 <template>
     <div class="cabinet-container">
         <CabinetHeader />
-        <CabinetProfile />
-        <CabinetFooter />
+        <CabinetStudentViewContest />
     </div>
 </template>
 
 <script setup>
 
 import CabinetHeader from '../components/cabinetStudent/CabinetHeader.vue'
-import CabinetFooter from '../components/cabinetStudent/CabinetFooter.vue'
-import CabinetProfile from '../components/cabinetStudent/CabinetProfile.vue'
+import CabinetStudentViewContest from '../components/cabinetStudent/contests/CabinetStudentViewContest.vue'
 </script>
 
 <style>
-.cabinet-container{
+.cabinet-container {
     min-height: 100vh;
     background-color: var(--dark);
-    display: flex;
-    flex-direction: column;
 }
 </style>

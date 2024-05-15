@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const button = document.querySelector('.previewshop-btn');
   const previewshopCard = document.querySelectorAll('.previewshop__card__hidden');
 
-    button.addEventListener('click', function () {
+    button?.addEventListener('click', function () {
         previewshopCard.forEach(function(card) {
             card.classList.remove("previewshop__card__hidden");
         })
