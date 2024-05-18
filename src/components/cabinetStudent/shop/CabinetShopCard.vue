@@ -1,6 +1,6 @@
 <template>
     <section class="shop-balance">
-     Карточка товара
+     Карточка товара+
     </section>
 </template>
 <script setup>
