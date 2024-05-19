@@ -31,7 +31,7 @@
   --orange: #de4700;
   --lightBege: #fff2de;
   --white: #ffffff;
-  --roseLight: 
+  --roseLight:
 }
 
 html,
@@ -56,6 +56,8 @@ button {
   text-align: start;
   font: inherit;
   text-decoration: none;
+  outline: none;
+  list-style: none;
 }
 
 html,
@@ -107,6 +109,7 @@ body,
   font-size: 14px;
   line-height: 20px;
 }
+
 .p2-phone {
   font-weight: 400;
   font-size: 12px;
@@ -166,4 +169,77 @@ body,
 .btn-text:active {
   border-bottom: 2px solid var(--orange);
   color: var(--orange);
+}
+
+.dropdown {
+  border: 2px solid var(--roseBege);
+  padding: 16px ;
+  color: var(--roseBege);
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  background: var(--white);
+  box-sizing: border-box;
+  height: 56px;
+  position: relative;
+  display: flex;
+  align-items:center
+}
+
+.dropdown-input {
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--roseBege);
+}
+
+.dropdown-icon {
+  width: 12px;
+  height: 6px;
+  padding-right: 6px;
+}
+
+.dropdown-input::placeholder {
+  color: var(--roseBege);
+}
+
+.dropdown-options {
+  width: 100%;
+  cursor: pointer;
+  background: white;
+  overflow: hidden;
+  position: absolute;
+  top: 54px;
+  left: 0;
+  transition: all 0.7s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 100;
+}
+
+.dropdown-options .dropdown-option {
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+  color: var(--dark);
+  border: 1px solid var(--roseBege);
+  border-top: none
+}
+
+.dropdown-options .dropdown-option:hover {
+  color: var(--roseBege);
+}
+
+.dropdown.opened .dropdown-options {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown.opened::before {
+  transform: rotate(-225deg);
+  top: 30px;
 }

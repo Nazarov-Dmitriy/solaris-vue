@@ -12,8 +12,4 @@ import CabinetStudentContests from '../components/cabinetStudent/contests/Cabine
 </script>
 
 <style>
-.cabinet-container {
-    min-height: 100vh;
-    background-color: var(--dark);
-}
 </style>
