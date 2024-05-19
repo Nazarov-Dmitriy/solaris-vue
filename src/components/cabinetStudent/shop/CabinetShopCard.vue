@@ -8,7 +8,7 @@
                     <h2 class="card-header-text h2">Сертификат<br>АНТИДВОЙКА</h2>
                     <div>
                         <div class="card-price-wraper">
-                            <p class="h2">200</p>
+                            <p class="card-price h2">200</p>
                             <svg class="card-icon" width="41" height="44" viewBox="0 0 41 44" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -200,7 +200,39 @@
     .card-price-wraper {
         float: right;
     }
+}
 
+@media (max-width: 768px) {
+    .card-header-text{
+        font-family: Inter;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 36px;
+        text-align: left;
+
+    }
     
+    .card-price{
+        font-size: 24px;
+        line-height: 150%;
+    }
+
+    .card-img {
+        height: 170px;
+    }
+
+    .card-icon {
+        width: 30px;
+        height: 32px;
+    }
+
+    .card-header-item {
+        justify-content: start;
+    }
+
+    .exchange-btn {
+        width: 111px;
+    }
+
 }
 </style>
