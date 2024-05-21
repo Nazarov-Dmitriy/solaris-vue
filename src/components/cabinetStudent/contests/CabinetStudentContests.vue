@@ -1,7 +1,7 @@
 <template>
     <section class="section-uc">
         <div class="uc-panel-wraper">
-            <div class="uc-panel">
+            <div class="uc-panel__container">
                 <svg class="uc-panel__coin" width="46" height="47" viewBox="0 0 46 47" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -29,9 +29,10 @@
                         d="M41.035 9.53022C48.7529 19.3453 47.0694 33.5718 37.2749 41.3059C27.4803 49.04 13.2837 47.353 5.56582 37.5378C-2.15206 27.7227 -0.468571 13.4962 9.32598 5.76215C19.1205 -1.97193 33.3172 -0.284916 41.035 9.53022ZM40.0359 10.3192C47.319 19.5813 45.7303 33.0063 36.4876 40.3047C27.2448 47.603 13.848 46.011 6.56495 36.7489C-0.718115 27.4867 0.870521 14.0617 10.1133 6.76338C19.356 -0.534984 32.7528 1.05699 40.0359 10.3192Z"
                         fill="#434C59" />
                 </svg>
-                <img src="../../../assets/image/user-cabinet/contest/hare.png" alt="Солярик" class="uc-panel__hair">
-                <div class="uc-panel-group">
-                    <div class="uc-dropdowns">
+                <div class="uc-panel">
+                    <img src="../../../assets/image/user-cabinet/contest/hare.png" alt="Солярик" class="uc-panel__hair">
+
+                    <div class="uc-panel-group">
                         <div class="dropdown uc-dropdown__role">
                             <input class="dropdown-input " type="text" placeholder="Выберите роль" value="" readonly />
                             <img class="dropdown-icon" src="../../../assets/icon/appearance.svg" alt="icon-appearance">
@@ -52,12 +53,12 @@
                                 <li class="dropdown-option">Новые вниз</li>
                             </ul>
                         </div>
+                        <button class="btn btn-contest">Мои конкурсы</button>
                     </div>
-                    <button class="btn">Мои конкурсы</button>
                 </div>
             </div>
         </div>
-        <div class="uc-wpaper">
+        <!-- <div class="uc-wpaper">
             <div class="uc-container">
                 <div class="uc-contnent">
                     <div class="uc-subtitle__wraper">
@@ -71,7 +72,6 @@
                 </div>
 
 
-                <!-- Пагинация -->
                 <div class="pagination__container">
                     <ul class="pagination-list">
                         <li class="pagination-prev"><svg width="8" height="14" viewBox="0 0 8 14" fill="none"
@@ -91,7 +91,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </section>
 </template>
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
     body.addEventListener('click', closeDropdownFromOutside);
 
     let arrContest = [
-        { title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне" },
+        { title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне" },
         { title: "Городской конкурс1" },
         { title: "Городской конкурс2" },
         { title: "Городской конкурс3" },
@@ -344,11 +344,26 @@ document.addEventListener("DOMContentLoaded", function () {
     background: var(--dark);
 }
 
+.uc-panel__container {
+    max-width: 1920px;
+
+    margin: auto;
+    position: relative;
+}
+
 .uc-panel {
-    max-width: 1560px;
+    max-width: 1440px;
     padding: 32px 60px;
     margin: auto;
     position: relative;
+
+    @media(max-width: 991px) {
+        padding: 32px 40px;
+    }
+
+    @media(max-width: 576px) {
+        padding: 32px 16px 80px 16px;
+    }
 
 }
 
@@ -360,37 +375,129 @@ document.addEventListener("DOMContentLoaded", function () {
     width: 45px;
     height: 45px;
     top: 7px;
-    left: 201px;
+    left: 379px;
     rotate: 86deg;
+
+    @media(max-width: 1440px) {
+        left: 314px;
+    }
+
+    @media(max-width: 1200px) {
+        left: 245px;
+    }
+
+    @media(max-width: 991px) {
+        top: 5px;
+        left: 164px;
+    }
+
+    @media(max-width: 768px) {
+        top: 10px;
+        left: 35px;
+    }
+
+    @media(max-width: 576px) {
+        top: 249px;
+        left: 161px;
+    }
 }
 
 .uc-panel__coin:nth-child(2) {
     width: 35px;
     height: 35px;
     top: 85px;
-    left: 160px;
+    left: 335px;
     rotate: -15deg;
+
+    @media(max-width: 1440px) {
+        left: 270px;
+    }
+
+    @media(max-width: 1200px) {
+        left: 248px;
+        top: 103px;
+    }
+
+    @media(max-width: 768px) {
+        top: 70px;
+        left: 151px;
+    }
+
+    @media(max-width: 576px) {
+        top: 256px;
+        left: 291px;
+    }
 }
 
 .uc-panel__coin:nth-child(3) {
     width: 62px;
     height: 62px;
     top: 68px;
-    left: 246px;
+    left: 414px;
     rotate: 36deg;
+
+    @media(max-width: 1440px) {
+        left: 348px;
+    }
+
+    @media(max-width: 1200px) {
+        display: none;
+    }
 }
 
 .uc-panel__hair {
     position: absolute;
-    left: 155px;
+    left: 153px;
     bottom: 0;
+
+    @media(max-width: 1440px) {
+        left: 93px;
+    }
+
+    @media(max-width: 1200px) {
+        left: 53px;
+        height: 114px;
+        width: 171px;
+    }
+
+    @media(max-width: 991px) {
+        left: 40px;
+        height: 150px;
+        width: 229px;
+    }
+
+    @media(max-width: 768px) {
+        left: 11px;
+        height: 141px;
+        width: 207px;
+    }
+
+    @media(max-width: 576px) {
+        left: 16px;
+        height: 70px;
+        width: 114px;
+    }
 }
 
 .uc-panel-group {
     display: flex;
-    gap: 40px;
+    gap: 16px;
     padding: 16px;
     justify-content: end;
+
+
+    @media(max-width: 991px) {
+        width: 55%;
+        margin-left: auto;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 0;
+    }
+
+    @media(max-width: 576px) {
+        width: 100%;
+    }
+
 }
 
 .uc-dropdowns {
@@ -400,10 +507,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .uc-dropdown__role {
     width: 318px;
+
+    @media(max-width: 1200px) {
+        max-width: 252px;
+    }
+
+    @media(max-width: 991px) {
+        width: 100%;
+        max-width: none;
+    }
 }
 
 .uc-dropdown__sort {
     width: 171px;
+
+    @media(max-width: 991px) {
+        flex-grow: 1;
+    }
+
+    @media(max-width: 768px) {
+        width: 100%;
+    }
+}
+
+.btn-contest {
+    margin-left: 24px;
+
+    @media(max-width: 991px) {
+        margin-left: 0;
+    }
+
+    @media(max-width: 768px) {
+        width: 100%;
+    }
 }
 
 .uc-wpaper {
@@ -458,6 +594,10 @@ document.addEventListener("DOMContentLoaded", function () {
     padding: 16px;
     border-bottom: 2px solid var(--roseBege);
     gap: 56px 0;
+}
+
+.uc__item:hover {
+    background: var(--lightBege)
 }
 
 .uc__decription {
