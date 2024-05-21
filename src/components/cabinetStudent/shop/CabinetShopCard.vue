@@ -99,6 +99,36 @@
 
     // // Инициализация начального состояния
     // updateDisplay();
+    const currentValue = document.getElementsByClassName('quantity');
+    const minusBtn = document.getElementsByClassName('decrease');
+    const plusBtn = document.getElementsByClassName('increase');
+
+    // Инициализируем начальное значение
+    let value = 0;
+
+    // Функция увеличения значения
+    function increase() {
+        value++;
+        updateDisplay();
+        }
+
+    // Функция уменьшения значения
+    function decrease() {
+        value--;
+        updateDisplay();
+        }
+
+    // Функция обновления отображения
+    function updateDisplay() {
+        currentValue.innerText = value;
+        }
+
+    // Привязываем события к кнопкам
+    // plusBtn.addEventListener('click', increase);
+    // minusBtn.addEventListener('click', decrease);
+
+    // // Инициализация начального состояния
+    // updateDisplay();
 
 </script>
 
@@ -132,6 +162,10 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.card-adaptiv{
+    display: none
 }
 
 .card-adaptiv{
@@ -191,6 +225,10 @@
     text-align: center;
     background-color: rgba(255, 255, 255, 0);
     color: var(--roseBege);
+}
+
+.cancel-btn-adaptiv {
+    display: none;
 }
 
 .cancel-btn-adaptiv {
