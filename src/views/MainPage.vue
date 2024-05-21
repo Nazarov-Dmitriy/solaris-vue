@@ -11,13 +11,11 @@ import SolarisFAQ from "../components/main/SolarisFAQ.vue";
 import Reviews from "../components/main/Reviews.vue";
 import FeedbackForm from "../components/main/FeedbackForm.vue";
 import Footer from "../components/main/Footer.vue";
-import CabinetShopSales from "@/components/cabinetStudent/shop/CabinetShopSales.vue";
 </script>
 
 <template>
   <main class="main-page">
-    <CabinetShopSales/>
-   <!-- <Header />
+    <Header />
     <Inro />
     <AboutSolarik />
     <AboutWorking />
@@ -26,9 +24,9 @@ import CabinetShopSales from "@/components/cabinetStudent/shop/CabinetShopSales.
     <ContestCom />
     <MoreCompetitions />
     <SolarisFAQ />
-    <Reviews /> 
+    <Reviews />
     <FeedbackForm />
-    <Footer/>  -->
+    <Footer />
   </main>
 </template>
 
