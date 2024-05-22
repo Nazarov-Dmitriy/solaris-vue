@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="uc-wpaper">
+        <div class="uc-wpaper">
             <div class="uc-container">
                 <div class="uc-contnent">
                     <div class="uc-subtitle__wraper">
@@ -91,7 +91,7 @@
                     </ul>
                 </div>
             </div>
-        </div> -->
+        </div>
 
     </section>
 </template>
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Пагинация
     let totalPage = 0;
-    const perPage = 3;
+    const perPage = 5;
     let currentPage = 1;
     let showCountPage = 3;
     let rangeCountPage = [];
@@ -333,6 +333,10 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 </script>
 <style>
+* {
+    outline: 4px solid green !important;
+}
+
 .section-uc {
     display: flex;
     flex-direction: column;
@@ -364,7 +368,6 @@ document.addEventListener("DOMContentLoaded", function () {
     @media(max-width: 576px) {
         padding: 32px 16px 80px 16px;
     }
-
 }
 
 .uc-panel__coin {
@@ -551,6 +554,14 @@ document.addEventListener("DOMContentLoaded", function () {
     max-width: 1560px;
     padding: 24px 60px 20px 60px;
     margin: 0 auto;
+
+    @media(max-width: 991px) {
+        padding: 24px 40px;
+    }
+
+    @media(max-width: 576px) {
+        padding: 24px 16px;
+    }
 }
 
 .uc-contnent {
@@ -594,6 +605,20 @@ document.addEventListener("DOMContentLoaded", function () {
     padding: 16px;
     border-bottom: 2px solid var(--roseBege);
     gap: 56px 0;
+
+    @media(max-width: 1200px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 32px auto;
+        grid-template-areas:
+            "uc-directions"
+            "uc-deccription "
+            "uc-info";
+        gap: 20px 0;
+    }
+
+    @media(max-width: 576px) {
+        grid-template-rows: auto;
+    }
 }
 
 .uc__item:hover {
@@ -603,6 +628,10 @@ document.addEventListener("DOMContentLoaded", function () {
 .uc__decription {
     grid-area: uc-deccription;
     max-width: 652px;
+
+    @media(max-width: 1200px) {
+        max-width: 100%;
+    }
 }
 
 .uc__directions {
@@ -610,21 +639,47 @@ document.addEventListener("DOMContentLoaded", function () {
     grid-area: uc-directions;
     display: flex;
     gap: 24px;
+
+    @media(max-width: 991px) {
+        gap: 16px;
+    }
+
+    @media(max-width: 576px) {
+        flex-wrap: wrap;
+        flex-grow: 1;
+        justify-content: space-between;
+        width: 100%;
+    }
 }
 
 .uc__direction {
     padding: 4px 8px;
     background: var(--roseBege);
     color: var(--white);
-}
 
+    @media(max-width: 576px) {
+        font-size: 12px;
+    }
+}
 
 .uc__info {
     grid-area: uc-info;
     justify-self: end;
     display: flex;
     gap: 16px;
-    align-items: end;
+    justify-content: flex-end;
+
+    @media(max-width: 576px) {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}
+
+.uc__info-btn {
+    @media(max-width: 576px) {
+        flex-grow: 1;
+        justify-content: center;
+    }
 }
 
 .uc__publication {
