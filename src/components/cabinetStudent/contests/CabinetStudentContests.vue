@@ -333,10 +333,6 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 </script>
 <style>
-* {
-    outline: 4px solid green !important;
-}
-
 .section-uc {
     display: flex;
     flex-direction: column;
@@ -668,6 +664,7 @@ document.addEventListener("DOMContentLoaded", function () {
     display: flex;
     gap: 16px;
     justify-content: flex-end;
+    align-items: flex-end;
 
     @media(max-width: 576px) {
         flex-wrap: wrap;
