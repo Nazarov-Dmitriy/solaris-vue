@@ -41,7 +41,7 @@
 }
 
 .cabinet-header {
-    max-width: 1560px;
+    max-width: 1440px;
     padding: 8px 60px;
     display: flex;
     justify-content: space-between;

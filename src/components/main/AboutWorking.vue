@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const aboutWorkingImg = document.querySelector(".about-working__img");
 
   function setVisible() {
-    const elementPosition = aboutWorkingImg.getBoundingClientRect();
+    const elementPosition = aboutWorkingImg?.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
     if (elementPosition.top < windowHeight * 0.5) {
