@@ -13,10 +13,7 @@
         <ul class="cabinet-shop-ready__list">
           <li class="cabinet-shop-ready__list-item">
             <div class="cabinet-shop-ready__list-item-img">
-              <img
-                src="../../../assets/image/cabinet-shop/pic.png"
-                alt="image"
-              />
+              <img src="../../../assets/image/cabinet-shop/pic.png" alt="image" />
             </div>
             <div class="cabinet-shop-ready__list-item-info">
               <p class="list-item-info">Антидвойка</p>
@@ -33,15 +30,9 @@
         <ul class="cabinet-shop-history__wrapper">
           <li class="cabinet-shop-history__wrapper-item">
             <div class="cabinet-shop-history__wrapper-left">
-              <img
-                src="../../../assets/image/cabinet-shop/solaris2.png"
-                alt="картинка"
-              />
+              <img src="../../../assets/image/cabinet-shop/solaris2.png" alt="картинка" />
               <p>200</p>
-              <img
-                src="../../../assets/image/cabinet-shop/currency.png"
-                alt=""
-              />
+              <img src="../../../assets/image/cabinet-shop/currency.png" alt="" />
             </div>
             <div class="cabinet-shop-history__wrapper-info">
               <p>Антидвойка</p>
@@ -50,11 +41,7 @@
           </li>
         </ul>
       </div>
-      <img
-        src="../../../assets/image/cabinet-shop/coinBege.png"
-        alt=""
-        class="cabinet-shop__img-background"
-      />
+      <img src="../../../assets/image/cabinet-shop/coinBege.png" alt="" class="cabinet-shop__img-background" />
     </div>
   </section>
 </template>
@@ -165,20 +152,37 @@ document.addEventListener("DOMContentLoaded", function () {
   width: 100%;
   background-color: var(--dark);
   box-sizing: border-box;
+  position: relative;
+
 }
+
 .cabinet-shop-container {
   display: flex;
   background: var(--white);
   width: 100%;
   margin: 0 auto;
   position: relative;
+  margin: 0 auto;
+  max-width: 1560px;
+
 }
+
+.cabinet-shop::before {
+  content:'';
+  width: 50%;
+  height: 100%;
+  background: #fff;
+  position: absolute;
+  right: 0;
+}
+
 .cabinet-shop-ready {
   background: #1f2a3e;
   padding: 24px 60px 24px 60px;
   min-height: 100vh;
   width: 40%;
 }
+
 .cabinet-shop-history__wrapper {
   max-width: 100%;
   flex-direction: column;
@@ -194,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
   max-width: 100%;
   width: 100%;
 }
+
 .cabinet-shop-ready__titles-info {
   display: flex;
   flex-direction: column;
@@ -220,6 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
   border: 2px solid var(--white);
   width: 24%;
 }
+
 .cabinet-shop-ready__title::after {
   content: "";
   position: absolute;
@@ -234,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
   text-align: center;
   color: var(--white);
 }
+
 .cabinet-shop-ready__login {
   font-weight: 600;
   font-size: 24px;
@@ -252,9 +259,11 @@ document.addEventListener("DOMContentLoaded", function () {
 .cabinet-shop-ready__list::-webkit-scrollbar {
   display: none;
 }
+
 .cabinet-shop-ready__list li:not(:last-child) {
   margin-bottom: 24px;
 }
+
 .cabinet-shop-ready__list-item {
   border: 2px solid #dda06b;
   padding: 24px;
@@ -263,6 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
   gap: 16px;
   background-color: var(--lightBege);
 }
+
 .cabinet-shop-ready__list-item p {
   font-size: 20px;
   line-height: 150%;
@@ -281,6 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
   padding-left: 16px;
   padding-right: 240px;
 }
+
 .cabinet-shop-history__title {
   line-height: 150%;
   color: var(--dark);
@@ -289,6 +300,7 @@ document.addEventListener("DOMContentLoaded", function () {
   margin-bottom: 8px;
   position: relative;
 }
+
 .cabinet-shop-history__title::before {
   content: "";
   position: absolute;
@@ -297,6 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
   border: 2px solid var(--dark);
   width: 40%;
 }
+
 .cabinet-shop-history__title::after {
   content: "";
   position: absolute;
@@ -355,9 +368,11 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history {
     padding-right: 60px;
   }
+
   .cabinet-shop-history__title::before {
     width: 35%;
   }
+
   .cabinet-shop-history__title::after {
     width: 35%;
   }
@@ -366,6 +381,7 @@ document.addEventListener("DOMContentLoaded", function () {
     left: 0;
     width: 30%;
   }
+
   .cabinet-shop-ready__title::after {
     right: 0;
     width: 30%;
@@ -377,20 +393,25 @@ document.addEventListener("DOMContentLoaded", function () {
     justify-content: flex-start;
   }
 }
+
 @media (max-width: 1200px) {
   .cabinet-shop-container {
     max-width: 100%;
     width: 100%;
   }
+
   .cabinet-shop-history__title::before {
     width: 30%;
   }
+
   .cabinet-shop-history__title::after {
     width: 30%;
   }
+
   .cabinet-shop-ready__title::before {
     width: 20%;
   }
+
   .cabinet-shop-ready__title::after {
     width: 20%;
   }
@@ -403,129 +424,159 @@ document.addEventListener("DOMContentLoaded", function () {
     align-items: flex-start;
   }
 }
+
 @media (max-width: 870px) {
   .cabinet-shop-ready {
     padding: 24px 40px 28px 40px;
   }
+
   .cabinet-shop-ready__list-item {
     flex-direction: column;
   }
+
   .cabinet-shop__img-background {
     display: none;
   }
+
   .cabinet-shop-history__wrapper {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     height: auto;
   }
+
   .cabinet-shop-history__wrapper-item {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
   }
+
   .cabinet-shop-history__title::before {
     width: 25%;
   }
+
   .cabinet-shop-history__title::after {
     width: 25%;
   }
+
   .cabinet-shop-ready__title::before {
     width: 15%;
   }
+
   .cabinet-shop-ready__title::after {
     width: 15%;
   }
 }
+
 @media (max-width: 750px) {
   .cabinet-shop-container {
     flex-direction: column;
   }
+
   .cabinet-shop-ready {
     width: 100%;
     padding: 0;
     min-height: auto;
     padding-bottom: 72px;
   }
+
   .cabinet-shop-ready__list-item {
     flex-direction: row;
     width: 80%;
     margin: 0 auto;
   }
+
   .cabinet-shop-ready__title::before {
     width: 28%;
     left: 40px;
   }
+
   .cabinet-shop-ready__title::after {
     width: 28%;
     right: 40px;
   }
+
   .cabinet-shop-history {
     width: auto;
   }
+
   .cabinet-shop-history__title::before {
     width: 35%;
   }
+
   .cabinet-shop-history__title::after {
     width: 35%;
   }
+
   .cabinet-shop-ready__list {
     height: 696px;
   }
 }
+
 @media (max-width: 590px) {
   .cabinet-shop-ready__title::before {
     width: 23%;
     left: 40px;
   }
+
   .cabinet-shop-ready__title::after {
     width: 23%;
     right: 40px;
   }
+
   .cabinet-shop-history__title::before {
     width: 30%;
   }
+
   .cabinet-shop-history__title::after {
     width: 30%;
   }
 }
+
 @media (max-width: 480px) {
   .cabinet-shop-ready__title::before {
     width: 18%;
     left: 30px;
   }
+
   .cabinet-shop-ready__title::after {
     width: 18%;
     right: 30px;
   }
+
   .cabinet-shop-history__title::before {
     width: 24%;
   }
+
   .cabinet-shop-history__title::after {
     width: 24%;
   }
 }
 
-@media (max-width: 370px){
+@media (max-width: 370px) {
   .cabinet-shop-ready__title::before {
     width: 15%;
     left: 18px;
   }
+
   .cabinet-shop-ready__title::after {
     width: 15%;
     right: 18px;
   }
+
   .cabinet-shop-history__title::before {
     width: 19%;
   }
+
   .cabinet-shop-history__title::after {
     width: 19%;
   }
-  .cabinet-shop-history{
+
+  .cabinet-shop-history {
     padding-right: 10px;
   }
 
-  .cabinet-shop-ready__list-item{
+  .cabinet-shop-ready__list-item {
     flex-direction: column;
   }
 }
