@@ -346,7 +346,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .uc-panel__container {
     max-width: 1920px;
-
     margin: auto;
     position: relative;
 }
@@ -356,6 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
     padding: 32px 60px;
     margin: auto;
     position: relative;
+    box-sizing: border-box;
 
     @media(max-width: 991px) {
         padding: 32px 40px;
@@ -547,9 +547,10 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .uc-container {
-    max-width: 1560px;
+    max-width: 1440px;
     padding: 24px 60px 20px 60px;
     margin: 0 auto;
+    box-sizing: border-box;
 
     @media(max-width: 991px) {
         padding: 24px 40px;
