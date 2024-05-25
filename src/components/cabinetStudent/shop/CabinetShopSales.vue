@@ -3,7 +3,9 @@
     <div class="cabinet-shop-container">
       <div class="cabinet-shop-ready">
         <div class="cabinet-shop-ready__titles-info">
-          <p class="cabinet-shop-ready__title">Готовы к получению</p>
+          <p class="cabinet-shop-ready__title">
+            <span>Готовы к получению</span>
+          </p>
           <p class="cabinet-shop-ready__subtitle">
             Для получения товара покажите на одном экране свой ID и номер заказа
           </p>
@@ -13,7 +15,10 @@
         <ul class="cabinet-shop-ready__list">
           <li class="cabinet-shop-ready__list-item">
             <div class="cabinet-shop-ready__list-item-img">
-              <img src="../../../assets/image/cabinet-shop/pic.png" alt="image" />
+              <img
+                src="../../../assets/image/cabinet-shop/pic.png"
+                alt="image"
+              />
             </div>
             <div class="cabinet-shop-ready__list-item-info">
               <p class="list-item-info">Антидвойка</p>
@@ -30,9 +35,15 @@
         <ul class="cabinet-shop-history__wrapper">
           <li class="cabinet-shop-history__wrapper-item">
             <div class="cabinet-shop-history__wrapper-left">
-              <img src="../../../assets/image/cabinet-shop/solaris2.png" alt="картинка" />
+              <img
+                src="../../../assets/image/cabinet-shop/solaris2.png"
+                alt="картинка"
+              />
               <p>200</p>
-              <img src="../../../assets/image/cabinet-shop/currency.png" alt="" />
+              <img
+                src="../../../assets/image/cabinet-shop/currency.png"
+                alt=""
+              />
             </div>
             <div class="cabinet-shop-history__wrapper-info">
               <p>Антидвойка</p>
@@ -40,8 +51,13 @@
             </div>
           </li>
         </ul>
+        <div>
+          <img class="cabinet-shop__img-background"
+            src="../../../assets/image/cabinet-shop/coinBege.png"
+            alt=""
+          />
+        </div>
       </div>
-      <img src="../../../assets/image/cabinet-shop/coinBege.png" alt="" class="cabinet-shop__img-background" />
     </div>
   </section>
 </template>
@@ -88,13 +104,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     list.append(listItem);
   });
-  /////////////////////////////////////
 
   const infoBuyHistoryItem = [
     {
       imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
       amount: 200,
       orderNumber: "Стикеры солярики № 33500967",
+      orderStatus: "заказ оплачен",
+      time: "13.02.2024",
+      currency: "/src/assets/image/cabinet-shop/currency.png",
+    },
+    {
+      imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+      amount: 150,
+      orderNumber: "Антидвойка № 33500967",
       orderStatus: "заказ оплачен",
       time: "13.02.2024",
       currency: "/src/assets/image/cabinet-shop/currency.png",
@@ -153,7 +176,6 @@ document.addEventListener("DOMContentLoaded", function () {
   background-color: var(--dark);
   box-sizing: border-box;
   position: relative;
-
 }
 
 .cabinet-shop-container {
@@ -164,11 +186,10 @@ document.addEventListener("DOMContentLoaded", function () {
   position: relative;
   margin: 0 auto;
   max-width: 1560px;
-
 }
 
 .cabinet-shop::before {
-  content:'';
+  content: "";
   width: 50%;
   height: 100%;
   background: #fff;
@@ -178,8 +199,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .cabinet-shop-ready {
   background: #1f2a3e;
-  padding: 24px 60px 24px 60px;
-  min-height: 100vh;
+  padding: 24px 60px 3px 60px;
+  min-height: 91vh;
   width: 40%;
 }
 
@@ -211,29 +232,40 @@ document.addEventListener("DOMContentLoaded", function () {
 .cabinet-shop-ready__titles-info p:not(:last-child) {
   margin-bottom: 8px;
 }
-
-.cabinet-shop-ready__title {
-  line-height: 150%;
-  color: var(--white);
-}
-
 .cabinet-shop-ready__title::before {
   content: "";
   position: absolute;
   top: 10px;
   left: 0;
   border: 2px solid var(--white);
-  width: 24%;
+  width: 100%;
+  z-index: 0;
 }
 
-.cabinet-shop-ready__title::after {
+.cabinet-shop-ready__title {
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.cabinet-shop-ready__title span {
+  line-height: 150%;
+  color: var(--white);
+  background: var(--dark);
+  position: relative;
+  z-index: 2;
+  padding: 0 10px;
+}
+
+/* .cabinet-shop-ready__title::after {
   content: "";
   position: absolute;
   top: 11px;
   right: 0;
   border: 2px solid var(--white);
-  width: 24%;
-}
+  width: 100%;
+  z-index: 0;
+} */
 
 .cabinet-shop-ready__subtitle {
   line-height: 150%;
@@ -250,10 +282,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .cabinet-shop-ready__list {
   width: 100%;
-  height: 696px;
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  min-height: 100vh;
 }
 
 .cabinet-shop-ready__list::-webkit-scrollbar {
@@ -349,9 +381,6 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .cabinet-shop__img-background {
-  position: absolute;
-  bottom: 0;
-  right: 0;
 }
 
 @media (max-width: 1440px) {
@@ -376,7 +405,7 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 35%;
   }
-
+  /* 
   .cabinet-shop-ready__title::before {
     left: 0;
     width: 30%;
@@ -385,7 +414,7 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-ready__title::after {
     right: 0;
     width: 30%;
-  }
+  } */
 
   .cabinet-shop-history__wrapper {
     max-width: 100%;
@@ -407,21 +436,25 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 30%;
   }
-
+  /* 
   .cabinet-shop-ready__title::before {
     width: 20%;
   }
 
   .cabinet-shop-ready__title::after {
     width: 20%;
-  }
+  } */
 }
 
-@media (max-width: 1015px) {
+@media (max-width: 1019px) {
   .cabinet-shop-history__wrapper-item {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+  }
+
+  .cabinet-shop__img-background {
+    display: none;
   }
 }
 
@@ -458,14 +491,14 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 25%;
   }
-
+  /* 
   .cabinet-shop-ready__title::before {
     width: 15%;
   }
 
   .cabinet-shop-ready__title::after {
     width: 15%;
-  }
+  } */
 }
 
 @media (max-width: 750px) {
@@ -480,12 +513,16 @@ document.addEventListener("DOMContentLoaded", function () {
     padding-bottom: 72px;
   }
 
+  .cabinet-shop-ready__title {
+    width: 90%;
+  }
+
   .cabinet-shop-ready__list-item {
     flex-direction: row;
     width: 80%;
     margin: 0 auto;
   }
-
+  /* 
   .cabinet-shop-ready__title::before {
     width: 28%;
     left: 40px;
@@ -494,7 +531,7 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-ready__title::after {
     width: 28%;
     right: 40px;
-  }
+  } */
 
   .cabinet-shop-history {
     width: auto;
@@ -514,7 +551,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 @media (max-width: 590px) {
-  .cabinet-shop-ready__title::before {
+  /* .cabinet-shop-ready__title::before {
     width: 23%;
     left: 40px;
   }
@@ -522,7 +559,7 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-ready__title::after {
     width: 23%;
     right: 40px;
-  }
+  } */
 
   .cabinet-shop-history__title::before {
     width: 30%;
@@ -534,7 +571,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 @media (max-width: 480px) {
-  .cabinet-shop-ready__title::before {
+  /* .cabinet-shop-ready__title::before {
     width: 18%;
     left: 30px;
   }
@@ -542,7 +579,7 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-ready__title::after {
     width: 18%;
     right: 30px;
-  }
+  } */
 
   .cabinet-shop-history__title::before {
     width: 24%;
@@ -554,7 +591,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 @media (max-width: 370px) {
-  .cabinet-shop-ready__title::before {
+  /* .cabinet-shop-ready__title::before {
     width: 15%;
     left: 18px;
   }
@@ -562,7 +599,7 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-ready__title::after {
     width: 15%;
     right: 18px;
-  }
+  } */
 
   .cabinet-shop-history__title::before {
     width: 19%;
