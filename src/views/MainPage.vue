@@ -24,7 +24,7 @@ import Footer from "../components/main/Footer.vue";
     <ContestCom />
     <MoreCompetitions />
     <SolarisFAQ />
-    <Reviews /> 
+    <Reviews />
     <FeedbackForm />
     <Footer />
   </main>
