@@ -28,11 +28,11 @@
                         <button type="button" class="btn cancel-btn">Отменить</button>
                     </div>
                     <div class="card-quantity">
-                        <div class="quantity-block">
+                        <div class="quantity-block" data-counter>
                             <div class="quantity-text p2">Количество</div>
-                            <button class="decrease h3">-</button>
-                            <span class="quantity h3">1</span>
-                            <button class="increase h3">+</button>
+                            <div class="decrease h3">-</div>
+                            <div class="quantity h3">1</div>
+                            <div class="increase h3">+</div>
                         </div>
                     </div>
                     <div>
@@ -44,9 +44,24 @@
     </section>
 </template>
 <script setup>
+    document.addEventListener("DOMContentLoaded", function () {
+        let minus = document.querySelector('.decrease');
+        let plus = document.querySelector('.increase');
+        let counter = document.querySelector('.quantity');
+        
+        plus.addEventListener('click', function(){
+            
+            counter.innerText = ++counter.innerText;
+        })
 
+        minus.addEventListener('click', function(){
+            if (counter.innerText>1) {
+                counter.innerText = --counter.innerText;
+            }
+        })
+    });
 </script>
-
+    
 <style>
 .shop-card-container {
     width: 100%;
@@ -142,13 +157,50 @@
     line-height: 100%;
 }
 
+.cancel-btn:hover {
+    border: 2px solid var(--orange);
+    background: none;
+    color: var(--orange);
+}
+
+.cancel-btn:active {
+  border: 2px solid white;
+  background: none;
+  color: white;
+}
+
+.cancel-btn:disabled {
+  border: 2px solid var(--roseLight);
+  background: none;
+  color: var(--roseLight);
+}
+
 .exchange-btn {
     width: 292px;
     display: inline-block;
     text-align: center;
     line-height: 100%;
-
 }
+
+.exchange-btn:hover {
+    border: none;
+    background: var(--roseBege);
+    color: white;
+}
+
+.exchange-btn:active {
+  border: 2px var(--dark);
+  background: var(--roseBege);
+  color: var(--dark);
+}
+
+.cexchange-btn:disabled {
+  border: 2px solid var(--roseLight);
+  background: none;
+  color: var(--roseLight);
+}
+
+
 
 .card-quantity {
     width: 100%;
@@ -177,6 +229,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.quantity > input {
+    width: 100%;
+    background-color: var(--dark);
+    text-align: center;
+    border: none;
+    color: white;
 }
 
 .increase, .decrease {
@@ -227,7 +287,6 @@
         font-weight: 700;
         line-height: 36px;
         text-align: left;
-
     }
     
     .card-price{
@@ -244,6 +303,10 @@
         width: 30px;
         height: 32px;
         padding-top: 0;
+    }
+
+    .card-text-word{
+        font-size: 16px;
     }
 
     .exchange-btn {
