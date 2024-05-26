@@ -27,6 +27,20 @@
               <p class="list-item-info">Предъяви учителю</p>
             </div>
           </li>
+          <li class="cabinet-shop-ready__list-item">
+            <div class="cabinet-shop-ready__list-item-img">
+              <img
+                src="../../../assets/image/cabinet-shop/pic.png"
+                alt="image"
+              />
+            </div>
+            <div class="cabinet-shop-ready__list-item-info">
+              <p class="list-item-info">Антидвойка</p>
+              <p class="list-item-info">№ 1</p>
+              <p class="list-item-info">Получить</p>
+              <p class="list-item-info">Предъяви учителю</p>
+            </div>
+          </li>
         </ul>
       </div>
 
@@ -39,7 +53,7 @@
                 src="../../../assets/image/cabinet-shop/solaris2.png"
                 alt="картинка"
               />
-              <p>200</p>
+              <p class="cabinet-shop-history__wrapper-price">200</p>
               <img
                 src="../../../assets/image/cabinet-shop/currency.png"
                 alt=""
@@ -52,7 +66,8 @@
           </li>
         </ul>
         <div>
-          <img class="cabinet-shop__img-background"
+          <img
+            class="cabinet-shop__img-background"
             src="../../../assets/image/cabinet-shop/coinBege.png"
             alt=""
           />
@@ -78,11 +93,18 @@ document.addEventListener("DOMContentLoaded", function () {
       img: "/src/assets/image/cabinet-shop/icon.png",
     },
     {
-      name: "Футболка",
+      name: "Значок",
       number: "№ 3459864",
-      text: "1 корпус - кабинет В 2012 корпус - кабинет В 208",
-      img: "/src/assets/image/cabinet-shop/t-shirt.png",
+      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+      img: "/src/assets/image/cabinet-shop/icon.png",
     },
+    {
+      name: "Значок",
+      number: "№ 3459864",
+      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+      img: "/src/assets/image/cabinet-shop/icon.png",
+    },
+   
   ];
 
   const list = document.querySelector(".cabinet-shop-ready__list");
@@ -158,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
     historyWrapperItem.innerHTML = `
           <div class="cabinet-shop-history__wrapper-left">
             <img src="${item.imgSrc}" alt="картинка" />
-            <p>${item.amount}</p>
+            <p class='cabinet-shop-history__wrapper-price'>${item.amount}</p>
             <img src="${item.currency}" alt="валюта" />
           </div>
           <div class="cabinet-shop-history__wrapper-info">
@@ -199,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .cabinet-shop-ready {
   background: #1f2a3e;
-  padding: 24px 60px 3px 60px;
+  padding: 24px 60px 0 60px;
   min-height: 91vh;
   width: 40%;
 }
@@ -285,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  min-height: 100vh;
+  padding-bottom: 72px;
 }
 
 .cabinet-shop-ready__list::-webkit-scrollbar {
@@ -320,8 +342,11 @@ document.addEventListener("DOMContentLoaded", function () {
 .cabinet-shop-history {
   width: 100%;
   max-width: 100%;
-  padding-left: 16px;
-  padding-right: 240px;
+  margin-left: 16px;
+  border-bottom: 2px solid #dda06b;
+  margin-bottom: 24px;
+  padding-right: 24px;
+  margin-right: 24px;
 }
 
 .cabinet-shop-history__title {
@@ -380,7 +405,17 @@ document.addEventListener("DOMContentLoaded", function () {
   padding: 0 8px;
 }
 
+.cabinet-shop-history__wrapper-price {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 150%;
+  color: #1f2a3e;
+}
+
 .cabinet-shop__img-background {
+  position: absolute;
+  right: 0;
+  transform: translateY(-55px);
 }
 
 @media (max-width: 1440px) {
@@ -390,7 +425,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   .cabinet-shop-ready {
-    padding: 24px 60px 28px 60px;
+    padding: 24px 60px 0 60px;
     width: 70%;
   }
 
@@ -420,6 +455,9 @@ document.addEventListener("DOMContentLoaded", function () {
     max-width: 100%;
     align-items: flex-start;
     justify-content: flex-start;
+  }
+  .cabinet-shop__img-background {
+    transform: translateY(0);
   }
 }
 
@@ -456,11 +494,14 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop__img-background {
     display: none;
   }
+  .cabinet-shop-history{
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 870px) {
   .cabinet-shop-ready {
-    padding: 24px 40px 28px 40px;
+    padding: 24px 40px 0 40px;
   }
 
   .cabinet-shop-ready__list-item {
@@ -510,28 +551,33 @@ document.addEventListener("DOMContentLoaded", function () {
     width: 100%;
     padding: 0;
     min-height: auto;
-    padding-bottom: 72px;
   }
 
   .cabinet-shop-ready__title {
     width: 90%;
   }
 
+  .cabinet-shop-ready__list {
+    min-height: auto;
+    padding-bottom: 72px;
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+  }
+
+  .cabinet-shop-ready__list::after{
+    content: "";
+    border-bottom: 2px solid #dda06b;
+    display: block;
+    width: 90%;
+    height: 2px;
+    margin: 0 auto;
+    padding-top: 10px;
+  }
   .cabinet-shop-ready__list-item {
     flex-direction: row;
     width: 80%;
     margin: 0 auto;
   }
-  /* 
-  .cabinet-shop-ready__title::before {
-    width: 28%;
-    left: 40px;
-  }
-
-  .cabinet-shop-ready__title::after {
-    width: 28%;
-    right: 40px;
-  } */
 
   .cabinet-shop-history {
     width: auto;
@@ -546,7 +592,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   .cabinet-shop-ready__list {
-    height: 696px;
+    /* height: 696px; */
   }
 }
 
