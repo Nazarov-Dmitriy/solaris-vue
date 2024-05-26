@@ -71,7 +71,7 @@
             src="../../../assets/image/cabinet-shop/coinBege.png"
             alt=""
           />
-        </div>
+        </div> 
       </div>
     </div>
   </section>
@@ -92,19 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
       text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
       img: "/src/assets/image/cabinet-shop/icon.png",
     },
-    {
-      name: "Значок",
-      number: "№ 3459864",
-      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
-      img: "/src/assets/image/cabinet-shop/icon.png",
-    },
-    {
-      name: "Значок",
-      number: "№ 3459864",
-      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
-      img: "/src/assets/image/cabinet-shop/icon.png",
-    },
-   
   ];
 
   const list = document.querySelector(".cabinet-shop-ready__list");
@@ -222,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .cabinet-shop-ready {
   background: #1f2a3e;
   padding: 24px 60px 0 60px;
-  min-height: 91vh;
+  height: auto;
   width: 40%;
 }
 
@@ -308,6 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding-bottom: 72px;
+  height: auto;
 }
 
 .cabinet-shop-ready__list::-webkit-scrollbar {
@@ -342,10 +330,10 @@ document.addEventListener("DOMContentLoaded", function () {
 .cabinet-shop-history {
   width: 100%;
   max-width: 100%;
+  min-height: 100vh;
   margin-left: 16px;
   border-bottom: 2px solid #dda06b;
   margin-bottom: 24px;
-  padding-right: 24px;
   margin-right: 24px;
 }
 
@@ -415,7 +403,9 @@ document.addEventListener("DOMContentLoaded", function () {
 .cabinet-shop__img-background {
   position: absolute;
   right: 0;
-  transform: translateY(-55px);
+  /* bottom: 0; */
+  transform: translateY(-20px);
+  width: 433px;
 }
 
 @media (max-width: 1440px) {
@@ -427,10 +417,6 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-ready {
     padding: 24px 60px 0 60px;
     width: 70%;
-  }
-
-  .cabinet-shop-history {
-    padding-right: 60px;
   }
 
   .cabinet-shop-history__title::before {
@@ -457,7 +443,7 @@ document.addEventListener("DOMContentLoaded", function () {
     justify-content: flex-start;
   }
   .cabinet-shop__img-background {
-    transform: translateY(0);
+    /* transform: translateY(0); */
   }
 }
 
@@ -474,17 +460,12 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 30%;
   }
-  /* 
-  .cabinet-shop-ready__title::before {
-    width: 20%;
+  .cabinet-shop__img-background{
+    width: 450px;
   }
-
-  .cabinet-shop-ready__title::after {
-    width: 20%;
-  } */
 }
 
-@media (max-width: 1019px) {
+/* @media (max-width: 1019px) {
   .cabinet-shop-history__wrapper-item {
     flex-direction: column;
     justify-content: flex-start;
@@ -494,10 +475,10 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop__img-background {
     display: none;
   }
-  .cabinet-shop-history{
+  .cabinet-shop-history {
     border-bottom: none;
   }
-}
+} */
 
 @media (max-width: 870px) {
   .cabinet-shop-ready {
@@ -518,11 +499,22 @@ document.addEventListener("DOMContentLoaded", function () {
     align-items: flex-start;
     height: auto;
   }
+  .cabinet-shop-ready__titles-info {
+    margin-top: 24px;
+  }
 
   .cabinet-shop-history__wrapper-item {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+  }
+
+  .cabinet-shop-history__wrapper {
+    border-bottom: none;
+  }
+
+  .cabinet-shop-history {
+    border-bottom: none;
   }
 
   .cabinet-shop-history__title::before {
@@ -559,18 +551,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   .cabinet-shop-ready__list {
     min-height: auto;
-    padding-bottom: 72px;
     padding-bottom: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 72px;
+    height: auto;
+    position: relative;
   }
 
-  .cabinet-shop-ready__list::after{
+  .cabinet-shop-ready__list::after {
     content: "";
     border-bottom: 2px solid #dda06b;
     display: block;
     width: 90%;
     height: 2px;
     margin: 0 auto;
+    position: sticky;
     padding-top: 10px;
   }
   .cabinet-shop-ready__list-item {
@@ -581,6 +575,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   .cabinet-shop-history {
     width: auto;
+    min-height: 100vh;
   }
 
   .cabinet-shop-history__title::before {
@@ -592,7 +587,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   .cabinet-shop-ready__list {
-    /* height: 696px; */
+    height: auto;
   }
 }
 
