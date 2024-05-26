@@ -125,21 +125,18 @@
 }
 
 .card-text {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    padding-top: 40px;
     color: var(--white);
     width: 100%;
 }
 
-.card-text-header {
-    margin-bottom: 24px;
-}
-
 .card-text-word {
+    padding-top: 24px;
     text-align: justify;
 }
 
 .card-buttons {
+    padding-top: 40px;
     width: 100%;
     display: flex;
     gap: 16px;
@@ -261,7 +258,6 @@
     .card-header {
         display: grid;
         grid-template-columns: 1fr 2fr;
-        /* grid-template-rows: 2fr 1fr; */
     }
 
     .card-img{
@@ -316,6 +312,14 @@
     .shop-card {
         padding: 20px 40px;
     }
+    
+    .card-text {
+        padding-top: 32px;
+    }
+
+    .card-buttons {
+        padding-top: 32px;
+    }
 }
 
 /* Что бы не появлялся скрок поменял 576 на 650 */
@@ -337,18 +341,6 @@
     .card-img {
         grid-column: 1;
         grid-row: 2;
-    }
-
-    .card-header-adptiv {
-        font-family: Inter;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 36px;
-        text-align: left;
-        color: white;
-        white-space: nowrap;
-        margin-bottom: 24px;
-        width: 100%;
     }
 
     .card {
@@ -411,6 +403,14 @@
 
     .shop-card {
         padding: 16px;
+    }
+
+    .card-text {
+        padding-top: 24px;
+    }
+
+    .card-buttons {
+        padding-top: 24px;
     }
 }
 
