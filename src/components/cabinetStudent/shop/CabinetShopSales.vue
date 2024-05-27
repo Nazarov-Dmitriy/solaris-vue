@@ -13,7 +13,7 @@
         </div>
 
         <ul class="cabinet-shop-ready__list">
-          <li class="cabinet-shop-ready__list-item">
+          <!-- <li class="cabinet-shop-ready__list-item">
             <div class="cabinet-shop-ready__list-item-img">
               <img
                 src="../../../assets/image/cabinet-shop/pic.png"
@@ -26,28 +26,14 @@
               <p class="list-item-info">Получить</p>
               <p class="list-item-info">Предъяви учителю</p>
             </div>
-          </li>
-          <li class="cabinet-shop-ready__list-item">
-            <div class="cabinet-shop-ready__list-item-img">
-              <img
-                src="../../../assets/image/cabinet-shop/pic.png"
-                alt="image"
-              />
-            </div>
-            <div class="cabinet-shop-ready__list-item-info">
-              <p class="list-item-info">Антидвойка</p>
-              <p class="list-item-info">№ 1</p>
-              <p class="list-item-info">Получить</p>
-              <p class="list-item-info">Предъяви учителю</p>
-            </div>
-          </li>
+          </li> -->
         </ul>
       </div>
 
       <div class="cabinet-shop-history">
         <p class="cabinet-shop-history__title">История покупок</p>
         <ul class="cabinet-shop-history__wrapper">
-          <li class="cabinet-shop-history__wrapper-item">
+          <!-- <li class="cabinet-shop-history__wrapper-item">
             <div class="cabinet-shop-history__wrapper-left">
               <img
                 src="../../../assets/image/cabinet-shop/solaris2.png"
@@ -63,15 +49,11 @@
               <p>Антидвойка</p>
               <p>13.12.2024 <span>заказ оплачен</span></p>
             </div>
-          </li>
+          </li> -->
         </ul>
-        <div>
-          <img
-            class="cabinet-shop__img-background"
-            src="../../../assets/image/cabinet-shop/coinBege.png"
-            alt=""
-          />
-        </div> 
+        <div class="cabinet-shop__img-background">
+          <img src="../../../assets/image/cabinet-shop/coinBege.png" alt="" />
+        </div>
       </div>
     </div>
   </section>
@@ -85,6 +67,18 @@ document.addEventListener("DOMContentLoaded", function () {
       number: "№ 2598",
       text: "Для активации покажи эту карточку учителю",
       img: "/src/assets/image/cabinet-shop/pic.png",
+    },
+    {
+      name: "Значок",
+      number: "№ 3459864",
+      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+      img: "/src/assets/image/cabinet-shop/icon.png",
+    },
+    {
+      name: "Значок",
+      number: "№ 3459864",
+      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+      img: "/src/assets/image/cabinet-shop/icon.png",
     },
     {
       name: "Значок",
@@ -177,9 +171,44 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
     historyWrapper.append(historyWrapperItem);
   });
+
+  if (list.children.length >= 1) {
+    return;
+  } else {
+    const emptyReady = document.createElement("p");
+    emptyReady.classList.add("shop-empty-ready");
+    emptyReady.textContent =
+      "У тебя сейчас нет товаров готовых к получению, ты можешь выбрать их в магазине";
+    list.append(emptyReady);
+  }
+
+  if (historyWrapper.children.length >= 1) {
+    return;
+  } else {
+    const emptyHistory = document.createElement("p");
+    emptyHistory.className = "shop-empty-history";
+    emptyHistory.textContent =
+      "здесь отображаются полученные товары, видимо ты пока ничего не покупал";
+    historyWrapper.append(emptyHistory);
+  }
+
+  console.log(historyWrapper.children);
 });
 </script>
 <style>
+.shop-empty-ready {
+  color: var(--white);
+  font-size: 24px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.shop-empty-history {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 500;
+}
+
 .cabinet-shop {
   width: 100%;
   background-color: var(--dark);
@@ -401,11 +430,8 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .cabinet-shop__img-background {
-  position: absolute;
-  right: 0;
-  /* bottom: 0; */
-  transform: translateY(-20px);
-  width: 433px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 @media (max-width: 1440px) {
@@ -426,6 +452,9 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 35%;
   }
+
+  .cabinet-shop-history {
+  }
   /* 
   .cabinet-shop-ready__title::before {
     left: 0;
@@ -442,9 +471,6 @@ document.addEventListener("DOMContentLoaded", function () {
     align-items: flex-start;
     justify-content: flex-start;
   }
-  .cabinet-shop__img-background {
-    /* transform: translateY(0); */
-  }
 }
 
 @media (max-width: 1200px) {
@@ -460,9 +486,6 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 30%;
   }
-  .cabinet-shop__img-background{
-    width: 450px;
-  }
 }
 
 /* @media (max-width: 1019px) {
@@ -472,13 +495,16 @@ document.addEventListener("DOMContentLoaded", function () {
     align-items: flex-start;
   }
 
-  .cabinet-shop__img-background {
-    display: none;
-  }
   .cabinet-shop-history {
     border-bottom: none;
   }
 } */
+
+@media (max-width: 930px) {
+  .cabinet-shop__img-background {
+    display: none;
+  }
+}
 
 @media (max-width: 870px) {
   .cabinet-shop-ready {
@@ -487,10 +513,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   .cabinet-shop-ready__list-item {
     flex-direction: column;
-  }
-
-  .cabinet-shop__img-background {
-    display: none;
   }
 
   .cabinet-shop-history__wrapper {
@@ -575,7 +597,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   .cabinet-shop-history {
     width: auto;
-    min-height: 100vh;
+    max-height: 100vh;
   }
 
   .cabinet-shop-history__title::before {
