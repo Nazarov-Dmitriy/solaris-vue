@@ -161,7 +161,7 @@
 }
 
 .cancel-btn:active {
-  border: 2px solid white;
+  border: 2px solid var(--roseLight);
   background: none;
   color: white;
 }
@@ -170,6 +170,7 @@
   border: 2px solid var(--roseLight);
   background: none;
   color: var(--roseLight);
+  opacity: 50%;
 }
 
 .exchange-btn {
@@ -241,6 +242,10 @@
     border: none;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0);
+}
+
+.increase:hover, .decrease:hover {
+    color: var(--orange);
 }
 
 .quantity-text {
