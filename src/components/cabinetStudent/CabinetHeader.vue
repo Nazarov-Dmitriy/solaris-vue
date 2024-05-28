@@ -145,5 +145,9 @@
     .cabinet-header {
         padding: 8px 16px;
     }
+
+    .cabinet-header__link{
+        flex-direction: column;
+    }
 }
 </style>
