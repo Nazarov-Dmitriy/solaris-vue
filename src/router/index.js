@@ -6,6 +6,7 @@ import CabinetStudentCardProduct from '../views/CabinetStudentCardProduct.vue'
 import CabinetStudentSales from '../views/CabinetStudentSales.vue'
 import CabinetStudentContests from '../views/CabinetStudentContests.vue'
 import CabinetStudentViewContest from '../views/CabinetStudentViewContest.vue'
+import CabinetStudentPortfolio from '../views/CabinetStudentPortfolio.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,9 +42,14 @@ const router = createRouter({
       component: CabinetStudentContests
     },
       {
-      path: '/cabinet-contests-view',
+      path: '/cabinet-contest-view',
       name: 'cabinet-contests-view',
       component: CabinetStudentViewContest
+    },
+      {
+      path: '/cabinet-portfolio',
+      name: 'cabinet-portfolio',
+      component: CabinetStudentPortfolio
     },
   ]
 })

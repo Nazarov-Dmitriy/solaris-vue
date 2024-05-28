@@ -3,11 +3,11 @@
         <div class="cabinet-header">
             <div class="cabinet-header__info">
                 <!-- <div class="cabinet-header__logo-wraper"> -->
-                    <a  class="cabinet-header__logo-wraper" href="/cabinet-student">
-                        <img src="../../assets/icon/cabinet-header/logo_cabinet.svg" class="cabinet-header__logo" alt="
+                <a class="cabinet-header__logo-wraper" href="/cabinet-student">
+                    <img src="../../assets/icon/cabinet-header/logo_cabinet.svg" class="cabinet-header__logo" alt="
                         icon-logo">
-                        <p class="cabinet-header__logo-text p2-phone">Кабинет ученика</p>
-                    </a>
+                    <p class="cabinet-header__logo-text p2-phone">Кабинет ученика</p>
+                </a>
                 <!-- </div> -->
                 <div class="cabinet-header__student-info">
                     <div class="cabinet-header__notification">
@@ -41,12 +41,13 @@
 }
 
 .cabinet-header {
-    max-width: 1440px;
+    max-width: 1560px;
     padding: 8px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: auto;
+    box-sizing: border-box;
 }
 
 .cabinet-header__info {
@@ -143,6 +144,10 @@
 @media (max-width: 576px) {
     .cabinet-header {
         padding: 8px 16px;
+    }
+
+    .cabinet-header__link{
+        flex-direction: column;
     }
 }
 </style>
