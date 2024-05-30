@@ -214,16 +214,19 @@ document.addEventListener("DOMContentLoaded", function () {
   background-color: var(--dark);
   box-sizing: border-box;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .cabinet-shop-container {
   display: flex;
   background: var(--white);
   width: 100%;
-  margin: 0 auto;
   position: relative;
   margin: 0 auto;
   max-width: 1560px;
+  flex-grow: 1;
 }
 
 .cabinet-shop::before {
@@ -240,6 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
   padding: 24px 60px 0 60px;
   height: auto;
   width: 40%;
+  overflow: hidden;
 }
 
 .cabinet-shop-history__wrapper {
@@ -295,16 +299,6 @@ document.addEventListener("DOMContentLoaded", function () {
   padding: 0 10px;
 }
 
-/* .cabinet-shop-ready__title::after {
-  content: "";
-  position: absolute;
-  top: 11px;
-  right: 0;
-  border: 2px solid var(--white);
-  width: 100%;
-  z-index: 0;
-} */
-
 .cabinet-shop-ready__subtitle {
   line-height: 150%;
   text-align: center;
@@ -323,8 +317,8 @@ document.addEventListener("DOMContentLoaded", function () {
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding-bottom: 72px;
   height: auto;
+  max-height: 832px;
 }
 
 .cabinet-shop-ready__list::-webkit-scrollbar {
@@ -359,7 +353,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .cabinet-shop-history {
   width: 100%;
   max-width: 100%;
-  min-height: 100vh;
+  max-height: 100vh;
   margin-left: 16px;
   border-bottom: 2px solid #dda06b;
   margin-bottom: 24px;

@@ -144,10 +144,12 @@
 @media (max-width: 576px) {
     .cabinet-header {
         padding: 8px 16px;
-    }
+        gap: 12px;
+    } 
 
     .cabinet-header__link{
         flex-direction: column;
+        gap: 0;
     }
 }
 </style>
