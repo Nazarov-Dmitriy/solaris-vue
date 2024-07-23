@@ -1,63 +1,107 @@
 <template>
-  <div class="header__container">
-    <div class="header">
-      <div class="header-logo">
-        <img src="../../assets/icon/logo.svg" alt="">
-      </div>
-      <div class="header-menu">
-        <nav>
-          <ul class="header__list">
-            <li class="botton"><a href='#intro' class="header__link">О проекте</a></li>
-            <li class="botton"><a href='#aboutSolaric' class="header__link">Cолярики</a></li>
-            <li class="botton"><a href='#previewshop' class="header__link">Магазин</a></li>
-            <li class="botton"><a href='#contest' class="header__link">Конкурсы</a></li>
-            <li class="botton"><a href='#moreCompetitions' class="header__link">Чат-бот</a></li>
-            <li class="botton"><a href='#solarisFaq' class="header__link">Вопросы</a></li>
-            <li class="botton"><a href='#reviews' class="header__link">Отзывы</a></li>
-            <li class="botton"><a href='#feedback' class="header__link">Написать нам</a></li>
-          </ul>
-        </nav>
-        <button class="btn btn-login">ВХОД</button>
-        <span class="header-line"></span>
-      </div>
-      <button class="btn btn-login">ВХОД</button>
-      <div class="burger-menu">
-        <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
-        <label class="burger" for="burger-checkbox"></label>
-      </div>
+    <div class="header__container">
+        <div class="header">
+            <div class="header-logo">
+                <img
+                    src="@/assets/icon/logo.svg"
+                    alt=""
+                >
+            </div>
+            <div
+                class="header-menu"
+                :class="{ 'active': active }"
+            >
+                <nav>
+                    <ul class="header__list">
+                        <router-link
+                            to="/#intro"
+                            class="header__link botton"
+                        >
+                            О проекте
+                        </router-link>
+                        <router-link
+                            to="/#aboutSolaric"
+                            class="header__link botton"
+                        >
+                            Cолярики
+                        </router-link>
+                        <router-link
+                            to="/#previewshop"
+                            class="header__link botton"
+                        >
+                            Магазин
+                        </router-link>
+                        <router-link
+                            to="/#moreCompetitions"
+                            class="header__link botton"
+                        >
+                            Чат-бот
+                        </router-link>
+                        <router-link
+                            to="/#solarisFaq"
+                            class="header__link botton"
+                        >
+                            Вопросы
+                        </router-link>
+                        <router-link
+                            to="/#reviews"
+                            class="header__link botton"
+                        >
+                            Отзывы
+                        </router-link>
+                        <router-link
+                            to="#feedback"
+                            class="header__link botton"
+                        >
+                            Написать нам
+                        </router-link>
+                    </ul>
+                </nav>
+                <button class="btn btn-login">
+                    ВХОД
+                </button>
+                <span class="header-line" />
+            </div>
+            <button class="btn btn-login">
+                ВХОД
+            </button>
+            <div class="burger-menu">
+                <input
+                    id="burger-checkbox"
+                    v-model="checkbox"
+                    type="checkbox"
+                    class="burger-checkbox"
+                    @click.stop="avtiveMenu(!active)"
+                >
+                <label
+                    class="burger"
+                    for="burger-checkbox"
+                />
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script setup>
-document.addEventListener("DOMContentLoaded", function () {
-  let btn = document.querySelector(".burger-menu");
-  let menu = document.querySelector(".header-menu");
-  let header = document.querySelector(".header");
+import { onMounted, ref } from 'vue';
 
-  btn.addEventListener('change', () => {
-    menu.classList.toggle("header-menu--active")
-    header.classList.toggle("header__burger-menu")
-  })
+const active = ref(false);
+const checkbox = ref(false);
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
- 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-    });
-  });
-});
+function avtiveMenu (par) {
+    active.value = par
+}
 
-window.addEventListener('resize', () => {
-  if (window.innerWidth >= 1200) {
-    document.querySelector(".header-menu").classList.remove("header-menu--active")
-    document.querySelector(".header").classList.remove("header__burger-menu");
-    document.querySelector(".burger-checkbox").checked = false;
-  }
+onMounted(() => {
+    window.addEventListener("resize", resizeHandler);
 })
+
+function resizeHandler () {
+    if (window.innerWidth >= 1200) {
+        active.value = false
+        checkbox.value = false
+    }
+}
 
 </script>
 
@@ -177,7 +221,7 @@ window.addEventListener('resize', () => {
 }
 
 
-.header-menu--active {
+.header-menu.active {
   display: flex;
   box-sizing: border-box;
 

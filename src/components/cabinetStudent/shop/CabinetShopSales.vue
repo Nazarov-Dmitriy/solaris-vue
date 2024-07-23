@@ -1,214 +1,257 @@
 <template>
-  <section class="cabinet-shop">
-    <div class="cabinet-shop-container">
-      <div class="cabinet-shop-ready">
-        <div class="cabinet-shop-ready__titles-info">
-          <p class="cabinet-shop-ready__title">
-            <span>Готовы к получению</span>
-          </p>
-          <p class="cabinet-shop-ready__subtitle">
-            Для получения товара покажите на одном экране свой ID и номер заказа
-          </p>
-          <h2 class="cabinet-shop-ready__login">IvanovAI_7a</h2>
-        </div>
+    <section class="cabinet-shop">
+        <div class="cabinet-shop-container">
+            <div class="cabinet-shop-ready">
+                <div class="cabinet-shop-ready__titles-info">
+                    <p class="cabinet-shop-ready__title">
+                        <span>Готовы к получению</span>
+                    </p>
+                    <template v-if="infoBuyItemInfo.length > 0">
+                        <p class="cabinet-shop-ready__subtitle">
+                            Для получения товара покажите на одном экране свой ID и номер заказа
+                        </p>
+                        <h2 class="cabinet-shop-ready__login">
+                            IvanovAI_7a
+                        </h2>
+                    </template>
+                </div>
+                <template v-if="infoBuyItemInfo.length > 0">
+                    <ul class="cabinet-shop-ready__list">
+                        <li
+                            v-for="el in infoBuyItemInfo"
+                            :key="el.id"
+                            class="cabinet-shop-ready__list-item"
+                        >
+                            <div class="cabinet-shop-ready__list-item-img">
+                                <img
+                                    src="/src/assets/image/cabinet-shop/pic.png"
+                                    alt="image"
+                                >
+                            </div>
+                            <div class="cabinet-shop-ready__list-item-info">
+                                <p class="list-item-info">
+                                    {{ el.name }}
+                                </p>
+                                <p class="list-item-info">
+                                    {{ el.number }}
+                                </p>
+                                <p class="list-item-info">
+                                    Получить
+                                </p>
+                                <p class="list-item-info">
+                                    {{ el.text }}
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </template>
+                <p
+                    v-else
+                    class="shop-empty-ready"
+                >
+                    У тебя сейчас нет товаров готовых к получению, ты можешь выбрать их в магазине
+                </p>
+            </div>
 
-        <ul class="cabinet-shop-ready__list">
-          <!-- <li class="cabinet-shop-ready__list-item">
-            <div class="cabinet-shop-ready__list-item-img">
-              <img
-                src="../../../assets/image/cabinet-shop/pic.png"
-                alt="image"
-              />
+            <div class="cabinet-shop-history">
+                <p class="cabinet-shop-history__title">
+                    История покупок
+                </p>
+                <template v-if="infoBuyHistoryItem.length > 0">
+                    <ul class="cabinet-shop-history__wrapper">
+                        <li
+                            v-for="el in infoBuyHistoryItem"
+                            :key="el.id"
+                            class="cabinet-shop-history__wrapper-item"
+                        >
+                            <div class="cabinet-shop-history__wrapper-left">
+                                <img
+                                    src="/src/assets/image/cabinet-shop/solaris2.png"
+                                    alt="<?php echo $value['orderNumber'] ?>"
+                                >
+                                <p class="cabinet-shop-history__wrapper-price">
+                                    {{ el.amount }}
+                                </p>
+                                <img
+                                    src="/src/assets/image/cabinet-shop/currency.png"
+                                    alt="solaris-valute"
+                                >
+                            </div>
+                            <div class="cabinet-shop-history__wrapper-info">
+                                <p> {{ el.orderNumber }}</p>
+                                <p> {{ el.time }} <span>заказ оплачен</span></p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="cabinet-shop__img-background">
+                        <img
+                            src="@/assets/image/cabinet-shop/coinBege.png"
+                            alt="coin"
+                        >
+                    </div>
+                </template>
+                <div
+                    v-else
+                    class="shop-empty__container"
+                >
+                    <p class="shop-empty-history">
+                        У вас еще не было покупок
+                    </p>
+                    <div class="shop-empty-history__content">
+                        <p class="shop-empty-history">
+                            Cамый популярный товар в магазине -
+                        </p>
+                        <p class="shop-empty-history__popular">
+                            Cертификат Антидвойка
+                        </p>
+                        <p class="shop-empty-history">
+                            Улучши свои оценки в один клик.
+                        </p>
+                    </div>
+                    <button
+                        class="btn shop-empty-history__btn"
+                        @click="$router.push('/cabinet-shop')"
+                    >
+                        В магазин
+                    </button>
+                </div>
+                <div
+                    v-if="infoBuyHistoryItem.length === 0"
+                    class="cabinet-shop__img-background--empty"
+                >
+                    <img
+                        src="@/assets/image/cabinet-shop/coinBege.png"
+                        alt=""
+                    >
+                </div>
+                <span class="cabinet-shop-history__line" />
             </div>
-            <div class="cabinet-shop-ready__list-item-info">
-              <p class="list-item-info">Антидвойка</p>
-              <p class="list-item-info">№ 1</p>
-              <p class="list-item-info">Получить</p>
-              <p class="list-item-info">Предъяви учителю</p>
-            </div>
-          </li> -->
-        </ul>
-      </div>
-
-      <div class="cabinet-shop-history">
-        <p class="cabinet-shop-history__title">История покупок</p>
-        <ul class="cabinet-shop-history__wrapper">
-          <!-- <li class="cabinet-shop-history__wrapper-item">
-            <div class="cabinet-shop-history__wrapper-left">
-              <img
-                src="../../../assets/image/cabinet-shop/solaris2.png"
-                alt="картинка"
-              />
-              <p class="cabinet-shop-history__wrapper-price">200</p>
-              <img
-                src="../../../assets/image/cabinet-shop/currency.png"
-                alt=""
-              />
-            </div>
-            <div class="cabinet-shop-history__wrapper-info">
-              <p>Антидвойка</p>
-              <p>13.12.2024 <span>заказ оплачен</span></p>
-            </div>
-          </li> -->
-        </ul>
-        <div class="cabinet-shop__img-background">
-          <img src="../../../assets/image/cabinet-shop/coinBege.png" alt="" />
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </template>
-
+  
 <script setup>
-document.addEventListener("DOMContentLoaded", function () {
-  const infoBuyItemInfo = [
+const infoBuyItemInfo = [
     {
-      name: "Антидвойка",
-      number: "№ 2598",
-      text: "Для активации покажи эту карточку учителю",
-      img: "/src/assets/image/cabinet-shop/pic.png",
+        name: "Антидвойка",
+        number: "№ 2598",
+        text: "Для активации покажи эту карточку учителю",
+        img: "/src/assets/image/cabinet-shop/pic.png",
+        id: 1
     },
     {
-      name: "Значок",
-      number: "№ 3459864",
-      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
-      img: "/src/assets/image/cabinet-shop/icon.png",
+        name: "Значок",
+        number: "№ 3459864",
+        text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+        img: "/src/assets/image/cabinet-shop/icon.png",
+        id: 2
     },
     {
-      name: "Значок",
-      number: "№ 3459864",
-      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
-      img: "/src/assets/image/cabinet-shop/icon.png",
+        name: "Значок",
+        number: "№ 3459864",
+        text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+        img: "/src/assets/image/cabinet-shop/icon.png",
+        id: 12
     },
     {
-      name: "Значок",
-      number: "№ 3459864",
-      text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
-      img: "/src/assets/image/cabinet-shop/icon.png",
-    },
-  ];
-
-  const list = document.querySelector(".cabinet-shop-ready__list");
-
-  infoBuyItemInfo.forEach((item) => {
-    const listItem = document.createElement("li");
-    listItem.className = "cabinet-shop-ready__list-item";
-    listItem.innerHTML = `
-          <div class="cabinet-shop-ready__list-item-img">
-            <img src="${item.img}" alt="image" />
-          </div>
-          <div class="cabinet-shop-ready__list-item-info">
-            <p class="list-item-info">${item.name}</p>
-            <p class="list-item-info">${item.number}</p>
-            <p class="list-item-info">Получить</p>
-            <p class="list-item-info">${item.text}</p>
-          </div>
-        `;
-
-    list.append(listItem);
-  });
-
-  const infoBuyHistoryItem = [
-    {
-      imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-      amount: 200,
-      orderNumber: "Стикеры солярики № 33500967",
-      orderStatus: "заказ оплачен",
-      time: "13.02.2024",
-      currency: "/src/assets/image/cabinet-shop/currency.png",
+        name: "Значок",
+        number: "№ 3459864",
+        text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+        img: "/src/assets/image/cabinet-shop/icon.png",
+        id: 11
     },
     {
-      imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-      amount: 150,
-      orderNumber: "Антидвойка № 33500967",
-      orderStatus: "заказ оплачен",
-      time: "13.02.2024",
-      currency: "/src/assets/image/cabinet-shop/currency.png",
+        name: "Значок",
+        number: "№ 3459864",
+        text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+        img: "/src/assets/image/cabinet-shop/icon.png",
+        id: 11
     },
     {
-      imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-      amount: 150,
-      orderNumber: "Антидвойка № 33500967",
-      orderStatus: "заказ оплачен",
-      time: "13.02.2024",
-      currency: "/src/assets/image/cabinet-shop/currency.png",
+        name: "Значок",
+        number: "№ 3459864",
+        text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+        img: "/src/assets/image/cabinet-shop/icon.png",
+        id: 11
     },
     {
-      imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-      amount: 150,
-      orderNumber: "Стикеры солярики № 33500967",
-      orderStatus: "заказ оплачен",
-      time: "13.02.2024",
-      currency: "/src/assets/image/cabinet-shop/currency.png",
+        name: "Значок",
+        number: "№ 3459864",
+        text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
+        img: "/src/assets/image/cabinet-shop/icon.png",
+        id: 11
+    },   
+];
+
+
+const infoBuyHistoryItem = [
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 200,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 1
     },
     {
-      imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-      amount: 150,
-      orderNumber: "Стикеры солярики № 33500967",
-      orderStatus: "заказ оплачен",
-      time: "13.02.2024",
-      currency: "/src/assets/image/cabinet-shop/currency.png",
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Антидвойка № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 13
     },
-  ];
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Антидвойка № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 11
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 12
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
+];
 
-  const historyWrapper = document.querySelector(
-    ".cabinet-shop-history__wrapper"
-  );
-
-  infoBuyHistoryItem.forEach((item) => {
-    const historyWrapperItem = document.createElement("li");
-    historyWrapperItem.className = "cabinet-shop-history__wrapper-item";
-    historyWrapperItem.innerHTML = `
-          <div class="cabinet-shop-history__wrapper-left">
-            <img src="${item.imgSrc}" alt="картинка" />
-            <p class='cabinet-shop-history__wrapper-price'>${item.amount}</p>
-            <img src="${item.currency}" alt="валюта" />
-          </div>
-          <div class="cabinet-shop-history__wrapper-info">
-            <p>${item.orderNumber}</p>
-            <p>${item.time} <span>${item.orderStatus}</span></p>
-          </div>
-        `;
-    historyWrapper.append(historyWrapperItem);
-  });
-
-  if (list.children.length >= 1) {
-    return;
-  } else {
-    const emptyReady = document.createElement("p");
-    emptyReady.classList.add("shop-empty-ready");
-    emptyReady.textContent =
-      "У тебя сейчас нет товаров готовых к получению, ты можешь выбрать их в магазине";
-    list.append(emptyReady);
-  }
-
-  if (historyWrapper.children.length >= 1) {
-    return;
-  } else {
-    const emptyHistory = document.createElement("p");
-    emptyHistory.className = "shop-empty-history";
-    emptyHistory.textContent =
-      "здесь отображаются полученные товары, видимо ты пока ничего не покупал";
-    historyWrapper.append(emptyHistory);
-  }
-
-  console.log(historyWrapper.children);
-});
 </script>
 <style>
-.shop-empty-ready {
-  color: var(--white);
-  font-size: 24px;
-  text-align: center;
-  font-weight: 500;
-}
-
-.shop-empty-history {
-  font-size: 24px;
-  text-align: center;
-  font-weight: 500;
-}
-
 .cabinet-shop {
   width: 100%;
   background-color: var(--dark);
@@ -216,17 +259,22 @@ document.addEventListener("DOMContentLoaded", function () {
   position: relative;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  z-index: 0;
+  height: 100%;
+  max-height: 100%;
 }
 
 .cabinet-shop-container {
   display: flex;
-  background: var(--white);
   width: 100%;
   position: relative;
   margin: 0 auto;
   max-width: 1560px;
   flex-grow: 1;
+  padding: 0 60px;
+  box-sizing: border-box;
+  gap: 60px;
+  height: 100%;
 }
 
 .cabinet-shop::before {
@@ -240,9 +288,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .cabinet-shop-ready {
   background: #1f2a3e;
-  padding: 24px 60px 0 60px;
+  padding-top: 24px;
   height: auto;
   width: 40%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.cabinet-shop-history {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100vh;
+  padding: 16px 0 24px 16px;
+  position: relative;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
 }
 
@@ -250,8 +311,19 @@ document.addEventListener("DOMContentLoaded", function () {
   max-width: 100%;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 8px 0px;
+  width: 100%;
+  overflow: auto;
+  scrollbar-width: none;
 }
+
+
+
 
 .cabinet-shop-history__wrapper-item {
   display: flex;
@@ -274,6 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .cabinet-shop-ready__titles-info p:not(:last-child) {
   margin-bottom: 8px;
 }
+
 .cabinet-shop-ready__title::before {
   content: "";
   position: absolute;
@@ -350,14 +423,28 @@ document.addEventListener("DOMContentLoaded", function () {
   color: #de4700;
 }
 
-.cabinet-shop-history {
-  width: 100%;
-  max-width: 100%;
-  max-height: 100vh;
-  margin-left: 16px;
-  border-bottom: 2px solid #dda06b;
+.shop-empty-ready {
+  color: var(--white);
+  font-size: 20px;
+  text-align: center;
+  font-weight: 500;
   margin-bottom: 24px;
-  margin-right: 24px;
+}
+
+.shop-empty-history {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+
+
+.cabinet-shop-history__line {
+  display: block;
+  margin-top: auto;
+  width: 100%;
+  height: 2px;
+  background: var(--roseBege)
 }
 
 .cabinet-shop-history__title {
@@ -387,16 +474,6 @@ document.addEventListener("DOMContentLoaded", function () {
   width: 40%;
 }
 
-.cabinet-shop-history__wrapper {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  /* border-bottom: 1px solid #dda06b; */
-  padding: 8px 0px;
-  max-width: 100%;
-  width: 100%;
-}
-
 .cabinet-shop-history__wrapper-left {
   display: flex;
   gap: 16px;
@@ -424,18 +501,55 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .cabinet-shop__img-background {
+  position: absolute;
+  bottom: 24px;
+  right: 63px;
   display: flex;
   justify-content: flex-end;
+  z-index: 0;
+  width: 100%;
+  max-width: 515px;
+}
+
+.cabinet-shop__img-background img {
+  width: 100%;
+  height: 100%;
+}
+
+
+.shop-empty-history__popular {
+  font-size: 20px;
+  text-align: center;
+  font-weight: 500;
+  color: var(--orange)
+}
+
+.shop-empty-history__btn {
+  max-width: 292px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cabinet-shop__img-background--empty {
+  position: absolute;
+  top: 406px;
+  right: 63px;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 0;
+  width: 100%;
+  max-width: 515px;
+}
+
+.cabinet-shop__img-background--empty img {
+  width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 1440px) {
-  .cabinet-shop-container {
-    margin: 0 auto;
-    width: 100%;
-  }
-
   .cabinet-shop-ready {
-    padding: 24px 60px 0 60px;
+    padding: 24px 0 0 0;
     width: 70%;
   }
 
@@ -446,19 +560,6 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 35%;
   }
-
-  .cabinet-shop-history {
-  }
-  /* 
-  .cabinet-shop-ready__title::before {
-    left: 0;
-    width: 30%;
-  }
-
-  .cabinet-shop-ready__title::after {
-    right: 0;
-    width: 30%;
-  } */
 
   .cabinet-shop-history__wrapper {
     max-width: 100%;
@@ -473,6 +574,10 @@ document.addEventListener("DOMContentLoaded", function () {
     width: 100%;
   }
 
+  .cabinet-shop::before {
+    width: 30%;
+  }
+
   .cabinet-shop-history__title::before {
     width: 30%;
   }
@@ -480,29 +585,29 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 30%;
   }
+
+  .cabinet-shop__img-background {
+    right: 0;
+    left: 0;
+  }
+
+  .cabinet-shop__img-background--empty {
+    right: 50%;
+    transform: translateX(50%);
+  }
 }
 
-/* @media (max-width: 1019px) {
-  .cabinet-shop-history__wrapper-item {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+@media (max-width: 991px) {
+  .cabinet-shop-history__line {
+    display: none;
   }
 
-  .cabinet-shop-history {
-    border-bottom: none;
-  }
-} */
-
-@media (max-width: 930px) {
   .cabinet-shop__img-background {
     display: none;
   }
-}
 
-@media (max-width: 870px) {
   .cabinet-shop-ready {
-    padding: 24px 40px 0 40px;
+    min-width: 0;
   }
 
   .cabinet-shop-ready__list-item {
@@ -515,6 +620,7 @@ document.addEventListener("DOMContentLoaded", function () {
     align-items: flex-start;
     height: auto;
   }
+
   .cabinet-shop-ready__titles-info {
     margin-top: 24px;
   }
@@ -540,36 +646,40 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-history__title::after {
     width: 25%;
   }
-  /* 
-  .cabinet-shop-ready__title::before {
-    width: 15%;
-  }
-
-  .cabinet-shop-ready__title::after {
-    width: 15%;
-  } */
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
+  .cabinet-shop {
+    background: var(--white)
+  }
+
+  .cabinet-shop-container {
+    height: auto;
+    gap: 0;
+  }
+
+  .cabinet-shop::before {
+    display: none;
+  }
+
   .cabinet-shop-container {
     flex-direction: column;
+    padding: 0 40px;
   }
 
   .cabinet-shop-ready {
-    width: 100%;
-    padding: 0;
-    min-height: auto;
-  }
-
-  .cabinet-shop-ready__title {
-    width: 90%;
+    width: calc(100% + 80px);
+    padding: 0 40px;
+    left: -40px;
+    max-height: 940px;
+    position: relative;
   }
 
   .cabinet-shop-ready__list {
     min-height: auto;
     padding-bottom: 10px;
-    margin-bottom: 72px;
-    height: auto;
+    margin-bottom: 62px;
+    max-height: 696px;
     position: relative;
   }
 
@@ -577,22 +687,23 @@ document.addEventListener("DOMContentLoaded", function () {
     content: "";
     border-bottom: 2px solid #dda06b;
     display: block;
-    width: 90%;
     height: 2px;
     margin: 0 auto;
     position: sticky;
     padding-top: 10px;
   }
+
   .cabinet-shop-ready__list-item {
     flex-direction: row;
-    width: 80%;
     margin: 0 auto;
   }
 
   .cabinet-shop-history {
     width: auto;
     max-height: 100vh;
+    position: relative;
   }
+
 
   .cabinet-shop-history__title::before {
     width: 35%;
@@ -607,16 +718,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 }
 
-@media (max-width: 590px) {
-  /* .cabinet-shop-ready__title::before {
-    width: 23%;
-    left: 40px;
+@media (max-width: 576px) {
+  .cabinet-shop-container {
+    flex-direction: column;
+    padding: 0 16px;
   }
 
-  .cabinet-shop-ready__title::after {
-    width: 23%;
-    right: 40px;
-  } */
+  .cabinet-shop-ready {
+    width: calc(100% + 32px);
+    padding: 0 16px;
+    left: -16px;
+  }
 
   .cabinet-shop-history__title::before {
     width: 30%;
@@ -628,16 +740,6 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 @media (max-width: 480px) {
-  /* .cabinet-shop-ready__title::before {
-    width: 18%;
-    left: 30px;
-  }
-
-  .cabinet-shop-ready__title::after {
-    width: 18%;
-    right: 30px;
-  } */
-
   .cabinet-shop-history__title::before {
     width: 24%;
   }
@@ -648,16 +750,6 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 @media (max-width: 370px) {
-  /* .cabinet-shop-ready__title::before {
-    width: 15%;
-    left: 18px;
-  }
-
-  .cabinet-shop-ready__title::after {
-    width: 15%;
-    right: 18px;
-  } */
-
   .cabinet-shop-history__title::before {
     width: 19%;
   }
@@ -673,5 +765,12 @@ document.addEventListener("DOMContentLoaded", function () {
   .cabinet-shop-ready__list-item {
     flex-direction: column;
   }
+}
+
+.shop-empty__container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
 }
 </style>

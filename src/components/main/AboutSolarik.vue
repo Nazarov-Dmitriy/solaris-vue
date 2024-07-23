@@ -1,50 +1,53 @@
 <template>
-    <section class="about-solaric" id="aboutSolaric">
+    <section
+        id="aboutSolaric"
+        class="about-solaric"
+    >
         <div class="about-solaric__header">
-            <img src="../../assets/icon/solaric.svg" alt="" class="about-solaric-icon">
+            <img
+                src="../../assets/icon/solaric.svg"
+                alt=""
+                class="about-solaric-icon"
+            >
             <div>
-                <h2 class="about-solaric-title h2">Солярики</h2>
-                <p class="about-solaric-subtitle h3">Школьная криптовалюта</p>
+                <h2 class="about-solaric-title h2">
+                    Солярики
+                </h2>
+                <p class="about-solaric-subtitle h3">
+                    Школьная криптовалюта
+                </p>
             </div>
         </div>
-        <p class="about-solaric__text p2">Солярик - официальный талисман и маскот нашего лицея. Внедрение криптовалюты
+        <p class="about-solaric__text p2">
+            Солярик - официальный талисман и маскот нашего лицея. Внедрение криптовалюты
             «Солярики» в образовательный процесс не только способствует мотивации и развитию участников, но и создает
             уникальную и инновационную среду, где образование сочетается с современными технологиями и цифровыми
             решениями. Стимулируя учащихся к активности и достижению целей и помогая развивать навыки финансовой
-            грамотности, управления ресурсами и экономического мышления.</p>
-        <img class="about-solaric__coin" src="../../assets/icon/solaric.svg" alt="coin">
-        <img class="about-solaric__coin" src="../../assets/icon/solaric.svg" alt="coin">
-        <img class="about-solaric__coin" src="../../assets/icon/solaric.svg" alt="coin">
+            грамотности, управления ресурсами и экономического мышления.
+        </p>
+        <img
+            class="about-solaric__coin"
+            src="../../assets/icon/solaric.svg"
+            alt="coin"
+        >
+        <img
+            class="about-solaric__coin"
+            src="../../assets/icon/solaric.svg"
+            alt="coin"
+        >
+        <img
+            class="about-solaric__coin"
+            src="../../assets/icon/solaric.svg"
+            alt="coin"
+        >
     </section>
 </template>
 
 <script setup>
-document.addEventListener("DOMContentLoaded", function () {
-    let title = document.querySelector(".about-solaric-title");
-
-    window.addEventListener('resize', () => {
-        changeClass()
-    })
-
-    changeClass()
-
-    function changeClass() {
-        if (window.innerWidth <= 991) {
-            title.classList.remove("h2")
-            title.classList.add("h3")
-        }
-
-        if (window.innerWidth >= 991) {
-            title.classList.remove("h3")
-            title.classList.add("h2")
-        }
-    }
-
-
-})
 </script>
 
-<style>
+<style lang="scss">
+
 .about-solaric {
     max-width: 1440px;
     margin: 0 auto;
@@ -67,7 +70,17 @@ document.addEventListener("DOMContentLoaded", function () {
     height: 95px;
 }
 
-.about-solaric-title,
+.about-solaric-title{
+    color: var(--dark);
+
+    @media(max-width:$lg) {
+        &.h2 {
+            font-size: 24px;
+            line-height: 150%;
+        }
+    }
+}
+
 .about-solaric-subtitle{
     color: var(--dark);
 }
@@ -117,6 +130,12 @@ document.addEventListener("DOMContentLoaded", function () {
         padding: 64px 40px;
     }
 
+    .about-solaric-title.h2{
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 150%;
+    }
+
     .about-solaric__text {
         max-width: 100%;
     }
@@ -146,6 +165,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }
 
+@media (max-width: 768px) {
+
+    .about-solaric__coin:nth-child(4) {
+        top: 41px;
+        right: 11px;
+        width: 57px;
+        height: 56px;
+    }
+
+    .about-solaric__coin:nth-child(3),
+    .about-solaric__coin:nth-child(5) {
+        display: none;
+    }
+}
+
 @media (max-width: 576px) {
     .about-solaric {
         padding: 40px 16px;
@@ -154,14 +188,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     .about-solaric__coin:nth-child(4) {
         top: 17px;
-        right: 9px;
+        right: 11px;
         width: 57px;
         height: 56px;
-    }
-
-    .about-solaric__coin:nth-child(3),
-    .about-solaric__coin:nth-child(5) {
-        display: none;
     }
 }
 

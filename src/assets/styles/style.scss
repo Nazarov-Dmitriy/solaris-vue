@@ -1,7 +1,12 @@
+/* *{
+  outline: 4px solid  green !important;
+} */
+
 @font-face {
   font-family: "Inter";
-  src: url("./fonts/Inter-Regular.woff2") format("woff2"),
-    url("./fonts/Inter-Regular.woff") format("woff");
+  src:
+    url("../fonts/Inter-Regular.woff2") format("woff2"),
+    url("../fonts/Inter-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -9,8 +14,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("./fonts/Inter-Medium.woff2") format("woff2"),
-    url("./fonts/Inter-Medium.woff") format("woff");
+  src:
+    url("../fonts/Inter-Medium.woff2") format("woff2"),
+    url("../fonts/Inter-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -18,8 +24,9 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("./fonts/Inter-Bold.woff2") format("woff2"),
-    url("./fonts/Inter-Bold.woff") format("woff");
+  src:
+    url("../fonts/Inter-Bold.woff2") format("woff2"),
+    url("../fonts/Inter-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -31,7 +38,6 @@
   --orange: #de4700;
   --lightBege: #fff2de;
   --white: #ffffff;
-  --roseLight:
 }
 
 html,
@@ -135,6 +141,7 @@ body,
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .btn:hover {
@@ -147,6 +154,13 @@ body,
   border: 2px solid var(--dark);
   background: var(--roseBege);
   color: var(--dark);
+}
+
+.btn:disabled {
+  border: 2px solid var(--lightBege);
+  background: var(--white);
+  color: var(--lightBege);
+  cursor: not-allowed;
 }
 
 .btn-text {
@@ -171,75 +185,37 @@ body,
   color: var(--orange);
 }
 
-.dropdown {
-  border: 2px solid var(--roseBege);
-  padding: 16px ;
-  color: var(--roseBege);
-  font-size: 16px;
-  font-weight: 400;
-  outline: none;
-  background: var(--white);
-  box-sizing: border-box;
-  height: 56px;
-  position: relative;
+.cabinet-container {
+  height: 100vh;
+  min-height: auto;
+  background-color: var(--dark);
   display: flex;
-  align-items:center
+  flex-direction: column;
 }
 
-.dropdown-input {
-  width: 100%;
-  cursor: pointer;
-  border: none;
-  user-select: none;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: var(--roseBege);
+.label-error {
+  color: var(--orange);
 }
 
-.dropdown-icon {
-  width: 12px;
-  height: 6px;
-  padding-right: 6px;
+.input-error {
+  border-color: var(--orange);
 }
 
-.dropdown-input::placeholder {
-  color: var(--roseBege);
+.form__error__login {
+  display: none;
+  align-items: center;
+  margin-top: 4px;
+  gap: 4px;
+
+  .form__text__error {
+    font-size: 14px;
+  }
 }
 
-.dropdown-options {
-  width: 100%;
-  cursor: pointer;
-  background: white;
-  overflow: hidden;
-  position: absolute;
-  top: 54px;
-  left: 0;
-  transition: all 0.7s ease;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 100;
-}
-
-.dropdown-options .dropdown-option {
-  padding: 8px 16px;
-  transition: all 0.2s ease;
-  color: var(--dark);
-  border: 1px solid var(--roseBege);
-  border-top: none
-}
-
-.dropdown-options .dropdown-option:hover {
-  color: var(--roseBege);
-}
-
-.dropdown.opened .dropdown-options {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.dropdown.opened::before {
-  transform: rotate(-225deg);
-  top: 30px;
+html,
+body,
+#root {
+  position: relative;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
 }

@@ -2,39 +2,86 @@
     <div class="cabinet-header__container">
         <div class="cabinet-header">
             <div class="cabinet-header__info">
-                <!-- <div class="cabinet-header__logo-wraper"> -->
-                <a class="cabinet-header__logo-wraper" href="/cabinet-student">
-                    <img src="../../assets/icon/cabinet-header/logo_cabinet.svg" class="cabinet-header__logo" alt="
-                        icon-logo">
-                    <p class="cabinet-header__logo-text p2-phone">Кабинет ученика</p>
-                </a>
-                <!-- </div> -->
+                <router-link
+                    to="/cabinet-student"
+                    class="cabinet-header__logo-wraper"
+                >
+                    <img
+                        src="../../assets/icon/cabinet-header/logo_cabinet.svg"
+                        class="cabinet-header__logo"
+                        alt="
+                        icon-logo"
+                    >
+                    <p class="cabinet-header__logo-text p2-phone">
+                        Кабинет ученика
+                    </p>
+                </router-link>               
                 <div class="cabinet-header__student-info">
                     <div class="cabinet-header__notification">
-                        <p class="cabinet-header__notification-count p2-phone">1</p>
-                        <img src="../../assets/icon/cabinet-header/bell.svg" alt="icon-bellt">
+                        <p class="cabinet-header__notification-count p2-phone">
+                            1
+                        </p>
+                        <img
+                            src="../../assets/icon/cabinet-header/bell.svg"
+                            alt="icon-bellt"
+                        >
                     </div>
-                    <p class="cabinet-header__student-initials">АИ</p>
-                    <img src="../../assets/icon/cabinet-header/pointer_down.svg" alt="icon-poiner-down">
+                    <p class="cabinet-header__student-initials">
+                        АИ
+                    </p>
+                    <img
+                        src="../../assets/icon/cabinet-header/pointer_down.svg"
+                        alt="icon-poiner-down"
+                    >
                 </div>
             </div>
             <div class="cabinet-header__nav">
                 <ul class="cabinet-header__list">
-                    <li class="botton"><a href='/cabinet-contests' class="cabinet-header__link"><img
-                                src="../../assets/icon/cabinet-header/contest.svg" alt="icon-contest">Конкурсы</a></li>
-                    <li class="botton"><a href='/cabinet-shop' class="cabinet-header__link"><img
-                                src="../../assets/icon/cabinet-header/сart.svg" alt="icon-shop">Магазин</a>
+                    <li class="botton">
+                        <router-link
+                            to="/cabinet-contests"
+                            class="cabinet-header__link"
+                        >
+                            <img
+                                src="../../assets/icon/cabinet-header/contest.svg"
+                                alt="icon-shop"
+                            >
+                            Конкурсы
+                        </router-link>
                     </li>
-                    <li class="botton"><a href='/cabinet-sales' class="cabinet-header__link"><img
-                                src="../../assets/icon/cabinet-header/сart.svg" alt="icon-cart">Покупки</a></li>
+                    <li class="botton">
+                        <router-link
+                            to="/cabinet-shop"
+                            class="cabinet-header__link"
+                        >
+                            <img
+                                src="../../assets/icon/cabinet-header/contest.svg"
+                                alt="icon-shop"
+                            >
+                            Магазин
+                        </router-link>
+                    </li>
+                    <li class="botton">
+                        <router-link
+                            to="/cabinet-sales"
+                            class="cabinet-header__link"
+                        >
+                            <img
+                                src="../../assets/icon/cabinet-header/сart.svg"
+                                alt="icon-shop"
+                            >
+                            Покупки
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </template>
 <script setup>
+
 </script>
-<style>
+<style lang="scss">
 .cabinet-header__container {
     width: 100%;
     border-bottom: 2px solid var(--roseBege)
@@ -132,7 +179,6 @@
 
     .cabinet-header__nav {
         width: 100%;
-
     }
 
     .cabinet-header__list {
@@ -145,9 +191,9 @@
     .cabinet-header {
         padding: 8px 16px;
         gap: 12px;
-    } 
+    }
 
-    .cabinet-header__link{
+    .cabinet-header__link {
         flex-direction: column;
         gap: 0;
     }

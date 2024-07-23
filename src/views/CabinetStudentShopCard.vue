@@ -13,9 +13,3 @@ import CabinetShopBalance from '../components/cabinetStudent/shop/CabinetShopBal
 import CabinetShopCard from '../components/cabinetStudent/shop/CabinetShopCard.vue'
 </script>
 
-<style>
-.cabinet-container{
-    min-height: 100vh;
-    background-color: var(--dark);
-}
-</style>

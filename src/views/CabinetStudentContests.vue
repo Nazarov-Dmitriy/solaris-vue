@@ -10,6 +10,3 @@
 import CabinetHeader from '../components/cabinetStudent/CabinetHeader.vue'
 import CabinetStudentContests from '../components/cabinetStudent/contests/CabinetStudentContests.vue'
 </script>
-
-<style>
-</style>
