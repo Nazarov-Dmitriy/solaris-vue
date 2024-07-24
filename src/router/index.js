@@ -7,6 +7,11 @@ import CabinetStudentSales from '../views/CabinetStudentSales.vue'
 import CabinetStudentContests from '../views/CabinetStudentContests.vue'
 import CabinetStudentViewContest from '../views/CabinetStudentViewContest.vue'
 import CabinetStudentPortfolio from '../views/CabinetStudentPortfolio.vue'
+import CabinetTeacher from '@/views/teacher/CabinetTeacher.vue'
+import ProfilePage from '@/views/teacher/ProfilePage.vue'
+import CasePortfolio from '@/views/teacher/CasePortfolio.vue'
+
+
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +56,30 @@ const router = createRouter({
             name: 'cabinet-portfolio',
             component: CabinetStudentPortfolio
         },
+        {
+            path: '/cabinet-teacher',
+            component: CabinetTeacher,
+            children: [   
+                {
+                    path: "profile",
+                    name: "profile",
+                    component: ProfilePage
+                },           
+                {
+                    path: 'case',                  
+                    children: [ 
+                        {
+                            path: 'portfolio',
+                            name: 'portfolio',                    
+                            component: CasePortfolio,
+                        },
+                    ]
+                },
+              
+            ],
+          
+
+        },
     ],
     scrollBehavior (to, from, savedPosition) {
         if (to.hash) {
@@ -61,7 +90,6 @@ const router = createRouter({
         } else if (savedPosition) {
             return savedPosition
         } else {
-            console.log(333);
             return {
                 top: 0, behavior: 'smooth',
             }
