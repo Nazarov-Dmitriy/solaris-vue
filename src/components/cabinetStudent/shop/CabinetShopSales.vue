@@ -172,9 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
     historyWrapper.append(historyWrapperItem);
   });
 
-  if (list.children.length >= 1) {
-    return;
-  } else {
+  if (list.children.length === 0) {
     const emptyReady = document.createElement("p");
     emptyReady.classList.add("shop-empty-ready");
     emptyReady.textContent =
@@ -182,17 +180,13 @@ document.addEventListener("DOMContentLoaded", function () {
     list.append(emptyReady);
   }
 
-  if (historyWrapper.children.length >= 1) {
-    return;
-  } else {
+  if (historyWrapper.children.length === 0) {
     const emptyHistory = document.createElement("p");
-    emptyHistory.className = "shop-empty-history";
+    emptyHistory.classList.add("shop-empty-history");
     emptyHistory.textContent =
-      "здесь отображаются полученные товары, видимо ты пока ничего не покупал";
+      "Здесь отображаются полученные товары, видимо ты пока ничего не покупал";
     historyWrapper.append(emptyHistory);
   }
-
-  console.log(historyWrapper.children);
 });
 </script>
 <style>
