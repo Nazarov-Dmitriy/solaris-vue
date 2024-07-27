@@ -10,7 +10,7 @@ import CabinetStudentPortfolio from '../views/CabinetStudentPortfolio.vue'
 import CabinetTeacher from '@/views/teacher/CabinetTeacher.vue'
 import ProfilePage from '@/views/teacher/ProfilePage.vue'
 import CasePortfolio from '@/views/teacher/CasePortfolio.vue'
-
+import CaseСontest from '@/views/teacher/CaseСontest.vue'
 
 
 const router = createRouter({
@@ -73,9 +73,13 @@ const router = createRouter({
                             name: 'portfolio',                    
                             component: CasePortfolio,
                         },
+                        {
+                            path: 'contest',
+                            name: 'contest',                    
+                            component: CaseСontest,
+                        },
                     ]
                 },
-              
             ],
           
 
