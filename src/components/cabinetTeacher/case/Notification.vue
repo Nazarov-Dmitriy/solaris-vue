@@ -1,6 +1,6 @@
 <template>
     <div>
-        Конкурсы
+        Уведомления
     </div>
 </template>
 <script setup>
