@@ -92,11 +92,11 @@ onBeforeUnmount(() => {
 .dashboard__dropdown-wrapper {
     cursor: pointer;
     position: relative;
-    padding: 14px 16px;
+    padding: 16px 16px;
     max-width: fit-content;
     border: 2px solid var(--roseBege);
     box-sizing: border-box;
-    height: 52px;
+    height: 56px;
     background: var(--white);
 }
 

@@ -69,9 +69,12 @@
                     <div class="uc-panel-group">
                         <DropdownComponent
                             v-model:modelValue="role"
+                            class="uc-panel__dropdown-role"
                             :options="optionRole"
-                        /><DropdownComponent
+                        />
+                        <DropdownComponent
                             v-model:modelValue="sort"
+                            class="uc-panel__dropdown-sort"
                             :options="optionSort"
                         />
                         <button class="btn btn-contest">
@@ -101,7 +104,7 @@
                             v-for="el in renderList"
                             :key="el.id"
                             class="uc__item"
-                        > 
+                        >
                             <p class="uc__decription h3">
                                 {{ el.title }}
                             </p>
@@ -165,7 +168,7 @@ const contests = [
     },
     {
         "id": 2,
-        "title": "Городской конкурс244444444222221"
+        "title": "Городской конкурс"
     },
     {
 
@@ -258,14 +261,12 @@ const optionSort = [
 
 
 function getRenderList (list) {
-    console.log(list);
     renderList.value = list
 }
 
 </script>
 
 <style lang="scss">
-
 .section-uc {
     display: flex;
     flex-direction: column;
@@ -419,14 +420,58 @@ function getRenderList (list) {
 
 
     @media(max-width: 991px) {
-        width: 55%;
+        width: 423px;
         margin-left: auto;
         flex-wrap: wrap;
         gap: 20px;
         padding: 0;
+
+        .uc-panel__dropdown-role {
+            width: 423px;
+            max-width: 100%;
+
+            .dropdown-selected {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        .uc-panel__dropdown-sort {
+            width: 167px;
+        }
+
+        .btn-contest {
+            margin-left: 0;
+            width: 236px;
+        }
     }
 
-    @media(max-width: 576px) {
+    @media(max-width: $md) {
+        width: 58%;
+
+        .uc-panel__dropdown-role {
+            width: 100%;
+            max-width: 100%;
+          
+        }
+
+        .uc-panel__dropdown-sort {
+            width: 100%;
+            max-width: 100%;
+
+            .dropdown-selected {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        .btn-contest {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+
+    @media(max-width: $sm) {
         width: 100%;
     }
 
@@ -464,19 +509,12 @@ function getRenderList (list) {
 
 .btn-contest {
     margin-left: 24px;
-
-    @media(max-width: 991px) {
-        margin-left: 0;
-    }
-
-    @media(max-width: 768px) {
-        width: 100%;
-    }
 }
 
 .uc-wpaper {
     flex-grow: 1;
     background: var(--white);
+    padding-bottom: 20px;
 }
 
 .uc-container {
@@ -517,6 +555,7 @@ function getRenderList (list) {
 
 .uc-subtitle__title {
     flex-shrink: 0;
+    color: var(--dark);
 }
 
 .uc-list {
@@ -552,12 +591,17 @@ function getRenderList (list) {
 }
 
 .uc__item:hover {
-    background: var(--lightBege)
+    background: var(--lightBege);
+
+    @media(max-width: 576px) {
+        background: unset;
+    }
 }
 
 .uc__decription {
     grid-area: uc-deccription;
     max-width: 652px;
+    color: var(--dark);
 
     @media(max-width: 1200px) {
         max-width: 100%;
@@ -617,6 +661,6 @@ function getRenderList (list) {
     max-width: 136px;
     text-align: end;
     margin-top: 4px;
+    color: var(--dark)
 }
-
 </style>

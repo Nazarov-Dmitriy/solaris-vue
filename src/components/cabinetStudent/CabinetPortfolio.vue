@@ -347,10 +347,7 @@ const option = [
     'сортировка 6',
 ]
 
-
-
 function getRenderList (list) {
-    console.log(list);
     renderList.value = list
 }
 
