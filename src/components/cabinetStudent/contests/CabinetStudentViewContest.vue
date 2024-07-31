@@ -26,8 +26,11 @@
                         <p class="uc__publication p2">
                             Дата публикации 02.03.2024
                         </p>
-                        <buttom class="uc__info-btn btn">
-                            Узнать подробнее
+                        <buttom
+                            class="uc__info-btn btn"
+                            @click="$router.push('/cabinet-contests')"
+                        >
+                            К списку конкурсов
                         </buttom>
                     </div>
                 </div>
