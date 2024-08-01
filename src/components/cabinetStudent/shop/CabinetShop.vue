@@ -107,7 +107,6 @@ let arr = [
 ];
 
 function getRenderList (list) {
-    console.log(list);
     renderList.value = list
 }
 
@@ -117,7 +116,6 @@ function getRenderList (list) {
     width: 100%;
     background: var(--dark);
     flex-grow: 1;
-    height: 100%;
     display: flex;
 }
 

@@ -26,8 +26,11 @@
                         <p class="uc__publication p2">
                             Дата публикации 02.03.2024
                         </p>
-                        <buttom class="uc__info-btn btn">
-                            Узнать подробнее
+                        <buttom
+                            class="uc__info-btn btn"
+                            @click="$router.push('/cabinet-contests')"
+                        >
+                            К списку конкурсов
                         </buttom>
                     </div>
                 </div>
@@ -143,7 +146,7 @@
                                         <img
                                             src="../../../assets/image/user-cabinet/contest/avatar.png"
                                             alt="avatar"
-                                            class="uc-contest__avater"
+                                            class="uc-contest__avatar"
                                         >
                                         <p class="uc-contest__user-name p2">
                                             {{ el.name }}
@@ -213,7 +216,7 @@
                                 <img
                                     src="../../../assets/image/user-cabinet/contest/avatar.png"
                                     alt="avatar"
-                                    class="uc-contest__avater"
+                                    class="uc-contest__avatar"
                                 >
                                 <div class="uc-contest__application-wraper">
                                     <p class="uc-contest__user-name p2">
@@ -341,6 +344,7 @@ function submitApplication () {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    color: var(--dark);
 
     @media(max-width: 768px) {
         max-width: 100%;
@@ -404,6 +408,14 @@ function submitApplication () {
         min-height: 300px;
         gap: 16px;
     }
+
+    @media(max-width: 576px) {
+      width: calc(100% + 32px);
+      left: -16px;
+      position: relative;
+      max-width: unset;
+      padding: 24px 16px;
+    }
     
 }
 
@@ -449,6 +461,11 @@ function submitApplication () {
         grid-template-areas:
             "contest-avatar  contest-user-name  contest-user-name"
             "contest-avatar  contest-user-derections  contest-btn";
+    }
+
+    @media(max-width:576px) {
+        gap: 0;
+        padding: 8px 8px;
     }
 }
 
@@ -506,13 +523,17 @@ function submitApplication () {
     gap: 8px;
 }
 
-.uc-contest__avater {
+.uc-contest__avatar {
     grid-area: contest-avatar;
     width: 56px;
     height: 56px;
     border-radius: 100%;
     border: 2px solid var(--roseBege);
     box-sizing: border-box;
+
+    @media(max-width: 576px) {
+      margin-right: 8px;
+    }
 }
 
 .uc-contest__user-name {

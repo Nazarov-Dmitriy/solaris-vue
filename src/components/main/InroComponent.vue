@@ -166,7 +166,6 @@ const passwordError = ref(false);
 
 function changeLogin (evt) {
     loginError.value = evt.target.value.length < 3 ? true : false
-    console.log(loginError);
 
 }
 function changePassword (evt) {

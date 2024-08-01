@@ -3,7 +3,7 @@
         <div class="balance">
             <div
                 class="balance-description"
-                :class="{'active': active}"
+                :class="{ 'active': active }"
                 @click="active = true"
             >
                 <p class="balance-text p2">
@@ -32,7 +32,7 @@
                 </svg>
                 <div
                     class="balance__tolltip"
-                    :class="{'active': active}"
+                    :class="{ 'active': active }"
                 >
                     <p class="balance__tolltip-text">
                         Для активации Сертификата “Антидвойка” покажи карточку покупки учителю.
@@ -56,7 +56,7 @@
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         class="balance__tolltip-close"
-                        @click.stop="active =false"
+                        @click.stop="active = false"
                     >
                         <line
                             x1="5.16421"
@@ -115,10 +115,10 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-const active =ref(false)
+const active = ref(false)
 
 </script>
-<style>
+<style lang="scss">
 .shop-balance {
     width: 100%;
     background: var(--lightBege)
@@ -131,27 +131,27 @@ const active =ref(false)
     justify-content: space-between;
     align-items: center;
     margin: auto;
-    box-sizing: border-box
+    box-sizing: border-box;
+    position: relative;
 }
 
 .balance-description {
     display: flex;
     align-items: center;
     gap: 8px;
-    position: relative;
     cursor: pointer;
- 
+
     &:active,
-    &.active{
-        .balance-text{
+    &.active {
+        .balance-text {
             color: var(--orange)
         }
 
-        .balance-question path{
+        .balance-question path {
             fill: var(--orange);
         }
 
-        .balance-question rect{
+        .balance-question rect {
             stroke: var(--orange);
         }
     }
@@ -187,11 +187,24 @@ const active =ref(false)
     border: 1px solid var(--orange);
     position: absolute;
     display: none;
-    top: 46px;
-    left: 0;
+    top: 88px;
+    left: 60px;
 
-    &.active{
+    &.active {
         display: block;
+    }
+
+    @media (max-width: $md) {
+        top: 78px;
+        left: 40px;
+    }
+
+    @media (max-width: $sm) {
+        top: 68px;
+        left: 16px;
+        max-width: 343px;
+        width: calc(100% - 32px);
+        box-sizing:border-box;
     }
 }
 
@@ -200,9 +213,9 @@ const active =ref(false)
     line-height: 24px;
     color: var(--dark);
 
-    &:first-child{
-       margin-bottom: 8px;
-       width: 80%;
+    &:first-child {
+        margin-bottom: 8px;
+        width: 80%;
     }
 }
 

@@ -129,7 +129,7 @@
         </div>
     </section>
 </template>
-  
+
 <script setup>
 const infoBuyItemInfo = [
     {
@@ -180,7 +180,7 @@ const infoBuyItemInfo = [
         text: "  1 корпус - кабинет В 2012 корпус - кабинет В 208",
         img: "/src/assets/image/cabinet-shop/icon.png",
         id: 11
-    },   
+    },
 ];
 
 
@@ -248,6 +248,60 @@ const infoBuyHistoryItem = [
         currency: "/src/assets/image/cabinet-shop/currency.png",
         id: 15
     },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
+    {
+        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
+        amount: 150,
+        orderNumber: "Стикеры солярики № 33500967",
+        orderStatus: "заказ оплачен",
+        time: "13.02.2024",
+        currency: "/src/assets/image/cabinet-shop/currency.png",
+        id: 15
+    },
 ];
 
 </script>
@@ -262,6 +316,7 @@ const infoBuyHistoryItem = [
   z-index: 0;
   height: 100%;
   max-height: 100%;
+  min-height: 0;
 }
 
 .cabinet-shop-container {
@@ -289,10 +344,11 @@ const infoBuyHistoryItem = [
 .cabinet-shop-ready {
   background: #1f2a3e;
   padding-top: 24px;
-  height: auto;
+  height: 100%;
   width: 40%;
   overflow: hidden;
   box-sizing: border-box;
+  padding-bottom: 24px;
 }
 
 .cabinet-shop-history {
@@ -321,8 +377,6 @@ const infoBuyHistoryItem = [
   overflow: auto;
   scrollbar-width: none;
 }
-
-
 
 
 .cabinet-shop-history__wrapper-item {
@@ -390,16 +444,17 @@ const infoBuyHistoryItem = [
   overflow: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  height: auto;
-  max-height: 832px;
+  height: 100%;
+  min-height: 100px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: calc(100% - 148px);
 }
 
 .cabinet-shop-ready__list::-webkit-scrollbar {
   display: none;
-}
-
-.cabinet-shop-ready__list li:not(:last-child) {
-  margin-bottom: 24px;
 }
 
 .cabinet-shop-ready__list-item {
@@ -549,7 +604,7 @@ const infoBuyHistoryItem = [
 
 @media (max-width: 1440px) {
   .cabinet-shop-ready {
-    padding: 24px 0 0 0;
+    padding: 24px 0 24px 0;
     width: 70%;
   }
 
@@ -671,7 +726,7 @@ const infoBuyHistoryItem = [
     width: calc(100% + 80px);
     padding: 0 40px;
     left: -40px;
-    max-height: 940px;
+    max-height: 900px;
     position: relative;
   }
 
@@ -691,6 +746,7 @@ const infoBuyHistoryItem = [
     margin: 0 auto;
     position: sticky;
     padding-top: 10px;
+    width: 100%;
   }
 
   .cabinet-shop-ready__list-item {
@@ -728,6 +784,7 @@ const infoBuyHistoryItem = [
     width: calc(100% + 32px);
     padding: 0 16px;
     left: -16px;
+    height: auto;
   }
 
   .cabinet-shop-history__title::before {
