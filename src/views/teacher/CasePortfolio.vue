@@ -16,7 +16,6 @@ import AddCertification from '@/components/cabinetTeacher/case/AddCertification.
 import AddPortfolio from '@/components/cabinetTeacher/case/AddPortfolio.vue'
 import TopCompetition from '@/components/cabinetTeacher/case/TopCompetition.vue'
 
-// Dropdown state and functions
 const isDropdownOpen = ref({
     criteria: false,
     subject: false
