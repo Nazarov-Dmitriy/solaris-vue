@@ -1,12 +1,88 @@
 <template>
     <div class="cabinet-container">
         <CabinetHeader />
-        <AddPortfolio />
-        Страница Добавить портфолио
+        <!-- <AddPortfolio /> -->
+        <!-- <AddCertification /> -->
+        <!-- <ActivityQuality /> -->
+         <TopCompetition/>
     </div>
 </template>
 
 <script setup>
-import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue';
-import AddPortfolio from '@/components/cabinetTeacher/case/AddPortfolio.vue';
+import { ref, provide } from 'vue'
+import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue'
+import ActivityQuality from '@/components/cabinetTeacher/case/ActivityQuality.vue'
+import AddCertification from '@/components/cabinetTeacher/case/AddCertification.vue'
+import AddPortfolio from '@/components/cabinetTeacher/case/AddPortfolio.vue'
+import TopCompetition from '@/components/cabinetTeacher/case/TopCompetition.vue'
+
+// Dropdown state and functions
+const isDropdownOpen = ref({
+    criteria: false,
+    subject: false
+})
+
+const selectedSubject = ref('')
+const selectedCriteria = ref('')
+
+const options = ref([
+    '-',
+    'Достижения обучающихся',
+    'Достижения учителя',
+    'Классное руководство',
+    'Участие в ТОП-конкурсе',
+    'Качество деятельности учителя',
+    'Аттестация'
+])
+const subjects = ['-', 'Математика', 'Физика', 'Химия']
+
+function toggleDropdown(type) {
+    isDropdownOpen.value[type] = !isDropdownOpen.value[type]
+}
+
+function selectSubject(subject) {
+    selectedSubject.value = subject
+    isDropdownOpen.value.subject = false
+}
+
+function selectCriteria(criteria) {
+    selectedCriteria.value = criteria
+    isDropdownOpen.value.criteria = false
+}
+
+const isModalVisible = ref(false)
+const isSecondModalVisible = ref(false)
+
+function sendForVerification() {
+    isModalVisible.value = true
+}
+
+function showSecondModal() {
+    isModalVisible.value = false
+    isSecondModalVisible.value = true
+}
+
+function handleModalClose() {
+    isModalVisible.value = false
+}
+
+function handleSecondModalClose() {
+    isSecondModalVisible.value = false
+}
+
+provide('options', options)
+provide('subjects', subjects)
+provide('toggleDropdown', toggleDropdown)
+provide('selectSubject', selectSubject)
+provide('selectCriteria', selectCriteria)
+provide('isDropdownOpen', isDropdownOpen)
+provide('selectedSubject', selectedSubject)
+provide('selectedCriteria', selectedCriteria)
+
+provide('isModalVisible', isModalVisible)
+provide('isSecondModalVisible', isSecondModalVisible)
+provide('sendForVerification', sendForVerification)
+provide('showSecondModal', showSecondModal)
+provide('handleModalClose', handleModalClose)
+provide('handleSecondModalClose', handleSecondModalClose)
 </script>
