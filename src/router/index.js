@@ -10,7 +10,7 @@ import CabinetStudentPortfolio from '../views/CabinetStudentPortfolio.vue'
 import CabinetTeacher from '@/views/teacher/CabinetTeacher.vue'
 import ProfilePage from '@/views/teacher/ProfilePage.vue'
 import CasePortfolio from '@/views/teacher/CasePortfolio.vue'
-import CaseNotification from '@/views/teacher/CaseNotification.vue'
+import TeacherNotification from '@/views/teacher/TeacherNotification.vue'
 
 
 const router = createRouter({
@@ -64,7 +64,12 @@ const router = createRouter({
                     path: "profile",
                     name: "profile",
                     component: ProfilePage
-                },           
+                },
+                {
+                    path: 'notification',
+                    name: 'notification',                    
+                    component: TeacherNotification,
+                },
                 {
                     path: 'case',                  
                     children: [ 
@@ -73,16 +78,9 @@ const router = createRouter({
                             name: 'portfolio',                    
                             component: CasePortfolio,
                         },
-                        {
-                            path: 'notification',
-                            name: 'notification',                    
-                            component: CaseNotification,
-                        },
                     ]
                 },
             ],
-          
-
         },
     ],
     scrollBehavior (to, from, savedPosition) {
