@@ -1,0 +1,382 @@
+<template>
+    <section class="management">
+        <div class="management__container">
+            <AddPortfolioTitle @form-submit="sendForVerification" />
+            <ModalComponent
+                v-if="isModalVisible"
+                @close-modal="handleModalClose"
+                @show-Modal="handleModalAction"
+            >
+                <template #text>
+                    <p class="modal__text">
+                        Если вы заполнили все критерии - подтвердите отправку, или нажмите кнопку
+                        отмены
+                    </p>
+                </template>
+                <template #btn>
+                    <div class="modal__btn-wrapper">
+                        <button class="modal__btn modal__btn--cancel" @click="handleModalClose">
+                            Отменить
+                        </button>
+                        <button class="modal__btn modal__btn--send" @click="showSecondModal">
+                            Отправить
+                        </button>
+                    </div>
+                </template>
+            </ModalComponent>
+            <ModalComponent v-if="isSecondModalVisible" @close-modal="handleSecondModalClose">
+                <template #text>
+                    <p class="modal__text">
+                        Ваш кейс успешно отправлен! После проверки результаты появятся у вас в
+                        портфолио
+                    </p>
+                </template>
+                <template #btn>
+                    <div class="modal__btn-wrapper">
+                        <button class="modal__btn modal__btn--send" @click="goToPortfolio">
+                            Перейти в портфолио
+                        </button>
+                    </div>
+                </template>
+            </ModalComponent>
+            <div class="management__wrapper">
+                <TeacherDetails />
+                <div class="management__achievement">
+                    <div class="management__header">
+                        <h3 class="h3 management__header-title">Классное руководство</h3>
+                        <p class="p2 management__header-text">максимум 10 баллов</p>
+                    </div>
+                    <div class="management__text-wrapper">
+                        <span></span>
+                        <p class="management__nomination-text">Мероприятие</p>
+                        <span></span>
+                    </div>
+                    <form action="#" class="management__form">
+                        <div class="management__input-group">
+                            <label for="eventName" class="management__label"
+                                >Наименование мероприятия</label
+                            >
+                            <DropdownComponent
+                                id="eventName"
+                                class="management__input"
+                                additionalClass="custom-dropdown-selected"
+                                :options="eventNameOptions"
+                            />
+                        </div>
+                        <div class="management__notes-wrapper">
+                            <p class="p2 management__notes-text">
+                                После выбора наименования мероприятия здесь отобразятся примечания к
+                                заполнению
+                            </p>
+                            <div class="management__input-group">
+                                <label for="chooseDate" class="management__label">Уровень</label>
+                                <DropdownComponent
+                                    id="chooseLevel"
+                                    class="management__input"
+                                    :options="chooseLevelOptions"
+                                    additionalClass="custom-dropdown-selected"
+                                />
+                            </div>
+                            <div class="management__input-group">
+                                <label for="organise" class="management__label">Организатор</label>
+                                <InputText id="organise" placeholder="Введите организатора" />
+                            </div>
+                            <div class="management__input-group">
+                                <label for="chooseName" class="management__label">Название</label>
+
+                                <InputText id="chooseName" placeholder="Введите название" />
+                            </div>
+                        </div>
+                        <div class="management__form-info-wrapper">
+                            <div class="management__input-group">
+                                <label for="#">Дата</label>
+                                <InputDate />
+                            </div>
+                            <div class="management__input-group">
+                                <label for="#">Класс</label>
+                                <InputText placeholder="Введите класс" />
+                            </div>
+                            <div class="management__input-group management__input-group--mobile">
+                                <label for="#">Классный руководитель</label>
+                                <InputText class="input-text" placeholder="Введите фио" />
+                            </div>
+                        </div>
+                        <div class="management__results">
+                            <div class="management__text-wrapper">
+                                <span></span>
+                                <p class="management__nomination-text">Организатор</p>
+                                <span></span>
+                            </div>
+                            <div class="management__results-input-wrapper">
+                                <div class="management__input-group">
+                                    <label for="chooseResult" class="management__label"
+                                        >Результат</label
+                                    >
+                                    <DropdownComponent
+                                        id="chooseResult"
+                                        class="management__input"
+                                        additionalClass="custom-dropdown-selected"
+                                        :options="chooseResultOptions"
+                                    />
+                                </div>
+                                <div class="management__result-btn-wrapper">
+                                    <BtnWhite class="management__btn management__result-btn">
+                                        Подтверждающий документ
+                                    </BtnWhite>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="p2 management__form-text">
+                        Баллы начислятся после проверки, возможные варианты результатов проверки:
+                        Зачтено, Зачтено частично, Не зачтено
+                    </p>
+                    <div class="management__footer">
+                        <h3 class="h3 management__footer-title">Предполагаемый балл: 0</h3>
+                        <BtnComponent class="management__footer-btn">Сохранить</BtnComponent>
+                    </div>
+                    <div class="management__btn-wrapper">
+                        <BtnWhite class="management__btn">
+                            <template #img>
+                                <img
+                                    src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
+                                    alt=""
+                                />
+                            </template>
+                            Добавить мероприятие
+                        </BtnWhite>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script setup>
+import { ref, inject } from 'vue'
+
+import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
+import TeacherDetails from './form/TeacherDetails.vue'
+import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
+import BtnComponent from '@/components/btns/BtnComponent.vue'
+import InputText from './form/InputText.vue'
+import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
+import ModalComponent from '@/components/modal/ModalComponent.vue'
+import InputDate from './form/InputDate.vue'
+
+const eventNameOptions = ref([
+    '-',
+    'Результативность участия обучающихся во Всероссийской олимпиаде школьников.',
+    'Результативность участия обучающихся в конкурсах и олимпиадах, входящие в Перечень Министерства просвещения РФ',
+    'Результативность участия в интеллектуальных конкурсах, фестивалях, играх, в том числе "Большая перемена", конкурс и олимпиады по функциональной грамотности и другие конкурсные мероприятия, не входящие в Перечень Министерства просвещения РФ.',
+    'Результативность участия в интеллектуальных конкурсах, фестивалях, играх, в том числе "Большая перемена", конкурс и олимпиады по функциональной грамотности и другие конкурсные мероприятия, не входящие в Перечень Министерства просвещения РФ.',
+    'Результативность участия в научно-практических конференциях и других исследовательских мероприятиях по предмету обучения.',
+    'Результаты участия в мероприятиях художественно - эстетической направленности - отчетные концерты, праздники искусства, утренники, выставки, ярмарки поделок и другие мероприятия, направленные на развитие эстетического вкуса у обучающихся. ',
+    'Результат участие в мероприятиях военно-патриотической, экологической, туристско-краеведческой, волонтерской, поисковой направленности ',
+    'Результат участия в спортивных состязаниях',
+    'Результативность участия обучающихся при выполнении нормативов Всероссийского  физкультурно-спортивного  комплекса "Готов к труду и обороне".',
+    'Результативность участия команды в спортивных соревнованиях "Президентские состязания".'
+])
+const chooseLevelOptions = ref(['-', 'Лицейский', 'Муниципальный', 'Региональный', 'Всероссийский'])
+const chooseResultOptions = ref(['-', 'Участие', 'Победитлеь', 'Призер'])
+const isModalVisible = inject('isModalVisible')
+const isSecondModalVisible = inject('isSecondModalVisible')
+const sendForVerification = inject('sendForVerification')
+const showSecondModal = inject('showSecondModal')
+const handleModalClose = inject('handleModalClose')
+const handleSecondModalClose = inject('handleSecondModalClose')
+</script>
+
+<style scoped lang="scss">
+.management {
+    background-color: var(--white);
+}
+.management__container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 16px 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+    @media (max-width: $xxl) {
+        padding: 16px 60px;
+    }
+    @media (max-width: $lg) {
+        padding: 0;
+        gap: 10px;
+    }
+}
+.management__wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    height: max-content;
+
+    @media (max-width: $lg) {
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+.management__achievement {
+    @media (max-width: $lg) {
+        padding: 0 40px 24px 40px;
+    }
+    @media (max-width: $sm) {
+        padding: 0 16px 24px 16px;
+    }
+}
+.management__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+
+    @media (max-width: $sm) {
+        flex-direction: column;
+        gap: 10px;
+        align-items: start;
+    }
+}
+.management__header-title {
+    color: var(--dark);
+}
+.management__header-text {
+    color: var(--dark);
+}
+.management__text-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.management__text-wrapper span {
+    width: 100%;
+    height: 0px;
+    border: 1px solid;
+    max-width: 50%;
+}
+.management__nomination-text {
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    flex-shrink: 0;
+}
+.management__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.management__input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &--mobile {
+        @media (max-width: $xl) {
+            display: grid;
+            grid-column: span 2;
+        }
+    }
+}
+.management__label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--dark);
+}
+.management__input {
+    width: 100%;
+    max-width: 100%;
+}
+.management__form-info-wrapper {
+    display: grid;
+    grid-template-columns: 20% 25% 1fr;
+    width: 100%;
+    gap: 16px;
+
+    @media (max-width: $xl) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: $lg) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+.management__notes-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
+    @media (max-width: $lg) {
+        grid-template-columns: 1fr;
+    }
+}
+.management__notes-text {
+    text-align: center;
+    color: var(--orange);
+}
+.management__student-input-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    @media (max-width: $lg) {
+        grid-template-columns: 1fr;
+    }
+}
+.management__results-input-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: end;
+    @media (max-width: $lg) {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+.management__result-btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    @media (max-width: $lg) {
+        width: 100%;
+    }
+}
+.management__result-btn {
+    @media (max-width: $lg) {
+        width: 100%;
+    }
+}
+.management__btn {
+    @media (max-width: $sm) {
+        width: 100%;
+    }
+}
+.management__form-text {
+    color: var(--dark);
+    margin-top: 16px;
+}
+.management__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    @media (max-width: $sm) {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+.management__footer-btn {
+    @media (max-width: $sm) {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+}
+.management__btn-wrapper {
+    display: flex;
+    justify-content: center;
+}
+</style>

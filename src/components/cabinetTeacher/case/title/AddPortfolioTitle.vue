@@ -22,7 +22,7 @@ function handleButtonClick() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         padding: 16px 40px;
     }
     @media (max-width: $sm) {
@@ -37,7 +37,7 @@ function handleButtonClick() {
     line-height: 1.5;
     color: #1f2a3e;
 
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         width: 55%;
     }
     @media (max-width: $sm) {

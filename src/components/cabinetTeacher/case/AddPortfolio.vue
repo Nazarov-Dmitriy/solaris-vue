@@ -44,7 +44,7 @@
             <div class="add-portfolio__main">
                 <TeacherDetails />
                 <div class="add-portfolio__info">
-                    <h2 class="add-portfolio__info-title">Инструкция по заполнению</h2>
+                    <h2 class="h3 add-portfolio__info-title">Инструкция по заполнению</h2>
                     <p class="add-portfolio__info-subtitle">
                         <span>Дорогой коллега!</span> Для правильного расчета баллов стимулирующей
                         части просим Вас ВНИМАТЕЛЬНО прочитать инструкцию полностью и пользоваться
@@ -66,14 +66,15 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue'
+import { inject } from 'vue'
+
 import TeacherDetails from './form/TeacherDetails.vue'
 import ModalComponent from '../../modal/ModalComponent.vue'
 import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
+
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
 const texts = [
     'Для начала заполнения выберите предмет, который вы ведете. Если вы ведете несколько предметов нажмите на кнопку с плюсиком рядом с выпадающим списком и появится дополнительное поле. Если вы ведете один предмет после выбора из списка ничего нажимать не нужно.',
     'Далее выберите критерий оценки из выпадающего списка и нажмите кнопку “Перейти”. Обратите внимание, если вы перейдете на пустой критерий вы попадете на страницу с инструкцией',
@@ -112,19 +113,17 @@ function goToPortfolio() {
     @media (max-width: $xxl) {
         padding: 16px 60px;
     }
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         padding: 0;
         gap: 10px;
     }
 }
-
 .add-portfolio__main {
     display: flex;
     justify-content: space-between;
     gap: 32px;
     height: max-content;
-
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         flex-direction: column;
         gap: 24px;
     }
@@ -132,8 +131,7 @@ function goToPortfolio() {
 .add-portfolio__info {
     margin: 37px auto 0 auto;
     max-width: 843px;
-
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         padding: 24px 40px;
         margin-top: 0;
     }
@@ -145,16 +143,13 @@ function goToPortfolio() {
     }
 }
 .add-portfolio__info-title {
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 150%;
-    color: #1f2a3e;
+    color: var(--dark);
 }
 .add-portfolio__info-subtitle {
     font-weight: 700;
     font-size: 16px;
-    line-height: 150%;
-    color: #1f2a3e;
+    line-height: 1.5;
+    color: var(--dark);
     margin-bottom: 16px;
 }
 .add-portfolio__info-subtitle span {
@@ -163,7 +158,7 @@ function goToPortfolio() {
 .add-portfolio__info-list {
     font-size: 16px;
     line-height: 150%;
-    color: #1f2a3e;
+    color: var(--dark);
     margin-left: 16px;
 }
 .add-portfolio__info-list-item {

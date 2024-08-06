@@ -1,7 +1,7 @@
 <template>
     <section class="activity-quality">
         <div class="activity-quality__container">
-            <AddPortfolioTitle @form-submit="sendForVerification"/>
+            <AddPortfolioTitle @form-submit="sendForVerification" />
             <ModalComponent
                 v-if="isModalVisible"
                 @close-modal="handleModalClose"
@@ -66,11 +66,12 @@
 </template>
 
 <script setup>
+import { inject } from 'vue'
+
 import ModalComponent from '@/components/modal/ModalComponent.vue'
 import TeacherDetails from './form/TeacherDetails.vue'
 import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
-import { inject } from 'vue'
 
 const isModalVisible = inject('isModalVisible')
 const isSecondModalVisible = inject('isSecondModalVisible')
@@ -82,7 +83,7 @@ const handleSecondModalClose = inject('handleSecondModalClose')
 
 <style lang="scss">
 .activity-quality {
-    background-color: #fff;
+    background-color: var(--white);
 }
 .activity-quality__container {
     max-width: 1920px;
@@ -94,7 +95,7 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     @media (max-width: $xxl) {
         padding: 16px 60px;
     }
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         padding: 0;
         gap: 10px;
     }
@@ -104,8 +105,7 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     justify-content: space-between;
     gap: 32px;
     height: max-content;
-
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         flex-direction: column;
         gap: 24px;
     }
@@ -114,8 +114,7 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     display: flex;
     flex-direction: column;
     gap: 24px;
-
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         padding: 24px 40px;
         box-sizing: border-box;
     }
@@ -123,20 +122,17 @@ const handleSecondModalClose = inject('handleSecondModalClose')
         padding: 24px 16px;
     }
 }
-
 .activity-quality__certification-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-
     span {
         font-weight: 400;
         font-size: 16px;
         line-height: 1.5;
-        color: #1f2a3e;
+        color: var(--dark);
     }
-
     @media (max-width: $sm) {
         flex-direction: column;
         gap: 10px;
@@ -147,9 +143,7 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     font-weight: 700;
     font-size: 24px;
     line-height: 1.5;
-    color: #1f2a3e;
-}
-.add-certification__text {
+    color: var(--dark);
 }
 .activity-quality__btn-wrapper {
     display: flex;

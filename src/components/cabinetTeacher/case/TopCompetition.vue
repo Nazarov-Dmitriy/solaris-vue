@@ -24,6 +24,21 @@
                     </div>
                 </template>
             </ModalComponent>
+            <ModalComponent v-if="isSecondModalVisible" @close-modal="handleSecondModalClose">
+                <template #text>
+                    <p class="modal__text">
+                        Ваш кейс успешно отправлен! После проверки результаты появятся у вас в
+                        портфолио
+                    </p>
+                </template>
+                <template #btn>
+                    <div class="modal__btn-wrapper">
+                        <button class="modal__btn modal__btn--send" @click="goToPortfolio">
+                            Перейти в портфолио
+                        </button>
+                    </div>
+                </template>
+            </ModalComponent>
             <div class="top-competition__wrapper">
                 <TeacherDetails />
                 <div class="top-competition__event">
@@ -48,11 +63,11 @@
                             </div>
                             <div class="top-competition__form-group">
                                 <label for="#" class="top-competition__form-label">Результат</label>
-                                <InputOption class="top-competition__form-input">
-                                    <template #text>
-                                        <span>Выберите результат</span>
-                                    </template>
-                                </InputOption>
+                                <DropdownComponent
+                                    class="top-competition__form-input"
+                                    additionalClass="custom-dropdown-selected"
+                                    :options="result"
+                                />
                             </div>
                         </form>
                         <p class="top-competition__form-text">
@@ -76,7 +91,8 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import ModalComponent from '@/components/modal/ModalComponent.vue'
 import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
@@ -84,7 +100,24 @@ import TeacherDetails from './form/TeacherDetails.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import InputText from './form/InputText.vue'
-import InputOption from './form/inputOption.vue'
+import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
+
+const router = useRouter()
+
+const result = ref([
+    '-',
+    'Участие',
+    'Призер/победитель',
+    'Победитель',
+    'Призер',
+    'ГТО: Золотой значок (более 50% от количества сдающих, обучающихся у учителя)',
+    'ГТО: Серебряный значок (более 50% от количества сдающих, обучающихся у учителя)',
+    'ГТО: Бронзовый значок (более 50% от количества сдающих, обучающихся у учителя)'
+])
+
+function goToPortfolio() {
+    router.push('/cabinet-portfolio')
+}
 
 const isModalVisible = inject('isModalVisible')
 const isSecondModalVisible = inject('isSecondModalVisible')
@@ -96,7 +129,7 @@ const handleSecondModalClose = inject('handleSecondModalClose')
 
 <style lang="scss" scoped>
 .top-competition {
-    background-color: #fff;
+    background-color: var(--white);
 }
 .top-competition__container {
     max-width: 1920px;
@@ -108,45 +141,41 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     @media (max-width: $xxl) {
         padding: 16px 60px;
     }
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         padding: 0;
         gap: 10px;
     }
 }
-
 .top-competition__wrapper {
     display: flex;
     justify-content: space-between;
     gap: 32px;
     height: max-content;
-
-    @media (max-width: $md) {
+    @media (max-width: $lg) {
         flex-direction: column;
         gap: 24px;
     }
 }
 .top-competition__event {
-    @media (max-width: $md) {
-        padding: 24px 40px;
+    @media (max-width: $lg) {
+        padding: 0 40px 24px 40px;
     }
     @media (max-width: $sm) {
-        padding: 24px 16px;
+        padding: 0 16px 24px 16px;
     }
 }
-
 .top-competition__nomination-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-
+    margin-bottom: 24px;
     span {
         font-weight: 400;
         font-size: 16px;
         line-height: 1.5;
-        color: #1f2a3e;
+        color: var(--dark);
     }
-
     @media (max-width: $sm) {
         flex-direction: column;
         gap: 10px;
@@ -157,7 +186,7 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     font-weight: 700;
     font-size: 24px;
     line-height: 1.5;
-    color: #1f2a3e;
+    color: var(--dark);
 }
 .top-competition__nomination {
     display: flex;
@@ -168,12 +197,10 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     display: flex;
     align-items: center;
     gap: 16px;
-
     &--center {
         margin-bottom: 16px;
     }
 }
-
 .top-competition__nomination-text {
     text-align: center;
     font-weight: 400;
@@ -181,14 +208,12 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     line-height: 1.5;
     flex-shrink: 0;
 }
-
 .top-competition__nomination-text-wrapper span {
     width: 100%;
     height: 0px;
     border: 1px solid;
     max-width: 50%;
 }
-
 .top-competition__form {
     display: flex;
     flex-direction: column;
@@ -199,20 +224,21 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     flex-direction: column;
     gap: 8px;
 }
-.top-competition__form-label {
+.custom-dropdown-selected {
+    max-width: 100%;
 }
 .top-competition__form-input {
+    max-width: 100%;
     width: 50%;
     background-image: url('../../../../public/cabinteTeacher/case/input-option-svg.svg');
     background-repeat: no-repeat;
     background-position: calc(100% - 23px);
-
     span {
         font-family: var(--font-family);
         font-weight: 400;
         font-size: 16px;
-        line-height: 150%;
-        color: #dda06b;
+        line-height: 1.5;
+        color: var(--roseBege);
     }
     @media (max-width: $lg) {
         width: 100%;
@@ -224,11 +250,15 @@ const handleSecondModalClose = inject('handleSecondModalClose')
 .top-competition__form-input--choose {
     width: 50%;
 }
+.top-competition__drop-down {
+    max-width: 100%;
+    width: 50%;
+}
 .top-competition__form-text {
     font-weight: 400;
     font-size: 16px;
-    line-height: 150%;
-    color: #1f2a3e;
+    line-height: 1.5;
+    color: var(--dark);
 }
 .top-competition__footer {
     display: flex;
@@ -245,10 +275,9 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     font-family: var(--font-family);
     font-weight: 700;
     font-size: 24px;
-    line-height: 150%;
-    color: #1f2a3e;
+    line-height: 1.5;
+    color: var(--dark);
 }
-
 .top-competition__footer-btn {
     width: max-content;
     @media (max-width: $sm) {
@@ -260,7 +289,6 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     display: flex;
     justify-content: center;
 }
-
 .top-competition__btn {
     @media (max-width: $sm) {
         width: 100%;

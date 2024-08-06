@@ -1,5 +1,6 @@
 <template>
     <button class="btn-white" @click="submitEmit">
+        <slot name="img" />
         <span class="btn-white__text">
             <slot />
         </span>
@@ -23,12 +24,13 @@ function submitEmit() {
 <style lang="scss">
 .btn-white {
     border: 2px solid #dda06b;
-    padding: 16px 16px 16px 44px;
+    padding: 16px;
     box-sizing: border-box;
     cursor: pointer;
-    background-image: url('../../../../../public/cabinteTeacher/case/portfolio-button-svg.svg');
-    background-repeat: no-repeat;
-    background-position: 5%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fff;
 }
 .btn-white__text {
     font-weight: 500;

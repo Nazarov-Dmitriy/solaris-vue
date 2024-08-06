@@ -1,10 +1,13 @@
 <template>
     <div class="cabinet-container">
         <CabinetHeader />
-        <!-- <AddPortfolio /> -->
-        <!-- <AddCertification /> -->
-        <!-- <ActivityQuality /> -->
-         <TopCompetition/>
+        <AddPortfolio />
+        <AddCertification />
+        <ActivityQuality />
+        <TopCompetition />
+        <StudentAchievments />
+        <TeacherAchievments />
+        <ClassroomManagement />
     </div>
 </template>
 
@@ -15,6 +18,9 @@ import ActivityQuality from '@/components/cabinetTeacher/case/ActivityQuality.vu
 import AddCertification from '@/components/cabinetTeacher/case/AddCertification.vue'
 import AddPortfolio from '@/components/cabinetTeacher/case/AddPortfolio.vue'
 import TopCompetition from '@/components/cabinetTeacher/case/TopCompetition.vue'
+import StudentAchievments from '@/components/cabinetTeacher/case/StudentAchievments.vue'
+import TeacherAchievments from '@/components/cabinetTeacher/case/TeacherAchievments.vue'
+import ClassroomManagement from '@/components/cabinetTeacher/case/ClassroomManagement.vue'
 
 const isDropdownOpen = ref({
     criteria: false,
@@ -23,17 +29,6 @@ const isDropdownOpen = ref({
 
 const selectedSubject = ref('')
 const selectedCriteria = ref('')
-
-const options = ref([
-    '-',
-    'Достижения обучающихся',
-    'Достижения учителя',
-    'Классное руководство',
-    'Участие в ТОП-конкурсе',
-    'Качество деятельности учителя',
-    'Аттестация'
-])
-const subjects = ['-', 'Математика', 'Физика', 'Химия']
 
 function toggleDropdown(type) {
     isDropdownOpen.value[type] = !isDropdownOpen.value[type]
@@ -69,8 +64,6 @@ function handleSecondModalClose() {
     isSecondModalVisible.value = false
 }
 
-provide('options', options)
-provide('subjects', subjects)
 provide('toggleDropdown', toggleDropdown)
 provide('selectSubject', selectSubject)
 provide('selectCriteria', selectCriteria)

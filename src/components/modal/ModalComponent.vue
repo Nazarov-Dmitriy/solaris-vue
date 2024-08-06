@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { defineEmits } from 'vue'
+import { defineEmits, onMounted, onBeforeUnmount } from 'vue'
 
 const emit = defineEmits(['closeModal'])
 
@@ -36,6 +36,14 @@ function handleCancel() {
 function getPath(img) {
     return new URL(img, import.meta.url).href
 }
+
+onMounted(() => {
+    document.body.classList.add('no-scroll')
+})
+
+onBeforeUnmount(() => {
+    document.body.classList.remove('no-scroll')
+})
 </script>
 
 <style lang="scss">
@@ -98,7 +106,6 @@ function getPath(img) {
     justify-content: center;
     align-items: center;
     gap: 27px;
-    
 }
 .modal__btn {
     padding: 16px;
@@ -115,5 +122,9 @@ function getPath(img) {
         background: #de4700;
         color: white;
     }
+}
+
+.no-scroll{
+    overflow: hidden;
 }
 </style>
