@@ -55,7 +55,7 @@
             </div>
             <img
                 class="teachcabinet-profile__img"
-                src="@/assets/image/cabinet-teacher/cabinet-teacher-solaric.png"
+                src="@/assets/image/cabinet-teacher/cabinet-teacher-solaric.svg"
                 alt="#"
             >
         </div>

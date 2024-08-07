@@ -7,11 +7,12 @@ import CabinetStudentSales from '../views/CabinetStudentSales.vue'
 import CabinetStudentContests from '../views/CabinetStudentContests.vue'
 import CabinetStudentViewContest from '../views/CabinetStudentViewContest.vue'
 import CabinetStudentPortfolio from '../views/CabinetStudentPortfolio.vue'
-import CabinetTeacher from '@/views/teacher/CabinetTeacher.vue'
 import ProfilePage from '@/views/teacher/ProfilePage.vue'
 import CasePortfolio from '@/views/teacher/CasePortfolio.vue'
-import TeacherNotification from '@/views/teacher/TeacherNotification.vue'
-
+import CabinetTeacher from '@/views/teacher/CabinetTeacher.vue'
+import CabinetTeacherNotification from '@/views/teacher/CabinetTeacherNotification.vue'
+import CabinetTeacherContests from '@/views/teacher/CabinetTeacherContests.vue'
+import CabinetTeacherPortfolio from '@/views/teacher/CabinetTeacherPortfolio.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,7 +69,17 @@ const router = createRouter({
                 {
                     path: 'notification',
                     name: 'notification',                    
-                    component: TeacherNotification,
+                    component: CabinetTeacherNotification,
+                },
+                {
+                    path: 'contests',
+                    name: 'contests',                    
+                    component: CabinetTeacherContests,
+                },
+                {
+                    path: 'teacher-portfolio',
+                    name: 'teacher-portfolio',                    
+                    component: CabinetTeacherPortfolio,
                 },
                 {
                     path: 'case',                  
