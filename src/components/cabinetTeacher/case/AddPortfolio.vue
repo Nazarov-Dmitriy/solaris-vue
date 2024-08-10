@@ -2,7 +2,7 @@
     <section class="add-portfolio">
         <div class="add-portfolio__container">
             <AddPortfolioTitle @form-submit="sendForVerification" />
-            <ModalComponent
+            <!-- <ModalComponent
                 v-if="isModalVisible"
                 @close-modal="handleModalClose"
                 @show-Modal="handleModalAction"
@@ -39,6 +39,48 @@
                         </button>
                     </div>
                 </template>
+            </ModalComponent> -->
+
+            <ModalComponent
+                class="modal"
+                v-if="isModalVisible"
+                @close-modal="handleModalClose"
+                additionalClass="custom-modal"
+            >
+                <template #text>
+                    <div class="activate-certificate">
+                        <div class="activate-certificate-wrapper">
+                            <span>№ сертификата</span>
+                        </div>
+                        <div class="activate-certificate-wrapper">
+                            <span>002</span>
+                        </div>
+                        <div class="activate-certificate-wrapper">
+                            <span>ФИО ученика</span>
+                        </div>
+                        <div class="activate-certificate-wrapper">
+                            <span>ФИО</span>
+                        </div>
+                        <div class="activate-certificate-wrapper">
+                            <span>Класс</span>
+                        </div>
+                        <div class="activate-certificate-wrapper">
+                            <span>7А класс</span>
+                        </div>
+                        <div class="activate-certificate-wrapper">
+                            <span>Дата приобретения</span>
+                        </div>
+                        <div class="activate-certificate-wrapper">
+                            <span>01.01.2024</span>
+                        </div>
+                        <div class="activate-certificate-button-wrapper">
+                            <span>Активация</span>
+                        </div>
+                        <div class="activate-certificate-button-wrapper">
+                            <BtnWhite class="activate-certificate-btn">Активировать</BtnWhite>
+                        </div>
+                    </div>
+                </template>
             </ModalComponent>
 
             <div class="add-portfolio__main">
@@ -73,6 +115,7 @@ import ModalComponent from '../../modal/ModalComponent.vue'
 import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
 
 import { useRouter } from 'vue-router'
+import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 
 const router = useRouter()
 const texts = [
@@ -100,6 +143,43 @@ function goToPortfolio() {
 </script>
 
 <style lang="scss">
+.custom-modal {
+    max-width: max-content;
+    width: 100%;
+    background-color: #fff;
+    padding: 16px;
+    box-sizing: border-box;
+}
+.activate-certificate {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+.activate-certificate-wrapper {
+    border: 2px solid #dda06b;
+    padding: 0px 16px;
+    width: 310px;
+}
+
+.activate-certificate-button-wrapper {
+    border: 2px solid #dda06b;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.activate-certificate-btn {
+    width: 144px;
+    height: 56px;
+}
+
 .add-portfolio {
     background-color: var(--white);
 }

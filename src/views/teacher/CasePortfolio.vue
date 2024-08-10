@@ -1,13 +1,15 @@
 <template>
     <div class="cabinet-container">
         <CabinetHeader />
-        <AddPortfolio />
-        <AddCertification />
-        <ActivityQuality />
-        <TopCompetition />
-        <StudentAchievments />
-        <TeacherAchievments />
-        <ClassroomManagement />
+        <!-- <AddPortfolio /> -->
+        <!-- <AddCertification /> -->
+        <!-- <ActivityQuality /> -->
+        <!-- <TopCompetition /> -->
+        <!-- <StudentAchievments /> --> 
+        <!-- <TeacherAchievments /> -->
+        <!-- <ClassroomManagement /> -->
+         <CabinetTeacherViewContestWith/>
+         <CabinetTeacherViewContestWithout/>
     </div>
 </template>
 
@@ -21,6 +23,8 @@ import TopCompetition from '@/components/cabinetTeacher/case/TopCompetition.vue'
 import StudentAchievments from '@/components/cabinetTeacher/case/StudentAchievments.vue'
 import TeacherAchievments from '@/components/cabinetTeacher/case/TeacherAchievments.vue'
 import ClassroomManagement from '@/components/cabinetTeacher/case/ClassroomManagement.vue'
+import CabinetTeacherViewContestWith from '@/components/cabinetTeacher/contest/CabinetTeacherViewContestWith.vue'
+import CabinetTeacherViewContestWithout from '@/components/cabinetTeacher/contest/CabinetTeacherViewContestWithout.vue'
 
 const isDropdownOpen = ref({
     criteria: false,

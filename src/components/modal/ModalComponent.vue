@@ -1,7 +1,7 @@
 <template>
     <Teleport to="body">
         <div class="modal">
-            <div class="modal__container">
+            <div :class="['custom-modal', props.additionalClass]">
                 <div class="modal__close-btn-wrapper">
                     <button class="modal__close-btn" @click="handleCancel">
                         <img
@@ -26,7 +26,12 @@
 
 <script setup>
 import { defineEmits, onMounted, onBeforeUnmount } from 'vue'
-
+const props = defineProps({
+    additionalClass: {
+        type: String,
+        default: ''
+    }
+})
 const emit = defineEmits(['closeModal'])
 
 function handleCancel() {
@@ -124,7 +129,9 @@ onBeforeUnmount(() => {
     }
 }
 
-.no-scroll{
+.no-scroll {
     overflow: hidden;
 }
+
+
 </style>
