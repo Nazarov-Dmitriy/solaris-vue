@@ -1,7 +1,7 @@
 <template>
     <div class="cabinet-container">
         <CabinetHeader />
-        <!-- <AddPortfolio /> -->
+        <AddPortfolio />
         <!-- <AddCertification /> -->
         <!-- <ActivityQuality /> -->
         <!-- <TopCompetition /> -->

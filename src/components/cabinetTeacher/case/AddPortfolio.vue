@@ -161,7 +161,13 @@ function goToPortfolio() {
 .activate-certificate-wrapper {
     border: 2px solid #dda06b;
     padding: 0px 16px;
-    width: 310px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .activate-certificate-button-wrapper {
