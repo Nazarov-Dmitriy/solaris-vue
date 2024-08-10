@@ -3,9 +3,24 @@
         <div class="teacher-portfolio-panel-wraper">
             <div class="teacher-portfolio-panel__container">
                 <div class="teacher-portfolio-panel">
+                    <img
+                        class="teacher-portfolio-panel__coin"
+                        src="@/assets/image/cabinet-teacher/solaric-single.svg"
+                        alt="solaric-img"
+                    >
+                    <img
+                        class="teacher-portfolio-panel__coin"
+                        src="@/assets/image/cabinet-teacher/solaric-single.svg"
+                        alt="solaric-img"
+                    >
+                    <img
+                        class="teacher-portfolio-panel__coin"
+                        src="@/assets/image/cabinet-teacher/solaric-single.svg"
+                        alt="solaric-img"
+                    >
                     <div class="teacher-portfolio__point">
                         <div>
-                            <p class="p1">
+                            <p class="teacher-portfolio__point-text p1">
                                 Оценка качества деятельности 
                                 <span class="h3">
                                     100 баллов
@@ -13,7 +28,7 @@
                             </p>
                         </div>
                         <div>
-                            <p class="p1">
+                            <p class="teacher-portfolio__point-text p1">
                                 Аттестация 
                                 <span class="h3">
                                     100 баллов
@@ -26,61 +41,69 @@
                         <DropdownComponent
                             v-model:modelValue="sort"
                             class="teacher-portfolio-panel__dropdown-sort"
-                            :options="notificationSort"
+                            :options="portfolioSort"
                         />
                         <button class="btn btn-teacher-portfolio">
                             Добавить
                         </button>
                     </div>
-
-                    <!-- <img
-                        class="teacher-portfolio-panel__coin"
-                        src="@/assets/image/cabinet-teacher/notification-solaric.svg"
-                        alt="solaric-img"
-                    > -->
-
-                    <!-- <img
-                        class="teacher-portfolio-panel__coin"
-                        src="@/assets/image/cabinet-teacher/solaric-single.svg"
-                        alt="solaric-img"
-                    >
-                    <img
-                        class="teacher-portfolio-panel__coin"
-                        src="@/assets/image/cabinet-teacher/solaric-single.svg"
-                        alt="solaric-img"
-                    >
-                    <img
-                        class="teacher-portfolio-panel__coin"
-                        src="@/assets/image/cabinet-teacher/solaric-single.svg"
-                        alt="solaric-img"
-                    > -->
                 </div>
             </div>
         </div>
         <div class="teacher-portfolio-wpaper">
             <div class="teacher-portfolio-container">
                 <div class="teacher-portfolio-contnent">
+                    <div class="teacher-portfolio-subtitle__wraper">
+                        <span class="teacher-portfolio-subtitle__line" />
+                        <p class="teacher-portfolio-subtitle__title p2">
+                            Портфолио
+                        </p>
+                        <span class="teacher-portfolio-subtitle__line" />
+                    </div>
                     <div
-                        v-if="notifications.length > 0"
+                        v-if="teacherPortfolioContests.length > 0"
                         class="teacher-portfolio-list"
                     >
+                        <div class="teacher-portfolio__tab-header">
+                            <div class="teacher-portfolio__tab-contest p2">
+                                Название конкурса
+                            </div>
+                            <div class="teacher-portfolio__tab-point p2">
+                                Баллы
+                            </div>
+                            <div class="teacher-portfolio__tab-date p2">
+                                Дата
+                            </div>
+                        </div>
                         <div
                             v-for="el in renderList"
                             :key="el.id"
                             class="teacher-portfolio__item"
                         > 
-                            <div class="teacher-portfolio__info">
-                                <p class="teacher-portfolio__publication p2">
-                                    {{ el.notification_date }}
-                                </p>
+                            <div class="teacher-portfolio__tab-contest">
+                                <div class="botton">
+                                    Конкурс:
+                                </div>
+                                <div class="p2">
+                                    {{ el.contest }}
+                                </div>
                             </div>
-                            <p 
-                                class="teacher-portfolio__decription h3"
-                                :class="{'active': readNotification.includes(el.id)}"
-                                @click="activeMenu(el.id)"
-                            >
-                                {{ el.message }}
-                            </p>
+                            <div class="teacher-portfolio__tab-point p2">
+                                <div class="botton">
+                                    Баллы
+                                </div>
+                                <div class="p2">
+                                    {{ el.points }}
+                                </div>
+                            </div>
+                            <div class="teacher-portfolio__tab-date p2">
+                                <div class="botton">
+                                    Дата
+                                </div>
+                                <div class="p2">
+                                    {{ el.contest_date }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <p
@@ -92,8 +115,8 @@
                 </div>
             </div>
             <PaginationComponent
-                :perpage="6"
-                :data="notifications"
+                :perpage="5"
+                :data="teacherPortfolioContests"
                 :color="{ main: '#1F2A3E', hover: '#dda06b' }"
                 @set-list="getRenderList"
             />
@@ -108,109 +131,88 @@ import DropdownComponent from '@/components/dropdown/DropdownComponent.vue';
 const renderList = ref([])
 const sort = ref([])
 
-const readNotification = ref([]);
-
-function activeMenu (id){
-    if (!readNotification.value.includes(id)) {
-        readNotification.value.push(id)
-    }
-}
-
-const notifications = [
+const teacherPortfolioContests = [
     {
         id: 1,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 2,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "03.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 3,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "04.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 4,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 5,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 6,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 7,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 8,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 9,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 10,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 11,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 12,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
     {
         id: 13,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
-    },
-    {
-        id: 14,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
-    },
-    {
-        id: 15,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
-    },
-    {
-        id: 16,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
-    },
-    {
-        id: 17,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
-    },
-    {
-        id: 18,
-        message: "Иванов Генадий Михайлович, 6б класс, подал заявку на наставничество в конкурсе «Деды наших дедов – герои Отечества».",
-        notification_date: "02.03.2024",
+        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
+        points: "260",
+        contest_date: "02.03.2024",
     },
 ];
 
-
-const notificationSort = [
+const portfolioSort = [
     'Новые вверху',
     'Cтарые вверху',
 ]
@@ -242,7 +244,7 @@ function getRenderList (list) {
 
 .teacher-portfolio-panel {
     max-width: 1560px;
-    padding: 36px 60px;
+    padding: 32px 60px;
     margin: auto;
     position: relative;
     box-sizing: border-box;
@@ -254,12 +256,10 @@ function getRenderList (list) {
     }
     
     @media(max-width: $md) {
-        padding: 48px 40px;
-    }
+        padding: 32px 40px;
+        flex-direction: column;
+        gap: 32px;
 
-    @media(max-width: 390px) {
-        padding: 48px 16px;
-        
         .teacher-portfolio-panel__dropdown-sort {
             max-width: 100%;
             width: 100%;
@@ -270,6 +270,11 @@ function getRenderList (list) {
             }
         }
     }
+
+    @media(max-width: 390px) {
+        padding: 32px 16px;
+        
+    }
 }
 
 .teacher-portfolio__point {
@@ -278,15 +283,35 @@ function getRenderList (list) {
     flex-direction: column;
     gap: 8px;
 
-    div {
-        align-items: center;
+    @media(max-width: $md) {
+        padding: 0 0 0 16px;
     }
 
-    p {
-        color: var(--white);
-        display: flex;
-        gap: 24px;
-        align-items: center;
+    @media(max-width: 390px) {
+        padding: 0;
+    }
+}
+
+.teacher-portfolio__point-text {
+    color: var(--white);
+    display: flex;
+    gap: 24px;
+    align-items: center;
+
+    span {
+        white-space: nowrap;
+    }
+
+    @media(max-width: $md) {
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    @media(max-width: 390px) {
+        flex-direction: column;
+        gap: 8px;
+        align-items: start;
+        width: 50%;
     }
 }
 
@@ -295,26 +320,75 @@ function getRenderList (list) {
     display: flex;
     justify-content: space-between;
     gap: 40px;
+
+    @media(max-width: $md) {
+        padding: 0 0 0 16px;
+    }
+
+    @media(max-width: 390px) {
+        padding: 0;
+        flex-direction: column;
+        gap: 16px;
+    }
 }
 
-.teacher-portfolio-panel__coin {
+.btn-teacher-portfolio {
+    @media(max-width: $md) {
+        width: 100%;
+    }
+}
+
+.teacher-portfolio-panel__coin:nth-child(1) {
+    width: 35px;
+    height: 35px;
+    top: 98px;
+    left: 576px;
+    rotate: -50deg;
     position: absolute;
-    height: 120px;
-    bottom: 10px;
-    right: 620px;
-    @media (max-width: $xxl) {
-        right: 365px;
+
+    @media(max-width: $lg) {
+        display: none;
     }
-    @media (max-width: $xl) {
-        right: 120px;
+}
+
+.teacher-portfolio-panel__coin:nth-child(2) {
+    width: 45px;
+    height: 45px;
+    top: 24px;
+    left: 701px;
+    rotate: 48deg;
+    position: absolute;
+
+    @media(max-width: $xxl) {
+        left: 750px;
     }
-    @media (max-width: $lg) {
-        right: 60px;
+    
+    @media(max-width: $xl) {
+        left: 634px;
     }
-    @media (max-width: $md) {
-        right: 40px;
+
+    @media(max-width: $lg) {
+        display: none;
     }
-    @media (max-width: 390px) {
+}
+
+.teacher-portfolio-panel__coin:nth-child(3) {
+    width: 62px;
+    height: 62px;
+    top: 56px;
+    left: 701px;
+    rotate: -10deg;
+    position: absolute;
+
+    @media(max-width: $xxl) {
+        left: 935px;
+    }
+
+    @media(max-width: $xl) {
+        left: 705px;
+    }
+    
+    @media(max-width: $lg) {
         display: none;
     }
 }
@@ -326,20 +400,16 @@ function getRenderList (list) {
 
 .teacher-portfolio-container {
     max-width: 1560px;
-    padding: 24px 60px 20px 60px;
+    padding: 24px 60px;
     margin: 0 auto;
     box-sizing: border-box;
 
-    @media(max-width: $lg) {
+    @media(max-width: $md) {
         padding: 24px 40px;
     }
 
-    @media(max-width: $sm) {
-        padding: 24px 16px;
-    }
-
     @media(max-width: 390px) {
-        padding: 24px 0;
+        padding: 24px 16px;
     }
 }
 
@@ -351,26 +421,118 @@ function getRenderList (list) {
     margin-bottom: 24px;
 }
 
+.teacher-portfolio-subtitle__wraper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.teacher-portfolio-subtitle__line {
+    max-width: 50%;
+    width: 100%;
+    height: 2px;
+    background: var(--dark)
+}
+
+.teacher-portfolio-subtitle__title {
+    flex-shrink: 0;
+    color: var(--dark);
+}
+
 .teacher-portfolio-list {
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    @media(max-width: 390px) {
+        gap: 24px;
+    }
+}
+
+.teacher-portfolio__tab-header {
+    display: flex;
+    justify-content: space-between;
+
+    @media(max-width: 390px) {
+        display: none;
+    }
+}
+
+.teacher-portfolio__tab-contest {
+    width: 100%;
+    padding: 16px;
+}
+
+.teacher-portfolio__tab-point {
+    text-align: center;
+    min-width: 116px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.teacher-portfolio__tab-date {
+    text-align: center;
+    min-width: 156px;
+    padding: 16px;
+    box-sizing: border-box;
+
+    @media(max-width: $sm) {
+        min-width: 104px;
+    }
 }
 
 .teacher-portfolio__item {
     display: flex;
-    align-items: center;
-    padding: 16px;
-    border-bottom: 2px solid var(--roseBege);
-    gap: 16px;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: var(--lightBege);
 
-    &:hover {
-        background: var(--lightBege)
+    .teacher-portfolio__tab-contest {
+        padding: 8px;
+
+        div:first-child {
+            display: none;
+        }
     }
 
-    @media(max-width: $sm) {
+    .teacher-portfolio__tab-point,
+    .teacher-portfolio__tab-date {
+        padding: 8px;
+
+        div:first-child {
+            display: none;
+        }
+
+        div:last-child {
+            text-align: center;
+        }
+    }
+
+    @media(max-width: 390px) {
         flex-direction: column;
-        align-items: flex-start;
+        
+        .teacher-portfolio__tab-contest {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: auto;
+
+            div:first-child {
+                display: block;
+            }
+        }
+
+        .teacher-portfolio__tab-point,
+        .teacher-portfolio__tab-date {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            div:first-child {
+                display: block;
+            }
+        }
+
     }
 }
 
