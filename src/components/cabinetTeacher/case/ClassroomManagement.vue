@@ -147,14 +147,6 @@ const chooseResultOptions = ref(['-', 'Участие', 'Победитлеь', 
     display: flex;
     flex-direction: column;
     gap: 25px;
-
-    @media (max-width: $xxl) {
-        padding: 16px 60px;
-    }
-    @media (max-width: $lg) {
-        padding: 0;
-        gap: 10px;
-    }
 }
 .management__wrapper {
     display: flex;

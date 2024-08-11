@@ -22,7 +22,6 @@
                 </div>
             </template>
         </ModalComponent>
-
         <ModalComponent v-if="isSecondModalVisible" @close-modal="handleSecondModalClose">
             <template #text>
                 <p class="modal__text">
@@ -31,7 +30,10 @@
             </template>
             <template #btn>
                 <div class="modal__btn-wrapper">
-                    <button class="modal__btn modal__btn--send" @click="goToPortfolio">
+                    <button
+                        class="modal__btn modal__btn--send"
+                        @click="$router.push('/cabinet-portfolio')"
+                    >
                         Перейти в портфолио
                     </button>
                 </div>
