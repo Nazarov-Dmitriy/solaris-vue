@@ -6,6 +6,6 @@
 </template>
 
 <script setup>
-import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue';
-import Portfolio from '@/components/cabinetTeacher/CabinetTeacherPortfolio.vue';
+import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue'
+import Portfolio from '@/components/cabinetTeacher/CabinetTeacherPortfolio.vue'
 </script>

@@ -1,7 +1,7 @@
 <template>
     <Teleport to="body">
-        <div class="modal">
-            <div :class="['custom-modal', props.additionalClass]">
+        <div class="modal" @click="handleCancel">
+            <div class="modal__container" :class="additionalClass" @click.stop>
                 <div class="modal__close-btn-wrapper">
                     <button class="modal__close-btn" @click="handleCancel">
                         <img
@@ -12,9 +12,7 @@
                         />
                     </button>
                 </div>
-                <slot name="title">
-                    <span></span>
-                </slot>
+                <slot name="title"></slot>
                 <slot name="text"></slot>
                 <div class="modal__btn-wrapper">
                     <slot name="btn"></slot>
@@ -25,7 +23,8 @@
 </template>
 
 <script setup>
-import { defineEmits, onMounted, onBeforeUnmount } from 'vue'
+import { defineEmits, defineProps, onMounted, onBeforeUnmount } from 'vue'
+
 const props = defineProps({
     additionalClass: {
         type: String,
@@ -81,6 +80,21 @@ onBeforeUnmount(() => {
         right: 10px;
     }
 }
+// .modal__content {
+//     border: 2px solid #dda06b;
+//     padding: 16px;
+//     box-sizing: border-box;
+//     background-color: #fff;
+//     width: 288px;
+//     height: 240px;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 16px;
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+// }
+
 .modal__close-btn-wrapper {
     display: flex;
     justify-content: flex-end;
@@ -132,6 +146,4 @@ onBeforeUnmount(() => {
 .no-scroll {
     overflow: hidden;
 }
-
-
 </style>

@@ -1,46 +1,7 @@
 <template>
     <section class="achievements">
         <div class="achievements__container">
-            <AddPortfolioTitle @form-submit="sendForVerification" />
-            <ModalComponent
-                v-if="isModalVisible"
-                @close-modal="handleModalClose"
-                @show-Modal="handleModalAction"
-            >
-                <template #text>
-                    <p class="modal__text">
-                        Если вы заполнили все критерии - подтвердите отправку, или нажмите кнопку
-                        отмены
-                    </p>
-                </template>
-                <template #btn>
-                    <div class="modal__btn-wrapper">
-                        <button class="modal__btn modal__btn--cancel" @click="handleModalClose">
-                            Отменить
-                        </button>
-                        <button class="modal__btn modal__btn--send" @click="showSecondModal">
-                            Отправить
-                        </button>
-                    </div>
-                </template>
-            </ModalComponent>
-            <ModalComponent v-if="isSecondModalVisible" @close-modal="handleSecondModalClose">
-                <template #text>
-                    <p class="modal__text">
-                        Ваш кейс успешно отправлен! После проверки результаты появятся у вас в
-                        портфолио
-                    </p>
-                </template>
-                <template #btn>
-                    <div class="modal__btn-wrapper">
-                        <button class="modal__btn modal__btn--send" @click="goToPortfolio">
-                            Перейти в портфолио
-                        </button>
-                    </div>
-                </template>
-            </ModalComponent>
             <div class="achievements__wrapper">
-                <TeacherDetails />
                 <div class="achievements__achievement">
                     <div class="achievements__header">
                         <h3 class="h3 achievements__header-title">Достижения обучающихся</h3>
@@ -178,15 +139,12 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue'
+import { ref } from 'vue'
 
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
-import TeacherDetails from './form/TeacherDetails.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import InputText from './form/InputText.vue'
-import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
-import ModalComponent from '@/components/modal/ModalComponent.vue'
 
 const eventNameOptions = ref([
     '-',
@@ -203,36 +161,14 @@ const eventNameOptions = ref([
 ])
 
 const chooseLevelOptions = ref(['-', 'Лицейский', 'Муниципальный', 'Региональный', 'Всероссийский'])
-const organiserOptions = ref([''])
 const classOptions = ref(['-', '1-3', '4-6', '7-11'])
-
-const isModalVisible = inject('isModalVisible')
-const isSecondModalVisible = inject('isSecondModalVisible')
-const sendForVerification = inject('sendForVerification')
-const showSecondModal = inject('showSecondModal')
-const handleModalClose = inject('handleModalClose')
-const handleSecondModalClose = inject('handleSecondModalClose')
 </script>
 
 <style scoped lang="scss">
 .achievements {
     background-color: var(--white);
 }
-.achievements__container {
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 16px 240px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    @media (max-width: $xxl) {
-        padding: 16px 60px;
-    }
-    @media (max-width: $lg) {
-        padding: 0;
-        gap: 10px;
-    }
-}
+
 .achievements__wrapper {
     display: flex;
     justify-content: space-between;
