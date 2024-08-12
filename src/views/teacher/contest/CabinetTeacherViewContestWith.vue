@@ -115,7 +115,6 @@
                                         </p>
                                     </div>
                                     <button class="uc-contest__btn" @click="removeStudent(el.id)">
-                                        {{el.id}}
                                         <svg
                                             width="16"
                                             height="20"
@@ -144,32 +143,32 @@ import { ref } from 'vue'
 
 const listTeacher = ref([
     {
-        name: 'Иванов Михаил Дмитриевич',
+        name: 'Иванов Михаил Дмитриевич1',
         studentGroup: '7А класс',
         id: 1
     },
     {
-        name: 'Иванов Михаил Дмитриевич',
+        name: 'Иванов Михаил Дмитриеви2',
         studentGroup: '7А класс',
         id: 2
     },
     {
-        name: 'Иванов Михаил Дмитриевич',
+        name: 'Иванов Михаил Дмитриевич3',
         studentGroup: '7А класс',
         id: 3
     },
     {
-        name: 'Иванов Михаил Дмитриевич',
+        name: 'Иванов Михаил Дмитриевич4',
         studentGroup: '7А класс',
         id: 4
     },
     {
-        name: 'Иванов Михаил Дмитриевич',
+        name: 'Иванов Михаил Дмитриевич5',
         studentGroup: '7А класс',
         id: 5
     },
     {
-        name: 'Иванов Михаил Дмитриевич',
+        name: 'Иванов Михаил Дмитриевич6',
         studentGroup: '7А класс',
         id: 6
     }

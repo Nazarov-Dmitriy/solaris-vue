@@ -13,6 +13,9 @@ import CabinetTeacher from '@/views/teacher/CabinetTeacher.vue'
 import CabinetTeacherNotification from '@/views/teacher/CabinetTeacherNotification.vue'
 import CabinetTeacherContests from '@/views/teacher/CabinetTeacherContests.vue'
 import CabinetTeacherPortfolio from '@/views/teacher/CabinetTeacherPortfolio.vue'
+import CabinetTeacherViewContestWith from '@/views/teacher/contest/CabinetTeacherViewContestWith.vue'
+import CabinetTeacherViewContestWithout from '@/views/teacher/contest/CabinetTeacherViewContestWithout.vue'
+import CabinetTeacherProposeContest from '@/views/teacher/contest/CabinetTeacherProposeContest.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -60,51 +63,73 @@ const router = createRouter({
         {
             path: '/cabinet-teacher',
             component: CabinetTeacher,
-            children: [   
+            children: [
                 {
-                    path: "profile",
-                    name: "profile",
+                    path: 'profile',
+                    name: 'profile',
                     component: ProfilePage
                 },
                 {
                     path: 'notification',
-                    name: 'notification',                    
-                    component: CabinetTeacherNotification,
+                    name: 'notification',
+                    component: CabinetTeacherNotification
                 },
                 {
                     path: 'contests',
-                    name: 'contests',                    
-                    component: CabinetTeacherContests,
+                    name: 'contests',
+                    component: CabinetTeacherContests
                 },
                 {
                     path: 'teacher-portfolio',
-                    name: 'teacher-portfolio',                    
-                    component: CabinetTeacherPortfolio,
+                    name: 'teacher-portfolio',
+                    component: CabinetTeacherPortfolio
                 },
                 {
-                    path: 'case',                  
-                    children: [ 
+                    path: 'case',
+                    children: [
                         {
                             path: 'portfolio',
-                            name: 'portfolio',                    
-                            component: CasePortfolio,
-                        },
+                            name: 'portfolio',
+                            component: CasePortfolio
+                        }
                     ]
                 },
-            ],
-        },
+                {
+                    path: 'teacher-contest',
+                    children: [
+                        {
+                            path: 'with',
+                            name: 'teacher-contest-with',
+                            component: CabinetTeacherViewContestWith
+                        },
+                        {
+                            path: 'without',
+                            name: 'teacher-contest-without',
+                            component: CabinetTeacherViewContestWithout
+                        },
+                        {
+                            path: 'propose',
+                            name: 'teacher-contest-propose',
+                            component: CabinetTeacherProposeContest
+                        }
+                    ]
+                }
+            ]
+        }
     ],
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior(to, from, savedPosition) {
         if (to.hash) {
             return {
-                el: to.hash, behavior: 'smooth',
-                top: 88,
+                el: to.hash,
+                behavior: 'smooth',
+                top: 88
             }
         } else if (savedPosition) {
             return savedPosition
         } else {
             return {
-                top: 0, behavior: 'smooth',
+                top: 0,
+                behavior: 'smooth'
             }
         }
     }
