@@ -84,7 +84,7 @@
 <style lang="scss">
 .cabinet-header__container {
     width: 100%;
-    border-bottom: 2px solid var(--roseBege)
+    border-bottom: 2px solid var(--roseBege);
 }
 
 .cabinet-header {

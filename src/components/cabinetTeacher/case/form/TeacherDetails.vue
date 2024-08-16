@@ -45,6 +45,7 @@
                     class="add-portfolio__form-input"
                     additionalClass="custom-dropdown-selected"
                     :options="options"
+                    @update:modelValue="updateSelectedOption"
                 />
             </div>
             <button class="add-portfolio__form-btn">Перейти</button>
@@ -68,6 +69,13 @@ const options = ref([
 
 const subjects = ['-', 'Математика', 'Физика', 'Химия']
 
+const emit = defineEmits(['optionSelected'])
+
+function updateSelectedOption(option) {
+    emit('optionSelected', option)
+    console.log('Selected option:', option)
+}
+
 function getPath(img) {
     return new URL(`../../../../../public/${img}`, import.meta.url).href
 }
@@ -85,8 +93,6 @@ function getPath(img) {
     max-width: 429px;
     width: 100%;
     min-width: 354px;
-    min-height: 100vh;
-
     @media (max-width: $lg) {
         max-width: 100%;
         padding: 24px 16px;
