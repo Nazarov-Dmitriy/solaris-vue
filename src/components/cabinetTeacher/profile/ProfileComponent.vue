@@ -81,7 +81,7 @@
     @media (max-width: $md) {
         padding: 40px;
     }
-    @media (max-width: 390px) {
+    @media (max-width: $sm) {
         padding: 16px;
         flex-direction: column;
     }
@@ -119,14 +119,14 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    @media (max-width: 390px) {
+    @media (max-width: $sm) {
         align-items: center;
         gap: 0px;
     }
 }
 
 .teachcabinet-profile__wrap p {
-    @media (max-width: 390px) {
+    @media (max-width: $sm) {
         text-align: center;
     }
 }
@@ -167,14 +167,11 @@
     }
     @media (max-width: $md) {
         bottom: 56px;
-        right: 40px;
+        right: -144px;
         width: 291px;
         height: 115px;
     }
     @media (max-width: $sm) {
-        right: -144px;
-    }
-    @media (max-width: 390px) {
         display: none;
     }
 }
@@ -184,7 +181,7 @@
         font-size: 14px;
         line-height: 20px;
     }
-    @media (max-width: 390px) {
+    @media (max-width: $sm) {
         font-size: 12px;
         line-height: 18px;
     }
@@ -196,7 +193,7 @@
         line-height: 20px;
     }
 
-    @media (max-width: 390px) {
+    @media (max-width: $sm) {
         font-size: 12px;
         line-height: 18px;
     }
