@@ -1,12 +1,19 @@
 <template>
     <div class="add-portfolio__data">
         <div class="add-portfolio__data-text-wrapper">
-            <span></span>
-            <p class="add-portfolio__data-text">Ваши данные</p>
-            <span></span>
+            <span />
+            <p class="add-portfolio__data-text">
+                Ваши данные
+            </p>
+            <span />
         </div>
-        <h2 class="add-portfolio__data-title">Иванова <span>Мария Ивановна</span></h2>
-        <form action="#" class="add-portfolio__form">
+        <h2 class="add-portfolio__data-title">
+            Иванова <span>Мария Ивановна</span>
+        </h2>
+        <form
+            action="#"
+            class="add-portfolio__form"
+        >
             <div class="options-group">
                 <label class="add-portfolio__form-label">
                     <span>Предмет</span>
@@ -14,7 +21,7 @@
                 <div class="input-group">
                     <DropdownComponent
                         class="add-portfolio__form-input"
-                        additionalClass="custom-dropdown-selected"
+                        additional-class="custom-dropdown-selected"
                         :options="subjects"
                     />
                     <button
@@ -25,7 +32,7 @@
                         <img
                             :src="getPath('cabinteTeacher/case/portfolio-button-svg.svg')"
                             alt="Выбрать предмет"
-                        />
+                        >
                     </button>
                 </div>
             </div>
@@ -34,21 +41,23 @@
                     <div
                         class="add-portfolio__data-text-wrapper add-portfolio__data-text-wrapper--center"
                     >
-                        <span></span>
+                        <span />
                         <p class="add-portfolio__data-text add-portfolio__data-text--center">
                             Критерий оценки
                         </p>
-                        <span></span>
+                        <span />
                     </div>
                 </label>
                 <DropdownComponent
                     class="add-portfolio__form-input"
-                    additionalClass="custom-dropdown-selected"
+                    additional-class="custom-dropdown-selected"
                     :options="options"
-                    @update:modelValue="updateSelectedOption"
+                    @update:model-value="updateSelectedOption"
                 />
             </div>
-            <button class="add-portfolio__form-btn">Перейти</button>
+            <button class="add-portfolio__form-btn">
+                Перейти
+            </button>
         </form>
     </div>
 </template>
@@ -71,12 +80,12 @@ const subjects = ['-', 'Математика', 'Физика', 'Химия']
 
 const emit = defineEmits(['optionSelected'])
 
-function updateSelectedOption(option) {
+function updateSelectedOption (option) {
     emit('optionSelected', option)
     console.log('Selected option:', option)
 }
 
-function getPath(img) {
+function getPath (img) {
     return new URL(`../../../../../public/${img}`, import.meta.url).href
 }
 </script>
