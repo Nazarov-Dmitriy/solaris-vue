@@ -37,13 +37,6 @@ import BtnComponent from '@/components/btns/BtnComponent.vue'
     display: flex;
     flex-direction: column;
     gap: 25px;
-    @media (max-width: $xxl) {
-        padding: 16px 60px;
-    }
-    @media (max-width: $lg) {
-        padding: 0;
-        gap: 10px;
-    }
 }
 .activity-quality__wrapper {
     display: flex;

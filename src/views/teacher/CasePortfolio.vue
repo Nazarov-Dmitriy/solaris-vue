@@ -8,10 +8,7 @@
                 <template v-if="!selectedComponent">
                     <AddCase />
                 </template>
-                <component
-                    :is="selectedComponent"
-                    v-else
-                />
+                <component :is="selectedComponent" v-else />
             </div>
         </div>
     </div>
@@ -19,7 +16,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue'
+import CabinetHeader from './header/CabinetHeader.vue'
 import AddCase from '@/components/cabinetTeacher/case/AddCase.vue'
 import TeacherDetails from '@/components/cabinetTeacher/case/form/TeacherDetails.vue'
 import CaseTitle from '@/components/cabinetTeacher/case/title/CaseTitle.vue'
@@ -45,7 +42,7 @@ const selectedComponent = computed(() => {
     return componentMap[selectedOption.value] || null
 })
 
-function handleOptionSelected (option) {
+function handleOptionSelected(option) {
     selectedOption.value = option
 }
 </script>
