@@ -8,7 +8,10 @@
                 <template v-if="!selectedComponent">
                     <AddCase />
                 </template>
-                <component :is="selectedComponent" v-else />
+                <component
+                    :is="selectedComponent"
+                    v-else
+                />
             </div>
         </div>
     </div>
@@ -42,7 +45,7 @@ const selectedComponent = computed(() => {
     return componentMap[selectedOption.value] || null
 })
 
-function handleOptionSelected(option) {
+function handleOptionSelected (option) {
     selectedOption.value = option
 }
 </script>

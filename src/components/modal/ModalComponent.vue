@@ -1,21 +1,31 @@
 <template>
     <Teleport to="body">
-        <div class="modal" @click="handleCancel">
-            <div class="modal__container" :class="additionalClass" @click.stop>
+        <div
+            class="modal"
+            @click="handleCancel"
+        >
+            <div
+                class="modal__container"
+                :class="additionalClass"
+                @click.stop
+            >
                 <div class="modal__close-btn-wrapper">
-                    <button class="modal__close-btn" @click="handleCancel">
+                    <button
+                        class="modal__close-btn"
+                        @click="handleCancel"
+                    >
                         <img
                             :src="
                                 getPath('../../../../../public/cabinteTeacher/case/modal-close.png')
                             "
                             alt="Close"
-                        />
+                        >
                     </button>
                 </div>
-                <slot name="title"></slot>
-                <slot name="text"></slot>
+                <slot name="title" />
+                <slot name="text" />
                 <div class="modal__btn-wrapper">
-                    <slot name="btn"></slot>
+                    <slot name="btn" />
                 </div>
             </div>
         </div>
@@ -33,11 +43,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['closeModal'])
 
-function handleCancel() {
+function handleCancel () {
     emit('closeModal')
 }
 
-function getPath(img) {
+function getPath (img) {
     return new URL(img, import.meta.url).href
 }
 

@@ -87,31 +87,65 @@
                     type="text"
                     class="cabinet-header__input"
                     placeholder="Введите номер сертификата"
+                    @keypress.enter="showModal()"
                 >
-                <BtnComponent class="cabinet-header__btn">
+                <BtnComponent
+                    class="cabinet-header__btn"
+                    emit-name="action" 
+                    @action="showModal()"
+                >
                     Проверить
                 </BtnComponent>
             </div>
         </div>
+        <Teleport to="body">
+            <ModalSertificat
+                :show="modal"
+                :user="user"
+                :sertificat="sertificat"
+                :validate="validateSertificat"
+                @close="closeModal()"
+            />
+        </Teleport>
     </div>
 </template>
 <script setup>
 import BtnComponent from '@/components/btns/BtnComponent.vue';
+import ModalSertificat from '@/components/modal/ModalSertificat.vue';
+
 // import { useRouter } from 'vue-router';
+// const router = useRouter()
 import { ref } from 'vue';
-
-const sertificat = ref('');
-
 const btnMenu = ref(false)
 const menuActive = ref(false)
-// const router = useRouter()
+
+const sertificat = ref('');
+const validateSertificat = ref(false)
+const modal = ref(false);
+
+const user = ref({ name: "Иванов Михаил Дмитриевич", class: "7А класс", date: "12/04/2024" })
 
 function setMenuAcive () {
     btnMenu.value = !btnMenu.value
     menuActive.value = !menuActive.value
 }
 
+function showModal () {
+    if(sertificat.value !== ''){
+        if (sertificat.value === "1234") {
+            validateSertificat.value = true;
+        }
 
+        console.log(validateSertificat.value);
+    
+        modal.value = true;
+    }
+}
+
+function closeModal (){
+    modal.value = false;
+    validateSertificat.value = false;
+}
 
 </script>
 <style lang="scss">
@@ -287,7 +321,8 @@ function setMenuAcive () {
 
     .cabinet-header__nav {
         width: 100%;
-justify-content: center;    }
+        justify-content: center;
+    }
 
     .cabinet-header__list {
         height: 48px;
