@@ -10,9 +10,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "-": "^0.0.1",
+    "autoprefixer": "^10.4.20",
     "gsap": "^3.12.5",
     "jest": "^29.7.0",
     "pinia": "^2.1.7",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
@@ -29,4 +33,3 @@
     "vite": "^5.1.6"
   }
 }
-
