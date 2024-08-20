@@ -1,46 +1,7 @@
 <template>
     <sections class="top-competition">
         <div class="top-competition__container">
-            <AddPortfolioTitle @form-submit="sendForVerification" />
-            <ModalComponent
-                v-if="isModalVisible"
-                @close-modal="handleModalClose"
-                @show-Modal="handleModalAction"
-            >
-                <template #text>
-                    <p class="modal__text">
-                        Если вы заполнили все критерии - подтвердите отправку, или нажмите кнопку
-                        отмены
-                    </p>
-                </template>
-                <template #btn>
-                    <div class="modal__btn-wrapper">
-                        <button class="modal__btn modal__btn--cancel" @click="handleModalClose">
-                            Отменить
-                        </button>
-                        <button class="modal__btn modal__btn--send" @click="showSecondModal">
-                            Отправить
-                        </button>
-                    </div>
-                </template>
-            </ModalComponent>
-            <ModalComponent v-if="isSecondModalVisible" @close-modal="handleSecondModalClose">
-                <template #text>
-                    <p class="modal__text">
-                        Ваш кейс успешно отправлен! После проверки результаты появятся у вас в
-                        портфолио
-                    </p>
-                </template>
-                <template #btn>
-                    <div class="modal__btn-wrapper">
-                        <button class="modal__btn modal__btn--send" @click="goToPortfolio">
-                            Перейти в портфолио
-                        </button>
-                    </div>
-                </template>
-            </ModalComponent>
             <div class="top-competition__wrapper">
-                <TeacherDetails />
                 <div class="top-competition__event">
                     <div class="top-competition__nomination-header">
                         <h2 class="top-competition__nomination-header-title">
@@ -91,18 +52,11 @@
 </template>
 
 <script setup>
-import { inject, ref } from 'vue'
-import { useRouter } from 'vue-router'
-
-import ModalComponent from '@/components/modal/ModalComponent.vue'
-import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
-import TeacherDetails from './form/TeacherDetails.vue'
+import { ref } from 'vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import InputText from './form/InputText.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
-
-const router = useRouter()
 
 const result = ref([
     '-',
@@ -114,38 +68,13 @@ const result = ref([
     'ГТО: Серебряный значок (более 50% от количества сдающих, обучающихся у учителя)',
     'ГТО: Бронзовый значок (более 50% от количества сдающих, обучающихся у учителя)'
 ])
-
-function goToPortfolio() {
-    router.push('/cabinet-portfolio')
-}
-
-const isModalVisible = inject('isModalVisible')
-const isSecondModalVisible = inject('isSecondModalVisible')
-const sendForVerification = inject('sendForVerification')
-const showSecondModal = inject('showSecondModal')
-const handleModalClose = inject('handleModalClose')
-const handleSecondModalClose = inject('handleSecondModalClose')
 </script>
 
 <style lang="scss" scoped>
 .top-competition {
     background-color: var(--white);
 }
-.top-competition__container {
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 16px 240px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    @media (max-width: $xxl) {
-        padding: 16px 60px;
-    }
-    @media (max-width: $lg) {
-        padding: 0;
-        gap: 10px;
-    }
-}
+
 .top-competition__wrapper {
     display: flex;
     justify-content: space-between;

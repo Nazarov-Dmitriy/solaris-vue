@@ -2,6 +2,10 @@
   outline: 4px solid  green !important;
 } */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "Inter";
   src:

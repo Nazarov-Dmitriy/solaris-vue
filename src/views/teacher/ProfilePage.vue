@@ -8,8 +8,8 @@
 
 <script setup>
 import CabinetFooter from '@/components/cabinetTeacher/profile/CabinetFooter.vue';
-import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue';
 import CabinetProfile from '@/components/cabinetTeacher/profile/ProfileComponent.vue';
+import CabinetHeader from './header/CabinetHeader.vue';
 </script>
 
 

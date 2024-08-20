@@ -1,31 +1,7 @@
 <template>
     <section class="add-certification">
         <div class="add-certification__container">
-            <AddPortfolioTitle @form-submit="sendForVerification" />
-            <ModalComponent
-                v-if="isModalVisible"
-                @close-modal="handleModalClose"
-                @show-Modal="handleModalAction"
-            >
-                <template #text>
-                    <p class="modal__text">
-                        Если вы заполнили все критерии - подтвердите отправку, или нажмите кнопку
-                        отмены
-                    </p>
-                </template>
-                <template #btn>
-                    <div class="modal__btn-wrapper">
-                        <button class="modal__btn modal__btn--cancel" @click="handleModalClose">
-                            Отменить
-                        </button>
-                        <button class="modal__btn modal__btn--send" @click="showSecondModal">
-                            Отправить
-                        </button>
-                    </div>
-                </template>
-            </ModalComponent>
             <div class="add-certification__wrapper">
-                <TeacherDetails />
                 <div class="add-certification__certification">
                     <div class="add-certification__certification-header">
                         <h2 class="add-certification__certification-title">Аттестация</h2>
@@ -48,40 +24,14 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
-
-import TeacherDetails from './form/TeacherDetails.vue'
-import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
-import ModalComponent from '@/components/modal/ModalComponent.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
-
-const isModalVisible = inject('isModalVisible')
-const isSecondModalVisible = inject('isSecondModalVisible')
-const sendForVerification = inject('sendForVerification')
-const showSecondModal = inject('showSecondModal')
-const handleModalClose = inject('handleModalClose')
-const handleSecondModalClose = inject('handleSecondModalClose')
 </script>
 
 <style lang="scss">
 .add-certification {
     background-color: var(--white);
 }
-.add-certification__container {
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 16px 240px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    @media (max-width: $xxl) {
-        padding: 16px 60px;
-    }
-    @media (max-width: $lg) {
-        padding: 0;
-        gap: 10px;
-    }
-}
+
 .add-certification__wrapper {
     display: flex;
     justify-content: space-between;

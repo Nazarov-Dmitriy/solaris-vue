@@ -1,47 +1,7 @@
 <template>
     <section class="activity-quality">
         <div class="activity-quality__container">
-            <AddPortfolioTitle @form-submit="sendForVerification" />
-            <ModalComponent
-                v-if="isModalVisible"
-                @close-modal="handleModalClose"
-                @show-Modal="handleModalAction"
-            >
-                <template #text>
-                    <p class="modal__text">
-                        Если вы заполнили все критерии - подтвердите отправку, или нажмите кнопку
-                        отмены
-                    </p>
-                </template>
-                <template #btn>
-                    <div class="modal__btn-wrapper">
-                        <button class="modal__btn modal__btn--cancel" @click="handleModalClose">
-                            Отменить
-                        </button>
-                        <button class="modal__btn modal__btn--send" @click="showSecondModal">
-                            Отправить
-                        </button>
-                    </div>
-                </template>
-            </ModalComponent>
-
-            <ModalComponent v-if="isSecondModalVisible" @close-modal="handleSecondModalClose">
-                <template #text>
-                    <p class="modal__text">
-                        Ваш кейс успешно отправлен! После проверки результаты появятся у вас в
-                        портфолио
-                    </p>
-                </template>
-                <template #btn>
-                    <div class="modal__btn-wrapper">
-                        <button class="modal__btn modal__btn--send" @click="goToPortfolio">
-                            Перейти в портфолио
-                        </button>
-                    </div>
-                </template>
-            </ModalComponent>
             <div class="activity-quality__wrapper">
-                <TeacherDetails />
                 <div class="activity-quality__certification">
                     <div class="activity-quality__certification-header">
                         <h2 class="activity-quality__certification-title">
@@ -66,19 +26,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
-
-import ModalComponent from '@/components/modal/ModalComponent.vue'
-import TeacherDetails from './form/TeacherDetails.vue'
-import AddPortfolioTitle from './title/AddPortfolioTitle.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
-
-const isModalVisible = inject('isModalVisible')
-const isSecondModalVisible = inject('isSecondModalVisible')
-const sendForVerification = inject('sendForVerification')
-const showSecondModal = inject('showSecondModal')
-const handleModalClose = inject('handleModalClose')
-const handleSecondModalClose = inject('handleSecondModalClose')
 </script>
 
 <style lang="scss">
@@ -86,9 +34,6 @@ const handleSecondModalClose = inject('handleSecondModalClose')
     background-color: var(--white);
 }
 .activity-quality__container {
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 16px 240px;
     display: flex;
     flex-direction: column;
     gap: 25px;

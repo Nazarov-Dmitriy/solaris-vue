@@ -252,7 +252,7 @@ function getRenderList (list) {
     justify-content: space-between;
 
     .dropdown-selected-text {
-        min-width: 107px;
+        min-width: 111px;
     }
     
     @media(max-width: $md) {
@@ -311,7 +311,7 @@ function getRenderList (list) {
         flex-direction: column;
         gap: 8px;
         align-items: start;
-        width: 50%;
+        width: 75%;
     }
 }
 
@@ -532,7 +532,6 @@ function getRenderList (list) {
                 display: block;
             }
         }
-
     }
 }
 
