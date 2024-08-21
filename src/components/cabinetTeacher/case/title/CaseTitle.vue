@@ -2,9 +2,9 @@
     <div class="add-portfolio__header">
         <ModalComponent
             v-if="isModalVisible"
-            :additionalClass="'custom-modal'"
+            :additional-class="'custom-modal'"
             @close-modal="handleModalClose"
-            @show-Modal="handleModalAction"
+            @show-modal="handleModalAction"
         >
             <template #text>
                 <p class="modal__text">
@@ -13,16 +13,25 @@
             </template>
             <template #btn>
                 <div class="modal__btn-wrapper">
-                    <button class="modal__btn modal__btn--cancel" @click="handleModalClose">
+                    <button
+                        class="modal__btn modal__btn--cancel"
+                        @click="handleModalClose"
+                    >
                         Отменить
                     </button>
-                    <button class="modal__btn modal__btn--send" @click="showSecondModal">
+                    <button
+                        class="modal__btn modal__btn--send"
+                        @click="showSecondModal"
+                    >
                         Отправить
                     </button>
                 </div>
             </template>
         </ModalComponent>
-        <ModalComponent v-if="isSecondModalVisible" @close-modal="handleSecondModalClose">
+        <ModalComponent
+            v-if="isSecondModalVisible"
+            @close-modal="handleSecondModalClose"
+        >
             <template #text>
                 <p class="modal__text">
                     Ваш кейс успешно отправлен! После проверки результаты появятся у вас в портфолио
@@ -39,8 +48,14 @@
                 </div>
             </template>
         </ModalComponent>
-        <h2 class="add-portfolio__title">Добавить кейс в портфолио</h2>
-        <BtnComponent emitName="form-submit" class="add-portfolio__btn" @click="handleButtonClick">
+        <h2 class="add-portfolio__title">
+            Добавить кейс в портфолио
+        </h2>
+        <BtnComponent
+            emit-name="form-submit"
+            class="add-portfolio__btn"
+            @click="handleButtonClick"
+        >
             Отправить на проверку
         </BtnComponent>
     </div>
@@ -55,21 +70,21 @@ const isModalVisible = ref(false)
 const isSecondModalVisible = ref(false)
 const emit = defineEmits(['form-submit', 'handleModalClose', 'handleModalAction'])
 
-function handleButtonClick() {
+function handleButtonClick () {
     emit('form-submit')
     isModalVisible.value = true
 }
 
-function handleModalClose() {
+function handleModalClose () {
     isModalVisible.value = false
 }
 
-function showSecondModal() {
+function showSecondModal () {
     isSecondModalVisible.value = true
     isModalVisible.value = false
 }
 
-function handleSecondModalClose() {
+function handleSecondModalClose () {
     isSecondModalVisible.value = false
 }
 </script>

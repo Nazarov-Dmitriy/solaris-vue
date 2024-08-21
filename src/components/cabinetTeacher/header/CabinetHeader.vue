@@ -66,7 +66,7 @@
                     </li>
                     <li class="botton">
                         <router-link
-                            to="/cabinet-teacher/contests"
+                            to="/cabinet-teacher/case/portfolio"
                             class="cabinet-header__link"
                         >
                             <img
@@ -113,8 +113,6 @@
 import BtnComponent from '@/components/btns/BtnComponent.vue';
 import ModalSertificat from '@/components/modal/ModalSertificat.vue';
 
-// import { useRouter } from 'vue-router';
-// const router = useRouter()
 import { ref } from 'vue';
 const btnMenu = ref(false)
 const menuActive = ref(false)

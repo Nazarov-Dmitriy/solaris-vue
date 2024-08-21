@@ -6,13 +6,13 @@
                     <span>Баланс</span>
                 </p>
                 <div class="cabinet-footer__balance">
-                        <p class="cabinet-footer__balance__text p2">
+                    <p class="cabinet-footer__balance__text p2">
                         На твоем счете
                     </p>
                     <p class="cabinet-footer__balance__price h3">
                         500
                     </p>
-                <svg
+                    <svg
                         class="cabinet-footer__balance__coin"
                         width="32"
                         height="32"

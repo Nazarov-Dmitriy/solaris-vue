@@ -6,26 +6,28 @@
         >
             <div
                 class="modal__container"
-                :class="additionalClass"
+                :class="props.additionalClass"
                 @click.stop
             >
-                <div class="modal__close-btn-wrapper">
-                    <button
-                        class="modal__close-btn"
-                        @click="handleCancel"
-                    >
-                        <img
-                            :src="
-                                getPath('../../../../../public/cabinteTeacher/case/modal-close.png')
-                            "
-                            alt="Close"
+                <div class="modal__content">
+                    <div class="modal__close-btn-wrapper">
+                        <button
+                            class="modal__close-btn"
+                            @click="handleCancel"
                         >
-                    </button>
-                </div>
-                <slot name="title" />
-                <slot name="text" />
-                <div class="modal__btn-wrapper">
-                    <slot name="btn" />
+                            <img
+                                :src="
+                                    getPath('/cabinteTeacher/case/modal-close.png')
+                                "
+                                alt="Close"
+                            >
+                        </button>
+                    </div>
+                    <slot name="title" />
+                    <slot name="text" />
+                    <div class="modal__btn-wrapper">
+                        <slot name="btn" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,6 +75,14 @@ onBeforeUnmount(() => {
     align-items: center;
 }
 .modal__container {
+      max-width: 1560px;
+      margin: 0 auto;
+      width: 100%;
+      height: 100%;
+      position: relative;
+}
+
+.modal__content{
     border: 2px solid #dda06b;
     padding: 16px;
     box-sizing: border-box;
@@ -81,29 +91,22 @@ onBeforeUnmount(() => {
     flex-direction: column;
     gap: 16px;
     width: 288px;
-    position: fixed;
-    right: 40px;
+    position: absolute;
+    right: 60px;
     top: 80px;
+    
+    @media (max-width: $lg) {
+        right: 40px;
+    }
+     
 
     @media (max-width: $sm) {
-        width: 95%;
-        right: 10px;
+        max-width: 100%;
+        width: calc(100% - 32px) ;
+        right: 16px;
     }
 }
-// .modal__content {
-//     border: 2px solid #dda06b;
-//     padding: 16px;
-//     box-sizing: border-box;
-//     background-color: #fff;
-//     width: 288px;
-//     height: 240px;
-//     display: flex;
-//     flex-direction: column;
-//     gap: 16px;
-//     position: absolute;
-//     top: 0;
-//     right: 0;
-// }
+
 
 .modal__close-btn-wrapper {
     display: flex;
