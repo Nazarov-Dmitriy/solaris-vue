@@ -9,7 +9,6 @@
         >
             <li
                 class="pagination-prev"
-                :class="{ 'hidden': showPrev }"
                 @click="prevPage()"
             >
                 <svg
@@ -60,7 +59,6 @@
             </li>
             <li
                 class="pagination-next"
-                :class="{ 'hidden': showNext }"
                 @click="nextPage()"
             >
                 <svg
@@ -335,7 +333,7 @@ watch(() => props.data, () => {
 .pagination-dots--left,
 .pagination-dots--right {
     user-select: none;
-    opacity: 1;
+    opacity: 0;
     cursor: pointer;
     color: var(--piganation-main);
 

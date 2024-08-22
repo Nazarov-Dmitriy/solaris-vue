@@ -6,6 +6,7 @@
 </template>
 
 <script setup>
+import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue';
 import Notification from '@/components/cabinetTeacher/CabinetTeacherNotification.vue';
-import CabinetHeader from '@/components/cabinetTeacher/header/CabinetHeader.vue';
+
 </script>

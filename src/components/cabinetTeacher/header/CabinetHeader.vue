@@ -19,13 +19,17 @@
                     </router-link>
                     <div class="cabinet-header__student-info">
                         <div class="cabinet-header__notification">
-                            <p class="cabinet-header__notification-count p2-phone">
-                                1
-                            </p>
-                            <img
-                                src="@/assets/icon/cabinet-header/bell.svg"
-                                alt="icon-bellt"
+                            <router-link
+                                to="/cabinet-teacher/notification"
                             >
+                                <p class="cabinet-header__notification-count p2-phone">
+                                    1
+                                </p>
+                                <img
+                                    src="@/assets/icon/cabinet-header/bell.svg"
+                                    alt="icon-bellt"
+                                >
+                            </router-link>
                         </div>
                         <p class="cabinet-header__student-initials">
                             АИ
@@ -197,6 +201,7 @@ function closeModal (){
 
 .cabinet-header__notification {
     position: relative;
+    cursor: pointer;
 }
 
 .cabinet-header__notification-count {
