@@ -119,14 +119,9 @@
                                 v-if="index === fieldsGroup.length - 1"
                                 emit-name="form-submit"
                                 @form-submit="addFieldsGroup"
+                                additionalClass="btn-white__text--img"
                                 class="management__btn"
                             >
-                                <template #img>
-                                    <img
-                                        src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
-                                        alt=""
-                                    />
-                                </template>
                                 Добавить мероприятие
                             </BtnWhite>
                         </div>

@@ -50,8 +50,10 @@
                         </div>
                         <div class="top-competition__btn-wrapper">
                             <BtnWhite
+                                v-if="index === events.length - 1"
                                 emit-name="form-submit"
                                 @form-submit="addNewEvent"
+                                additionalClass="btn-white__text--img"
                                 class="top-competition__btn"
                                 >Добавить номинацию</BtnWhite
                             >

@@ -105,7 +105,7 @@
                                             id="chooseResult"
                                             class="achievements__input"
                                             additionalClass="custom-dropdown-selected"
-                                            :options="result"
+                                            :options="results"
                                         />
                                     </div>
                                     <div class="achievements__result-btn-wrapper">
@@ -136,14 +136,9 @@
                                 v-if="index === events.length - 1"
                                 emit-name="form-submit"
                                 @form-submit="addNewEvent"
+                                additionalClass="btn-white__text--img"
                                 class="achievements__btn"
                             >
-                                <template #img>
-                                    <img
-                                        src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
-                                        alt=""
-                                    />
-                                </template>
                                 Добавить мероприятие
                             </BtnWhite>
                         </div>
@@ -206,6 +201,17 @@ const eventNameOptions = ref([
     'Результат участия в спортивных состязаниях',
     'Результативность участия обучающихся при выполнении нормативов Всероссийского  физкультурно-спортивного  комплекса "Готов к труду и обороне".',
     'Результативность участия команды в спортивных соревнованиях "Президентские состязания".'
+])
+
+const results = ref([
+    '-',
+    'Участие',
+    'Призер/победитель',
+    'Победитель',
+    'Призер',
+    'ГТО: Золотой значок (более 50% от количества сдающих, обучающихся у учителя)',
+    'ГТО: Серебряный значок (более 50% от количества сдающих, обучающихся у учителя)',
+    'ГТО: Бронзовый значок (более 50% от количества сдающих, обучающихся у учителя)'
 ])
 
 const chooseLevelOptions = ref(['-', 'Лицейский', 'Муниципальный', 'Региональный', 'Всероссийский'])
@@ -375,6 +381,4 @@ function addNewEvent() {
     display: flex;
     justify-content: center;
 }
-
-
 </style>
