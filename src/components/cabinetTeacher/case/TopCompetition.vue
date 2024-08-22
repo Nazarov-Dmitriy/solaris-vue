@@ -2,14 +2,18 @@
     <sections class="top-competition">
         <div class="top-competition__container">
             <div class="top-competition__wrapper">
-                <div class="top-competition__event">
+                <div class="top-competition__event flex flex-col gap-4">
                     <div class="top-competition__nomination-header">
                         <h2 class="top-competition__nomination-header-title">
                             Участие в ТОП-конкурсе
                         </h2>
                         <span>максимум 20 баллов</span>
                     </div>
-                    <div class="top-competition__nomination">
+                    <div
+                        v-for="(event, index) in events"
+                        :key="index"
+                        class="top-competition__nomination"
+                    >
                         <div class="top-competition__nomination-text-wrapper">
                             <span></span>
                             <p class="top-competition__nomination-text">Участие в номинации</p>
@@ -42,7 +46,12 @@
                             >
                         </div>
                         <div class="top-competition__btn-wrapper">
-                            <BtnWhite class="top-competition__btn">Добавить номинацию</BtnWhite>
+                            <BtnWhite
+                                emit-name="form-submit"
+                                @form-submit="addNewEvent"
+                                class="top-competition__btn"
+                                >Добавить номинацию</BtnWhite
+                            >
                         </div>
                     </div>
                 </div>
@@ -57,6 +66,12 @@ import BtnComponent from '@/components/btns/BtnComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import InputText from './form/InputText.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
+
+const events = ref([1])
+
+function addNewEvent() {
+    events.value.push(1)
+}
 
 const result = ref([
     '-',
@@ -159,7 +174,7 @@ const result = ref([
 .top-competition__form-input {
     max-width: 100%;
     width: 50%;
-    background-image: url('../../../../public/cabinteTeacher/case/input-option-svg.svg');
+    // background-image: url('../../../../public/cabinteTeacher/case/input-option-svg.svg');
     background-repeat: no-repeat;
     background-position: calc(100% - 23px);
     span {

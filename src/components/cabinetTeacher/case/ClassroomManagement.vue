@@ -7,105 +7,124 @@
                         <h3 class="h3 management__header-title">Классное руководство</h3>
                         <p class="p2 management__header-text">максимум 10 баллов</p>
                     </div>
-                    <div class="management__text-wrapper">
-                        <span></span>
-                        <p class="management__nomination-text">Мероприятие</p>
-                        <span></span>
-                    </div>
-                    <form action="#" class="management__form">
-                        <div class="management__input-group">
-                            <label for="eventName" class="management__label"
-                                >Наименование мероприятия</label
-                            >
-                            <DropdownComponent
-                                id="eventName"
-                                class="management__input"
-                                additionalClass="custom-dropdown-selected"
-                                :options="eventNameOptions"
-                            />
+                    <div
+                        v-for="(fieldGroup, index) in fieldsGroup"
+                        :key="index"
+                        class="flex flex-col gap-4"
+                    >
+                        <div class="management__text-wrapper">
+                            <span></span>
+                            <p class="management__nomination-text">Мероприятие</p>
+                            <span></span>
                         </div>
-                        <div class="management__notes-wrapper">
-                            <p class="p2 management__notes-text">
-                                После выбора наименования мероприятия здесь отобразятся примечания к
-                                заполнению
-                            </p>
+                        <form action="#" class="management__form">
                             <div class="management__input-group">
-                                <label for="chooseDate" class="management__label">Уровень</label>
+                                <label for="eventName" class="management__label"
+                                    >Наименование мероприятия</label
+                                >
                                 <DropdownComponent
-                                    id="chooseLevel"
+                                    id="eventName"
                                     class="management__input"
-                                    :options="chooseLevelOptions"
                                     additionalClass="custom-dropdown-selected"
+                                    :options="eventNameOptions"
                                 />
                             </div>
-                            <div class="management__input-group">
-                                <label for="organise" class="management__label">Организатор</label>
-                                <InputText id="organise" placeholder="Введите организатора" />
-                            </div>
-                            <div class="management__input-group">
-                                <label for="chooseName" class="management__label">Название</label>
-
-                                <InputText id="chooseName" placeholder="Введите название" />
-                            </div>
-                        </div>
-                        <div class="management__form-info-wrapper">
-                            <div class="management__input-group">
-                                <label for="#">Дата</label>
-                                <InputDate />
-                            </div>
-                            <div class="management__input-group">
-                                <label for="#">Класс</label>
-                                <InputText placeholder="Введите класс" />
-                            </div>
-                            <div class="management__input-group management__input-group--mobile">
-                                <label for="#">Классный руководитель</label>
-                                <InputText class="input-text" placeholder="Введите фио" />
-                            </div>
-                        </div>
-                        <div class="management__results">
-                            <div class="management__text-wrapper">
-                                <span></span>
-                                <p class="management__nomination-text">Организатор</p>
-                                <span></span>
-                            </div>
-                            <div class="management__results-input-wrapper">
+                            <div class="management__notes-wrapper">
+                                <p class="p2 management__notes-text">
+                                    После выбора наименования мероприятия здесь отобразятся
+                                    примечания к заполнению
+                                </p>
                                 <div class="management__input-group">
-                                    <label for="chooseResult" class="management__label"
-                                        >Результат</label
+                                    <label for="chooseDate" class="management__label"
+                                        >Уровень</label
                                     >
                                     <DropdownComponent
-                                        id="chooseResult"
+                                        id="chooseLevel"
                                         class="management__input"
+                                        :options="chooseLevelOptions"
                                         additionalClass="custom-dropdown-selected"
-                                        :options="chooseResultOptions"
                                     />
                                 </div>
-                                <div class="management__result-btn-wrapper">
-                                    <BtnWhite class="management__btn management__result-btn">
-                                        Подтверждающий документ
-                                    </BtnWhite>
+                                <div class="management__input-group">
+                                    <label for="organise" class="management__label"
+                                        >Организатор</label
+                                    >
+                                    <InputText id="organise" placeholder="Введите организатора" />
+                                </div>
+                                <div class="management__input-group">
+                                    <label for="chooseName" class="management__label"
+                                        >Название</label
+                                    >
+
+                                    <InputText id="chooseName" placeholder="Введите название" />
                                 </div>
                             </div>
+                            <div class="management__form-info-wrapper">
+                                <div class="management__input-group">
+                                    <label for="#">Дата</label>
+                                    <InputDate />
+                                </div>
+                                <div class="management__input-group">
+                                    <label for="#">Класс</label>
+                                    <InputText placeholder="Введите класс" />
+                                </div>
+                                <div
+                                    class="management__input-group management__input-group--mobile"
+                                >
+                                    <label for="#">Классный руководитель</label>
+                                    <InputText class="input-text" placeholder="Введите фио" />
+                                </div>
+                            </div>
+                            <div class="management__results">
+                                <div class="management__text-wrapper">
+                                    <span></span>
+                                    <p class="management__nomination-text">Организатор</p>
+                                    <span></span>
+                                </div>
+                                <div class="management__results-input-wrapper">
+                                    <div class="management__input-group">
+                                        <label for="chooseResult" class="management__label"
+                                            >Результат</label
+                                        >
+                                        <DropdownComponent
+                                            id="chooseResult"
+                                            class="management__input"
+                                            additionalClass="custom-dropdown-selected"
+                                            :options="chooseResultOptions"
+                                        />
+                                    </div>
+                                    <div class="management__result-btn-wrapper">
+                                        <BtnWhite class="management__btn management__result-btn">
+                                            Подтверждающий документ
+                                        </BtnWhite>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <p class="p2 management__form-text">
+                            Баллы начислятся после проверки, возможные варианты результатов
+                            проверки: Зачтено, Зачтено частично, Не зачтено
+                        </p>
+                        <div class="management__footer">
+                            <h3 class="h3 management__footer-title">Предполагаемый балл: 0</h3>
+                            <BtnComponent class="management__footer-btn">Сохранить</BtnComponent>
                         </div>
-                    </form>
-                    <p class="p2 management__form-text">
-                        Баллы начислятся после проверки, возможные варианты результатов проверки:
-                        Зачтено, Зачтено частично, Не зачтено
-                    </p>
-                    <div class="management__footer">
-                        <h3 class="h3 management__footer-title">Предполагаемый балл: 0</h3>
-                        <BtnComponent class="management__footer-btn">Сохранить</BtnComponent>
-                    </div>
-                    <div class="management__btn-wrapper">
-                        <BtnWhite class="management__btn">
-                            <template #img>
-                                <img
-                                    src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
-                                    alt=""
-                                />
-                            </template>
-                            Добавить мероприятие
-                        </BtnWhite>
+                        <div class="management__btn-wrapper">
+                            <BtnWhite
+                                v-if="index === fieldsGroup.length - 1"
+                                emit-name="form-submit"
+                                @form-submit="addFieldsGroup"
+                                class="management__btn"
+                            >
+                                <template #img>
+                                    <img
+                                        src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
+                                        alt=""
+                                    />
+                                </template>
+                                Добавить мероприятие
+                            </BtnWhite>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,6 +140,12 @@ import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import InputText from './form/InputText.vue'
 import InputDate from './form/InputDate.vue'
+
+const fieldsGroup = ref([1])
+
+function addFieldsGroup() {
+    fieldsGroup.value.push(1)
+}
 
 const eventNameOptions = ref([
     '-',
@@ -150,6 +175,7 @@ const chooseResultOptions = ref(['-', 'Участие', 'Победитлеь', 
 }
 .management__wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 32px;
     height: max-content;

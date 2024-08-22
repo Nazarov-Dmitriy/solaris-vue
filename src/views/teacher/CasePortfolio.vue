@@ -16,7 +16,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import CabinetHeader from './header/CabinetHeader.vue'
+import CabinetHeader from '../../components/cabinetTeacher/header/CabinetHeader.vue'
 import AddCase from '@/components/cabinetTeacher/case/AddCase.vue'
 import TeacherDetails from '@/components/cabinetTeacher/case/form/TeacherDetails.vue'
 import CaseTitle from '@/components/cabinetTeacher/case/title/CaseTitle.vue'
@@ -26,9 +26,10 @@ import StudentAchievments from '@/components/cabinetTeacher/case/StudentAchievme
 import TeacherAchievments from '@/components/cabinetTeacher/case/TeacherAchievments.vue'
 import TopCompetition from '@/components/cabinetTeacher/case/TopCompetition.vue'
 import AddCertification from '@/components/cabinetTeacher/case/AddCertification.vue'
-import CabinetHeader from '@/components/cabinetTeacher/header/CabinetHeader.vue';
 
 const selectedOption = ref('')
+
+
 
 const componentMap = {
     'Классное руководство': ClassroomManagement,

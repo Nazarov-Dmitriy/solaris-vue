@@ -1,90 +1,98 @@
 <template>
     <div class="add-portfolio__header">
-        <ModalComponent
-            v-if="isModalVisible"
-            :additional-class="'custom-modal'"
-            @close-modal="handleModalClose"
-            @show-modal="handleModalAction"
-        >
-            <template #text>
-                <p class="modal__text">
-                    Если вы заполнили все критерии - подтвердите отправку, или нажмите кнопку отмены
-                </p>
-            </template>
-            <template #btn>
-                <div class="modal__btn-wrapper">
-                    <button
-                        class="modal__btn modal__btn--cancel"
-                        @click="handleModalClose"
-                    >
-                        Отменить
-                    </button>
-                    <button
-                        class="modal__btn modal__btn--send"
-                        @click="showSecondModal"
-                    >
-                        Отправить
-                    </button>
-                </div>
-            </template>
-        </ModalComponent>
-        <ModalComponent
-            v-if="isSecondModalVisible"
-            @close-modal="handleSecondModalClose"
-        >
-            <template #text>
-                <p class="modal__text">
-                    Ваш кейс успешно отправлен! После проверки результаты появятся у вас в портфолио
-                </p>
-            </template>
-            <template #btn>
-                <div class="modal__btn-wrapper">
-                    <button
-                        class="modal__btn modal__btn--send"
-                        @click="$router.push('/cabinet-portfolio')"
-                    >
-                        Перейти в портфолио
-                    </button>
-                </div>
-            </template>
-        </ModalComponent>
-        <h2 class="add-portfolio__title">
-            Добавить кейс в портфолио
-        </h2>
-        <BtnComponent
-            emit-name="form-submit"
-            class="add-portfolio__btn"
-            @click="handleButtonClick"
-        >
+        <Teleport to="body">
+            <ModalComponent
+                :visible="isModalVisible"
+                :additional-class="'custom-modal'"
+                @toggle-modal="handleModalClose"
+                @show-modal="handleModalAction"
+            >
+                <template #text>
+                    <p class="modal__text">
+                        Если вы заполнили все критерии - подтвердите отправку, или нажмите кнопку
+                        отмены
+                    </p>
+                </template>
+                <template #btn>
+                    <div class="modal__btn-wrapper">
+                        <button class="modal__btn modal__btn--cancel" @click="handleModalClose">
+                            Отменить
+                        </button>
+                        <button class="modal__btn modal__btn--send" @click="showSecondModal">
+                            Отправить
+                        </button>
+                    </div>
+                </template>
+            </ModalComponent>
+        </Teleport>
+        <Teleport to="body">
+            <ModalComponent :visible="isSecondModalVisible" @toggleModal="handleSecondModalClose">
+                <template #text>
+                    <p class="modal__text">
+                        Ваш кейс успешно отправлен! После проверки результаты появятся у вас в
+                        портфолио
+                    </p>
+                </template>
+                <template #btn>
+                    <div class="modal__btn-wrapper">
+                        <button
+                            class="modal__btn modal__btn--send"
+                            @click="$router.push('/cabinet-portfolio')"
+                        >
+                            Перейти в портфолио
+                        </button>
+                    </div>
+                </template>
+            </ModalComponent>
+        </Teleport>
+
+        <h2 class="add-portfolio__title">Добавить кейс в портфолио</h2>
+        <BtnComponent emit-name="form-submit" class="add-portfolio__btn" @click="handleButtonClick">
             Отправить на проверку
         </BtnComponent>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
+import { useRouter } from 'vue-router'
 
 const isModalVisible = ref(false)
 const isSecondModalVisible = ref(false)
 const emit = defineEmits(['form-submit', 'handleModalClose', 'handleModalAction'])
 
-function handleButtonClick () {
+const router = useRouter()
+
+function manageBodyScroll() {
+    if (isModalVisible.value || isSecondModalVisible.value) {
+        document.body.classList.add('no-scroll')
+    } else {
+        document.body.classList.remove('no-scroll')
+    }
+}
+watch([isModalVisible, isSecondModalVisible], manageBodyScroll)
+
+router.afterEach(() => {
+    document.body.classList.remove('no-scroll')
+})
+
+function handleButtonClick() {
     emit('form-submit')
     isModalVisible.value = true
 }
 
-function handleModalClose () {
+function handleModalClose() {
     isModalVisible.value = false
 }
 
-function showSecondModal () {
+function showSecondModal() {
     isSecondModalVisible.value = true
     isModalVisible.value = false
 }
 
-function handleSecondModalClose () {
+function handleSecondModalClose() {
     isSecondModalVisible.value = false
 }
 </script>

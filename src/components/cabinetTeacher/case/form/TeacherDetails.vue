@@ -1,40 +1,31 @@
 <template>
     <div class="add-portfolio__data">
-        <div class="add-portfolio__data-text-wrapper">
-            <span />
-            <p class="add-portfolio__data-text">
-                Ваши данные
-            </p>
-            <span />
+        <div v-for="(item, index) in data" :key="index" class="flex flex-col gap-4">
+            <div class="add-portfolio__data-text-wrapper">
+                <span />
+                <p class="add-portfolio__data-text">Ваши данные</p>
+                <span />
+            </div>
+            <h2 class="add-portfolio__data-title">
+                {{ item.dataTitle }} <span>{{ item.dataTitleSpan }}</span>
+            </h2>
         </div>
-        <h2 class="add-portfolio__data-title">
-            Иванова <span>Мария Ивановна</span>
-        </h2>
-        <form
-            action="#"
-            class="add-portfolio__form"
-        >
-            <div class="options-group">
-                <label class="add-portfolio__form-label">
-                    <span>Предмет</span>
-                </label>
-                <div class="input-group">
-                    <DropdownComponent
-                        class="add-portfolio__form-input"
-                        additional-class="custom-dropdown-selected"
-                        :options="subjects"
+        <form @submit.prevent action="#" class="add-portfolio__form">
+            <label class="add-portfolio__form-label">
+                <span>Предмет</span>
+            </label>
+            <div v-for="(fieldGroup, index) in fieldsGroup" :key="index" class="input-group">
+                <DropdownComponent
+                    class="add-portfolio__form-input"
+                    :additional-class="'custom-dropdown-selected'"
+                    :options="subjects"
+                />
+                <button type="button" class="add-portfolio__form-btn" @click="addFieldsGroup">
+                    <img
+                        :src="getPath('cabinteTeacher/case/portfolio-button-svg.svg')"
+                        alt="Выбрать предмет"
                     />
-                    <button
-                        type="button"
-                        class="add-portfolio__form-btn"
-                        @click="toggleDropdown('subject')"
-                    >
-                        <img
-                            :src="getPath('cabinteTeacher/case/portfolio-button-svg.svg')"
-                            alt="Выбрать предмет"
-                        >
-                    </button>
-                </div>
+                </button>
             </div>
             <div class="options-group">
                 <label class="add-portfolio__form-label">
@@ -50,14 +41,12 @@
                 </label>
                 <DropdownComponent
                     class="add-portfolio__form-input"
-                    additional-class="custom-dropdown-selected"
+                    :additional-class="'custom-dropdown-selected'"
                     :options="options"
                     @update:model-value="updateSelectedOption"
                 />
             </div>
-            <button class="add-portfolio__form-btn">
-                Перейти
-            </button>
+            <button @click="handleSubmit" class="add-portfolio__form-btn">Перейти</button>
         </form>
     </div>
 </template>
@@ -65,6 +54,20 @@
 <script setup>
 import { ref } from 'vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
+
+const data = ref([
+    {
+        dataTitle: 'Иванова',
+        dataTitleSpan: 'Мария Ивановна'
+    }
+])
+
+const selectedOption = ref('')
+const fieldsGroup = ref([1])
+
+function addFieldsGroup() {
+    fieldsGroup.value.push(1)
+}
 
 const options = ref([
     '-',
@@ -80,17 +83,20 @@ const subjects = ['-', 'Математика', 'Физика', 'Химия']
 
 const emit = defineEmits(['optionSelected'])
 
-function updateSelectedOption (option) {
-    emit('optionSelected', option)
-    console.log('Selected option:', option)
+function updateSelectedOption(option) {
+    selectedOption.value = option
 }
 
-function getPath (img) {
+function handleSubmit() {
+    emit('optionSelected', selectedOption.value)
+}
+
+function getPath(img) {
     return new URL(`../../../../../public/${img}`, import.meta.url).href
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .add-portfolio__data {
     display: flex;
     flex-direction: column;
@@ -177,10 +183,13 @@ function getPath (img) {
 .input-group {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .custom-dropdown-selected {
-    max-width: 100%;
+    max-width: 100% !important;
+    width: 100%;
+    background: url('/cabinteTeacher/case/input-option-svg.svg') no-repeat right center !important;
 }
 
 .custom-dropdown-selected-text {
@@ -203,7 +212,7 @@ function getPath (img) {
 }
 
 .add-portfolio__form-input {
-    max-width: 100%;
+    max-width: 100% !important;
     width: 100%;
 }
 

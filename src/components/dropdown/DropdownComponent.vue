@@ -1,10 +1,10 @@
 <template>
     <div ref="dropDown" class="dashboard__dropdown-wrapper">
         <div
-            :class="['dropdown-selected', props.additionalClass]"
+            :class="[props.additionalClass, 'dropdown-selected']"
             @click="isDropDownVisible = !isDropDownVisible"
         >
-            <p :class="['dropdown-selected-text', props.additionalClass]">
+            <p :class="['dropdown-selected-text']">
                 {{ selectedOption || defaultValue }}
             </p>
             <img
@@ -13,6 +13,7 @@
                 alt="icon-appearance"
             />
         </div>
+
         <transition name="slide-fade">
             <div v-if="isDropDownVisible" class="option-wrapper">
                 <template v-for="(option, ind) in props.options" :key="ind">
@@ -27,7 +28,6 @@
 
 <script setup>
 import { defineProps, ref, computed, defineEmits, onMounted, onBeforeUnmount } from 'vue'
-
 const dropDown = ref(null)
 
 const props = defineProps({
@@ -103,9 +103,9 @@ onBeforeUnmount(() => {
     font-size: 16px;
     font-weight: 400;
     outline: none;
-    -webkit-line-clamp: 1; /* Число отображаемых строк */
-    display: -webkit-box; /* Включаем флексбоксы */
-    -webkit-box-orient: vertical; /* Вертикальная ориентация */
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
@@ -148,9 +148,5 @@ onBeforeUnmount(() => {
 .slide-fade-leave-to {
     transform: translateY(-4px);
     opacity: 0;
-}
-
-.custom-dropdown-selected {
-    max-width: 100%;
 }
 </style>

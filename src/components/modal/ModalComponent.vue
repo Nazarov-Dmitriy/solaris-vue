@@ -1,37 +1,20 @@
 <template>
-    <Teleport to="body">
-        <div
-            class="modal"
-            @click="handleCancel"
-        >
-            <div
-                class="modal__container"
-                :class="props.additionalClass"
-                @click.stop
-            >
-                <div class="modal__content">
-                    <div class="modal__close-btn-wrapper">
-                        <button
-                            class="modal__close-btn"
-                            @click="handleCancel"
-                        >
-                            <img
-                                :src="
-                                    getPath('/cabinteTeacher/case/modal-close.png')
-                                "
-                                alt="Close"
-                            >
-                        </button>
-                    </div>
-                    <slot name="title" />
-                    <slot name="text" />
-                    <div class="modal__btn-wrapper">
-                        <slot name="btn" />
-                    </div>
+    <div v-if="props.visible" class="modal" @click="handleCancel">
+        <div class="modal__container" @click.stop>
+            <div :class="[props.additionalClass, 'modal__content']">
+                <div class="modal__close-btn-wrapper">
+                    <button class="modal__close-btn" @click="handleCancel">
+                        <img :src="getPath('/cabinteTeacher/case/modal-close.png')" alt="Close" />
+                    </button>
+                </div>
+                <slot name="title" />
+                <slot name="text" />
+                <div class="modal__btn-wrapper">
+                    <slot name="btn" />
                 </div>
             </div>
         </div>
-    </Teleport>
+    </div>
 </template>
 
 <script setup>
@@ -41,25 +24,29 @@ const props = defineProps({
     additionalClass: {
         type: String,
         default: ''
+    },
+    visible: {
+        type: Boolean,
+        default: false
     }
 })
-const emit = defineEmits(['closeModal'])
+const emit = defineEmits(['toggleModal'])
 
-function handleCancel () {
-    emit('closeModal')
+function handleCancel() {
+    emit('toggleModal')
 }
 
-function getPath (img) {
+function getPath(img) {
     return new URL(img, import.meta.url).href
 }
 
-onMounted(() => {
-    document.body.classList.add('no-scroll')
-})
+// onMounted(() => {
+//     document.body.classList.add('no-scroll')
+// })
 
-onBeforeUnmount(() => {
-    document.body.classList.remove('no-scroll')
-})
+// onBeforeUnmount(() => {
+//     document.body.classList.remove('no-scroll')
+// })
 </script>
 
 <style lang="scss">
@@ -75,14 +62,14 @@ onBeforeUnmount(() => {
     align-items: center;
 }
 .modal__container {
-      max-width: 1560px;
-      margin: 0 auto;
-      width: 100%;
-      height: 100%;
-      position: relative;
+    max-width: 1560px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
-.modal__content{
+.modal__content {
     border: 2px solid #dda06b;
     padding: 16px;
     box-sizing: border-box;
@@ -94,19 +81,17 @@ onBeforeUnmount(() => {
     position: absolute;
     right: 60px;
     top: 80px;
-    
+
     @media (max-width: $lg) {
         right: 40px;
     }
-     
 
     @media (max-width: $sm) {
         max-width: 100%;
-        width: calc(100% - 32px) ;
+        width: calc(100% - 32px);
         right: 16px;
     }
 }
-
 
 .modal__close-btn-wrapper {
     display: flex;
@@ -158,5 +143,10 @@ onBeforeUnmount(() => {
 
 .no-scroll {
     overflow: hidden;
+}
+
+.custom-modal-position {
+    top: auto;
+    bottom: 100px;
 }
 </style>
