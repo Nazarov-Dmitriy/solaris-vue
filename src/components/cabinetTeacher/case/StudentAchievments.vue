@@ -376,19 +376,5 @@ function addNewEvent() {
     justify-content: center;
 }
 
-.modal-title {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 150%;
-    color: var(--orange);
-    text-align: center;
-}
 
-.modal-text {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
-    text-align: center;
-    color: var(--dark);
-}
 </style>

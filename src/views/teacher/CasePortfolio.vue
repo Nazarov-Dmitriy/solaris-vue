@@ -29,8 +29,6 @@ import AddCertification from '@/components/cabinetTeacher/case/AddCertification.
 
 const selectedOption = ref('')
 
-
-
 const componentMap = {
     'Классное руководство': ClassroomManagement,
     'Качество деятельности учителя': ActivityQuality,

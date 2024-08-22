@@ -39,14 +39,6 @@ function handleCancel() {
 function getPath(img) {
     return new URL(img, import.meta.url).href
 }
-
-// onMounted(() => {
-//     document.body.classList.add('no-scroll')
-// })
-
-// onBeforeUnmount(() => {
-//     document.body.classList.remove('no-scroll')
-// })
 </script>
 
 <style lang="scss">
@@ -148,5 +140,21 @@ function getPath(img) {
 .custom-modal-position {
     top: auto;
     bottom: 100px;
+}
+
+.modal-title {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--orange);
+    text-align: center;
+}
+
+.modal-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    color: var(--dark);
 }
 </style>

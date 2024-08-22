@@ -117,7 +117,12 @@
                         </p>
                         <div class="achievements__footer">
                             <h3 class="h3 achievements__footer-title">Предполагаемый балл: 0</h3>
-                            <BtnComponent class="achievements__footer-btn">Сохранить</BtnComponent>
+                            <BtnComponent
+                                emit-name="form-submit"
+                                @form-submit="toggleModal"
+                                class="achievements__footer-btn"
+                                >Сохранить</BtnComponent
+                            >
                         </div>
                         <div class="achievements__btn-wrapper">
                             <BtnWhite
@@ -139,17 +144,35 @@
                 </div>
             </div>
         </div>
+        <Teleport to="body">
+            <ModalComponent
+                additionalClass="custom-modal-position"
+                emit-name="toggleModal"
+                @toggleModal="toggleModal"
+                :visible="isModalVisible"
+            >
+                <template #title>
+                    <h2 class="modal-title">Данные сохранены</h2>
+                </template>
+                <template #text>
+                    <p class="text-center">
+                        Вы можете добавить еще работу или перейти к другому критерию
+                    </p>
+                </template>
+            </ModalComponent>
+        </Teleport>
     </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import InputText from './form/InputText.vue'
 import InputDate from './form/InputDate.vue'
+import ModalComponent from '@/components/modal/ModalComponent.vue'
 
 const fieldsGroup = ref([1])
 
@@ -157,6 +180,19 @@ function addFieldsGroup() {
     fieldsGroup.value.push(1)
 }
 
+const isModalVisible = ref(false)
+
+function toggleModal() {
+    isModalVisible.value = !isModalVisible.value
+}
+
+watch(isModalVisible, (newValue) => {
+    if (newValue) {
+        document.body.classList.add('no-scroll')
+    } else {
+        document.body.classList.remove('no-scroll')
+    }
+})
 const eventNameOptions = ref([
     '-',
     'Результативность участия обучающихся во Всероссийской олимпиаде школьников.',
