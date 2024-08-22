@@ -37,4 +37,16 @@ function submitEmit () {
     line-height: 1.5%;
     color: var(--white);
 }
+
+.btn-orange:hover {
+  border: 2px solid var(--roseBege);
+  background: var(--roseBege);
+  color: var(--bage);
+}
+
+.btn-orange:active {
+  border: 2px solid var(--dark);
+  background: var(--roseBege);
+  color: var(--dark);
+}
 </style>

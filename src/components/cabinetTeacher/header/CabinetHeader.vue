@@ -1,61 +1,99 @@
 <template>
     <div class="cabinet-header__container">
         <div class="cabinet-header">
-            <div class="cabinet-header__mobile flex items-center justify-between">
+            <div class="cabinet-header__mobile  flex items-center justify-between">
                 <div class="cabinet-header__info">
-                    <router-link to="/cabinet-teacher/profile" class="cabinet-header__logo-wraper">
+                    <router-link
+                        to="/cabinet-teacher/profile"
+                        class="cabinet-header__logo-wraper"
+                    >
                         <img
                             src="@/assets/icon/cabinet-header/logo_cabinet.svg"
                             class="cabinet-header__logo"
                             alt="
                         icon-logo"
-                        />
-                        <p class="cabinet-header__logo-text p2-phone">Кабинет учителя</p>
+                        >
+                        <p class="cabinet-header__logo-text p2-phone">
+                            Кабинет учителя
+                        </p>
                     </router-link>
                     <div class="cabinet-header__student-info">
                         <div class="cabinet-header__notification">
-                            <p class="cabinet-header__notification-count p2-phone">1</p>
-                            <img src="@/assets/icon/cabinet-header/bell.svg" alt="icon-bellt" />
+                            <p class="cabinet-header__notification-count p2-phone">
+                                1
+                            </p>
+                            <img
+                                src="@/assets/icon/cabinet-header/bell.svg"
+                                alt="icon-bellt"
+                            >
                         </div>
-                        <p class="cabinet-header__student-initials">АИ</p>
+                        <p class="cabinet-header__student-initials">
+                            АИ
+                        </p>
                         <img
                             src="@/assets/icon/cabinet-header/pointer_down.svg"
                             alt="icon-poiner-down"
-                        />
+                        >
                     </div>
                 </div>
 
-                <div class="hamburger" :class="{ 'is-active': btnMenu }" @click="setMenuAcive()">
+                <div
+                    class="hamburger"
+                    :class="{ 'is-active': btnMenu }"
+                    @click="setMenuAcive()"
+                >
                     <span class="line" />
                     <span class="line" />
                     <span class="line" />
                 </div>
             </div>
-            <div class="cabinet-header__nav" :class="{ 'is-active': btnMenu }">
+            <div
+                class="cabinet-header__nav"
+                :class="{ 'is-active': btnMenu }"
+            >
                 <ul class="cabinet-header__list">
                     <li class="botton">
-                        <router-link to="/cabinet-teacher/contests" class="cabinet-header__link">
-                            <img src="@/assets/icon/cabinet-header/contest.svg" alt="icon-shop" />
+                        <router-link
+                            to="/cabinet-teacher/contests"
+                            class="cabinet-header__link"
+                        >
+                            <img
+                                src="@/assets/icon/cabinet-header/contest.svg"
+                                alt="icon-shop"
+                            >
                             Конкурсы
                         </router-link>
                     </li>
                     <li class="botton">
-                        <router-link to="/cabinet-teacher/contests" class="cabinet-header__link">
-                            <img src="@/assets/icon/cabinet-header/contest.svg" alt="icon-shop" />
+                        <router-link
+                            to="/cabinet-teacher/case/portfolio"
+                            class="cabinet-header__link"
+                        >
+                            <img
+                                src="@/assets/icon/cabinet-header/contest.svg"
+                                alt="icon-shop"
+                            >
                             Добавить в портфолио
                         </router-link>
                     </li>
                 </ul>
             </div>
-            <div class="cabinet-header__wrapper" :class="{ 'is-active': btnMenu }">
+            <div
+                class="cabinet-header__wrapper"
+                :class="{ 'is-active': btnMenu }"
+            >
                 <input
                     v-model="sertificat"
                     type="text"
                     class="cabinet-header__input"
                     placeholder="Введите номер сертификата"
                     @keypress.enter="showModal()"
-                />
-                <BtnComponent class="cabinet-header__btn" emit-name="action" @action="showModal()">
+                >
+                <BtnComponent
+                    class="cabinet-header__btn"
+                    emit-name="action" 
+                    @action="showModal()"
+                >
                     Проверить
                 </BtnComponent>
             </div>
@@ -72,42 +110,41 @@
     </div>
 </template>
 <script setup>
-import BtnComponent from '@/components/btns/BtnComponent.vue'
-import ModalSertificat from '@/components/modal/ModalSertificat.vue'
+import BtnComponent from '@/components/btns/BtnComponent.vue';
+import ModalSertificat from '@/components/modal/ModalSertificat.vue';
 
-// import { useRouter } from 'vue-router';
-// const router = useRouter()
-import { ref } from 'vue'
+import { ref } from 'vue';
 const btnMenu = ref(false)
 const menuActive = ref(false)
 
-const sertificat = ref('')
+const sertificat = ref('');
 const validateSertificat = ref(false)
-const modal = ref(false)
+const modal = ref(false);
 
-const user = ref({ name: 'Иванов Михаил Дмитриевич', class: '7А класс', date: '12/04/2024' })
+const user = ref({ name: "Иванов Михаил Дмитриевич", class: "7А класс", date: "12/04/2024" })
 
-function setMenuAcive() {
+function setMenuAcive () {
     btnMenu.value = !btnMenu.value
     menuActive.value = !menuActive.value
 }
 
-function showModal() {
-    if (sertificat.value !== '') {
-        if (sertificat.value === '1234') {
-            validateSertificat.value = true
+function showModal () {
+    if(sertificat.value !== ''){
+        if (sertificat.value === "1234") {
+            validateSertificat.value = true;
         }
 
-        console.log(validateSertificat.value)
-
-        modal.value = true
+        console.log(validateSertificat.value);
+    
+        modal.value = true;
     }
 }
 
-function closeModal() {
-    modal.value = false
-    validateSertificat.value = false
+function closeModal (){
+    modal.value = false;
+    validateSertificat.value = false;
 }
+
 </script>
 <style lang="scss">
 .cabinet-header__container {
@@ -125,22 +162,23 @@ function closeModal() {
     margin: auto;
     box-sizing: border-box;
 
-    @media (max-width: $xl) {
+    @media (max-width:$xl) {
         flex-wrap: wrap;
         gap: 8px;
     }
 }
 
 .cabinet-header__mobile {
-    @media (max-width: $xl) {
+    @media (max-width:$xl) {
         width: 100%;
     }
 }
 
 .cabinet-header__info {
     display: flex;
-    gap: 24px;
+    gap: 24px
 }
+
 
 .cabinet-header__logo {
     width: 101px;
@@ -148,7 +186,7 @@ function closeModal() {
 }
 
 .cabinet-header__logo-text {
-    color: var(--roseBege);
+    color: var(--roseBege)
 }
 
 .cabinet-header__student-info {
@@ -175,6 +213,7 @@ function closeModal() {
     justify-content: center;
 }
 
+
 .cabinet-header__student-initials {
     width: 32px;
     height: 32px;
@@ -189,7 +228,7 @@ function closeModal() {
 }
 
 .cabinet-header__nav {
-    @media (max-width: $xl) {
+    @media (max-width:$xl) {
         display: none;
 
         &.is-active {
@@ -223,7 +262,7 @@ function closeModal() {
     display: flex;
     gap: 16px;
 
-    @media (max-width: $xl) {
+    @media (max-width:$xl) {
         display: none;
 
         &.is-active {
@@ -231,11 +270,11 @@ function closeModal() {
         }
     }
 
-    @media (max-width: $lg) {
+    @media (max-width:$lg) {
         flex-direction: column;
     }
 
-    @media (max-width: $md) {
+    @media (max-width:$md) {
         margin-top: 12px;
     }
 }
@@ -244,7 +283,7 @@ function closeModal() {
     height: 36px;
     padding: 6px 16px;
 
-    @media (max-width: $lg) {
+    @media (max-width:$lg) {
         box-sizing: border-box;
         display: flex;
         justify-content: center;
@@ -257,17 +296,17 @@ function closeModal() {
     width: 100%;
     border: 2px solid var(--roseBege);
     color: var(--roseBege);
-    background: rgba($color: #ffffff, $alpha: 0.2);
+    background: rgba($color: #ffffff, $alpha: .2);
     padding: 6px 16px;
     box-sizing: border-box;
     height: 36px;
     font-size: 16px;
     line-height: 24px;
 
-    @media (max-width: $lg) {
+    @media (max-width:$lg) {
         max-width: 240px;
         padding: 6px 6px;
-        box-sizing: border-box;
+        box-sizing: border-box
     }
 }
 
@@ -275,6 +314,7 @@ function closeModal() {
     .cabinet-header {
         padding: 8px 40px;
         flex-direction: column;
+
     }
 
     .cabinet-header__nav {
@@ -305,8 +345,9 @@ function closeModal() {
     justify-content: space-between;
     display: none;
 
-    @media (max-width: $xl) {
+    @media (max-width:$xl) {
         display: flex;
+        ;
     }
 }
 

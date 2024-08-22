@@ -26,6 +26,7 @@ import StudentAchievments from '@/components/cabinetTeacher/case/StudentAchievme
 import TeacherAchievments from '@/components/cabinetTeacher/case/TeacherAchievments.vue'
 import TopCompetition from '@/components/cabinetTeacher/case/TopCompetition.vue'
 import AddCertification from '@/components/cabinetTeacher/case/AddCertification.vue'
+import CabinetHeader from '@/components/cabinetTeacher/header/CabinetHeader.vue';
 
 const selectedOption = ref('')
 
