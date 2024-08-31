@@ -24,7 +24,7 @@ jobs:
                   key: ${{ secrets.SSH_KEY }}
                   port: 22
                   script: |
-                      cd ${{ secrets.DIRECTORY_ROOT }}
+                      cd /var/solaris-vue/
                       bash scripts/docker-install.sh
     test:
         runs-on: ubuntu-latest
