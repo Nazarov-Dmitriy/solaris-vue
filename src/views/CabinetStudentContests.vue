@@ -1,12 +1,11 @@
 <template>
     <div class="cabinet-container">
         <CabinetHeader />
-        <CabinetStudentContests />
+        <CabinetStudentContestsComponent />
     </div>
 </template>
 
 <script setup>
-
+import CabinetStudentContestsComponent from '@/components/cabinetStudent/contests/CabinetStudentContestsComponent.vue'
 import CabinetHeader from '../components/cabinetStudent/CabinetHeader.vue'
-import CabinetStudentContests from '../components/cabinetStudent/contests/CabinetStudentContests.vue'
 </script>
