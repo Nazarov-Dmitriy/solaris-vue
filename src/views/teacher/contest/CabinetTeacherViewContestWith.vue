@@ -1,4 +1,5 @@
 <template>
+    <CabinetHeader />
     <section class="uc-contest-wrapper">
         <div class="uc-contest__container">
             <div class="uc-contest">
@@ -16,7 +17,10 @@
                     </div>
                     <div class="uc__info">
                         <p class="uc__publication p2">Дата публикации 02.03.2024</p>
-                        <buttom class="uc__info-btn btn" @click="$router.push('/cabinet-contests')">
+                        <buttom
+                            class="uc__info-btn btn"
+                            @click="$router.push('/cabinet-teacher/contests')"
+                        >
                             К списку конкурсов
                         </buttom>
                     </div>
@@ -139,6 +143,7 @@
     </section>
 </template>
 <script setup>
+import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue'
 import { ref } from 'vue'
 
 const listTeacher = ref([

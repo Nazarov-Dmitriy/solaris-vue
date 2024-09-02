@@ -80,7 +80,7 @@
                                 </p>
                                 <buttom
                                     class="teacher__info-btn btn"
-                                    @click="$router.push(`/cabinet-contest-view/${el.id}`)"
+                                    @click="$router.push(`/teacher-contest-view/${el.id}`)"
                                 >
                                     Узнать подробнее
                                 </buttom>

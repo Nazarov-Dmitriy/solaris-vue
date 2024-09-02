@@ -6,6 +6,6 @@
 </template>
 
 <script setup>
-import CabinetStudentContestsComponent from '@/components/cabinetStudent/contests/CabinetStudentContestsComponent.vue'
+import CabinetStudentContestsComponent from '@/components/cabinetStudent/contests/CabinetStudent.vue'
 import CabinetHeader from '../components/cabinetStudent/CabinetHeader.vue'
 </script>
