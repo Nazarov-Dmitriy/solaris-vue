@@ -1,18 +1,24 @@
 <template>
     <div class="input-wrapper">
-        <div class="input-container" @click="focusInput">
+        <div
+            class="input-container"
+            @click="focusInput"
+        >
             <input
-                type="text"
                 ref="input"
-                class="form-input"
                 v-model="inputValue"
+                type="text"
+                class="form-input"
+                :placeholder="props.placeholder"
                 @focus="hidePlaceholder"
                 @blur="validateDate"
                 @input="formatDate"
-                :placeholder="props.placeholder"
-            />
-            <div v-if="showCustomPlaceholder && !inputValue" class="custom-placeholder">
-                <slot name="placeholder"></slot>
+            >
+            <div
+                v-if="showCustomPlaceholder && !inputValue"
+                class="custom-placeholder"
+            >
+                <slot name="placeholder" />
             </div>
         </div>
     </div>
@@ -32,16 +38,16 @@ const inputValue = ref('')
 const showCustomPlaceholder = ref(true)
 const dateError = ref('')
 
-function focusInput() {
+function focusInput () {
     showCustomPlaceholder.value = false
     $refs.input.focus()
 }
 
-function hidePlaceholder() {
+function hidePlaceholder () {
     showCustomPlaceholder.value = false
 }
 
-function showPlaceholder() {
+function showPlaceholder () {
     if (!inputValue.value) {
         showCustomPlaceholder.value = true
     }

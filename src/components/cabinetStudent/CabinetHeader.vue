@@ -43,7 +43,7 @@
                 <ul class="cabinet-header__list">
                     <li class="botton">
                         <router-link
-                            to="/cabinet-contests"
+                            to="/cabinet-teacher/contests"
                             class="cabinet-header__link"
                         >
                             <img

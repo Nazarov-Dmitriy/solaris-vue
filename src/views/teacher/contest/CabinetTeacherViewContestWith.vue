@@ -1,5 +1,6 @@
 <template>
     <section class="uc-contest-wrapper">
+        222
         <div class="uc-contest__container">
             <div class="uc-contest">
                 <div class="uc__item">
@@ -9,14 +10,27 @@
                         Отечественной войне
                     </p>
                     <div class="uc__directions">
-                        <p class="uc__direction p2">Журналист</p>
-                        <p class="uc__direction p2">Историк</p>
-                        <p class="uc__direction p2">Патриот</p>
-                        <p class="uc__direction p2">Юнармеец</p>
+                        <p class="uc__direction p2">
+                            Журналист
+                        </p>
+                        <p class="uc__direction p2">
+                            Историк
+                        </p>
+                        <p class="uc__direction p2">
+                            Патриот
+                        </p>
+                        <p class="uc__direction p2">
+                            Юнармеец
+                        </p>
                     </div>
                     <div class="uc__info">
-                        <p class="uc__publication p2">Дата публикации 02.03.2024</p>
-                        <buttom class="uc__info-btn btn" @click="$router.push('/cabinet-contests')">
+                        <p class="uc__publication p2">
+                            Дата публикации 02.03.2024
+                        </p>
+                        <buttom
+                            class="uc__info-btn btn"
+                            @click="$router.push('/cabinet-contests')"
+                        >
                             К списку конкурсов
                         </buttom>
                     </div>
@@ -24,7 +38,9 @@
                 <div class="uc-contest__content">
                     <div class="uc-contest__decription">
                         <div class="uc-contest__target">
-                            <p class="uc-contest__subtitle">Цель Конкурса:</p>
+                            <p class="uc-contest__subtitle">
+                                Цель Конкурса:
+                            </p>
                             <p class="uc-contest__text">
                                 сохранение исторической памяти о подвиге и героизме советского
                                 народа в годы Великой Отечественной войны, о воинском и трудовом
@@ -34,7 +50,9 @@
                             </p>
                         </div>
                         <div class="uc-contest__task">
-                            <p class="uc-contest__subtitle">Задачи конкурса:</p>
+                            <p class="uc-contest__subtitle">
+                                Задачи конкурса:
+                            </p>
                             <ul class="ul-contest__list">
                                 <li class="uc-contest__list-item">
                                     воспитание патриотизма у учащихся;
@@ -49,7 +67,9 @@
                             </ul>
                         </div>
                         <div class="uc-contest__condition">
-                            <p class="uc-contest__subtitle">Условия участия</p>
+                            <p class="uc-contest__subtitle">
+                                Условия участия
+                            </p>
                             <p class="uc-contest__text">
                                 К участию в Конкурсе принимаются только индивидуальные сочинения
                             </p>
@@ -78,7 +98,9 @@
                             </ul>
                         </div>
                         <div class="uc-contest__when-passes">
-                            <p class="uc-contest__subtitle">Когда проходит</p>
+                            <p class="uc-contest__subtitle">
+                                Когда проходит
+                            </p>
                             <p class="uc-contest__text">
                                 Конкурс проводится в три этапа (школьный, районный, городской):
                             </p>
@@ -94,18 +116,24 @@
                         </p>
                     </div>
                     <div class="uc-contest__application">
-                        <h3 class="uc-contest__application-title h3">Список учеников</h3>
+                        <h3 class="uc-contest__application-title h3">
+                            Список учеников
+                        </h3>
                         <p class="uc-contest__application-text">
                             Ученики, которые подали заявку. Вы можете удалить лишнего учениа.
                         </p>
                         <div class="uc-contest__list">
-                            <div v-for="el in listTeacher" :key="el.id" class="uc-contest__cards">
+                            <div
+                                v-for="el in listTeacher"
+                                :key="el.id"
+                                class="uc-contest__cards"
+                            >
                                 <div class="uc-contest__card">
                                     <img
                                         src="../../../assets/image/user-cabinet/contest/avatar.png"
                                         alt="avatar"
                                         class="uc-contest__avatar"
-                                    />
+                                    >
                                     <p class="uc-contest__user-name p2">
                                         {{ el.name }}
                                     </p>
@@ -114,7 +142,10 @@
                                             {{ el.studentGroup }}
                                         </p>
                                     </div>
-                                    <button class="uc-contest__btn" @click="removeStudent(el.id)">
+                                    <button
+                                        class="uc-contest__btn"
+                                        @click="removeStudent(el.id)"
+                                    >
                                         <svg
                                             width="16"
                                             height="20"
@@ -174,7 +205,7 @@ const listTeacher = ref([
     }
 ])
 
-function removeStudent(id) {
+function removeStudent (id) {
     const index = listTeacher.value.findIndex((el) => el.id === id)
     if (index !== -1) {
         listTeacher.value.splice(index, 1)

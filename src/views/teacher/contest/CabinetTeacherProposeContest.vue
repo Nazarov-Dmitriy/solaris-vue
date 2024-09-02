@@ -1,12 +1,22 @@
 <template>
     <section class="propose-contest">
         <div class="propose-contest__container">
-            <h3 class="propose-contest__title h3">Предложить конкурс</h3>
-            <p class="p1">Опишите предлагаемый вами конкурс во всех полях.</p>
-            <form action="#" class="propose-contest__form">
+            <h3 class="propose-contest__title h3">
+                Предложить конкурс
+            </h3>
+            <p class="p1">
+                Опишите предлагаемый вами конкурс во всех полях.
+            </p>
+            <form
+                action="#"
+                class="propose-contest__form"
+            >
                 <div class="propose-contest__form-text-inputs">
                     <div class="propose-contest__form-input-group">
-                        <label for="#" class="propose-contest__form-label">Название</label>
+                        <label
+                            for="#"
+                            class="propose-contest__form-label"
+                        >Название</label>
                         <InputText
                             class="propose-contest__form-input"
                             placeholder="Опишите цель предлагаемого конкурса"
@@ -15,26 +25,30 @@
                     <div
                         class="propose-contest__form-dropdown-group propose-contest__form-dropdown-group--mobile"
                     >
-                        <label for="#" class="propose-contest__form-label"
-                            >Добавьте роль участника в конкурсе</label
-                        >
+                        <label
+                            for="#"
+                            class="propose-contest__form-label"
+                        >Добавьте роль участника в конкурсе</label>
                         <div class="dropdown-wrapper">
                             <DropdownComponent
                                 class="propose-contest__form-dropdown"
                                 :options="role"
-                                additionalClass="custom-dropdown-selected"
+                                additional-class="custom-dropdown-selected"
                             />
                             <button class="dropdown-btn">
                                 <img
                                     src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
                                     alt="Выбрать предмет"
-                                />
+                                >
                             </button>
                         </div>
                     </div>
 
                     <div class="propose-contest__form-input-group">
-                        <label for="#" class="propose-contest__form-label">Описание</label>
+                        <label
+                            for="#"
+                            class="propose-contest__form-label"
+                        >Описание</label>
                         <InputTextarea
                             class="propose-contest__form-textarea"
                             placeholder="Перечислите основные задачи конкурса"
@@ -43,30 +57,33 @@
                 </div>
                 <div class="propose-contest__form-add-file">
                     <div class="propose-contest__form-dropdown-group">
-                        <label for="#" class="propose-contest__form-label"
-                            >Добавьте роль участника в конкурсе</label
-                        >
+                        <label
+                            for="#"
+                            class="propose-contest__form-label"
+                        >Добавьте роль участника в конкурсе</label>
                         <div class="dropdown-wrapper">
                             <DropdownComponent
                                 :options="role"
                                 class="propose-contest__form-dropdown"
-                                additionalClass="custom-dropdown-selected"
+                                additional-class="custom-dropdown-selected"
                             />
                             <button class="dropdown-btn">
                                 <img
                                     src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
                                     alt="Выбрать предмет"
-                                />
+                                >
                             </button>
                         </div>
                     </div>
                     <div class="propose-contest__form-btn-wrapper">
                         <div class="propose-contest__form-btn">
-                            <BtnWhite class="propose-contest__form-btn">Добавить файл</BtnWhite>
+                            <BtnWhite class="propose-contest__form-btn">
+                                Добавить файл
+                            </BtnWhite>
                         </div>
-                        <BtnComponent class="propose-contest__form-btn"
-                            >Отправить на согласование</BtnComponent
-                        >
+                        <BtnComponent class="propose-contest__form-btn">
+                            Отправить на согласование
+                        </BtnComponent>
                         <div class="propose-contest__form-btn-info">
                             <p class="propose-contest__form-btn-info-text">
                                 Нажимая “Отправить на согласование” вы соглашаетесь с

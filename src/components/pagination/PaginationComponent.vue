@@ -146,22 +146,22 @@ const showRightDots = computed(() => {
     }
 })
 
-const showPrev = computed(() => {
+// const showPrev = computed(() => {
 
-    if (params.showPiganation === 'all') {
-        return params.currentPage == 1 ? true : false
-    } else {
-        return false
-    }
-})
+//     if (params.showPiganation === 'all') {
+//         return params.currentPage == 1 ? true : false
+//     } else {
+//         return false
+//     }
+// })
 
-const showNext = computed(() => {
-    if (params.showPiganation === 'all') {
-        return params.currentPage === params.totalPage ? true : false
-    } else {
-        return false
-    }
-})
+// const showNext = computed(() => {
+//     if (params.showPiganation === 'all') {
+//         return params.currentPage === params.totalPage ? true : false
+//     } else {
+//         return false
+//     }
+// })
 
 onMounted(() => {
     document.documentElement.style.setProperty('--piganation-main', props.color.main);

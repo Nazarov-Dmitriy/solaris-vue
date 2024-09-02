@@ -9,14 +9,27 @@
                         Отечественной войне
                     </p>
                     <div class="uc__directions">
-                        <p class="uc__direction p2">Журналист</p>
-                        <p class="uc__direction p2">Историк</p>
-                        <p class="uc__direction p2">Патриот</p>
-                        <p class="uc__direction p2">Юнармеец</p>
+                        <p class="uc__direction p2">
+                            Журналист
+                        </p>
+                        <p class="uc__direction p2">
+                            Историк
+                        </p>
+                        <p class="uc__direction p2">
+                            Патриот
+                        </p>
+                        <p class="uc__direction p2">
+                            Юнармеец
+                        </p>
                     </div>
                     <div class="uc__info">
-                        <p class="uc__publication p2">Дата публикации 02.03.2024</p>
-                        <buttom class="uc__info-btn btn" @click="$router.push('/cabinet-contests')">
+                        <p class="uc__publication p2">
+                            Дата публикации 02.03.2024
+                        </p>
+                        <buttom
+                            class="uc__info-btn btn"
+                            @click="$router.push('/cabinet-contests')"
+                        >
                             К списку конкурсов
                         </buttom>
                     </div>
@@ -24,7 +37,9 @@
                 <div class="uc-contest__content">
                     <div class="uc-contest__decription">
                         <div class="uc-contest__target">
-                            <p class="uc-contest__subtitle">Цель Конкурса:</p>
+                            <p class="uc-contest__subtitle">
+                                Цель Конкурса:
+                            </p>
                             <p class="uc-contest__text">
                                 сохранение исторической памяти о подвиге и героизме советского
                                 народа в годы Великой Отечественной войны, о воинском и трудовом
@@ -34,7 +49,9 @@
                             </p>
                         </div>
                         <div class="uc-contest__task">
-                            <p class="uc-contest__subtitle">Задачи конкурса:</p>
+                            <p class="uc-contest__subtitle">
+                                Задачи конкурса:
+                            </p>
                             <ul class="ul-contest__list">
                                 <li class="uc-contest__list-item">
                                     воспитание патриотизма у учащихся;
@@ -49,7 +66,9 @@
                             </ul>
                         </div>
                         <div class="uc-contest__condition">
-                            <p class="uc-contest__subtitle">Условия участия</p>
+                            <p class="uc-contest__subtitle">
+                                Условия участия
+                            </p>
                             <p class="uc-contest__text">
                                 К участию в Конкурсе принимаются только индивидуальные сочинения
                             </p>
@@ -78,7 +97,9 @@
                             </ul>
                         </div>
                         <div class="uc-contest__when-passes">
-                            <p class="uc-contest__subtitle">Когда проходит</p>
+                            <p class="uc-contest__subtitle">
+                                Когда проходит
+                            </p>
                             <p class="uc-contest__text">
                                 Конкурс проводится в три этапа (школьный, районный, городской):
                             </p>

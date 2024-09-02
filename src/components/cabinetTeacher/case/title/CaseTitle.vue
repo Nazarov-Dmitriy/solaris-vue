@@ -15,10 +15,16 @@
                 </template>
                 <template #btn>
                     <div class="modal__btn-wrapper">
-                        <button class="modal__btn modal__btn--cancel" @click="handleModalClose">
+                        <button
+                            class="modal__btn modal__btn--cancel"
+                            @click="handleModalClose"
+                        >
                             Отменить
                         </button>
-                        <button class="modal__btn modal__btn--send" @click="showSecondModal">
+                        <button
+                            class="modal__btn modal__btn--send"
+                            @click="showSecondModal"
+                        >
                             Отправить
                         </button>
                     </div>
@@ -26,7 +32,10 @@
             </ModalComponent>
         </Teleport>
         <Teleport to="body">
-            <ModalComponent :visible="isSecondModalVisible" @toggleModal="handleSecondModalClose">
+            <ModalComponent
+                :visible="isSecondModalVisible"
+                @toggle-modal="handleSecondModalClose"
+            >
                 <template #text>
                     <p class="modal__text">
                         Ваш кейс успешно отправлен! После проверки результаты появятся у вас в
@@ -46,8 +55,14 @@
             </ModalComponent>
         </Teleport>
 
-        <h2 class="add-portfolio__title">Добавить кейс в портфолио</h2>
-        <BtnComponent emit-name="form-submit" class="add-portfolio__btn" @click="handleButtonClick">
+        <h2 class="add-portfolio__title">
+            Добавить кейс в портфолио
+        </h2>
+        <BtnComponent
+            emit-name="form-submit"
+            class="add-portfolio__btn"
+            @click="handleButtonClick"
+        >
             Отправить на проверку
         </BtnComponent>
     </div>
@@ -65,7 +80,7 @@ const emit = defineEmits(['form-submit', 'handleModalClose', 'handleModalAction'
 
 const router = useRouter()
 
-function manageBodyScroll() {
+function manageBodyScroll () {
     if (isModalVisible.value || isSecondModalVisible.value) {
         document.body.classList.add('no-scroll')
     } else {
@@ -78,21 +93,21 @@ router.afterEach(() => {
     document.body.classList.remove('no-scroll')
 })
 
-function handleButtonClick() {
+function handleButtonClick () {
     emit('form-submit')
     isModalVisible.value = true
 }
 
-function handleModalClose() {
+function handleModalClose () {
     isModalVisible.value = false
 }
 
-function showSecondModal() {
+function showSecondModal () {
     isSecondModalVisible.value = true
     isModalVisible.value = false
 }
 
-function handleSecondModalClose() {
+function handleSecondModalClose () {
     isSecondModalVisible.value = false
 }
 </script>
