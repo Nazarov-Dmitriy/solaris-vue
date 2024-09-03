@@ -12,9 +12,10 @@ import CasePortfolio from '@/views/teacher/CasePortfolio.vue'
 import CabinetTeacher from '@/views/teacher/CabinetTeacher.vue'
 import CabinetTeacherNotification from '@/views/teacher/CabinetTeacherNotification.vue'
 import CabinetTeacherPortfolio from '@/views/teacher/CabinetTeacherPortfolio.vue'
-import CabinetTeacherViewContestWith from '@/views/teacher/contest/CabinetTeacherViewContestWith.vue'
+import CabinetTeacherViewContestWith from '@/components/cabinetTeacher/contests/Contest.vue'
 import CabinetTeacherProposeContest from '@/views/teacher/contest/CabinetTeacherProposeContest.vue'
 import CabinetTeacherContests from '@/views/teacher/CabinetTeacherContests.vue'
+import ContestView from '@/views/teacher/contest/ContestView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -99,7 +100,7 @@ const router = createRouter({
                         {
                             path: '/teacher-contest-view/:id',
                             name: '/teacher-contest-view',
-                            component: CabinetTeacherViewContestWith
+                            component: ContestView
                         },
                         {
                             path: 'propose',

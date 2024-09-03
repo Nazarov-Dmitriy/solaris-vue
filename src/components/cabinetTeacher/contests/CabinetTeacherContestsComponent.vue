@@ -6,21 +6,24 @@
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                >
+                />
                 <img
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                >
+                />
                 <img
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                >
+                />
                 <div class="teacher-panel">
                     <div class="teacher-under-panel-group">
                         <div class="teacher-panel__btn-request">
-                            <button class="btn btn-request-contest">
+                            <button
+                                @click="$router.push('/cabinet-teacher/teacher-contest/propose')"
+                                class="btn btn-request-contest"
+                            >
                                 Предложить конкурс
                             </button>
                         </div>
@@ -35,9 +38,7 @@
                                 class="teacher-panel__dropdown-sort"
                                 :options="optionSort"
                             />
-                            <button class="btn btn-contest">
-                                Мои конкурсы
-                            </button>
+                            <button class="btn btn-contest">Мои конкурсы</button>
                         </div>
                     </div>
                 </div>
@@ -48,35 +49,26 @@
                 <div class="teacher-contnent">
                     <div class="teacher-subtitle__wraper">
                         <span class="teacher-subtitle__line" />
-                        <p class="teacher-subtitle__title p2">
-                            Конкурсы
-                        </p>
+                        <p class="teacher-subtitle__title p2">Конкурсы</p>
                         <span class="teacher-subtitle__line" />
                     </div>
-                    <div
-                        v-if="contests.length > 0"
-                        class="teacher-list"
-                    >
-                        <div
-                            v-for="el in renderList"
-                            :key="el.id"
-                            class="teacher__item"
-                        >
+                    <div v-if="contests.length > 0" class="teacher-list">
+                        <div v-for="el in renderList" :key="el.id" class="teacher__item">
                             <p class="teacher__decription h3">
                                 {{ el.title }}
                             </p>
                             <div class="teacher__directions">
-                                <p 
-                                    v-for="(item, number) in el.directions"
+                                <p
+                                    v-for="(item, number) in el.tags"
                                     :key="number"
                                     class="teacher__direction p2"
                                 >
-                                    {{ item.direction }}
+                                    {{ item }}
                                 </p>
                             </div>
                             <div class="teacher__info">
                                 <p class="teacher__publication p2">
-                                    Дата публикации 02.03.2024
+                                    Дата публикации {{ el.publication_date }}
                                 </p>
                                 <buttom
                                     class="teacher__info-btn btn"
@@ -87,10 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <p
-                        v-else
-                        class="p1 teacher-contnent-empty"
-                    >
+                    <p v-else class="p1 teacher-contnent-empty">
                         Здесь отображаются полученные конкрусы, конкурсов пока нет
                     </p>
                 </div>
@@ -105,193 +94,187 @@
     </section>
 </template>
 <script setup>
-import { ref } from 'vue';
-import PaginationComponent from '@/components/pagination/PaginationComponent.vue';
-import DropdownComponent from '@/components/dropdown/DropdownComponent.vue';
+import { ref } from 'vue'
+import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
+import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
+import { getAll } from '@/db/db'
 
 const renderList = ref([])
 const role = ref([])
 const sort = ref([])
 
-const contests = ref([
-    {
-        id: 1,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 2,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 3,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 4,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 5,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 6,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 7,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 8,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 9,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 10,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 11,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 12,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 13,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 14,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 15,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-    {
-        id: 16,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        directions: [
-            {direction: 'Журналист'},
-            {direction: 'Историк'},
-            {direction: 'Патриот'},
-            {direction: 'Юнармеец'},
-        ]
-    },
-]);
+const contests = getAll()
 
-const optionRole = [
-    'Выберите роль',
-    'Роль1',
-    'Роль2'
-]
+// const contests = ref([
+//     {
+//         id: 1,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 2,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 3,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 4,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 5,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 6,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 7,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 8,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 9,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 10,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 11,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 12,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 13,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 14,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 15,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     },
+//     {
+//         id: 16,
+//         title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+//         directions: [
+//             { direction: 'Журналист' },
+//             { direction: 'Историк' },
+//             { direction: 'Патриот' },
+//             { direction: 'Юнармеец' }
+//         ]
+//     }
+// ])
 
-const optionSort = [
-    'Новые вверху',
-    'Новые внизу',
-]
+const optionRole = ['Выберите роль', 'Роль1', 'Роль2']
 
+const optionSort = ['Новые вверху', 'Новые внизу']
 
-function getRenderList (list) {
+function getRenderList(list) {
     renderList.value = list
 }
-
 </script>
 
 <style lang="scss">
@@ -319,11 +302,11 @@ function getRenderList (list) {
     position: relative;
     box-sizing: border-box;
 
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         padding: 32px 40px;
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         padding: 32px 16px 32px 16px;
     }
 }
@@ -337,15 +320,15 @@ function getRenderList (list) {
     position: absolute;
     z-index: 1;
 
-    @media(max-width: $xxl) {
+    @media (max-width: $xxl) {
         left: 309px;
     }
 
-    @media(max-width: $xl) {
+    @media (max-width: $xl) {
         left: 295px;
     }
 
-    @media(max-width: $lg) {
+    @media (max-width: $lg) {
         display: none;
     }
 }
@@ -359,15 +342,15 @@ function getRenderList (list) {
     position: absolute;
     z-index: 1;
 
-    @media(max-width: $xxl) {
+    @media (max-width: $xxl) {
         left: 405px;
     }
 
-    @media(max-width: $xl) {
+    @media (max-width: $xl) {
         left: 359px;
     }
 
-    @media(max-width: $lg) {
+    @media (max-width: $lg) {
         display: none;
     }
 }
@@ -381,11 +364,11 @@ function getRenderList (list) {
     position: absolute;
     z-index: 1;
 
-    @media(max-width: $xxl) {
+    @media (max-width: $xxl) {
         left: 514px;
     }
 
-    @media(max-width: $xl) {
+    @media (max-width: $xl) {
         display: none;
     }
 }
@@ -395,7 +378,7 @@ function getRenderList (list) {
     justify-content: space-between;
     gap: 40px;
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         gap: 20px;
         flex-direction: column;
     }
@@ -407,12 +390,12 @@ function getRenderList (list) {
     padding: 16px;
     justify-content: end;
     width: 100%;
-    
+
     .btn-contest {
-            min-width: 151px;
-            margin-left: 24px;
-        }
-    
+        min-width: 151px;
+        margin-left: 24px;
+    }
+
     .dropdown-selected-text {
         min-width: 111px;
         width: 100%;
@@ -421,7 +404,7 @@ function getRenderList (list) {
     .dropdown-selected {
         max-width: 100%;
     }
-    
+
     .teacher-panel__dropdown-sort {
         width: 171px;
     }
@@ -435,7 +418,7 @@ function getRenderList (list) {
         }
     }
 
-    @media(max-width: $lg) {
+    @media (max-width: $lg) {
         .btn-contest {
             margin-left: 8px;
         }
@@ -445,7 +428,7 @@ function getRenderList (list) {
         }
     }
 
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         width: 100%;
         flex-wrap: wrap;
         gap: 20px;
@@ -460,40 +443,39 @@ function getRenderList (list) {
                 max-width: 100%;
             }
         }
-        
+
         .btn-contest {
             margin-left: 0;
             width: calc(100% - 20px - 171px);
         }
     }
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         flex-direction: column;
-        
+
         .teacher-panel__dropdown-sort {
             width: 100%;
             max-width: 100%;
         }
-        
+
         .btn-contest {
             margin-left: 0;
             width: 100%;
         }
     }
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         width: 100%;
     }
-
 }
 
 .teacher-panel__btn-request {
     padding: 16px 0 0 16px;
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         padding: 0 0 0 16px;
     }
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         padding: 0;
     }
 }
@@ -508,7 +490,7 @@ function getRenderList (list) {
     cursor: pointer;
     box-sizing: border-box;
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         width: 100%;
     }
 }
@@ -525,11 +507,11 @@ function getRenderList (list) {
     margin: 0 auto;
     box-sizing: border-box;
 
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         padding: 24px 40px;
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         padding: 24px 16px;
     }
 }
@@ -552,7 +534,7 @@ function getRenderList (list) {
     max-width: 50%;
     width: 100%;
     height: 2px;
-    background: var(--dark)
+    background: var(--dark);
 }
 
 .teacher-subtitle__title {
@@ -571,27 +553,27 @@ function getRenderList (list) {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 32px auto;
     grid-template-areas:
-        "teacher-deccription teacher-directions"
-        "teacher-deccription  teacher-info";
+        'teacher-deccription teacher-directions'
+        'teacher-deccription  teacher-info';
     padding: 16px;
     border-bottom: 2px solid var(--roseBege);
     gap: 56px 0;
 
-    @media(max-width: $lg) {
+    @media (max-width: $lg) {
         grid-template-columns: 1fr;
         grid-template-rows: 32px auto;
         grid-template-areas:
-            "teacher-directions"
-            "teacher-deccription "
-            "teacher-info";
+            'teacher-directions'
+            'teacher-deccription '
+            'teacher-info';
         gap: 20px 0;
     }
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         grid-template-rows: auto;
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         padding: 0 0 16px 0;
     }
 }
@@ -599,7 +581,7 @@ function getRenderList (list) {
 .teacher__item:hover {
     background: var(--lightBege);
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         background: unset;
     }
 }
@@ -609,7 +591,7 @@ function getRenderList (list) {
     max-width: 652px;
     color: var(--dark);
 
-    @media(max-width: $xl) {
+    @media (max-width: $xl) {
         max-width: 100%;
     }
 }
@@ -621,7 +603,7 @@ function getRenderList (list) {
     justify-content: flex-end;
     gap: 16px;
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         flex-wrap: wrap;
         flex-grow: 1;
         justify-content: space-between;
@@ -634,7 +616,7 @@ function getRenderList (list) {
     background: var(--roseBege);
     color: var(--white);
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         font-size: 12px;
     }
 }
@@ -647,7 +629,7 @@ function getRenderList (list) {
     justify-content: flex-end;
     align-items: flex-end;
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         flex-wrap: wrap;
         width: 100%;
         gap: 8px;
@@ -656,7 +638,7 @@ function getRenderList (list) {
 }
 
 .teacher__info-btn {
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         flex-grow: 1;
         justify-content: center;
         width: 100%;
@@ -668,6 +650,6 @@ function getRenderList (list) {
     max-width: 136px;
     text-align: end;
     margin-top: 4px;
-    color: var(--dark)
+    color: var(--dark);
 }
 </style>
