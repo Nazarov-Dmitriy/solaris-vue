@@ -65,28 +65,27 @@
                             </button>
                         </div>
                     </div>
+                    <div v-if="showFile" class="flex justify-end gap-4">
+                        <div
+                            v-for="(file, index) in selectedFiles"
+                            :key="index"
+                            class="propose-contest__file-img-wrapper"
+                        >
+                            <img
+                                @click="deleteFile"
+                                class="propose-contest__file-img-close"
+                                src="/public/cabinteTeacher/propose/close.png"
+                                alt="file img"
+                            />
+                            <img
+                                class="propose-contest__file-img"
+                                src="/public/cabinteTeacher/propose/file.svg"
+                                alt="file img"
+                            />
+                        </div>
+                    </div>
                     <div class="propose-contest__form-btn-wrapper">
                         <div class="propose-contest__form-btn">
-                            <div v-if="showFile" class="propose-contest__file-img-wrapper">
-                                <div
-                                    v-for="(file, index) in selectedFiles"
-                                    :key="index"
-                                    class="flex gap-4"
-                                >
-                                    <img
-                                        @click="deleteFile"
-                                        class="propose-contest__file-img-close"
-                                        src="/public/cabinteTeacher/propose/close.png"
-                                        alt="file img"
-                                    />
-                                    <img
-                                        class="propose-contest__file-img"
-                                        src="/public/cabinteTeacher/propose/file.svg"
-                                        alt="file img"
-                                    />
-                                </div>
-                            </div>
-
                             <BtnWhite
                                 emit-name="form-submit"
                                 @form-submit="addFile"
@@ -279,6 +278,7 @@ function deleteFile(index) {
         flex-direction: column;
     }
 }
+
 .propose-contest__form-btn-info {
     text-align: end;
     max-width: 400px;
