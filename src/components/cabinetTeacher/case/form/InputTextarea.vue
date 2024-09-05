@@ -14,7 +14,7 @@ const props = defineProps({
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .textarea {
     font-family: 'Inter';
     border: 2px solid var(--roseBege);
