@@ -1,4 +1,5 @@
 <template>
+    <CabinetHeader />
     <section class="propose-contest">
         <div class="propose-contest__container">
             <h3 class="propose-contest__title h3">
@@ -56,7 +57,11 @@
                     </div>
                 </div>
                 <div class="propose-contest__form-add-file">
-                    <div class="propose-contest__form-dropdown-group">
+                    <div
+                        v-for="(dropdown, index) in dropdowns"
+                        :key="index"
+                        class="propose-contest__form-dropdown-group"
+                    >
                         <label
                             for="#"
                             class="propose-contest__form-label"
@@ -67,7 +72,10 @@
                                 class="propose-contest__form-dropdown"
                                 additional-class="custom-dropdown-selected"
                             />
-                            <button class="dropdown-btn">
+                            <button
+                                class="dropdown-btn"
+                                @click="addDropdown"
+                            >
                                 <img
                                     src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
                                     alt="Выбрать предмет"
@@ -75,11 +83,43 @@
                             </button>
                         </div>
                     </div>
+                    <div
+                        v-if="showFile"
+                        class="flex justify-end gap-4"
+                    >
+                        <div
+                            v-for="(file, index) in selectedFiles"
+                            :key="index"
+                            class="propose-contest__file-img-wrapper"
+                        >
+                            <img
+                                class="propose-contest__file-img-close"
+                                src="/public/cabinteTeacher/propose/close.png"
+                                alt="file img"
+                                @click="deleteFile"
+                            >
+                            <img
+                                class="propose-contest__file-img"
+                                src="/public/cabinteTeacher/propose/file.svg"
+                                alt="file img"
+                            >
+                        </div>
+                    </div>
                     <div class="propose-contest__form-btn-wrapper">
                         <div class="propose-contest__form-btn">
-                            <BtnWhite class="propose-contest__form-btn">
+                            <BtnWhite
+                                emit-name="form-submit"
+                                class="propose-contest__form-btn"
+                                @form-submit="addFile"
+                            >
                                 Добавить файл
                             </BtnWhite>
+                            <input
+                                ref="fileInput"
+                                type="file"
+                                class="propose-contest__file-input"
+                                @change="handleFileChange"
+                            >
                         </div>
                         <BtnComponent class="propose-contest__form-btn">
                             Отправить на согласование
@@ -109,8 +149,40 @@ import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import InputText from '@/components/cabinetTeacher/case/form/InputText.vue'
 import InputTextarea from '@/components/cabinetTeacher/case/form/InputTextarea.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
+import CabinetHeader from '@/components/cabinetStudent/CabinetHeader.vue'
 
 const role = ref(['-', 'Ученик', 'Учитель'])
+
+const fileInput = ref(null)
+const showFile = ref(false)
+const selectedFiles = ref([])
+
+const dropdowns = ref([1])
+
+function addDropdown () {
+    if (dropdowns.value.length >= 3) {
+        return
+    }
+    dropdowns.value.push(1)
+    console.log(dropdowns.value)
+}
+
+function addFile () {
+    fileInput.value.click()
+}
+
+function handleFileChange (event) {
+    const files = event.target.files
+    for (let i = 0; i < files.length; i++) {
+        selectedFiles.value.push(files[i])
+    }
+    showFile.value = selectedFiles.value.length > 0
+}
+
+function deleteFile (index) {
+    selectedFiles.value.splice(index, 1)
+    showFile.value = selectedFiles.value.length > 0
+}
 </script>
 
 <style lang="scss" scoped>
@@ -228,6 +300,7 @@ const role = ref(['-', 'Ученик', 'Учитель'])
         flex-direction: column;
     }
 }
+
 .propose-contest__form-btn-info {
     text-align: end;
     max-width: 400px;
@@ -238,6 +311,26 @@ const role = ref(['-', 'Ученик', 'Учитель'])
         max-width: 100%;
     }
 }
+
+.propose-contest__file-img-wrapper {
+    border: 2px solid #1f2a3e;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 32px;
+    margin-top: 32px;
+}
+
+.propose-contest__file-img-close {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    cursor: pointer;
+}
+
 .propose-contest__form-btn-info-text {
     text-align: right;
     @media (max-width: $lg) {
@@ -251,5 +344,9 @@ const role = ref(['-', 'Ученик', 'Учитель'])
         text-align: center;
         display: block;
     }
+}
+
+.propose-contest__file-input {
+    display: none;
 }
 </style>

@@ -10,13 +10,12 @@ import ProfilePage from '@/views/teacher/ProfilePage.vue'
 import CasePortfolio from '@/views/teacher/CasePortfolio.vue'
 import CabinetTeacher from '@/views/teacher/CabinetTeacher.vue'
 import CabinetTeacherNotification from '@/views/teacher/CabinetTeacherNotification.vue'
-import CabinetTeacherContests from '@/views/teacher/CabinetTeacherContests.vue'
 import CabinetTeacherPortfolio from '@/views/teacher/CabinetTeacherPortfolio.vue'
-import CabinetTeacherViewContestWith from '@/views/teacher/contest/CabinetTeacherViewContestWith.vue'
-import CabinetTeacherViewContestWithout from '@/views/teacher/contest/CabinetTeacherViewContestWithout.vue'
 import CabinetTeacherProposeContest from '@/views/teacher/contest/CabinetTeacherProposeContest.vue'
-import CabinetStudentNotification from '@/views/student/CabinetStudentNotification.vue'
+import CabinetTeacherContests from '@/views/teacher/CabinetTeacherContests.vue'
+import ContestView from '@/views/teacher/contest/ContestView.vue'
 import CabinetStudent from '@/views/student/CabinetStudent.vue'
+import CabinetStudentNotification from '@/views/student/CabinetStudentNotification.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -108,14 +107,9 @@ const router = createRouter({
                     path: 'teacher-contest',
                     children: [
                         {
-                            path: 'with',
-                            name: 'teacher-contest-with',
-                            component: CabinetTeacherViewContestWith
-                        },
-                        {
-                            path: 'without',
-                            name: 'teacher-contest-without',
-                            component: CabinetTeacherViewContestWithout
+                            path: '/teacher-contest-view/:id',
+                            name: '/teacher-contest-view',
+                            component: ContestView
                         },
                         {
                             path: 'propose',
