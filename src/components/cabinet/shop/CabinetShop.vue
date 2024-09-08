@@ -9,7 +9,7 @@
                     <div
                         class="shop-item"
                         :class="{ 'shop-item__popular': el.popular }"
-                        @click="$router.push(`/cabinet-shop-card/${el.id}`)"
+                        @click="$router.push(`/cabinet/student/shop/${el.id}`)"
                     >
                         <img
                             class="shop-img"

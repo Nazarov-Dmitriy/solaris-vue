@@ -3,11 +3,11 @@
         <div class="cabinet-header">
             <div class="cabinet-header__info">
                 <router-link
-                    to="/cabinet-student"
+                    to="/cabinet/student"
                     class="cabinet-header__logo-wraper"
                 >
                     <img
-                        src="../../assets/icon/cabinet-header/logo_cabinet.svg"
+                        src="@/assets/icon/cabinet-header/logo_cabinet.svg"
                         class="cabinet-header__logo"
                         alt="
                         icon-logo"
@@ -19,13 +19,13 @@
                 <div class="cabinet-header__student-info">
                     <div class="cabinet-header__notification">
                         <router-link
-                            to="/cabinet-student/notification"
+                            to="/cabinet/student/notification"
                         >
                             <p class="cabinet-header__notification-count p2-phone">
                                 1
                             </p>
                             <img
-                                src="../../assets/icon/cabinet-header/bell.svg"
+                                src="@/assets/icon/cabinet-header/bell.svg"
                                 alt="icon-bellt"
                             >
                         </router-link>
@@ -34,7 +34,7 @@
                         АИ
                     </p>
                     <img
-                        src="../../assets/icon/cabinet-header/pointer_down.svg"
+                        src="@/assets/icon/cabinet-header/pointer_down.svg"
                         alt="icon-poiner-down"
                     >
                 </div>
@@ -43,11 +43,11 @@
                 <ul class="cabinet-header__list">
                     <li class="botton">
                         <router-link
-                            to="/cabinet-teacher/contests"
+                            to="/cabinet/student/contests"
                             class="cabinet-header__link"
                         >
                             <img
-                                src="../../assets/icon/cabinet-header/contest.svg"
+                                src="@/assets/icon/cabinet-header/contest.svg"
                                 alt="icon-shop"
                             >
                             Конкурсы
@@ -55,11 +55,11 @@
                     </li>
                     <li class="botton">
                         <router-link
-                            to="/cabinet-shop"
+                            to="/cabinet/student/shop"
                             class="cabinet-header__link"
                         >
                             <img
-                                src="../../assets/icon/cabinet-header/contest.svg"
+                                src="@/assets/icon/cabinet-header/contest.svg"
                                 alt="icon-shop"
                             >
                             Магазин
@@ -67,11 +67,11 @@
                     </li>
                     <li class="botton">
                         <router-link
-                            to="/cabinet-sales"
+                            to="/cabinet/student/sales"
                             class="cabinet-header__link"
                         >
                             <img
-                                src="../../assets/icon/cabinet-header/сart.svg"
+                                src="@/assets/icon/cabinet-header/сart.svg"
                                 alt="icon-shop"
                             >
                             Покупки

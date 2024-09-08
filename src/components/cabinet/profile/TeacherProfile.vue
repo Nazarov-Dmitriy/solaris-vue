@@ -1,11 +1,11 @@
 <template>
-    <section class="cabinet-profile">
-        <div class="cabinet-profile__container">
-            <div class="cabinet-profile__avatar">
-                <h2 class="cabinet-profile__avatar-initial h2">
+    <section class="teachcabinet-profile">
+        <div class="teachcabinet-profile__container">
+            <div class="teachcabinet-profile__avatar">
+                <h2 class="teachcabinet-profile__avatar-initial h2">
                     АИ
                 </h2>
-                <button class="cabinet-profile__avatar-button">
+                <button class="teachcabinet-profile__avatar-button">
                     <svg
                         width="32"
                         height="32"
@@ -39,50 +39,57 @@
                     </svg>
                 </button>
             </div>
-            <div class="cabinet-profile__wrap">
-                <p class="cabinet-profile__name p1">
-                    Иванов<span>Анатолий Иванович</span>
+            <div class="teachcabinet-profile__wrap">
+                <p class="teachcabinet-profile__name p1">
+                    Иванов<span>Андрей Иванович</span>
                 </p>
-                <p class="cabinet-profile__class p2">
-                    7A класс
+                <p class="teachcabinet-profile__class p2">
+                    Русский язык
                 </p>
-                <p class="cabinet-profile__text p2">
-                    ID используется для входа на сайт
+                <p class="teachcabinet-profile__text p2">
+                    Литература
                 </p>
-                <p class="cabinet-profile__id p1">
-                    IvanovAI_7a
+                <p class="teachcabinet-profile__id p1">
+                    IvanovAI_Russian and literature
                 </p>
             </div>
             <img
-                class="cabinet-profile__img"
-                src="../../assets/image/cabinet-profile/cabinet-profile-solaric.png"
+                class="teachcabinet-profile__img"
+                src="@/assets/image/cabinet-teacher/cabinet-teacher-solaric.svg"
                 alt="#"
             >
         </div>
     </section>
 </template>
 <script>
-export default {
-
-}
 </script>
-<style>
-.cabinet-profile {
+<style lang="scss">
+.teachcabinet-profile {
     background-color: var(--dark);
 }
 
-.cabinet-profile__container {
+.teachcabinet-profile__container {
     max-width: 1560px;
     margin: auto;
     box-sizing: border-box;
-    padding: 80px 60px;
+    padding: 50px 60px;
     position: relative;
     display: flex;
     gap: 16px;
     align-items: center;
+    overflow: hidden;
+
+    @media (max-width: $md) {
+        padding: 40px;
+    }
+
+    @media (max-width: $sm) {
+        padding: 16px;
+        flex-direction: column;
+    }
 }
 
-.cabinet-profile__avatar {
+.teachcabinet-profile__avatar {
     width: 148px;
     height: 148px;
     border-radius: 50%;
@@ -93,12 +100,12 @@ export default {
     justify-content: center;
 }
 
-.cabinet-profile__avatar-initial {
+.teachcabinet-profile__avatar-initial {
     color: var(--roseBege);
     margin-top: 26px;
 }
 
-.cabinet-profile__avatar-button {
+.teachcabinet-profile__avatar-button {
     position: absolute;
     bottom: 24px;
     left: 56px;
@@ -109,69 +116,93 @@ export default {
     cursor: pointer;
 }
 
-.cabinet-profile__wrap {
+.teachcabinet-profile__wrap {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+
+    @media (max-width: $sm) {
+        align-items: center;
+        gap: 0px;
+    }
 }
 
-.cabinet-profile__name span {
+.teachcabinet-profile__wrap p {
+    @media (max-width: $sm) {
+        text-align: center;
+    }
+}
+
+.teachcabinet-profile__name span {
     display: block;
 }
 
-.cabinet-profile__name,
-.cabinet-profile__class,
-.cabinet-profile__text,
-.cabinet-profile__id {
+.teachcabinet-profile__name,
+.teachcabinet-profile__class,
+.teachcabinet-profile__text,
+.teachcabinet-profile__id {
     color: var(--white);
 }
 
-.cabinet-profile__img {
+.teachcabinet-profile__img {
     position: absolute;
-    bottom: 0px;
+    bottom: 20px;
     right: 260px;
-    width: 552px;
-    height: 298px;
-}
+    width: 680px;
+    height: 222px;
 
-@media (max-width: 1440px) {
-    .cabinet-profile__img {
-        right: 140px;
+    @media (max-width: $xxl) {
+        right: 190px;
     }
-}
 
-@media (max-width: 1200px) {
-    .cabinet-profile__img {
-        right: 56px;
+    @media (max-width: $xl) {
+        bottom: 32px;
+        right: 68px;
+        width: 562px;
+        height: 200px;
     }
-}
 
-@media (max-width: 991px) {
-    .cabinet-profile__container {
-        padding: 80px 40px;
+    @media (max-width: $lg) {
+        bottom: 56px;
+        right: 60px;
+        width: 363px;
+        height: 143px;
     }
-}
 
-@media (max-width: 860px) {
-    .cabinet-profile__img {
+    @media (max-width: $md) {
+        bottom: 56px;
+        right: -144px;
+        width: 291px;
+        height: 115px;
+    }
+
+    @media (max-width: $sm) {
         display: none;
     }
 }
 
-@media (max-width: 576px) {
-    .cabinet-profile__container {
-        padding: 16px;
-        flex-direction: column;
+.teachcabinet-profile__class {
+    @media (max-width: $lg) {
+        font-size: 14px;
+        line-height: 20px;
     }
 
-    .cabinet-profile__wrap {
-        align-items: center;
-        gap: 0px;
+    @media (max-width: $sm) {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+.teachcabinet-profile__text {
+    @media (max-width: $lg) {
+        font-size: 14px;
+        line-height: 20px;
     }
 
-    .cabinet-profile__wrap p {
-        text-align: center;
+    @media (max-width: $sm) {
+        font-size: 12px;
+        line-height: 18px;
     }
 }
 </style>

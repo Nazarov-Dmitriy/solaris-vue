@@ -156,6 +156,10 @@ const props = defineProps({
     contests: {
         type: Array,
         default: () => []
+    },
+    user: {
+        type: String,
+        default: ''
     }
 })
 

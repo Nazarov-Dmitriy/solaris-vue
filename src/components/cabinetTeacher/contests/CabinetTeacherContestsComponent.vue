@@ -6,23 +6,23 @@
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                />
+                >
                 <img
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                />
+                >
                 <img
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                />
+                >
                 <div class="teacher-panel">
                     <div class="teacher-under-panel-group">
                         <div class="teacher-panel__btn-request">
                             <button
-                                @click="$router.push('/cabinet-teacher/teacher-contest/propose')"
                                 class="btn btn-request-contest"
+                                @click="$router.push('/cabinet-teacher/teacher-contest/propose')"
                             >
                                 Предложить конкурс
                             </button>
@@ -38,7 +38,9 @@
                                 class="teacher-panel__dropdown-sort"
                                 :options="optionSort"
                             />
-                            <button class="btn btn-contest">Мои конкурсы</button>
+                            <button class="btn btn-contest">
+                                Мои конкурсы
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -49,11 +51,20 @@
                 <div class="teacher-contnent">
                     <div class="teacher-subtitle__wraper">
                         <span class="teacher-subtitle__line" />
-                        <p class="teacher-subtitle__title p2">Конкурсы</p>
+                        <p class="teacher-subtitle__title p2">
+                            Конкурсы
+                        </p>
                         <span class="teacher-subtitle__line" />
                     </div>
-                    <div v-if="allContests.length > 0" class="teacher-list">
-                        <div v-for="el in renderList" :key="el.id" class="teacher__item">
+                    <div
+                        v-if="allContests.length > 0"
+                        class="teacher-list"
+                    >
+                        <div
+                            v-for="el in renderList"
+                            :key="el.id"
+                            class="teacher__item"
+                        >
                             <p class="teacher__decription h3">
                                 {{ el.title }}
                             </p>
@@ -79,7 +90,10 @@
                             </div>
                         </div>
                     </div>
-                    <p v-else class="p1 teacher-contnent-empty">
+                    <p
+                        v-else
+                        class="p1 teacher-contnent-empty"
+                    >
                         Здесь отображаются полученные конкурсы, конкурсов пока нет
                     </p>
                 </div>
@@ -107,7 +121,7 @@ const contests = getAll()
 const allContests = ref([...contests])
 const filteredContests = ref([...contests])
 
-function sortContests() {
+function sortContests () {
     filteredContests.value.sort((a, b) => {
         return sort.value === 'Новые вверху'
             ? new Date(b.publication_date) - new Date(a.publication_date)
@@ -116,7 +130,7 @@ function sortContests() {
     updateRenderList()
 }
 
-function filterContestsByRole() {
+function filterContestsByRole () {
     if (role.value === null || role.value === 'Выберите роль') {
         filteredContests.value = [...allContests.value]
     } else {
@@ -127,7 +141,7 @@ function filterContestsByRole() {
     sortContests()
 }
 
-function updateRenderList() {
+function updateRenderList () {
     renderList.value = filteredContests.value.slice(0, 4)
 }
 
@@ -143,7 +157,7 @@ onMounted(() => {
 const optionRole = ['Выберите роль', 'Журналист', 'Историк', 'Патриот', 'Юнармеец']
 const optionSort = ['Новые вверху', 'Новые внизу']
 
-function getRenderList(list) {
+function getRenderList (list) {
     renderList.value = list
 }
 </script>

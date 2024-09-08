@@ -8,7 +8,7 @@
 
 <script setup>
 
-import CabinetHeader from '../components/cabinetStudent/CabinetHeader.vue'
+import CabinetHeader from '../components/cabinet/header/StudentHeader.vue'
 import CabinetShopBalance from '../components/cabinetStudent/shop/CabinetShopBalance.vue'
 import CabinetShopCard from '../components/cabinetStudent/shop/CabinetShopCard.vue'
 </script>

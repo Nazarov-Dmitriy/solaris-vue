@@ -20,7 +20,7 @@
                     <div class="cabinet-header__student-info">
                         <div class="cabinet-header__notification">
                             <router-link
-                                to="/cabinet-teacher/notification"
+                                to="/cabinet/teacher/notification"
                             >
                                 <p class="cabinet-header__notification-count p2-phone">
                                     1

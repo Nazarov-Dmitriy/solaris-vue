@@ -19,7 +19,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import CabinetHeader from '../../components/cabinetTeacher/header/CabinetHeader.vue'
+// import CabinetHeader from '../../components/cabinetTeacher/header/CabinetHeader.vue'
 import AddCase from '@/components/cabinetTeacher/case/AddCase.vue'
 import TeacherDetails from '@/components/cabinetTeacher/case/form/TeacherDetails.vue'
 import CaseTitle from '@/components/cabinetTeacher/case/title/CaseTitle.vue'

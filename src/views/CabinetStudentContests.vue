@@ -7,5 +7,5 @@
 
 <script setup>
 import CabinetStudentContestsComponent from '@/components/cabinetStudent/contests/CabinetStudent.vue'
-import CabinetHeader from '../components/cabinetStudent/CabinetHeader.vue'
+import CabinetHeader from '../components/cabinet/header/StudentHeader.vue'
 </script>

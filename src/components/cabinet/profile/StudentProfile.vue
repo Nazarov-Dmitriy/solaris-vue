@@ -1,11 +1,11 @@
 <template>
-    <section class="teachcabinet-profile">
-        <div class="teachcabinet-profile__container">
-            <div class="teachcabinet-profile__avatar">
-                <h2 class="teachcabinet-profile__avatar-initial h2">
+    <section class="cabinet-profile">
+        <div class="cabinet-profile__container">
+            <div class="cabinet-profile__avatar">
+                <h2 class="cabinet-profile__avatar-initial h2">
                     АИ
                 </h2>
-                <button class="teachcabinet-profile__avatar-button">
+                <button class="cabinet-profile__avatar-button">
                     <svg
                         width="32"
                         height="32"
@@ -39,55 +39,50 @@
                     </svg>
                 </button>
             </div>
-            <div class="teachcabinet-profile__wrap">
-                <p class="teachcabinet-profile__name p1">
-                    Иванов<span>Андрей Иванович</span>
+            <div class="cabinet-profile__wrap">
+                <p class="cabinet-profile__name p1">
+                    Иванов<span>Анатолий Иванович</span>
                 </p>
-                <p class="teachcabinet-profile__class p2">
-                    Русский язык
+                <p class="cabinet-profile__class p2">
+                    7A класс
                 </p>
-                <p class="teachcabinet-profile__text p2">
-                    Литература
+                <p class="cabinet-profile__text p2">
+                    ID используется для входа на сайт
                 </p>
-                <p class="teachcabinet-profile__id p1">
-                    IvanovAI_Russian and literature
+                <p class="cabinet-profile__id p1">
+                    IvanovAI_7a
                 </p>
             </div>
             <img
-                class="teachcabinet-profile__img"
-                src="@/assets/image/cabinet-teacher/cabinet-teacher-solaric.svg"
+                class="cabinet-profile__img"
+                src="@/assets/image/cabinet-profile/cabinet-profile-solaric.png"
                 alt="#"
             >
         </div>
     </section>
 </template>
 <script>
+export default {
+
+}
 </script>
-<style lang="scss">
-.teachcabinet-profile {
+<style>
+.cabinet-profile {
     background-color: var(--dark);
 }
 
-.teachcabinet-profile__container {
+.cabinet-profile__container {
     max-width: 1560px;
     margin: auto;
     box-sizing: border-box;
-    padding: 50px 60px;
+    padding: 80px 60px;
     position: relative;
     display: flex;
     gap: 16px;
     align-items: center;
-    overflow: hidden;
-    @media (max-width: $md) {
-        padding: 40px;
-    }
-    @media (max-width: $sm) {
-        padding: 16px;
-        flex-direction: column;
-    }
 }
 
-.teachcabinet-profile__avatar {
+.cabinet-profile__avatar {
     width: 148px;
     height: 148px;
     border-radius: 50%;
@@ -98,12 +93,12 @@
     justify-content: center;
 }
 
-.teachcabinet-profile__avatar-initial {
+.cabinet-profile__avatar-initial {
     color: var(--roseBege);
     margin-top: 26px;
 }
 
-.teachcabinet-profile__avatar-button {
+.cabinet-profile__avatar-button {
     position: absolute;
     bottom: 24px;
     left: 56px;
@@ -114,88 +109,69 @@
     cursor: pointer;
 }
 
-.teachcabinet-profile__wrap {
+.cabinet-profile__wrap {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    @media (max-width: $sm) {
-        align-items: center;
-        gap: 0px;
-    }
 }
 
-.teachcabinet-profile__wrap p {
-    @media (max-width: $sm) {
-        text-align: center;
-    }
-}
-
-.teachcabinet-profile__name span {
+.cabinet-profile__name span {
     display: block;
 }
 
-.teachcabinet-profile__name,
-.teachcabinet-profile__class,
-.teachcabinet-profile__text,
-.teachcabinet-profile__id {
+.cabinet-profile__name,
+.cabinet-profile__class,
+.cabinet-profile__text,
+.cabinet-profile__id {
     color: var(--white);
 }
 
-.teachcabinet-profile__img {
+.cabinet-profile__img {
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
     right: 260px;
-    width: 680px;
-    height: 222px;
-    @media (max-width: $xxl) {
-        right: 190px;
-    }
+    width: 552px;
+    height: 298px;
+}
 
-    @media (max-width: $xl) {
-        bottom: 32px;
-        right: 68px;
-        width: 562px;
-        height: 200px;
+@media (max-width: 1440px) {
+    .cabinet-profile__img {
+        right: 140px;
     }
+}
 
-    @media (max-width: $lg) {
-        bottom: 56px;
-        right: 60px;
-        width: 363px;
-        height: 143px;
+@media (max-width: 1200px) {
+    .cabinet-profile__img {
+        right: 56px;
     }
-    @media (max-width: $md) {
-        bottom: 56px;
-        right: -144px;
-        width: 291px;
-        height: 115px;
+}
+
+@media (max-width: 991px) {
+    .cabinet-profile__container {
+        padding: 80px 40px;
     }
-    @media (max-width: $sm) {
+}
+
+@media (max-width: 860px) {
+    .cabinet-profile__img {
         display: none;
     }
 }
 
-.teachcabinet-profile__class {
-    @media (max-width: $lg) {
-        font-size: 14px;
-        line-height: 20px;
-    }
-    @media (max-width: $sm) {
-        font-size: 12px;
-        line-height: 18px;
-    }
-}
-
-.teachcabinet-profile__text {
-    @media (max-width: $lg) {
-        font-size: 14px;
-        line-height: 20px;
+@media (max-width: 576px) {
+    .cabinet-profile__container {
+        padding: 16px;
+        flex-direction: column;
     }
 
-    @media (max-width: $sm) {
-        font-size: 12px;
-        line-height: 18px;
+    .cabinet-profile__wrap {
+        align-items: center;
+        gap: 0px;
+    }
+
+    .cabinet-profile__wrap p {
+        text-align: center;
     }
 }
 </style>
