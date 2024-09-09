@@ -1,6 +1,6 @@
 <template>
-    <div class="cabinet-header__container">
-        <div class="cabinet-header">
+    <div class="cabinet-header__container student">
+        <div class="cabinet-header ">
             <div class="cabinet-header__info">
                 <router-link
                     to="/cabinet/student"
@@ -87,7 +87,7 @@
 
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .cabinet-header__container {
     width: 100%;
     border-bottom: 2px solid var(--roseBege);

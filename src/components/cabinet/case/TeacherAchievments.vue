@@ -2,26 +2,40 @@
     <section class="achievements">
         <div class="achievements__container">
             <div class="achievements__wrapper">
-                <div class="achievements__achievement">
+                <div>
                     <div class="achievements__header">
-                        <h3 class="h3 achievements__header-title">Достижения обучающихся</h3>
-                        <p class="p2 achievements__header-text">максимум 20 баллов</p>
+                        <h3 class="h3 achievements__header-title">
+                            Достижения учителя
+                        </h3>
+                        <p class="p2 achievements__header-text">
+                            максимум 20 баллов
+                        </p>
                     </div>
-                    <div v-for="(event, index) in events" :key="index" class="flex flex-col gap-4">
+                    <div
+                        v-for="(fieldGroup, index) in fieldsGroup"
+                        :key="index"
+                        class="flex flex-col gap-4"
+                    >
                         <div class="achievements__text-wrapper">
-                            <span></span>
-                            <p class="achievements__nomination-text">Мероприятие</p>
-                            <span></span>
+                            <span />
+                            <p class="achievements__nomination-text">
+                                Мероприятие
+                            </p>
+                            <span />
                         </div>
-                        <form action="#" class="achievements__form">
+                        <form
+                            action="#"
+                            class="achievements__form"
+                        >
                             <div class="achievements__input-group">
-                                <label for="eventName" class="achievements__label"
-                                    >Наименование мероприятия</label
-                                >
+                                <label
+                                    for="eventName"
+                                    class="achievements__label"
+                                >Наименование мероприятия</label>
                                 <DropdownComponent
                                     id="eventName"
                                     class="achievements__input"
-                                    additionalClass="custom-dropdown-selected"
+                                    additional-class="custom-dropdown-selected"
                                     :options="eventNameOptions"
                                 />
                             </div>
@@ -31,28 +45,61 @@
                                     примечания к заполнению
                                 </p>
                                 <div class="achievements__input-group">
-                                    <label for="chooseLevel" class="achievements__label"
-                                        >Уровень</label
+                                    <label
+                                        for="chooseDate"
+                                        class="achievements__label"
+                                    >Дата</label>
+                                    <InputDate id="chooseDate" />
+                                    <p
+                                        v-if="dateError"
+                                        class="error-message"
                                     >
+                                        {{ dateError }}
+                                    </p>
+                                </div>
+                                <div class="achievements__input-group">
+                                    <label
+                                        for="chooseEventType"
+                                        class="achievements__label"
+                                    >Тип мероприятия</label>
                                     <DropdownComponent
-                                        id="chooseLevel"
+                                        id="chooseEventType"
+                                        :options="chooseEventTypeOptions"
+                                        additional-class="custom-dropdown-selected"
                                         class="achievements__input"
-                                        additionalClass="custom-dropdown-selected"
-                                        :options="chooseLevelOptions"
                                     />
                                 </div>
                                 <div class="achievements__input-group">
-                                    <label for="organiser" class="achievements__label"
-                                        >Организатор</label
-                                    >
+                                    <label
+                                        for="chooseLevel"
+                                        class="achievements__label"
+                                    >Уровень</label>
+
+                                    <DropdownComponent
+                                        id="chooseLevel"
+                                        additional-class="custom-dropdown-selected"
+                                        :options="chooseLevelOptions"
+                                        class="achievements__input"
+                                    />
+                                </div>
+                                <div class="achievements__input-group">
+                                    <label
+                                        for="orginise"
+                                        class="achievements__label"
+                                    >Организатор</label>
+
                                     <InputText
-                                        id="organiser"
+                                        id="orginise"
                                         class="achievements__input"
                                         placeholder="Введите организатора"
                                     />
                                 </div>
                                 <div class="achievements__input-group">
-                                    <label for="name" class="achievements__label">Название</label>
+                                    <label
+                                        for="name"
+                                        class="achievements__label"
+                                    >Название</label>
+
                                     <InputText
                                         id="name"
                                         class="achievements__input"
@@ -60,52 +107,25 @@
                                     />
                                 </div>
                             </div>
-                            <div class="achievements__student">
-                                <div class="achievements__text-wrapper">
-                                    <span></span>
-                                    <p class="achievements__nomination-text">Обучающиеся/Ученик</p>
-                                    <span></span>
-                                </div>
-                                <div class="achievements__student-input-wrapper">
-                                    <div class="achievements__input-group">
-                                        <label for="class" class="achievements__label"
-                                            >Класс обучающегося</label
-                                        >
-                                        <DropdownComponent
-                                            id="class"
-                                            class="achievements__input"
-                                            additionalClass="custom-dropdown-selected"
-                                            :options="classOptions"
-                                        />
-                                    </div>
-                                    <div class="achievements__input-group">
-                                        <label for="studentInformation" class="achievements__label"
-                                            >ФИ обучающегося, группа или класс</label
-                                        >
-                                        <InputText
-                                            id="studentInformation"
-                                            class="achievements__input"
-                                            placeholder="Введите обучающегося"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
                             <div class="achievements__results">
                                 <div class="achievements__text-wrapper">
-                                    <span></span>
-                                    <p class="achievements__nomination-text">Результат</p>
-                                    <span></span>
+                                    <span />
+                                    <p class="achievements__nomination-text">
+                                        Результат
+                                    </p>
+                                    <span />
                                 </div>
                                 <div class="achievements__results-input-wrapper">
                                     <div class="achievements__input-group">
-                                        <label for="chooseResult" class="achievements__label"
-                                            >Результат</label
-                                        >
+                                        <label
+                                            for="chooseResult"
+                                            class="achievements__label"
+                                        >Результат</label>
                                         <DropdownComponent
                                             id="chooseResult"
                                             class="achievements__input"
-                                            additionalClass="custom-dropdown-selected"
-                                            :options="results"
+                                            additional-class="custom-dropdown-selected"
+                                            :options="chooseResultOptions"
                                         />
                                     </div>
                                     <div class="achievements__result-btn-wrapper">
@@ -123,21 +143,24 @@
                             проверки: Зачтено, Зачтено частично, Не зачтено
                         </p>
                         <div class="achievements__footer">
-                            <h3 class="h3 achievements__footer-title">Предполагаемый балл: 0</h3>
+                            <h3 class="h3 achievements__footer-title">
+                                Предполагаемый балл: 0
+                            </h3>
                             <BtnComponent
                                 emit-name="form-submit"
-                                @form-submit="toggleModal"
                                 class="achievements__footer-btn"
-                                >Сохранить</BtnComponent
+                                @form-submit="toggleModal"
                             >
+                                Сохранить
+                            </BtnComponent>
                         </div>
                         <div class="achievements__btn-wrapper">
                             <BtnWhite
-                                v-if="index === events.length - 1"
+                                v-if="index === fieldsGroup.length - 1"
                                 emit-name="form-submit"
-                                @form-submit="addNewEvent"
-                                additionalClass="btn-white__text--img"
+                                additional-class="btn-white__text--img"
                                 class="achievements__btn"
+                                @form-submit="addFieldsGroup"
                             >
                                 Добавить мероприятие
                             </BtnWhite>
@@ -148,13 +171,15 @@
         </div>
         <Teleport to="body">
             <ModalComponent
-                additionalClass="custom-modal-position"
+                additional-class="custom-modal-position"
                 emit-name="toggleModal"
-                @toggleModal="toggleModal"
                 :visible="isModalVisible"
+                @toggle-modal="toggleModal"
             >
                 <template #title>
-                    <h2 class="modal-title">Данные сохранены</h2>
+                    <h2 class="modal-title">
+                        Данные сохранены
+                    </h2>
                 </template>
                 <template #text>
                     <p class="text-center">
@@ -173,11 +198,18 @@ import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import InputText from './form/InputText.vue'
+import InputDate from './form/InputDate.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
+
+const fieldsGroup = ref([1])
+
+function addFieldsGroup () {
+    fieldsGroup.value.push(1)
+}
 
 const isModalVisible = ref(false)
 
-function toggleModal() {
+function toggleModal () {
     isModalVisible.value = !isModalVisible.value
 }
 
@@ -188,7 +220,6 @@ watch(isModalVisible, (newValue) => {
         document.body.classList.remove('no-scroll')
     }
 })
-
 const eventNameOptions = ref([
     '-',
     'Результативность участия обучающихся во Всероссийской олимпиаде школьников.',
@@ -203,25 +234,18 @@ const eventNameOptions = ref([
     'Результативность участия команды в спортивных соревнованиях "Президентские состязания".'
 ])
 
-const results = ref([
+const chooseLevelOptions = ref(['-', 'Лицейский', 'Муниципальный', 'Региональный', 'Всероссийский'])
+const chooseEventTypeOptions = ref([
     '-',
-    'Участие',
-    'Призер/победитель',
-    'Победитель',
-    'Призер',
-    'ГТО: Золотой значок (более 50% от количества сдающих, обучающихся у учителя)',
-    'ГТО: Серебряный значок (более 50% от количества сдающих, обучающихся у учителя)',
-    'ГТО: Бронзовый значок (более 50% от количества сдающих, обучающихся у учителя)'
+    'Открытый урок',
+    'Мастер класс',
+    'Внеклассное мероприятие',
+    'Выступление на НПК/заседаниях',
+    'Выступление на практических семинарах',
+    'Публикации в научных журналах за исключением интернет-сми'
 ])
 
-const chooseLevelOptions = ref(['-', 'Лицейский', 'Муниципальный', 'Региональный', 'Всероссийский'])
-const classOptions = ref(['-', '1-3', '4-6', '7-11'])
-
-const events = ref([1])
-
-function addNewEvent() {
-    events.value.push(1)
-}
+const chooseResultOptions = ref(['-', 'Участие', 'Победитлеь', 'Призер'])
 </script>
 
 <style scoped lang="scss">
@@ -231,6 +255,7 @@ function addNewEvent() {
 
 .achievements__wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 32px;
     height: max-content;
@@ -240,7 +265,6 @@ function addNewEvent() {
     }
 }
 .achievements__achievement {
-    margin-bottom: 20px;
     @media (max-width: $lg) {
         padding: 0 40px 24px 40px;
     }
@@ -293,7 +317,6 @@ function addNewEvent() {
 .achievements__input-group {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 8px;
 }
 .achievements__label {
@@ -312,7 +335,6 @@ function addNewEvent() {
     justify-content: center;
     align-items: center;
     gap: 16px;
-
     @media (max-width: $lg) {
         grid-template-columns: 1fr;
     }
@@ -333,7 +355,6 @@ function addNewEvent() {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: end;
-    gap: 16px;
     @media (max-width: $lg) {
         grid-template-columns: 1fr;
         gap: 16px;

@@ -1,5 +1,5 @@
 <template>
-    <CabinetHeader />
+    <TeacherHeader />
     <div class="cabinet-container">
         <div class="cabinet-container__wrapper">
             <CaseTitle />
@@ -19,16 +19,16 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-// import CabinetHeader from '../../components/cabinetTeacher/header/CabinetHeader.vue'
-import AddCase from '@/components/cabinetTeacher/case/AddCase.vue'
-import TeacherDetails from '@/components/cabinetTeacher/case/form/TeacherDetails.vue'
-import CaseTitle from '@/components/cabinetTeacher/case/title/CaseTitle.vue'
-import ActivityQuality from '@/components/cabinetTeacher/case/ActivityQuality.vue'
-import ClassroomManagement from '@/components/cabinetTeacher/case/ClassroomManagement.vue'
-import StudentAchievments from '@/components/cabinetTeacher/case/StudentAchievments.vue'
-import TeacherAchievments from '@/components/cabinetTeacher/case/TeacherAchievments.vue'
-import TopCompetition from '@/components/cabinetTeacher/case/TopCompetition.vue'
-import AddCertification from '@/components/cabinetTeacher/case/AddCertification.vue'
+import TeacherHeader from '@/components/cabinet/header/TeacherHeader.vue';
+import AddCase from '@/components/cabinet/case/AddCase.vue';
+import TeacherDetails from '@/components/cabinet/case/form/TeacherDetails.vue';
+import CaseTitle from '@/components/cabinet/case/title/CaseTitle.vue';
+import ActivityQuality from '@/components/cabinet/case/ActivityQuality.vue';
+import ClassroomManagement from '@/components/cabinet/case/ClassroomManagement.vue';
+import StudentAchievments from '@/components/cabinet/case/StudentAchievments.vue';
+import TeacherAchievments from '@/components/cabinet/case/TeacherAchievments.vue';
+import TopCompetition from '@/components/cabinet/case/TopCompetition.vue';
+import AddCertification from '@/components/cabinet/case/AddCertification.vue';
 
 const selectedOption = ref('')
 

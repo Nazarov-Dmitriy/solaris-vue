@@ -4,7 +4,7 @@
             <div class="cabinet-header__mobile  flex items-center justify-between">
                 <div class="cabinet-header__info">
                     <router-link
-                        to="/cabinet-teacher/profile"
+                        to="/cabinet/teacher"
                         class="cabinet-header__logo-wraper"
                     >
                         <img
@@ -58,7 +58,7 @@
                 <ul class="cabinet-header__list">
                     <li class="botton">
                         <router-link
-                            to="/cabinet-teacher/contests"
+                            to="/cabinet/teacher/contests"
                             class="cabinet-header__link"
                         >
                             <img
@@ -70,7 +70,7 @@
                     </li>
                     <li class="botton">
                         <router-link
-                            to="/cabinet-teacher/case/portfolio"
+                            to="/cabinet/teacher/case-portfolio"
                             class="cabinet-header__link"
                         >
                             <img
@@ -150,7 +150,7 @@ function closeModal (){
 }
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .cabinet-header__container {
     width: 100%;
     border-bottom: 2px solid var(--roseBege);

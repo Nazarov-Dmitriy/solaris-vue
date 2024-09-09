@@ -15,9 +15,9 @@
                         обновятся в вашем портфолио
                     </p>
                     <div class="activity-quality__btn-wrapper">
-                        <BtnComponent class="activity-quality__btn"
-                            >Актуализировать данные</BtnComponent
-                        >
+                        <BtnComponent class="activity-quality__btn">
+                            Актуализировать данные
+                        </BtnComponent>
                     </div>
                 </div>
             </div>

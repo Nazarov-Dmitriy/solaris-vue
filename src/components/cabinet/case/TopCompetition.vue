@@ -15,22 +15,35 @@
                         class="top-competition__nomination"
                     >
                         <div class="top-competition__nomination-text-wrapper">
-                            <span></span>
-                            <p class="top-competition__nomination-text">Участие в номинации</p>
-                            <span></span>
+                            <span />
+                            <p class="top-competition__nomination-text">
+                                Участие в номинации
+                            </p>
+                            <span />
                         </div>
-                        <form action="#" class="top-competition__form">
+                        <form
+                            action="#"
+                            class="top-competition__form"
+                        >
                             <div class="top-competition__form-group">
-                                <label for="#" class="top-competition__form-label">Номинация</label>
+                                <label
+                                    for="#"
+                                    class="top-competition__form-label"
+                                >Номинация</label>
                                 <InputText>
-                                    <template #placeholder> Введите название номинации </template>
+                                    <template #placeholder>
+                                        Введите название номинации
+                                    </template>
                                 </InputText>
                             </div>
                             <div class="top-competition__form-group">
-                                <label for="#" class="top-competition__form-label">Результат</label>
+                                <label
+                                    for="#"
+                                    class="top-competition__form-label"
+                                >Результат</label>
                                 <DropdownComponent
                                     class="top-competition__form-input"
-                                    additionalClass="custom-dropdown-selected"
+                                    additional-class="custom-dropdown-selected"
                                     :options="result"
                                 />
                             </div>
@@ -40,23 +53,27 @@
                             проверки: Зачтено, Зачтено частично, Не зачтено
                         </p>
                         <div class="top-competition__footer">
-                            <h2 class="top-competition__footer-title">Предполагаемый балл: 0</h2>
+                            <h2 class="top-competition__footer-title">
+                                Предполагаемый балл: 0
+                            </h2>
                             <BtnComponent
                                 emit-name="form-submit"
-                                @form-submit="toggleModal"
                                 class="top-competition__footer-btn"
-                                >Сохранить</BtnComponent
+                                @form-submit="toggleModal"
                             >
+                                Сохранить
+                            </BtnComponent>
                         </div>
                         <div class="top-competition__btn-wrapper">
                             <BtnWhite
                                 v-if="index === events.length - 1"
                                 emit-name="form-submit"
-                                @form-submit="addNewEvent"
-                                additionalClass="btn-white__text--img"
+                                additional-class="btn-white__text--img"
                                 class="top-competition__btn"
-                                >Добавить номинацию</BtnWhite
+                                @form-submit="addNewEvent"
                             >
+                                Добавить номинацию
+                            </BtnWhite>
                         </div>
                     </div>
                 </div>
@@ -64,13 +81,15 @@
         </div>
         <Teleport to="body">
             <ModalComponent
-                additionalClass="custom-modal-position"
+                additional-class="custom-modal-position"
                 emit-name="toggleModal"
-                @toggleModal="toggleModal"
                 :visible="isModalVisible"
+                @toggle-modal="toggleModal"
             >
                 <template #title>
-                    <h2 class="modal-title">Данные сохранены</h2>
+                    <h2 class="modal-title">
+                        Данные сохранены
+                    </h2>
                 </template>
                 <template #text>
                     <p class="text-center">
@@ -92,13 +111,13 @@ import ModalComponent from '@/components/modal/ModalComponent.vue'
 
 const events = ref([1])
 
-function addNewEvent() {
+function addNewEvent () {
     events.value.push(1)
 }
 
 const isModalVisible = ref(false)
 
-function toggleModal() {
+function toggleModal () {
     isModalVisible.value = !isModalVisible.value
 }
 

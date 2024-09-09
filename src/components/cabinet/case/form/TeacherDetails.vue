@@ -1,30 +1,48 @@
 <template>
     <div class="add-portfolio__data">
-        <div v-for="(item, index) in data" :key="index" class="flex flex-col gap-4">
+        <div
+            v-for="(item, index) in data"
+            :key="index"
+            class="flex flex-col gap-4"
+        >
             <div class="add-portfolio__data-text-wrapper">
                 <span />
-                <p class="add-portfolio__data-text">Ваши данные</p>
+                <p class="add-portfolio__data-text">
+                    Ваши данные
+                </p>
                 <span />
             </div>
             <h2 class="add-portfolio__data-title">
                 {{ item.dataTitle }} <span>{{ item.dataTitleSpan }}</span>
             </h2>
         </div>
-        <form @submit.prevent action="#" class="add-portfolio__form">
+        <form
+            action="#"
+            class="add-portfolio__form"
+            @submit.prevent
+        >
             <label class="add-portfolio__form-label">
                 <span>Предмет</span>
             </label>
-            <div v-for="(fieldGroup, index) in fieldsGroup" :key="index" class="input-group">
+            <div
+                v-for="(fieldGroup, index) in fieldsGroup"
+                :key="index"
+                class="input-group"
+            >
                 <DropdownComponent
                     class="add-portfolio__form-input"
                     :additional-class="'custom-dropdown-selected'"
                     :options="subjects"
                 />
-                <button type="button" class="add-portfolio__form-btn" @click="addFieldsGroup">
+                <button
+                    type="button"
+                    class="add-portfolio__form-btn"
+                    @click="addFieldsGroup"
+                >
                     <img
                         :src="getPath('cabinteTeacher/case/portfolio-button-svg.svg')"
                         alt="Выбрать предмет"
-                    />
+                    >
                 </button>
             </div>
             <div class="options-group">
@@ -46,7 +64,12 @@
                     @update:model-value="updateSelectedOption"
                 />
             </div>
-            <button @click="handleSubmit" class="add-portfolio__form-btn">Перейти</button>
+            <button
+                class="add-portfolio__form-btn"
+                @click="handleSubmit()"
+            >
+                Перейти
+            </button>
         </form>
     </div>
 </template>
@@ -65,7 +88,7 @@ const data = ref([
 const selectedOption = ref('')
 const fieldsGroup = ref([1])
 
-function addFieldsGroup() {
+function addFieldsGroup () {
     fieldsGroup.value.push(1)
 }
 
@@ -83,15 +106,15 @@ const subjects = ['-', 'Математика', 'Физика', 'Химия']
 
 const emit = defineEmits(['optionSelected'])
 
-function updateSelectedOption(option) {
+function updateSelectedOption (option) {
     selectedOption.value = option
 }
 
-function handleSubmit() {
+function handleSubmit () {   
     emit('optionSelected', selectedOption.value)
 }
 
-function getPath(img) {
+function getPath (img) {
     return new URL(`../../../../../public/${img}`, import.meta.url).href
 }
 </script>

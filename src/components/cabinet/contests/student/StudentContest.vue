@@ -4,22 +4,15 @@
             <div class="uc-contest">
                 <div class="uc__item">
                     <p class="uc__decription h3">
-                        Городской конкурс сочинений
-                        «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в
-                        Великой Отечественной войне
+                        {{ props.contests?.title }}
                     </p>
                     <div class="uc__directions">
-                        <p class="uc__direction p2">
-                            Журналист
-                        </p>
-                        <p class="uc__direction p2">
-                            Историк
-                        </p>
-                        <p class="uc__direction p2">
-                            Патриот
-                        </p>
-                        <p class="uc__direction p2">
-                            Юнармеец
+                        <p
+                            v-for="tag in props.contests?.tags"
+                            :key="tag"
+                            class="uc__direction p2"
+                        >
+                            {{ tag }}
                         </p>
                     </div>
                     <div class="uc__info">
@@ -244,6 +237,14 @@
 <script setup>
 import { ref } from 'vue';
 
+const props = defineProps({
+    contests: {
+        type: Object,
+        default: () => {}
+    },
+})
+
+
 const arrSubmitApplication = ref([])
 const confirmedApplication = ref([])
 
@@ -298,7 +299,7 @@ function submitApplication () {
 }
 
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .uc-contest-wrapper {
     width: 100%;
     display: flex;
@@ -332,6 +333,8 @@ function submitApplication () {
 .uc-contest__content {
     display: flex;
     gap: 16px;
+    flex-direction: row-reverse;
+
 
     @media(max-width: 768px) {
         flex-direction: column;
@@ -397,8 +400,8 @@ function submitApplication () {
     box-sizing: border-box;
     border: 2px solid var(--roseBege);
 
-    &.success{
-     height: fit-content;
+    &.success {
+        height: fit-content;
         min-height: 200px;
     }
 
@@ -410,13 +413,13 @@ function submitApplication () {
     }
 
     @media(max-width: 576px) {
-      width: calc(100% + 32px);
-      left: -16px;
-      position: relative;
-      max-width: unset;
-      padding: 24px 16px;
+        width: calc(100% + 32px);
+        left: -16px;
+        position: relative;
+        max-width: unset;
+        padding: 24px 16px;
     }
-    
+
 }
 
 .uc-contest__application-title {
@@ -532,7 +535,7 @@ function submitApplication () {
     box-sizing: border-box;
 
     @media(max-width: 576px) {
-      margin-right: 8px;
+        margin-right: 8px;
     }
 }
 
@@ -572,5 +575,98 @@ function submitApplication () {
 
 .uc-contest-btn {
     margin-top: auto;
+}
+
+.uc__item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 32px auto;
+    grid-template-areas:
+        "uc-deccription uc-directions"
+        "uc-deccription  uc-info";
+    padding: 16px;
+    border-bottom: 2px solid var(--roseBege);
+    gap: 56px 0;
+
+    @media(max-width: 1200px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 32px auto;
+        grid-template-areas:
+            "uc-directions"
+            "uc-deccription "
+            "uc-info";
+        gap: 20px 0;
+    }
+
+    @media(max-width: 576px) {
+        grid-template-rows: auto;
+    }
+}
+
+.uc__item:hover {
+    background: var(--lightBege);
+
+    @media(max-width: 576px) {
+        background: unset;
+    }
+}
+
+.uc__decription {
+    grid-area: uc-deccription;
+    max-width: 652px;
+    color: var(--dark);
+
+    @media(max-width: 1200px) {
+        max-width: 100%;
+    }
+}
+
+.uc__directions {
+    justify-self: end;
+    grid-area: uc-directions;
+    display: flex;
+    gap: 24px;
+
+    @media(max-width: 991px) {
+        gap: 16px;
+    }
+
+    @media(max-width: 576px) {
+        flex-wrap: wrap;
+        flex-grow: 1;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+.uc__direction {
+    padding: 4px 8px;
+    background: var(--roseBege);
+    color: var(--white);
+
+    @media(max-width: 576px) {
+        font-size: 12px;
+    }
+}
+
+.uc__info {
+    grid-area: uc-info;
+    justify-self: end;
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    @media(max-width: 576px) {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+}
+
+.uc__info-btn {
+    @media(max-width: 576px) {
+        flex-grow: 1;
+        justify-content: center;
+    }
 }
 </style>

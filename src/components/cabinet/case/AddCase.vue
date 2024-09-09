@@ -3,7 +3,9 @@
         <div class="add-portfolio__container">
             <div class="add-portfolio__main">
                 <div class="add-portfolio__info">
-                    <h2 class="h3 add-portfolio__info-title">Инструкция по заполнению</h2>
+                    <h2 class="h3 add-portfolio__info-title">
+                        Инструкция по заполнению
+                    </h2>
                     <p class="add-portfolio__info-subtitle">
                         <span>Дорогой коллега!</span> Для правильного расчета баллов стимулирующей
                         части просим Вас ВНИМАТЕЛЬНО прочитать инструкцию полностью и пользоваться

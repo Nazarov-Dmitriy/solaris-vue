@@ -219,7 +219,7 @@ const data = [
     {
         id: 8,
         title: 'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        tags: ['Юнармеец'],
+        tags: ['Юнармеец', 'Историк'],
         description: {
             aim: 'сохранение исторической памяти о подвиге и героизме советского народа в годы Великой Отечественной войны, о воинском и трудовом подвиге наших предков через личное осмысление, традиции и судьбы семей, хранящих светлую память о своих близких, через понимание роли нашей страны в избавлении от фашизма.',
             tasks: [
@@ -311,13 +311,11 @@ const data = [
     }
 ]
 
-export function getById(id) {
-    return data.filter((el) => {
-        return el.id === id
-    })
+export function getById (id) {
+    return data.filter((el) => el.id === id)
 }
 
-export function getSiblingCard(id) {
+export function getSiblingCard (id) {
     let index = data.findIndex((el) => isId(el, id))
     let prev = data[index - 1]?.id
     let next = data[index + 1]?.id
@@ -331,11 +329,11 @@ export function getSiblingCard(id) {
     return { prevId: prev, nextId: next }
 }
 
-function isId(el, id) {
+function isId (el, id) {
     return el.id === id
 }
 
-export function randomArticle(id, count) {
+export function randomArticle (id, count) {
     const idArr = [id]
     const arrContnent = []
 
@@ -349,6 +347,6 @@ export function randomArticle(id, count) {
     return arrContnent
 }
 
-export function getAll() {
+export function getAll () {
     return data
 }

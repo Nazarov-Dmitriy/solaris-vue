@@ -1,5 +1,5 @@
 <template>
-    <CabinetHeader />
+    <TeacherHeader />
     <section class="propose-contest">
         <div class="propose-contest__container">
             <h3 class="propose-contest__title h3">
@@ -143,13 +143,12 @@
 
 <script setup>
 import { ref } from 'vue'
-
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
-import InputText from '@/components/cabinetTeacher/case/form/InputText.vue'
-import InputTextarea from '@/components/cabinetTeacher/case/form/InputTextarea.vue'
+import InputText from '@/components/cabinet/case/form/InputText.vue'
+import InputTextarea from '@/components/cabinet/case/form/InputTextarea.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
-import CabinetHeader from '@/components/cabinet/header/StudentHeader.vue'
+import TeacherHeader from '@/components/cabinet/header/TeacherHeader.vue'
 
 const role = ref(['-', 'Ученик', 'Учитель'])
 

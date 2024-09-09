@@ -1,5 +1,8 @@
 <template>
-    <button class="btn-white" @click="submitEmit">
+    <button
+        class="btn-white"
+        @click="submitEmit"
+    >
         <slot name="img" />
         <span :class="[props.additionalClass, 'btn-white__text']">
             <slot />
@@ -20,7 +23,7 @@ const props = defineProps({
 })
 const emit = defineEmits(['form-submit', 'offer'])
 
-function submitEmit() {
+function submitEmit () {
     emit(props.emitName)
 }
 </script>

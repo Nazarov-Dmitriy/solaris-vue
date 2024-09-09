@@ -42,7 +42,7 @@
                 </p>
                 <button
                     class="teachcabinet-footer__button botton btn"
-                    @click="$router.push('#')"
+                    @click="$router.push('/cabinet/teacher/portfolio')"
                 >
                     Портфолио
                 </button>
@@ -51,7 +51,7 @@
                 </p>
                 <button
                     class="teachcabinet-footer__button botton btn"
-                    @click="$router.push('/cabinet-teacher/case/portfolio')"
+                    @click="$router.push('/cabinet/teacher/case-portfolio')"
                 >
                     &#8853; Добавить
                 </button>
@@ -60,7 +60,7 @@
                 </p>
                 <button
                     class="teachcabinet-footer__button botton btn"
-                    @click="$router.push('/cabinet-teacher/contests')"
+                    @click="$router.push('/cabinet/teacher/contests')"
                 >
                     Мои конкурсы
                 </button>

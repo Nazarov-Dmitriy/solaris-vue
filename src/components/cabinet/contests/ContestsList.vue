@@ -25,7 +25,7 @@
                         <div class="teacher-panel__btn-request">
                             <button
                                 class="btn btn-request-contest"
-                                @click="$router.push('/cabinet-teacher/teacher-contest/propose')"
+                                @click="$router.push('/cabinet/teacher/offer-contests')"
                             >
                                 Предложить конкурс
                             </button>
@@ -173,7 +173,7 @@
                                 </p>
                                 <button
                                     class="teacher__info-btn btn"
-                                    @click="$router.push(`/teacher-contest-view/${el.id}`)"
+                                    @click="linkContest(el.id)"
                                 >
                                     Узнать подробнее
                                 </button>
@@ -201,6 +201,7 @@
 import { onMounted, ref, watch } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
     contests: {
@@ -219,6 +220,7 @@ const renderList = ref([])
 const role = ref(null)
 const sort = ref('Новые вверху')
 const list = ref([])
+const router = useRouter();
 
 function sortContests () {
     list.value = list.value.sort((a, b) => {
@@ -229,7 +231,6 @@ function sortContests () {
 }
 
 function filterContestsByRole () {
-    console.log(role.value);
 
     if (role.value === null || role.value === 'Выберите роль') {
         list.value = [...props.contests]
@@ -240,6 +241,15 @@ function filterContestsByRole () {
         )
     }
     sortContests()
+}
+
+function linkContest (id) {
+    if (props.user === 'teacher') {
+        router.push(`/cabinet/teacher/contests/${id}`);
+    } else {
+        router.push(`/cabinet/student/contests/${id}`);
+
+    }
 }
 
 

@@ -121,7 +121,7 @@
                 </p>
                 <button
                     class="cabinet-footer__button botton btn"
-                    @click="$router.push('/cabinet-portfolio')"
+                    @click="$router.push('/cabinet/student/portfolio')"
                 >
                     Портфолио
                 </button>

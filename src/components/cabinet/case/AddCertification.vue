@@ -4,7 +4,9 @@
             <div class="add-certification__wrapper">
                 <div class="add-certification__certification">
                     <div class="add-certification__certification-header">
-                        <h2 class="add-certification__certification-title">Аттестация</h2>
+                        <h2 class="add-certification__certification-title">
+                            Аттестация
+                        </h2>
                         <span>максимум 20 баллов</span>
                     </div>
                     <p class="add-certification__text">
@@ -13,9 +15,9 @@
                         они обновятся в вашем портфолио
                     </p>
                     <div class="add-certification__btn-wrapper">
-                        <BtnComponent class="add-certification__btn"
-                            >Актуализировать данные</BtnComponent
-                        >
+                        <BtnComponent class="add-certification__btn">
+                            Актуализировать данные
+                        </BtnComponent>
                     </div>
                 </div>
             </div>

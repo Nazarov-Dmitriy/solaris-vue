@@ -222,8 +222,8 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import PaginationComponent from '../pagination/PaginationComponent.vue';
-import DropdownComponent from '../dropdown/DropdownComponent.vue';
+import PaginationComponent from '@/components/pagination/PaginationComponent.vue';
+import DropdownComponent from '@/components/dropdown/DropdownComponent.vue';
 
 const selected = ref("")
 const active = ref([])
