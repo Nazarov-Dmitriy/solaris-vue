@@ -104,7 +104,7 @@
                             >
                                 <div class="uc-contest__card">
                                     <img
-                                        src="../../../assets/image/user-cabinet/contest/avatar.png"
+                                        src="@/assets/image/user-cabinet/contest/avatar.png"
                                         alt="avatar"
                                         class="uc-contest__avatar"
                                     >
