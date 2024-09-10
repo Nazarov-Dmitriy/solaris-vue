@@ -23,7 +23,7 @@
                         </p>
                         <button
                             class="uc__info-btn btn"
-                            @click="$router.push('/cabinet-teacher/contests')"
+                            @click="$router.push('/cabinet/teacher/contests')"
                         >
                             К списку конкурсов
                         </button>

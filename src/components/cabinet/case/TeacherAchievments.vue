@@ -3,7 +3,7 @@
         <div class="achievements__container">
             <div class="achievements__wrapper">
                 <div>
-                    <div class="achievements__header">
+                    <div class="achievements__header px-4">
                         <h3 class="h3 achievements__header-title">
                             Достижения учителя
                         </h3>
@@ -14,7 +14,7 @@
                     <div
                         v-for="(fieldGroup, index) in fieldsGroup"
                         :key="index"
-                        class="flex flex-col gap-4"
+                        class="flex flex-col gap-4 p-4"
                     >
                         <div class="achievements__text-wrapper">
                             <span />

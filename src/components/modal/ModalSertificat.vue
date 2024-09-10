@@ -4,21 +4,12 @@
             v-if="props.show"
             class="modal-sertificate-wrapper"
             @click="closeModal"
+            @keyup.esc="closeModal()"
         >
-            <div
-                v-if="props.validate"
-                class="activate-certificate"
-                @click.stop
-            >
+            <div v-if="props.validate" class="activate-certificate" @click.stop>
                 <div class="modal__close-btn-wrapper">
-                    <button
-                        class="modal__close-btn"
-                        @click="closeModal"
-                    >
-                        <img
-                            src="/public/cabinteTeacher/case/modal-close.png"
-                            alt="Close"
-                        >
+                    <button class="modal__close-btn" @click="closeModal">
+                        <img src="/public/cabinteTeacher/case/modal-close.png" alt="Close" />
                     </button>
                 </div>
                 <div class="activate-certificate-wrapper">
@@ -45,16 +36,10 @@
                 <div class="activate-certificate-wrapper">
                     <span>{{ props.user.date }}</span>
                 </div>
-                <div
-                    v-if="!active"
-                    class="activate-certificate-button-wrapper"
-                >
+                <div v-if="!active" class="activate-certificate-button-wrapper">
                     <span>Активация</span>
                 </div>
-                <div
-                    v-if="!active"
-                    class="activate-certificate-button-wrapper"
-                >
+                <div v-if="!active" class="activate-certificate-button-wrapper">
                     <BtnWhite
                         class="activate-certificate-btn"
                         emit-name="action"
@@ -64,28 +49,15 @@
                     </BtnWhite>
                 </div>
             </div>
-            <div
-                v-else
-                class="certificate__blocck-error"
-            >
+            <div v-else class="certificate__blocck-error">
                 <div class="modal__close-btn-wrapper">
-                    <button
-                        class="modal__close-btn"
-                        @click="closeModal"
-                    >
-                        <img
-                            src="/public/cabinteTeacher/case/modal-close.png"
-                            alt="Close"
-                        >
+                    <button class="modal__close-btn" @click="closeModal">
+                        <img src="/public/cabinteTeacher/case/modal-close.png" alt="Close" />
                     </button>
                 </div>
                 <div class="certificate__error">
-                    <p class="certificate__text certificate__text-error">
-                        Ошибка
-                    </p>
-                    <p class="certificate__text">
-                        Такого сертификата нет
-                    </p>
+                    <p class="certificate__text certificate__text-error">Ошибка</p>
+                    <p class="certificate__text">Такого сертификата нет</p>
                 </div>
             </div>
         </div>
@@ -118,11 +90,11 @@ const emit = defineEmits('close')
 
 const active = ref(false)
 
-function activeteSertificat () {
+function activeteSertificat() {
     active.value = true
 }
 
-function closeModal () {
+function closeModal() {
     emit('close')
 }
 </script>

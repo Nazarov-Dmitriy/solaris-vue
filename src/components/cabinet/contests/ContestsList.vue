@@ -1,25 +1,22 @@
 <template>
     <section class="section-contests">
-        <div
-            v-if="user === 'teacher'"
-            class="teacher-panel-wraper"
-        >
+        <div v-if="user === 'teacher'" class="teacher-panel-wraper">
             <div class="teacher-panel__container">
                 <img
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                >
+                />
                 <img
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                >
+                />
                 <img
                     class="teacher-panel__contests-coin"
                     src="@/assets/image/cabinet-teacher/solaric-single.svg"
                     alt="solaric-img"
-                >
+                />
                 <div class="teacher-panel">
                     <div class="teacher-under-panel-group">
                         <div class="teacher-panel__btn-request">
@@ -36,23 +33,22 @@
                                 class="teacher-panel__dropdown-role"
                                 :options="optionRole"
                             />
-                            <DropdownComponent
-                                v-model:modelValue="sort"
-                                class="teacher-panel__dropdown-sort"
-                                :options="optionSort"
-                            />
-                            <button class="btn btn-contest">
-                                Мои конкурсы
-                            </button>
+                            <div class="teacher-panel-group-down">
+                                <DropdownComponent
+                                    v-model:modelValue="sort"
+                                    class="teacher-panel__dropdown-sort"
+                                    :options="optionSort"
+                                />
+                                <button @click="filterContestsByRole" class="btn btn-contest">
+                                    Мои конкурсы
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div
-            v-else
-            class="uc-panel-wraper"
-        >
+        <div v-else class="uc-panel-wraper">
             <div class="uc-panel__container">
                 <svg
                     class="uc-panel__coin"
@@ -116,7 +112,7 @@
                         src="@/assets/image/user-cabinet/contest/hare.png"
                         alt="Солярик"
                         class="uc-panel__hair"
-                    >
+                    />
 
                     <div class="uc-panel-group">
                         <DropdownComponent
@@ -129,9 +125,7 @@
                             class="uc-panel__dropdown-sort"
                             :options="optionSort"
                         />
-                        <button class="btn btn-contest">
-                            Мои конкурсы
-                        </button>
+                        <button class="btn btn-contest">Мои конкурсы</button>
                     </div>
                 </div>
             </div>
@@ -141,20 +135,11 @@
                 <div class="teacher-contnent">
                     <div class="teacher-subtitle__wraper">
                         <span class="teacher-subtitle__line" />
-                        <p class="teacher-subtitle__title p2">
-                            Конкурсы
-                        </p>
+                        <p class="teacher-subtitle__title p2">Конкурсы</p>
                         <span class="teacher-subtitle__line" />
                     </div>
-                    <div
-                        v-if="list.length > 0"
-                        class="teacher-list"
-                    >
-                        <div
-                            v-for="el in renderList"
-                            :key="el.id"
-                            class="teacher__item"
-                        >
+                    <div v-if="list.length > 0" class="teacher-list">
+                        <div v-for="el in renderList" :key="el.id" class="teacher__item">
                             <p class="teacher__decription h3">
                                 {{ el.title }}
                             </p>
@@ -171,19 +156,13 @@
                                 <p class="teacher__publication p2">
                                     Дата публикации {{ el.publication_date }}
                                 </p>
-                                <button
-                                    class="teacher__info-btn btn"
-                                    @click="linkContest(el.id)"
-                                >
+                                <button class="teacher__info-btn btn" @click="linkContest(el.id)">
                                     Узнать подробнее
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <p
-                        v-else
-                        class="p1 teacher-contnent-empty"
-                    >
+                    <p v-else class="p1 teacher-contnent-empty">
                         Здесь отображаются полученные конкурсы, конкурсов пока нет
                     </p>
                 </div>
@@ -201,7 +180,7 @@
 import { onMounted, ref, watch } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
     contests: {
@@ -220,55 +199,44 @@ const renderList = ref([])
 const role = ref(null)
 const sort = ref('Новые вверху')
 const list = ref([])
-const router = useRouter();
+const router = useRouter()
 
-function sortContests () {
+function sortContests() {
     list.value = list.value.sort((a, b) => {
         return sort.value === 'Новые вверху'
             ? new Date(b.publication_date) - new Date(a.publication_date)
             : new Date(a.publication_date) - new Date(b.publication_date)
     })
 }
-
-function filterContestsByRole () {
-
+function filterContestsByRole() {
     if (role.value === null || role.value === 'Выберите роль') {
         list.value = [...props.contests]
     } else {
-
-        list.value = props.contests.filter((contest) =>
-            contest.tags.includes(role.value)
-        )
+        list.value = props.contests.filter((contest) => contest.tags.includes(role.value))
     }
     sortContests()
 }
-
-function linkContest (id) {
+function linkContest(id) {
     if (props.user === 'teacher') {
-        router.push(`/cabinet/teacher/contests/${id}`);
+        router.push(`/cabinet/teacher/contests/${id}`)
     } else {
-        router.push(`/cabinet/student/contests/${id}`);
-
+        router.push(`/cabinet/student/contests/${id}`)
     }
 }
-
-
 onMounted(() => {
     list.value = props.contests
     filterContestsByRole()
 })
+// watch([sort, role], () => {
+//     filterContestsByRole()
+// })
 
-watch([sort, role], () => {
-    filterContestsByRole()
-})
-
-
-function getRenderList (list) {
+function getRenderList(list) {
     renderList.value = list
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .section-contests {
     display: flex;
     flex-direction: column;
@@ -278,6 +246,10 @@ function getRenderList (list) {
 .teacher-panel-wraper {
     width: 100%;
     background: var(--dark);
+}
+
+.teacher-panel-wraper :deep(.dashboard__dropdown-wrapper) {
+    width: 100%;
 }
 
 .teacher-panel__container {
@@ -369,22 +341,38 @@ function getRenderList (list) {
     justify-content: space-between;
     gap: 40px;
 
-    @media (max-width: $sm) {
+    @media (max-width: $md) {
         gap: 20px;
         flex-direction: column;
+    }
+}
+
+.teacher-panel-group-down {
+    display: flex;
+    gap: 16px;
+    @media (max-width: $lg) {
+        width: 100%;
+    }
+    @media (max-width: $md) {
+        flex-direction: column;
+    }
+
+    :deep(.dashboard__dropdown-wrapper) {
+        max-width: 100%;
+        width: 100%;
     }
 }
 
 .teacher-panel-group {
     display: flex;
     gap: 16px;
-    padding: 16px;
+    padding: 16px 0;
     justify-content: end;
     width: 100%;
 
-    .btn-contest {
-        min-width: 151px;
-        margin-left: 24px;
+    :deep(.dashboard__dropdown-wrapper) {
+        position: relative;
+        z-index: 5;
     }
 
     .dropdown-selected-text {
@@ -397,7 +385,6 @@ function getRenderList (list) {
     }
 
     .teacher-panel__dropdown-sort {
-        width: 171px;
     }
 
     .teacher-panel__dropdown-role {
@@ -410,20 +397,11 @@ function getRenderList (list) {
     }
 
     @media (max-width: $lg) {
-        .btn-contest {
-            margin-left: 8px;
-        }
-
-        .teacher-panel__dropdown-role {
-            max-width: 206px;
-        }
-    }
-
-    @media (max-width: $md) {
         width: 100%;
         flex-wrap: wrap;
         gap: 20px;
         padding: 0;
+        justify-content: center;
 
         .teacher-panel__dropdown-role {
             width: 100%;
@@ -436,8 +414,7 @@ function getRenderList (list) {
         }
 
         .btn-contest {
-            margin-left: 0;
-            width: calc(100% - 20px - 171px);
+            width: 100%;
         }
     }
 
@@ -482,7 +459,7 @@ function getRenderList (list) {
     cursor: pointer;
     box-sizing: border-box;
 
-    @media (max-width: $sm) {
+    @media (max-width: $md) {
         width: 100%;
     }
 }
@@ -663,11 +640,11 @@ function getRenderList (list) {
     position: relative;
     box-sizing: border-box;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         padding: 32px 40px;
     }
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         padding: 32px 16px 80px 16px;
     }
 }
@@ -683,25 +660,25 @@ function getRenderList (list) {
     left: 379px;
     rotate: 86deg;
 
-    @media(max-width: 1440px) {
+    @media (max-width: 1440px) {
         left: 314px;
     }
 
-    @media(max-width: 1200px) {
+    @media (max-width: 1200px) {
         left: 245px;
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         top: 5px;
         left: 164px;
     }
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         top: 10px;
         left: 35px;
     }
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         top: 249px;
         left: 161px;
     }
@@ -714,21 +691,21 @@ function getRenderList (list) {
     left: 335px;
     rotate: -15deg;
 
-    @media(max-width: 1440px) {
+    @media (max-width: 1440px) {
         left: 270px;
     }
 
-    @media(max-width: 1200px) {
+    @media (max-width: 1200px) {
         left: 248px;
         top: 103px;
     }
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         top: 70px;
         left: 151px;
     }
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         top: 256px;
         left: 291px;
     }
@@ -741,11 +718,11 @@ function getRenderList (list) {
     left: 414px;
     rotate: 36deg;
 
-    @media(max-width: 1440px) {
+    @media (max-width: 1440px) {
         left: 348px;
     }
 
-    @media(max-width: 1200px) {
+    @media (max-width: 1200px) {
         display: none;
     }
 }
@@ -755,29 +732,29 @@ function getRenderList (list) {
     left: 153px;
     bottom: 0;
 
-    @media(max-width: 1440px) {
+    @media (max-width: 1440px) {
         left: 93px;
     }
 
-    @media(max-width: 1200px) {
+    @media (max-width: 1200px) {
         left: 53px;
         height: 114px;
         width: 171px;
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         left: 40px;
         height: 150px;
         width: 229px;
     }
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         left: 11px;
         height: 141px;
         width: 207px;
     }
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         left: 16px;
         height: 70px;
         width: 114px;
@@ -790,8 +767,7 @@ function getRenderList (list) {
     padding: 16px;
     justify-content: end;
 
-
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         width: 423px;
         margin-left: auto;
         flex-wrap: wrap;
@@ -818,13 +794,12 @@ function getRenderList (list) {
         }
     }
 
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         width: 58%;
 
         .uc-panel__dropdown-role {
             width: 100%;
             max-width: 100%;
-
         }
 
         .uc-panel__dropdown-sort {
@@ -843,10 +818,9 @@ function getRenderList (list) {
         }
     }
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         width: 100%;
     }
-
 }
 
 .uc-dropdowns {
@@ -857,11 +831,11 @@ function getRenderList (list) {
 .uc-dropdown__role {
     width: 318px;
 
-    @media(max-width: 1200px) {
+    @media (max-width: 1200px) {
         max-width: 252px;
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         width: 100%;
         max-width: none;
     }
@@ -870,16 +844,16 @@ function getRenderList (list) {
 .uc-dropdown__sort {
     width: 171px;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         flex-grow: 1;
     }
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         width: 100%;
     }
 }
 
 .btn-contest {
-    margin-left: 24px;
+    width: 100%;
 }
 </style>

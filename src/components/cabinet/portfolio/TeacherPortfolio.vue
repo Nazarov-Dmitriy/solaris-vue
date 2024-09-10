@@ -7,45 +7,39 @@
                         class="teacher-portfolio-panel__coin"
                         src="@/assets/image/cabinet-teacher/solaric-single.svg"
                         alt="solaric-img"
-                    >
+                    />
                     <img
                         class="teacher-portfolio-panel__coin"
                         src="@/assets/image/cabinet-teacher/solaric-single.svg"
                         alt="solaric-img"
-                    >
+                    />
                     <img
                         class="teacher-portfolio-panel__coin"
                         src="@/assets/image/cabinet-teacher/solaric-single.svg"
                         alt="solaric-img"
-                    >
+                    />
                     <div class="teacher-portfolio__point">
                         <div>
                             <p class="teacher-portfolio__point-text p1">
-                                Оценка качества деятельности 
-                                <span class="h3">
-                                    100 баллов
-                                </span>
+                                Оценка качества деятельности
+                                <span class="h3"> 100 баллов </span>
                             </p>
                         </div>
                         <div>
                             <p class="teacher-portfolio__point-text p1">
-                                Аттестация 
-                                <span class="h3">
-                                    100 баллов
-                                </span>
+                                Аттестация
+                                <span class="h3"> 100 баллов </span>
                             </p>
                         </div>
                     </div>
-                    
+
                     <div class="teacher-portfolio__buttons">
                         <DropdownComponent
                             v-model:modelValue="sort"
                             class="teacher-portfolio-panel__dropdown-sort"
                             :options="portfolioSort"
                         />
-                        <button class="btn btn-teacher-portfolio">
-                            Добавить
-                        </button>
+                        <button class="btn btn-teacher-portfolio">Добавить</button>
                     </div>
                 </div>
             </div>
@@ -55,61 +49,37 @@
                 <div class="teacher-portfolio-contnent">
                     <div class="teacher-portfolio-subtitle__wraper">
                         <span class="teacher-portfolio-subtitle__line" />
-                        <p class="teacher-portfolio-subtitle__title p2">
-                            Портфолио
-                        </p>
+                        <p class="teacher-portfolio-subtitle__title p2 text-right">Портфолио</p>
                         <span class="teacher-portfolio-subtitle__line" />
                     </div>
-                    <div
-                        v-if="teacherPortfolioContests.length > 0"
-                        class="teacher-portfolio-list"
-                    >
+                    <div v-if="teacherPortfolioContests.length > 0" class="teacher-portfolio-list">
                         <div class="teacher-portfolio__tab-header">
-                            <div class="teacher-portfolio__tab-contest p2">
-                                Название конкурса
-                            </div>
-                            <div class="teacher-portfolio__tab-point p2">
-                                Баллы
-                            </div>
-                            <div class="teacher-portfolio__tab-date p2">
-                                Дата
-                            </div>
+                            <div class="teacher-portfolio__tab-contest p2">Название конкурса</div>
+                            <div class="teacher-portfolio__tab-point p2">Баллы</div>
+                            <div class="teacher-portfolio__tab-date p2">Дата</div>
                         </div>
-                        <div
-                            v-for="el in renderList"
-                            :key="el.id"
-                            class="teacher-portfolio__item"
-                        > 
+                        <div v-for="el in renderList" :key="el.id" class="teacher-portfolio__item">
                             <div class="teacher-portfolio__tab-contest">
-                                <div class="botton">
-                                    Конкурс:
-                                </div>
+                                <div class="botton">Конкурс:</div>
                                 <div class="p2">
                                     {{ el.contest }}
                                 </div>
                             </div>
                             <div class="teacher-portfolio__tab-point p2">
-                                <div class="botton">
-                                    Баллы
-                                </div>
+                                <div class="botton">Баллы</div>
                                 <div class="p2">
                                     {{ el.points }}
                                 </div>
                             </div>
                             <div class="teacher-portfolio__tab-date p2">
-                                <div class="botton">
-                                    Дата
-                                </div>
+                                <div class="botton">Дата</div>
                                 <div class="p2">
                                     {{ el.contest_date }}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <p
-                        v-else
-                        class="p1 teacher-portfolio-contnent-empty"
-                    >
+                    <p v-else class="p1 teacher-portfolio-contnent-empty">
                         Здесь отображаются уведомления, уведомлений пока нет
                     </p>
                 </div>
@@ -124,9 +94,9 @@
     </section>
 </template>
 <script setup>
-import { ref } from 'vue';
-import PaginationComponent from '@/components/pagination/PaginationComponent.vue';
-import DropdownComponent from '@/components/dropdown/DropdownComponent.vue';
+import { ref } from 'vue'
+import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
+import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 
 const renderList = ref([])
 const sort = ref([])
@@ -134,97 +104,106 @@ const sort = ref([])
 const teacherPortfolioContests = [
     {
         id: 1,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 2,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 3,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 4,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 5,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 6,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 7,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 8,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 9,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 10,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 11,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 12,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
     },
     {
         id: 13,
-        contest: "Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне",
-        points: "260",
-        contest_date: "02.03.2024",
-    },
-];
-
-const portfolioSort = [
-    'Новые вверху',
-    'Cтарые вверху',
+        contest:
+            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
+        points: '260',
+        contest_date: '02.03.2024'
+    }
 ]
 
-function getRenderList (list) {
-    console.log(list);
+const portfolioSort = ['Новые вверху', 'Cтарые вверху']
+
+function getRenderList(list) {
+    console.log(list)
     renderList.value = list
 }
 </script>
 
 <style lang="scss">
-
 .section-teacher-portfolio {
     display: flex;
     flex-direction: column;
@@ -254,8 +233,8 @@ function getRenderList (list) {
     .dropdown-selected-text {
         min-width: 111px;
     }
-    
-    @media(max-width: $md) {
+
+    @media (max-width: $md) {
         padding: 32px 40px;
         flex-direction: column;
         gap: 32px;
@@ -271,9 +250,8 @@ function getRenderList (list) {
         }
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: $sm) {
         padding: 32px 16px;
-        
     }
 }
 
@@ -283,11 +261,11 @@ function getRenderList (list) {
     flex-direction: column;
     gap: 8px;
 
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         padding: 0 0 0 16px;
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         padding: 0;
     }
 }
@@ -297,17 +275,18 @@ function getRenderList (list) {
     display: flex;
     gap: 24px;
     align-items: center;
+    margin-right: 16px;
 
     span {
         white-space: nowrap;
     }
 
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         justify-content: space-between;
         gap: 0;
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         flex-direction: column;
         gap: 8px;
         align-items: start;
@@ -316,16 +295,16 @@ function getRenderList (list) {
 }
 
 .teacher-portfolio__buttons {
-    padding: 16px;
+    padding: 16px 0;
     display: flex;
     justify-content: space-between;
     gap: 40px;
 
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         padding: 0 0 0 16px;
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         padding: 0;
         flex-direction: column;
         gap: 16px;
@@ -333,7 +312,7 @@ function getRenderList (list) {
 }
 
 .btn-teacher-portfolio {
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         width: 100%;
     }
 }
@@ -346,7 +325,7 @@ function getRenderList (list) {
     rotate: -50deg;
     position: absolute;
 
-    @media(max-width: $lg) {
+    @media (max-width: $lg) {
         display: none;
     }
 }
@@ -359,15 +338,15 @@ function getRenderList (list) {
     rotate: 48deg;
     position: absolute;
 
-    @media(max-width: $xxl) {
+    @media (max-width: $xxl) {
         left: 750px;
     }
-    
-    @media(max-width: $xl) {
+
+    @media (max-width: $xl) {
         left: 634px;
     }
 
-    @media(max-width: $lg) {
+    @media (max-width: $lg) {
         display: none;
     }
 }
@@ -380,15 +359,15 @@ function getRenderList (list) {
     rotate: -10deg;
     position: absolute;
 
-    @media(max-width: $xxl) {
+    @media (max-width: $xxl) {
         left: 935px;
     }
 
-    @media(max-width: $xl) {
+    @media (max-width: $xl) {
         left: 705px;
     }
-    
-    @media(max-width: $lg) {
+
+    @media (max-width: $lg) {
         display: none;
     }
 }
@@ -404,11 +383,11 @@ function getRenderList (list) {
     margin: 0 auto;
     box-sizing: border-box;
 
-    @media(max-width: $md) {
+    @media (max-width: $md) {
         padding: 24px 40px;
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: $sm) {
         padding: 24px 16px;
     }
 }
@@ -431,7 +410,7 @@ function getRenderList (list) {
     max-width: 50%;
     width: 100%;
     height: 2px;
-    background: var(--dark)
+    background: var(--dark);
 }
 
 .teacher-portfolio-subtitle__title {
@@ -444,16 +423,17 @@ function getRenderList (list) {
     flex-direction: column;
     gap: 16px;
 
-    @media(max-width: 390px) {
+    @media (max-width: 390px) {
         gap: 24px;
     }
 }
 
 .teacher-portfolio__tab-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
 
-    @media(max-width: 390px) {
+    @media (max-width: $sm) {
         display: none;
     }
 }
@@ -476,8 +456,8 @@ function getRenderList (list) {
     padding: 16px;
     box-sizing: border-box;
 
-    @media(max-width: $sm) {
-        min-width: 104px;
+    @media (max-width: $sm) {
+        padding: 0;
     }
 }
 
@@ -508,9 +488,9 @@ function getRenderList (list) {
         }
     }
 
-    @media(max-width: 390px) {
+    @media (max-width: $sm) {
         flex-direction: column;
-        
+
         .teacher-portfolio__tab-contest {
             display: flex;
             flex-direction: column;
@@ -538,7 +518,7 @@ function getRenderList (list) {
 .teacher-portfolio__decription {
     cursor: pointer;
 
-    &.active{
+    &.active {
         font-weight: 400;
         font-size: 20px;
         line-height: 30px;
@@ -548,5 +528,4 @@ function getRenderList (list) {
 .teacher-portfolio__publication {
     text-align: center;
 }
-
 </style>
