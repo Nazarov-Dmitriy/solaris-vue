@@ -2,22 +2,12 @@
     <TeacherHeader />
     <section class="propose-contest">
         <div class="propose-contest__container">
-            <h3 class="propose-contest__title h3">
-                Предложить конкурс
-            </h3>
-            <p class="p1">
-                Опишите предлагаемый вами конкурс во всех полях.
-            </p>
-            <form
-                action="#"
-                class="propose-contest__form"
-            >
+            <h3 class="propose-contest__title h3">Предложить конкурс</h3>
+            <p class="p1">Опишите предлагаемый вами конкурс во всех полях.</p>
+            <form @submit.prevent action="#" class="propose-contest__form">
                 <div class="propose-contest__form-text-inputs">
                     <div class="propose-contest__form-input-group">
-                        <label
-                            for="#"
-                            class="propose-contest__form-label"
-                        >Название</label>
+                        <label for="#" class="propose-contest__form-label">Название</label>
                         <InputText
                             class="propose-contest__form-input"
                             placeholder="Опишите цель предлагаемого конкурса"
@@ -26,10 +16,9 @@
                     <div
                         class="propose-contest__form-dropdown-group propose-contest__form-dropdown-group--mobile"
                     >
-                        <label
-                            for="#"
-                            class="propose-contest__form-label"
-                        >Добавьте роль участника в конкурсе</label>
+                        <label for="#" class="propose-contest__form-label"
+                            >Добавьте роль участника в конкурсе</label
+                        >
                         <div class="dropdown-wrapper">
                             <DropdownComponent
                                 class="propose-contest__form-dropdown"
@@ -40,16 +29,13 @@
                                 <img
                                     src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
                                     alt="Выбрать предмет"
-                                >
+                                />
                             </button>
                         </div>
                     </div>
 
                     <div class="propose-contest__form-input-group">
-                        <label
-                            for="#"
-                            class="propose-contest__form-label"
-                        >Описание</label>
+                        <label for="#" class="propose-contest__form-label">Описание</label>
                         <InputTextarea
                             class="propose-contest__form-textarea"
                             placeholder="Перечислите основные задачи конкурса"
@@ -62,31 +48,24 @@
                         :key="index"
                         class="propose-contest__form-dropdown-group"
                     >
-                        <label
-                            for="#"
-                            class="propose-contest__form-label"
-                        >Добавьте роль участника в конкурсе</label>
+                        <label for="#" class="propose-contest__form-label"
+                            >Добавьте роль участника в конкурсе</label
+                        >
                         <div class="dropdown-wrapper">
                             <DropdownComponent
                                 :options="role"
                                 class="propose-contest__form-dropdown"
                                 additional-class="custom-dropdown-selected"
                             />
-                            <button
-                                class="dropdown-btn"
-                                @click="addDropdown"
-                            >
+                            <button class="dropdown-btn" @click="addDropdown">
                                 <img
                                     src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
                                     alt="Выбрать предмет"
-                                >
+                                />
                             </button>
                         </div>
                     </div>
-                    <div
-                        v-if="showFile"
-                        class="flex justify-end gap-4"
-                    >
+                    <div v-if="showFile" class="flex justify-end gap-4">
                         <div
                             v-for="(file, index) in selectedFiles"
                             :key="index"
@@ -97,12 +76,12 @@
                                 src="/public/cabinteTeacher/propose/close.png"
                                 alt="file img"
                                 @click="deleteFile"
-                            >
+                            />
                             <img
                                 class="propose-contest__file-img"
                                 src="/public/cabinteTeacher/propose/file.svg"
                                 alt="file img"
-                            >
+                            />
                         </div>
                     </div>
                     <div class="propose-contest__form-btn-wrapper">
@@ -119,7 +98,7 @@
                                 type="file"
                                 class="propose-contest__file-input"
                                 @change="handleFileChange"
-                            >
+                            />
                         </div>
                         <BtnComponent class="propose-contest__form-btn">
                             Отправить на согласование
@@ -158,7 +137,7 @@ const selectedFiles = ref([])
 
 const dropdowns = ref([1])
 
-function addDropdown () {
+function addDropdown() {
     if (dropdowns.value.length >= 3) {
         return
     }
@@ -166,11 +145,11 @@ function addDropdown () {
     console.log(dropdowns.value)
 }
 
-function addFile () {
+function addFile() {
     fileInput.value.click()
 }
 
-function handleFileChange (event) {
+function handleFileChange(event) {
     const files = event.target.files
     for (let i = 0; i < files.length; i++) {
         selectedFiles.value.push(files[i])
@@ -178,7 +157,7 @@ function handleFileChange (event) {
     showFile.value = selectedFiles.value.length > 0
 }
 
-function deleteFile (index) {
+function deleteFile(index) {
     selectedFiles.value.splice(index, 1)
     showFile.value = selectedFiles.value.length > 0
 }

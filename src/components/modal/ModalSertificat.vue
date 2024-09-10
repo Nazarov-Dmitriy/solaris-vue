@@ -147,6 +147,12 @@ function closeModal() {
     justify-content: center;
     align-items: center;
     padding: 3px 0;
+
+    @media (max-width: $sm) {
+        span {
+            text-align: center;
+        }
+    }
 }
 
 .activate-certificate-button-wrapper {
