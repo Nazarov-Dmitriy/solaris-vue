@@ -49,7 +49,7 @@
                     </BtnWhite>
                 </div>
             </div>
-            <div v-else class="certificate__blocck-error">
+            <div v-else class="certificate__blocck-error" @click.stop>
                 <div class="modal__close-btn-wrapper">
                     <button class="modal__close-btn" @click="closeModal">
                         <img src="/public/cabinteTeacher/case/modal-close.png" alt="Close" />
