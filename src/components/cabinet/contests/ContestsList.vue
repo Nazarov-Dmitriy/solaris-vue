@@ -142,7 +142,7 @@
                     <div class="teacher-subtitle__wraper">
                         <span class="teacher-subtitle__line" />
                         <p class="teacher-subtitle__title p2">
-                            Конкурсы
+                            Конкурсы для участия
                         </p>
                         <span class="teacher-subtitle__line" />
                     </div>
@@ -790,6 +790,24 @@ function getRenderList (list) {
     padding: 16px;
     justify-content: end;
 
+    .dropdown-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .uc-panel__dropdown-sort {
+        width: 167px;
+        .dropdown-selected-text {
+            min-width: 111px;
+        }
+    }
+
+    .uc-panel__dropdown-role {
+        width: 318px;
+        .dropdown-selected-text {
+            min-width: 259px;
+        }
+    }
 
     @media(max-width: 991px) {
         width: 423px;
@@ -808,10 +826,6 @@ function getRenderList (list) {
             }
         }
 
-        .uc-panel__dropdown-sort {
-            width: 167px;
-        }
-
         .btn-contest {
             margin-left: 0;
             width: 236px;
@@ -824,7 +838,9 @@ function getRenderList (list) {
         .uc-panel__dropdown-role {
             width: 100%;
             max-width: 100%;
-
+            .dropdown-selected-text {
+                min-width: 111px;
+            }
         }
 
         .uc-panel__dropdown-sort {

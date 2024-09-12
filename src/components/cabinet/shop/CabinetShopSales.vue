@@ -10,7 +10,9 @@
                         <p class="cabinet-shop-ready__subtitle">
                             Для получения товара покажите на одном экране свой ID и номер заказа
                         </p>
-                        <h2 class="cabinet-shop-ready__login">IvanovAI_7a</h2>
+                        <h2 class="cabinet-shop-ready__login">
+                            IvanovAI_7a
+                        </h2>
                     </template>
                 </div>
                 <template v-if="infoBuyItemInfo.length > 0">
@@ -30,7 +32,9 @@
                                 <p class="list-item-info">
                                     {{ el.number }}
                                 </p>
-                                <p class="list-item-info">Получить</p>
+                                <p class="list-item-info">
+                                    Получить
+                                </p>
                                 <p class="list-item-info">
                                     {{ el.text }}
                                 </p>
@@ -38,13 +42,18 @@
                         </li>
                     </ul>
                 </template>
-                <p v-else class="shop-empty-ready">
+                <p 
+                    v-else 
+                    class="shop-empty-ready"
+                >
                     У тебя сейчас нет товаров готовых к получению, ты можешь выбрать их в магазине
                 </p>
             </div>
 
             <div class="cabinet-shop-history">
-                <p class="cabinet-shop-history__title">История покупок</p>
+                <p class="cabinet-shop-history__title">
+                    История покупок
+                </p>
                 <template v-if="infoBuyHistoryItem.length > 0">
                     <ul class="cabinet-shop-history__wrapper">
                         <li
@@ -56,14 +65,14 @@
                                 <img
                                     src="/src/assets/image/cabinet-shop/solaris2.png"
                                     alt="<?php echo $value['orderNumber'] ?>"
-                                />
+                                >
                                 <p class="cabinet-shop-history__wrapper-price">
                                     {{ el.amount }}
                                 </p>
                                 <img
                                     src="/src/assets/image/cabinet-shop/currency.png"
                                     alt="solaris-valute"
-                                />
+                                >
                             </div>
                             <div class="cabinet-shop-history__wrapper-info">
                                 <p>{{ el.orderNumber }}</p>
@@ -72,15 +81,26 @@
                         </li>
                     </ul>
                     <div class="cabinet-shop__img-background">
-                        <img src="@/assets/image/cabinet-shop/coinBege.png" alt="coin" />
+                        <img 
+                            src="@/assets/image/cabinet-shop/coinBege.png" 
+                            alt="coin" 
+                        >
                     </div>
                 </template>
                 <div v-else class="shop-empty__container">
-                    <p class="shop-empty-history">У вас еще не было покупок</p>
+                    <p class="shop-empty-history">
+                        У вас еще не было покупок
+                    </p>
                     <div class="shop-empty-history__content">
-                        <p class="shop-empty-history">Cамый популярный товар в магазине -</p>
-                        <p class="shop-empty-history__popular">Cертификат Антидвойка</p>
-                        <p class="shop-empty-history">Улучши свои оценки в один клик.</p>
+                        <p class="shop-empty-history">
+                            Cамый популярный товар в магазине -
+                        </p>
+                        <p class="shop-empty-history__popular">
+                            Cертификат Антидвойка
+                        </p>
+                        <p class="shop-empty-history">
+                            Улучши свои оценки в один клик.
+                        </p>
                     </div>
                     <button
                         class="btn shop-empty-history__btn"
@@ -93,14 +113,16 @@
                     v-if="infoBuyHistoryItem.length === 0"
                     class="cabinet-shop__img-background--empty"
                 >
-                    <img src="@/assets/image/cabinet-shop/coinBege.png" alt="" />
+                    <img 
+                        src="@/assets/image/cabinet-shop/coinBege.png" 
+                        alt="" 
+                    >
                 </div>
                 <span class="cabinet-shop-history__line" />
             </div>
         </div>
     </section>
 </template>
-
 
 <script setup>
 const infoBuyItemInfo = [
@@ -509,6 +531,9 @@ const infoBuyHistoryItem = [
 .cabinet-shop-history__wrapper-info {
     line-height: 150%;
     color: var(--dark);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .cabinet-shop-history__wrapper-info span {
@@ -680,15 +705,12 @@ const infoBuyHistoryItem = [
     .cabinet-shop-container {
         height: auto;
         gap: 0;
+        flex-direction: column;
+        padding: 0 40px;
     }
 
     .cabinet-shop::before {
         display: none;
-    }
-
-    .cabinet-shop-container {
-        flex-direction: column;
-        padding: 0 40px;
     }
 
   .cabinet-shop-ready {
@@ -720,7 +742,7 @@ const infoBuyHistoryItem = [
 
     .cabinet-shop-ready__list-item {
         flex-direction: row;
-        margin: 0 auto;
+        margin: 0;
     }
 
     .cabinet-shop-history {
