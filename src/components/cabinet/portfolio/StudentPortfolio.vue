@@ -384,6 +384,11 @@ function setActiveMobile (id) {
     gap: 24px;
     width: 100%;
 
+    .dropdown-icon {
+        width: 24px;
+        height: 24px;
+    }
+
     @media(max-width: 991px) {
         padding: 24px 40px;
     }

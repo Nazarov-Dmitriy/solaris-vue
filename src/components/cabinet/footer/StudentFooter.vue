@@ -220,6 +220,9 @@
     padding-top: 8px;
     width: 100%;
     position: relative;
+    .cabinet-footer__text_orange {
+        color: var(--orange);
+    }
 }
 
 .cabinet-footer__rating:last-child {
@@ -233,10 +236,6 @@
     width: 100%;
     height: 0px;
     border: 1px solid var(--white);
-}
-
-.cabinet-footer__text_orange {
-    color: var(--orange);
 }
 
 .cabinet-footer__button {

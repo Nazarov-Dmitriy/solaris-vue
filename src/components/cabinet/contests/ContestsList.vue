@@ -784,10 +784,6 @@ function getRenderList(list) {
             }
         }
 
-        .uc-panel__dropdown-sort {
-            width: 167px;
-        }
-
         .btn-contest {
             margin-left: 0;
             width: 236px;
