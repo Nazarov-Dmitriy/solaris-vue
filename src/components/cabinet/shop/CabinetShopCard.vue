@@ -7,14 +7,10 @@
                         class="card-img"
                         src="@/assets/image/cabinet/image.png"
                         alt="Изображение отсутствует"
-                    >
-                    <h2 class="card-header-text">
-                        Сертификат АНТИДВОЙКА
-                    </h2>
+                    />
+                    <h2 class="card-header-text">Сертификат АНТИДВОЙКА</h2>
                     <div class="card-price-wraper">
-                        <p class="card-price">
-                            200
-                        </p>
+                        <p class="card-price">200</p>
                         <svg
                             class="card-icon"
                             width="41"
@@ -31,55 +27,53 @@
                     </div>
                 </div>
                 <div class="card-text">
-                    <p class="card-text-header h3">
-                        О товаре
-                    </p>
+                    <p class="card-text-header h3">О товаре</p>
                     <p class="card-text-word p1">
-                        Сертификат «Антидвойка» - <br>это уникальный документ, предоставляющий ученикам школы возможность
-                        аннулировать любые полученные двойки по любым предметам. Этот сертификат служит своеобразным
-                        спасательным кругом для тех, кто допустил ошибку и стремится её исправить. Он помогает восстановить
-                        уверенность в собственных силах и продолжить обучение с новыми возможностями.
-                        <br>Кроме того, сертификат «Антидвойка» мотивирует учеников к усердной учёбе и достижению лучших
-                        результатов. Зная, что у них есть возможность исправить ошибки и улучшить свои оценки, ученики
-                        становятся более ответственными и целеустремлёнными в своём обучении. Это способствует формированию
-                        позитивного отношения к образованию и развитию навыков самоконтроля.
-                        <br>В заключение, сертификат «Антидвойка» является важным инструментом для поддержки и мотивации
-                        учеников школы. Он помогает им преодолевать трудности, исправлять ошибки и улучшать свою
-                        успеваемость, способствуя формированию успешной образовательной траектории.
+                        Сертификат «Антидвойка» - <br />это уникальный документ, предоставляющий
+                        ученикам школы возможность аннулировать любые полученные двойки по любым
+                        предметам. Этот сертификат служит своеобразным спасательным кругом для тех,
+                        кто допустил ошибку и стремится её исправить. Он помогает восстановить
+                        уверенность в собственных силах и продолжить обучение с новыми
+                        возможностями. <br />Кроме того, сертификат «Антидвойка» мотивирует учеников
+                        к усердной учёбе и достижению лучших результатов. Зная, что у них есть
+                        возможность исправить ошибки и улучшить свои оценки, ученики становятся
+                        более ответственными и целеустремлёнными в своём обучении. Это способствует
+                        формированию позитивного отношения к образованию и развитию навыков
+                        самоконтроля. <br />В заключение, сертификат «Антидвойка» является важным
+                        инструментом для поддержки и мотивации учеников школы. Он помогает им
+                        преодолевать трудности, исправлять ошибки и улучшать свою успеваемость,
+                        способствуя формированию успешной образовательной траектории.
                     </p>
                 </div>
                 <div class="card-buttons">
-                    <button
-                        type="button"
-                        class="cancel-btn"
-                    >
-                        Отменить
-                    </button>
+                    <button type="button" class="cancel-btn">Отменить</button>
                     <div class="quantity-block">
-                        <div class="quantity-text p2">
-                            Количество
-                        </div>
-                        <button class="decrease h3">
-                            -
-                        </button>
-                        <span class="quantity h3">1</span>
-                        <button class="increase h3">
-                            +
-                        </button>
+                        <div class="quantity-text p2">Количество</div>
+                        <button class="decrease h3" @click="decrement">-</button>
+                        <span class="quantity h3">{{ countValue }}</span>
+                        <button class="increase h3" @click="increment">+</button>
                     </div>
-                    <button
-                        type="button"
-                        class="exchange-btn"
-                    >
-                        Обменять
-                    </button>
+                    <button type="button" class="exchange-btn">Обменять</button>
                 </div>
             </div>
         </div>
     </section>
 </template>
 <script setup>
+import { ref } from 'vue'
 
+const countValue = ref(1)
+
+function increment() {
+    countValue.value++
+}
+function decrement() {
+    if (countValue.value > 1) {
+        countValue.value--
+    } else {
+        return
+    }
+}
 </script>
 
 <style lang="scss">
@@ -90,12 +84,12 @@
     display: flex;
 }
 
-.shop-card__container{
+.shop-card__container {
     width: 100%;
     padding: 32px 60px;
     max-width: 1560px;
     margin: 0 auto;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 .card {
@@ -156,9 +150,8 @@
 .card-price {
     font-size: 48px;
     line-height: 64px;
-    font-weight: 700
+    font-weight: 700;
 }
-
 
 .card-text-word {
     text-align: justify;
@@ -253,7 +246,6 @@
     color: white;
     display: flex;
     align-items: center;
-
 }
 
 @media (max-width: 1200px) {
@@ -286,7 +278,7 @@
         line-height: 36px;
     }
 
-    .card-text-word{
+    .card-text-word {
         font-size: 16px;
     }
 
@@ -300,7 +292,7 @@
 }
 
 @media (max-width: 768px) {
-    .shop-card__container{
+    .shop-card__container {
         padding: 20px 40px;
     }
 
@@ -420,7 +412,7 @@
         margin: 0 auto;
     }
 
-    .quantity.h3{
+    .quantity.h3 {
         font-size: 20px;
         line-height: 30px;
     }

@@ -125,7 +125,12 @@
                             class="uc-panel__dropdown-sort"
                             :options="optionSort"
                         />
-                        <button class="btn btn-contest">Мои конкурсы</button>
+                        <button
+                            @click="filterContestsByRole"
+                            class="btn btn-contest btn-contest--student"
+                        >
+                            Мои конкурсы
+                        </button>
                     </div>
                 </div>
             </div>
@@ -375,6 +380,12 @@ function getRenderList(list) {
         z-index: 5;
     }
 
+    :deep(.dropdown-icon) {
+        position: absolute;
+        right: 16px;
+        width: auto;
+        height: auto;
+    }
     .dropdown-selected-text {
         min-width: 111px;
         width: 100%;
@@ -851,5 +862,9 @@ function getRenderList(list) {
 
 .btn-contest {
     width: 100%;
+
+    &--student {
+        width: auto;
+    }
 }
 </style>

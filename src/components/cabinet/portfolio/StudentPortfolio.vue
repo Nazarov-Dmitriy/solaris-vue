@@ -2,45 +2,28 @@
     <section class="uc-portfolio">
         <div class="uc-portfolio__container">
             <DropdownComponent
+                class="uc-portfolio__dropdown"
                 v-model:modelValue="selected"
                 :options="option"
             />
             <table class="uc-portfolio__table">
                 <thead>
                     <tr>
-                        <th class="uc-portfolio__head-title">
-                            Название конкурса
-                        </th>
-                        <th class="uc-portfolio__head-role">
-                            Название роли
-                        </th>
-                        <th class="uc-portfolio__head-teacher">
-                            Наставник
-                        </th>
-                        <th class="uc-portfolio__head-money">
-                            Солярики
-                        </th>
-                        <th class="uc-portfolio__head-balls">
-                            Баллы
-                        </th>
-                        <th class="uc-portfolio__head-status">
-                            Статус
-                        </th>
+                        <th class="uc-portfolio__head-title">Название конкурса</th>
+                        <th class="uc-portfolio__head-role">Название роли</th>
+                        <th class="uc-portfolio__head-teacher">Наставник</th>
+                        <th class="uc-portfolio__head-money">Солярики</th>
+                        <th class="uc-portfolio__head-balls">Баллы</th>
+                        <th class="uc-portfolio__head-status">Статус</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        v-for="el in renderList"
-                        :key="el.id"
-                    >
+                    <tr v-for="el in renderList" :key="el.id">
                         <td class="uc-portfolio__title">
                             {{ el.title }}
                         </td>
                         <td class="uc-portfolio__role">
-                            <p
-                                v-for="role in el.role"
-                                :key="role"
-                            >
+                            <p v-for="role in el.role" :key="role">
                                 {{ role }}
                             </p>
                         </td>
@@ -59,46 +42,25 @@
                     </tr>
                 </tbody>
             </table>
-            <table
-                v-for="el in renderList"
-                :key="el.id"
-                class="uc-portfolio__table tablet"
-            >
+            <table v-for="el in renderList" :key="el.id" class="uc-portfolio__table tablet">
                 <thead>
                     <tr>
-                        <th
-                            colspan="5"
-                            class="uc-portfolio__title"
-                            @click="setActive(el.id)"
-                        >
+                        <th colspan="5" class="uc-portfolio__title" @click="setActive(el.id)">
                             {{ el.title }}
                         </th>
                     </tr>
                 </thead>
                 <tbody v-if="active.includes(el.id)">
                     <tr>
-                        <th class="uc-portfolio__head-role">
-                            Название роли
-                        </th>
-                        <th class="uc-portfolio__head-teacher">
-                            Наставник
-                        </th>
-                        <th class="uc-portfolio__head-money">
-                            Солярики
-                        </th>
-                        <th class="uc-portfolio__head-balls">
-                            Баллы
-                        </th>
-                        <th class="uc-portfolio__head-status">
-                            Статус
-                        </th>
+                        <th class="uc-portfolio__head-role">Название роли</th>
+                        <th class="uc-portfolio__head-teacher">Наставник</th>
+                        <th class="uc-portfolio__head-money">Солярики</th>
+                        <th class="uc-portfolio__head-balls">Баллы</th>
+                        <th class="uc-portfolio__head-status">Статус</th>
                     </tr>
                     <tr>
                         <td class="uc-portfolio__role">
-                            <p
-                                v-for="role in el.role"
-                                :key="role"
-                            >
+                            <p v-for="role in el.role" :key="role">
                                 {{ role }}
                             </p>
                         </td>
@@ -117,94 +79,43 @@
                     </tr>
                 </tbody>
             </table>
-            <table
-                v-for="el in renderList"
-                :key="el.id"
-                class="uc-portfolio__table mobile"
-            >
+            <table v-for="el in renderList" :key="el.id" class="uc-portfolio__table mobile">
                 <thead>
                     <tr>
-                        <th
-                            colspan="6"
-                            class="uc-portfolio__title"
-                            @click="setActiveMobile(el.id)"
-                        >
+                        <th colspan="6" class="uc-portfolio__title" @click="setActiveMobile(el.id)">
                             {{ el.title }}
                         </th>
                     </tr>
                 </thead>
-                
+
                 <tbody v-if="activeMobile.includes(el.id)">
                     <tr>
-                        <th
-                            class="uc-portfolio__head-role"
-                            colspan="3"
-                        >
-                            Название роли
-                        </th>
-                        <th
-                            class="uc-portfolio__head-teacher"
-                            colspan="3"
-                        >
-                            Наставник
-                        </th>
+                        <th class="uc-portfolio__head-role" colspan="3">Название роли</th>
+                        <th class="uc-portfolio__head-teacher" colspan="3">Наставник</th>
                     </tr>
                     <tr>
-                        <td
-                            class="uc-portfolio__role"
-                            colspan="3"
-                        >
-                            <p
-                                v-for="role in el.role"
-                                :key="role"
-                            >
+                        <td class="uc-portfolio__role" colspan="3">
+                            <p v-for="role in el.role" :key="role">
                                 {{ role }}
                             </p>
                         </td>
-                        <td
-                            colspan="3"
-                            class="uc-portfolio__teacher"
-                        >
+                        <td colspan="3" class="uc-portfolio__teacher">
                             {{ el.teacher }}
                         </td>
                     </tr>
                     <tr>
-                        <th
-                            class="uc-portfolio__head-money"
-                            colspan="2"
-                        >
-                            Солярики
-                        </th>
-                        <th
-                            class="uc-portfolio__head-balls"
-                            colspan="2"
-                        >
-                            Баллы
-                        </th>
-                        <th
-                            class="uc-portfolio__head-status"
-                            colspan="2"
-                        >
-                            Статус
-                        </th>
+                        <th class="uc-portfolio__head-money" colspan="2">Солярики</th>
+                        <th class="uc-portfolio__head-balls" colspan="2">Баллы</th>
+                        <th class="uc-portfolio__head-status" colspan="2">Статус</th>
                     </tr>
                     <tr>
-                        <td
-                            class="uc-portfolio__money"
-                            colspan="2"
-                        >
+                        <td class="uc-portfolio__money" colspan="2">
                             {{ el.money }}
                         </td>
-                        <td
-                            class="uc-portfolio__balls"
-                            colspan="2"
-                        >
+                        <td class="uc-portfolio__balls" colspan="2">
                             {{ el.balls }}
                         </td>
-                        <td
-                            class="uc-portfolio__status"
-                            colspan="2"
-                        >
+                        <td class="uc-portfolio__status" colspan="2">
                             {{ el.status }}
                         </td>
                     </tr>
@@ -221,11 +132,11 @@
     </section>
 </template>
 <script setup>
-import { ref } from 'vue';
-import PaginationComponent from '@/components/pagination/PaginationComponent.vue';
-import DropdownComponent from '@/components/dropdown/DropdownComponent.vue';
+import { ref, watch } from 'vue'
+import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
+import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 
-const selected = ref("")
+const selected = ref('')
 const active = ref([])
 const activeMobile = ref([])
 const renderList = ref([])
@@ -233,8 +144,8 @@ const renderList = ref([])
 const data = [
     {
         id: 1,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 300,
         balls: 200,
         status: '1 место 1 этап',
@@ -242,58 +153,53 @@ const data = [
     },
     {
         id: 11,
-        title: " «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: ' «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 300,
         balls: 200,
         status: '1 место 1 этап',
         teacher: 'Иванова М.И'
-
     },
     {
         id: 2,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 300,
         balls: 400,
         status: '1 место 1 этап',
         teacher: 'Иванова М.И'
-
     },
     {
         id: 3,
-        title: " «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: ' «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 700,
         balls: 200,
         status: '1 место 1 этап',
         teacher: 'Иванова М.И'
-
     },
     {
         id: 4,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 300,
         balls: 200,
         status: '1 место 1 этап',
         teacher: 'Иванова М.И'
-
     },
     {
         id: 6,
-        title: "«Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: '«Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 200,
         balls: 200,
         status: '1 место 1 этап',
         teacher: 'Иванова М.И'
-
     },
     {
         id: 7,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 500,
         balls: 200,
         status: '1 место 1 этап',
@@ -301,8 +207,8 @@ const data = [
     },
     {
         id: 8,
-        title: " «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: ' «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 500,
         balls: 200,
         status: '1 место 1 этап',
@@ -310,8 +216,8 @@ const data = [
     },
     {
         id: 9,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 500,
         balls: 200,
         status: '1 место 1 этап',
@@ -319,8 +225,8 @@ const data = [
     },
     {
         id: 17,
-        title: " «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: ' «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 500,
         balls: 200,
         status: '1 место 1 этап',
@@ -328,15 +234,14 @@ const data = [
     },
     {
         id: 27,
-        title: "Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне",
-        role: ["журналист", "историк", "патриот", "юнармеец"],
+        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
+        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
         money: 500,
         balls: 200,
         status: '1 место 1 этап',
         teacher: 'Иванова М.И'
-    },
-
-];
+    }
+]
 
 const option = [
     'сортировка 1',
@@ -344,21 +249,25 @@ const option = [
     'сортировка 3',
     'сортировка 4',
     'сортировка 5',
-    'сортировка 6',
+    'сортировка 6'
 ]
 
-function getRenderList (list) {
+watch(selected, () => {
+    renderList.value.sort((a, b) => a - b)
+})
+
+function getRenderList(list) {
     renderList.value = list
 }
 
-function setActive (id) {
+function setActive(id) {
     if (!active.value.includes(id)) {
         active.value.push(id)
     } else {
         active.value.splice(active.value.indexOf(id), 1)
     }
 }
-function setActiveMobile (id) {
+function setActiveMobile(id) {
     if (!activeMobile.value.includes(id)) {
         activeMobile.value.push(id)
     } else {
@@ -366,7 +275,7 @@ function setActiveMobile (id) {
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .uc-portfolio {
     background-color: var(--white);
     display: flex;
@@ -389,13 +298,17 @@ function setActiveMobile (id) {
         height: 24px;
     }
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         padding: 24px 40px;
     }
 
-    @media(max-width:576px) {
+    @media (max-width: 576px) {
         padding: 24px 16px;
     }
+}
+
+.uc-portfolio__dropdown :deep(.dropdown-icon) {
+    width: 12px;
 }
 
 .uc-dropdown__portfolio {
@@ -406,7 +319,7 @@ function setActiveMobile (id) {
     height: fit-content;
     border-collapse: collapse;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         display: none;
     }
 }
@@ -419,7 +332,7 @@ thead th:nth-child(1) {
 thead th:nth-child(2) {
     width: 158px;
     min-width: 158px;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 thead th:nth-child(3) {
@@ -433,13 +346,13 @@ thead th:nth-child(4) {
 thead th:nth-child(5) {
     min-width: 100px;
     max-width: 112px;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 thead th:nth-child(6) {
     min-width: 80px;
     max-width: 156px;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 tbody tr {
@@ -473,7 +386,7 @@ tbody tr {
 }
 
 .uc-portfolio__table tbody td {
-    background: var(--lightBege)
+    background: var(--lightBege);
 }
 
 .uc-portfolio__table td p {
@@ -483,7 +396,7 @@ tbody tr {
 .uc-portfolio__table.tablet {
     display: none;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         display: table;
 
         thead .uc-portfolio__title {
@@ -509,7 +422,7 @@ tbody tr {
         }
     }
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         display: none;
     }
 }
@@ -517,7 +430,7 @@ tbody tr {
 .uc-portfolio__table.mobile {
     display: none;
 
-    @media(max-width: $sm) {
+    @media (max-width: $sm) {
         display: table;
 
         thead .uc-portfolio__title {
@@ -528,10 +441,10 @@ tbody tr {
 
         tbody td,
         tbody th,
-        tbody tr  {
+        tbody tr {
             text-align: center;
             margin-bottom: 0;
-            border-bottom:none;
+            border-bottom: none;
             padding: 8px;
         }
     }
