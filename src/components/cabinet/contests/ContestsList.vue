@@ -120,17 +120,16 @@
                             class="uc-panel__dropdown-role"
                             :options="optionRole"
                         />
-                        <DropdownComponent
-                            v-model:modelValue="sort"
-                            class="uc-panel__dropdown-sort"
-                            :options="optionSort"
-                        />
-                        <button
-                            @click="filterContestsByRole"
-                            class="btn btn-contest btn-contest--student"
-                        >
-                            Мои конкурсы
-                        </button>
+                        <div class="teacher-panel-group-down">
+                            <DropdownComponent
+                                v-model:modelValue="sort"
+                                class="teacher-panel__dropdown-sort"
+                                :options="optionSort"
+                            />
+                            <button @click="filterContestsByRole" class="btn btn-contest">
+                                Мои конкурсы
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -182,7 +181,7 @@
     </section>
 </template>
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import { useRouter } from 'vue-router'
@@ -368,7 +367,8 @@ function getRenderList(list) {
     }
 }
 
-.teacher-panel-group {
+.teacher-panel-group,
+.uc-panel-group {
     display: flex;
     gap: 16px;
     padding: 16px 0;
@@ -395,8 +395,6 @@ function getRenderList(list) {
         max-width: 100%;
     }
 
-    .teacher-panel__dropdown-sort {
-    }
 
     .teacher-panel__dropdown-role {
         width: 100%;
@@ -798,6 +796,9 @@ function getRenderList(list) {
         .btn-contest {
             margin-left: 0;
             width: 236px;
+            @media(max-width: $lg){
+                width: 100%;
+            }
         }
     }
 

@@ -6,121 +6,126 @@
                 v-model:modelValue="selected"
                 :options="option"
             />
-            <table class="uc-portfolio__table">
-                <thead>
-                    <tr>
-                        <th class="uc-portfolio__head-title">Название конкурса</th>
-                        <th class="uc-portfolio__head-role">Название роли</th>
-                        <th class="uc-portfolio__head-teacher">Наставник</th>
-                        <th class="uc-portfolio__head-money">Солярики</th>
-                        <th class="uc-portfolio__head-balls">Баллы</th>
-                        <th class="uc-portfolio__head-status">Статус</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="el in renderList" :key="el.id">
-                        <td class="uc-portfolio__title">
-                            {{ el.title }}
-                        </td>
-                        <td class="uc-portfolio__role">
-                            <p v-for="role in el.role" :key="role">
-                                {{ role }}
-                            </p>
-                        </td>
-                        <td class="uc-portfolio__teacher">
-                            {{ el.teacher }}
-                        </td>
-                        <td class="uc-portfolio__money">
-                            {{ el.money }}
-                        </td>
-                        <td class="uc-portfolio__balls">
-                            {{ el.balls }}
-                        </td>
-                        <td class="uc-portfolio__status">
-                            {{ el.status }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table v-for="el in renderList" :key="el.id" class="uc-portfolio__table tablet">
-                <thead>
-                    <tr>
-                        <th colspan="5" class="uc-portfolio__title" @click="setActive(el.id)">
-                            {{ el.title }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody v-if="active.includes(el.id)">
-                    <tr>
-                        <th class="uc-portfolio__head-role">Название роли</th>
-                        <th class="uc-portfolio__head-teacher">Наставник</th>
-                        <th class="uc-portfolio__head-money">Солярики</th>
-                        <th class="uc-portfolio__head-balls">Баллы</th>
-                        <th class="uc-portfolio__head-status">Статус</th>
-                    </tr>
-                    <tr>
-                        <td class="uc-portfolio__role">
-                            <p v-for="role in el.role" :key="role">
-                                {{ role }}
-                            </p>
-                        </td>
-                        <td class="uc-portfolio__teacher">
-                            {{ el.teacher }}
-                        </td>
-                        <td class="uc-portfolio__money">
-                            {{ el.money }}
-                        </td>
-                        <td class="uc-portfolio__balls">
-                            {{ el.balls }}
-                        </td>
-                        <td class="uc-portfolio__status">
-                            {{ el.status }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table v-for="el in renderList" :key="el.id" class="uc-portfolio__table mobile">
-                <thead>
-                    <tr>
-                        <th colspan="6" class="uc-portfolio__title" @click="setActiveMobile(el.id)">
-                            {{ el.title }}
-                        </th>
-                    </tr>
-                </thead>
-
-                <tbody v-if="activeMobile.includes(el.id)">
-                    <tr>
-                        <th class="uc-portfolio__head-role" colspan="3">Название роли</th>
-                        <th class="uc-portfolio__head-teacher" colspan="3">Наставник</th>
-                    </tr>
-                    <tr>
-                        <td class="uc-portfolio__role" colspan="3">
-                            <p v-for="role in el.role" :key="role">
-                                {{ role }}
-                            </p>
-                        </td>
-                        <td colspan="3" class="uc-portfolio__teacher">
-                            {{ el.teacher }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="uc-portfolio__head-money" colspan="2">Солярики</th>
-                        <th class="uc-portfolio__head-balls" colspan="2">Баллы</th>
-                        <th class="uc-portfolio__head-status" colspan="2">Статус</th>
-                    </tr>
-                    <tr>
-                        <td class="uc-portfolio__money" colspan="2">
-                            {{ el.money }}
-                        </td>
-                        <td class="uc-portfolio__balls" colspan="2">
-                            {{ el.balls }}
-                        </td>
-                        <td class="uc-portfolio__status" colspan="2">
-                            {{ el.status }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="uc-portfolio__table-container">
+                <table class="uc-portfolio__table">
+                    <thead>
+                        <tr>
+                            <th class="uc-portfolio__head-title">Название конкурса</th>
+                            <th class="uc-portfolio__head-role">Название роли</th>
+                            <th class="uc-portfolio__head-teacher">Наставник</th>
+                            <th class="uc-portfolio__head-money">Солярики</th>
+                            <th class="uc-portfolio__head-balls">Баллы</th>
+                            <th class="uc-portfolio__head-status">Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="el in renderList" :key="el.id">
+                            <td class="uc-portfolio__title">
+                                {{ el.title }}
+                            </td>
+                            <td class="uc-portfolio__role">
+                                <p v-for="role in el.role" :key="role">
+                                    {{ role }}
+                                </p>
+                            </td>
+                            <td class="uc-portfolio__teacher">
+                                {{ el.teacher }}
+                            </td>
+                            <td class="uc-portfolio__money">
+                                {{ el.money }}
+                            </td>
+                            <td class="uc-portfolio__balls">
+                                {{ el.balls }}
+                            </td>
+                            <td class="uc-portfolio__status">
+                                {{ el.status }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="uc-portfolio__table-container tablet">
+                <table v-for="el in renderList" :key="el.id" class="uc-portfolio__table tablet">
+                    <thead>
+                        <tr>
+                            <th colspan="5" class="uc-portfolio__title" @click="setActive(el.id)">
+                                {{ el.title }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody v-if="active.includes(el.id)">
+                        <tr>
+                            <th class="uc-portfolio__head-role">Название роли</th>
+                            <th class="uc-portfolio__head-teacher">Наставник</th>
+                            <th class="uc-portfolio__head-money">Солярики</th>
+                            <th class="uc-portfolio__head-balls">Баллы</th>
+                            <th class="uc-portfolio__head-status">Статус</th>
+                        </tr>
+                        <tr>
+                            <td class="uc-portfolio__role">
+                                <p v-for="role in el.role" :key="role">
+                                    {{ role }}
+                                </p>
+                            </td>
+                            <td class="uc-portfolio__teacher">
+                                {{ el.teacher }}
+                            </td>
+                            <td class="uc-portfolio__money">
+                                {{ el.money }}
+                            </td>
+                            <td class="uc-portfolio__balls">
+                                {{ el.balls }}
+                            </td>
+                            <td class="uc-portfolio__status">
+                                {{ el.status }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="uc-portfolio__table-container mobile">
+                <table v-for="el in renderList" :key="el.id" class="uc-portfolio__table mobile">
+                    <thead>
+                        <tr>
+                            <th colspan="6" class="uc-portfolio__title" @click="setActiveMobile(el.id)">
+                                {{ el.title }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody v-if="activeMobile.includes(el.id)">
+                        <tr>
+                            <th class="uc-portfolio__head-role" colspan="3">Название роли</th>
+                            <th class="uc-portfolio__head-teacher" colspan="3">Наставник</th>
+                        </tr>
+                        <tr>
+                            <td class="uc-portfolio__role" colspan="3">
+                                <p v-for="role in el.role" :key="role">
+                                    {{ role }}
+                                </p>
+                            </td>
+                            <td colspan="3" class="uc-portfolio__teacher">
+                                {{ el.teacher }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="uc-portfolio__head-money" colspan="2">Солярики</th>
+                            <th class="uc-portfolio__head-balls" colspan="2">Баллы</th>
+                            <th class="uc-portfolio__head-status" colspan="2">Статус</th>
+                        </tr>
+                        <tr>
+                            <td class="uc-portfolio__money" colspan="2">
+                                {{ el.money }}
+                            </td>
+                            <td class="uc-portfolio__balls" colspan="2">
+                                {{ el.balls }}
+                            </td>
+                            <td class="uc-portfolio__status" colspan="2">
+                                {{ el.status }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <PaginationComponent
                 :perpage="5"
                 :data="data"
@@ -131,6 +136,7 @@
         </div>
     </section>
 </template>
+
 <script setup>
 import { ref, watch } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
@@ -275,6 +281,7 @@ function setActiveMobile(id) {
     }
 }
 </script>
+
 <style lang="scss" scoped>
 .uc-portfolio {
     background-color: var(--white);
@@ -298,11 +305,11 @@ function setActiveMobile(id) {
         height: 24px;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: $lg) {
         padding: 24px 40px;
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: $md) {
         padding: 24px 16px;
     }
 }
@@ -315,12 +322,20 @@ function setActiveMobile(id) {
     width: 243px;
 }
 
+.uc-portfolio__table-container {
+    overflow-x: auto;
+
+    @media (min-width: $lg) {
+        overflow-x: visible;
+    }
+}
+
 .uc-portfolio__table {
     height: fit-content;
     border-collapse: collapse;
 
-    @media (max-width: 991px) {
-        display: none;
+    @media (max-width: $lg) {
+        overflow: auto;
     }
 }
 
