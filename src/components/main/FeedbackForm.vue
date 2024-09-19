@@ -283,7 +283,6 @@ onMounted(() => {
 function setVisible () {
     const elementPosition = feedback.getBoundingClientRect();
     const windowHeight = window.innerHeight;
-    console.log(222);
     if (elementPosition.top < windowHeight * 0.3) {
         feedbackContainer.classList.add("feedback_background__animate");
         feedbackTitle.classList.add("feedback__animate");

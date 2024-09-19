@@ -80,7 +80,6 @@
 import { ref } from 'vue';
 
 function setActive (ind){
-    console.log( ind !== active.value);
     ind !== active.value ? active.value= ind : active.value = null
 }
 
