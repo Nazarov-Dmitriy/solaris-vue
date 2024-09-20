@@ -430,7 +430,7 @@ function getRenderList(list) {
 
 .teacher-portfolio__tab-header {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 9fr 1fr 1fr;;
     align-items: center;
 
     @media (max-width: $sm) {

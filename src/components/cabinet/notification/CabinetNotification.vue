@@ -180,12 +180,16 @@ function getRenderList (list) {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .section-notification {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+
+    :deep(.dashboard__dropdown-wrapper){
+        z-index: 1;
+    }
 }
 
 .notification-panel-wraper {
@@ -306,6 +310,7 @@ function getRenderList (list) {
 
 .notification__decription {
     cursor: pointer;
+    color: var(--dark);
 
     &.active{
         font-weight: 400;

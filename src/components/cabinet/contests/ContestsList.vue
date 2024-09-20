@@ -374,10 +374,11 @@ function getRenderList(list) {
     padding: 16px 0;
     justify-content: end;
     width: 100%;
+    position: relative;
+    z-index: 5;
 
     :deep(.dashboard__dropdown-wrapper) {
         position: relative;
-        z-index: 5;
     }
 
     :deep(.dropdown-icon) {
@@ -394,7 +395,6 @@ function getRenderList(list) {
     .dropdown-selected {
         max-width: 100%;
     }
-
 
     .teacher-panel__dropdown-role {
         width: 100%;
@@ -796,7 +796,7 @@ function getRenderList(list) {
         .btn-contest {
             margin-left: 0;
             width: 236px;
-            @media(max-width: $lg){
+            @media (max-width: $lg) {
                 width: 100%;
             }
         }

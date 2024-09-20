@@ -57,7 +57,6 @@ const toggleOptionSelect = (option) => {
         isDropDownVisible.value = false
     }, 100)
 }
-
 const closeDropDown = (element) => {
     if (!dropDown.value.contains(element.target)) {
         isDropDownVisible.value = false
@@ -116,7 +115,7 @@ onBeforeUnmount(() => {
     border: 1px solid var(--roseBege);
     top: 50px;
     left: -1px;
-    z-index: 10;
+    z-index: 999;
 }
 
 .option {

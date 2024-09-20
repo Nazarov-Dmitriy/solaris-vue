@@ -4,12 +4,8 @@
             <div class="achievements__wrapper">
                 <div>
                     <div class="achievements__header px-4">
-                        <h3 class="h3 achievements__header-title">
-                            Достижения учителя
-                        </h3>
-                        <p class="p2 achievements__header-text">
-                            максимум 20 баллов
-                        </p>
+                        <h3 class="h3 achievements__header-title">Достижения учителя</h3>
+                        <p class="p2 achievements__header-text">максимум 20 баллов</p>
                     </div>
                     <div
                         v-for="(fieldGroup, index) in fieldsGroup"
@@ -18,20 +14,14 @@
                     >
                         <div class="achievements__text-wrapper">
                             <span />
-                            <p class="achievements__nomination-text">
-                                Мероприятие
-                            </p>
+                            <p class="achievements__nomination-text">Мероприятие</p>
                             <span />
                         </div>
-                        <form
-                            action="#"
-                            class="achievements__form"
-                        >
+                        <form action="#" class="achievements__form" @submit.prevent>
                             <div class="achievements__input-group">
-                                <label
-                                    for="eventName"
-                                    class="achievements__label"
-                                >Наименование мероприятия</label>
+                                <label for="eventName" class="achievements__label"
+                                    >Наименование мероприятия</label
+                                >
                                 <DropdownComponent
                                     id="eventName"
                                     class="achievements__input"
@@ -45,23 +35,16 @@
                                     примечания к заполнению
                                 </p>
                                 <div class="achievements__input-group">
-                                    <label
-                                        for="chooseDate"
-                                        class="achievements__label"
-                                    >Дата</label>
+                                    <label for="chooseDate" class="achievements__label">Дата</label>
                                     <InputDate id="chooseDate" />
-                                    <p
-                                        v-if="dateError"
-                                        class="error-message"
-                                    >
+                                    <p v-if="dateError" class="error-message">
                                         {{ dateError }}
                                     </p>
                                 </div>
                                 <div class="achievements__input-group">
-                                    <label
-                                        for="chooseEventType"
-                                        class="achievements__label"
-                                    >Тип мероприятия</label>
+                                    <label for="chooseEventType" class="achievements__label"
+                                        >Тип мероприятия</label
+                                    >
                                     <DropdownComponent
                                         id="chooseEventType"
                                         :options="chooseEventTypeOptions"
@@ -70,10 +53,9 @@
                                     />
                                 </div>
                                 <div class="achievements__input-group">
-                                    <label
-                                        for="chooseLevel"
-                                        class="achievements__label"
-                                    >Уровень</label>
+                                    <label for="chooseLevel" class="achievements__label"
+                                        >Уровень</label
+                                    >
 
                                     <DropdownComponent
                                         id="chooseLevel"
@@ -83,10 +65,9 @@
                                     />
                                 </div>
                                 <div class="achievements__input-group">
-                                    <label
-                                        for="orginise"
-                                        class="achievements__label"
-                                    >Организатор</label>
+                                    <label for="orginise" class="achievements__label"
+                                        >Организатор</label
+                                    >
 
                                     <InputText
                                         id="orginise"
@@ -95,10 +76,7 @@
                                     />
                                 </div>
                                 <div class="achievements__input-group">
-                                    <label
-                                        for="name"
-                                        class="achievements__label"
-                                    >Название</label>
+                                    <label for="name" class="achievements__label">Название</label>
 
                                     <InputText
                                         id="name"
@@ -110,17 +88,14 @@
                             <div class="achievements__results">
                                 <div class="achievements__text-wrapper">
                                     <span />
-                                    <p class="achievements__nomination-text">
-                                        Результат
-                                    </p>
+                                    <p class="achievements__nomination-text">Результат</p>
                                     <span />
                                 </div>
                                 <div class="achievements__results-input-wrapper">
                                     <div class="achievements__input-group">
-                                        <label
-                                            for="chooseResult"
-                                            class="achievements__label"
-                                        >Результат</label>
+                                        <label for="chooseResult" class="achievements__label"
+                                            >Результат</label
+                                        >
                                         <DropdownComponent
                                             id="chooseResult"
                                             class="achievements__input"
@@ -143,9 +118,7 @@
                             проверки: Зачтено, Зачтено частично, Не зачтено
                         </p>
                         <div class="achievements__footer">
-                            <h3 class="h3 achievements__footer-title">
-                                Предполагаемый балл: 0
-                            </h3>
+                            <h3 class="h3 achievements__footer-title">Предполагаемый балл: 0</h3>
                             <BtnComponent
                                 emit-name="form-submit"
                                 class="achievements__footer-btn"
@@ -177,9 +150,7 @@
                 @toggle-modal="toggleModal"
             >
                 <template #title>
-                    <h2 class="modal-title">
-                        Данные сохранены
-                    </h2>
+                    <h2 class="modal-title">Данные сохранены</h2>
                 </template>
                 <template #text>
                     <p class="text-center">
@@ -203,13 +174,13 @@ import ModalComponent from '@/components/modal/ModalComponent.vue'
 
 const fieldsGroup = ref([1])
 
-function addFieldsGroup () {
+function addFieldsGroup() {
     fieldsGroup.value.push(1)
 }
 
 const isModalVisible = ref(false)
 
-function toggleModal () {
+function toggleModal() {
     isModalVisible.value = !isModalVisible.value
 }
 

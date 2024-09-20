@@ -14,6 +14,8 @@
                         />
                     </div>
                     <div
+                        v-for="(dropdown, index) in dropdowns"
+                        :key="index"
                         class="propose-contest__form-dropdown-group propose-contest__form-dropdown-group--mobile"
                     >
                         <label for="#" class="propose-contest__form-label"
@@ -25,7 +27,7 @@
                                 :options="role"
                                 additional-class="custom-dropdown-selected"
                             />
-                            <button class="dropdown-btn">
+                            <button class="dropdown-btn" @click="addDropdown">
                                 <img
                                     src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
                                     alt="Выбрать предмет"

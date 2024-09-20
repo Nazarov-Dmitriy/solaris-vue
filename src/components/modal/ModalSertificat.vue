@@ -130,6 +130,9 @@ function closeModal() {
     @media (max-width: $lg) {
         align-items: stretch;
     }
+    @media (max-width: $sm) {
+        width: 96%;
+    }
 }
 
 .modal__close-btn-wrapper {
@@ -151,6 +154,10 @@ function closeModal() {
     @media (max-width: $sm) {
         span {
             text-align: center;
+
+            @media (max-width: $sm) {
+                padding: 8px;
+            }
         }
     }
 }
