@@ -127,7 +127,7 @@
                                 :options="optionSort"
                             />
                             <button @click="filterContestsByRole" class="btn btn-contest">
-                                Мои конкурсы
+                                Мои конкурсы 
                             </button>
                         </div>
                     </div>

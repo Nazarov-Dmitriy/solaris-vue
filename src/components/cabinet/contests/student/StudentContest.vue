@@ -7,45 +7,34 @@
                         {{ props.contests?.title }}
                     </p>
                     <div class="uc__directions">
-                        <p
-                            v-for="tag in props.contests?.tags"
-                            :key="tag"
-                            class="uc__direction p2"
-                        >
+                        <p v-for="tag in props.contests?.tags" :key="tag" class="uc__direction p2">
                             {{ tag }}
                         </p>
                     </div>
                     <div class="uc__info">
-                        <p class="uc__publication p2">
-                            Дата публикации 02.03.2024
-                        </p>
-                        <buttom
+                        <p class="uc__publication p2">Дата публикации 02.03.2024</p>
+                        <button
                             class="uc__info-btn btn"
-                            @click="$router.push('/cabinet-contests')"
+                            @click="$router.push('/cabinet/student/contests')"
                         >
                             К списку конкурсов
-                        </buttom>
+                        </button>
                     </div>
                 </div>
                 <div class="uc-contest__content">
                     <div class="uc-contest__decription">
                         <div class="uc-contest__target">
-                            <p class="uc-contest__subtitle">
-                                Цель Конкурса:
-                            </p>
+                            <p class="uc-contest__subtitle">Цель Конкурса:</p>
                             <p class="uc-contest__text">
-                                сохранение исторической памяти о подвиге и героизме советского народа в годы Великой
-                                Отечественной войны, о воинском и трудовом подвиге наших предков через личное
-                                осмысление,
-                                традиции и судьбы семей, хранящих светлую память о своих близких, через понимание роли
-                                нашей
-                                страны в избавлении от фашизма.
+                                сохранение исторической памяти о подвиге и героизме советского
+                                народа в годы Великой Отечественной войны, о воинском и трудовом
+                                подвиге наших предков через личное осмысление, традиции и судьбы
+                                семей, хранящих светлую память о своих близких, через понимание роли
+                                нашей страны в избавлении от фашизма.
                             </p>
                         </div>
                         <div class="uc-contest__task">
-                            <p class="uc-contest__subtitle">
-                                Задачи конкурса:
-                            </p>
+                            <p class="uc-contest__subtitle">Задачи конкурса:</p>
                             <ul class="ul-contest__list">
                                 <li class="uc-contest__list-item">
                                     воспитание патриотизма у учащихся;
@@ -54,52 +43,42 @@
                                     уважения к подвигу защитников Отечества;
                                 </li>
                                 <li class="uc-contest__list-item">
-                                    изучение исторического наследия России на примере
-                                    подвига
+                                    изучение исторического наследия России на примере подвига
                                     советского народа во время Великой Отечественной войны.
                                 </li>
                             </ul>
                         </div>
                         <div class="uc-contest__condition">
-                            <p class="uc-contest__subtitle">
-                                Условия участия
-                            </p>
+                            <p class="uc-contest__subtitle">Условия участия</p>
                             <p class="uc-contest__text">
                                 К участию в Конкурсе принимаются только индивидуальные сочинения
                             </p>
                             <ul class="ul-contest__list">
                                 <li class="uc-contest__list-item">
-                                    Работы на Конкурс принимаются в электронном формате
-                                    docx
-                                    (формат А4, шрифт - Times New Roman, основной текст - кегль 14, интервал межстрочный
-                                    –
-                                    1,5).
+                                    Работы на Конкурс принимаются в электронном формате docx (формат
+                                    А4, шрифт - Times New Roman, основной текст - кегль 14, интервал
+                                    межстрочный – 1,5).
                                 </li>
                                 <li class="uc-contest__list-item">
-                                    Объем работы должен быть не более 4 (четырёх) печатных
-                                    страниц
+                                    Объем работы должен быть не более 4 (четырёх) печатных страниц
                                     основного текста.
                                 </li>
                                 <li class="uc-contest__list-item">
-                                    Первая страница – заполненная заявка (Тема работы
-                                    (пункт 5
-                                    Положения); сведения об авторе: фамилия, имя, отчество, дата рождения,
-                                    общеобразовательное
-                                    учреждение, класс, руководитель (учитель помогающий в написании и структурировании
-                                    работы),
+                                    Первая страница – заполненная заявка (Тема работы (пункт 5
+                                    Положения); сведения об авторе: фамилия, имя, отчество, дата
+                                    рождения, общеобразовательное учреждение, класс, руководитель
+                                    (учитель помогающий в написании и структурировании работы),
                                     телефон и электронная почта руководителя.
                                 </li>
                                 <li class="uc-contest__list-item">
-                                    Работа должна содержать фотографию или фотографии
-                                    родственника, о котором будет идти речь в сочинении, а также фотографию участника,
-                                    руководителя и директора школы.
+                                    Работа должна содержать фотографию или фотографии родственника,
+                                    о котором будет идти речь в сочинении, а также фотографию
+                                    участника, руководителя и директора школы.
                                 </li>
                             </ul>
                         </div>
                         <div class="uc-contest__when-passes">
-                            <p class="uc-contest__subtitle">
-                                Когда проходит
-                            </p>
+                            <p class="uc-contest__subtitle">Когда проходит</p>
                             <p class="uc-contest__text">
                                 Конкурс проводится в три этапа (школьный, районный, городской):
                             </p>
@@ -116,14 +95,13 @@
                     </div>
                     <div
                         class="uc-contest__application"
-                        :class="{ 'success': confirmedApplication.length > 0 }"
+                        :class="{ success: confirmedApplication.length > 0 }"
                     >
                         <template v-if="confirmedApplication.length === 0">
-                            <h3 class="uc-contest__application-title h3">
-                                Подать заявку
-                            </h3>
+                            <h3 class="uc-contest__application-title h3">Подать заявку</h3>
                             <p class="uc-contest__application-text">
-                                Для участия в конкурсе выбери наставника, подай заявку и жди подтвержения в уведомлениях
+                                Для участия в конкурсе выбери наставника, подай заявку и жди
+                                подтвержения в уведомлениях
                             </p>
                             <div class="uc-contest__list">
                                 <div
@@ -134,13 +112,13 @@
                                 >
                                     <div
                                         class="uc-contest__card"
-                                        :class="{ 'active': arrSubmitApplication.includes(el.id) }"
+                                        :class="{ active: arrSubmitApplication.includes(el.id) }"
                                     >
                                         <img
                                             src="@/assets/image/user-cabinet/contest/avatar.png"
                                             alt="avatar"
                                             class="uc-contest__avatar"
-                                        >
+                                        />
                                         <p class="uc-contest__user-name p2">
                                             {{ el.name }}
                                         </p>
@@ -198,19 +176,17 @@
                             </button>
                         </template>
                         <template v-else>
-                            <h3 class="uc-contest__application-title h3">
-                                Твоя заявка принята
-                            </h3>
+                            <h3 class="uc-contest__application-title h3">Твоя заявка принята</h3>
                             <p class="uc-contest__application-text">
-                                Ты учатвуешь в этом конкурсе, обратись к своему наставнику для получения всех
-                                необходимых инструкций
+                                Ты учатвуешь в этом конкурсе, обратись к своему наставнику для
+                                получения всех необходимых инструкций
                             </p>
                             <div class="uc-contest__application-success">
                                 <img
                                     src="@/assets/image/user-cabinet/contest/avatar.png"
                                     alt="avatar"
                                     class="uc-contest__avatar"
-                                >
+                                />
                                 <div class="uc-contest__application-wraper">
                                     <p class="uc-contest__user-name p2">
                                         {{ confirmedApplication[0].name }}
@@ -235,69 +211,67 @@
     </section>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const props = defineProps({
     contests: {
         type: Object,
         default: () => {}
-    },
+    }
 })
-
 
 const arrSubmitApplication = ref([])
 const confirmedApplication = ref([])
 
 const listTeacher = [
     {
-        name: "Жуков Марк Никитич",
+        name: 'Жуков Марк Никитич',
         trend: ['История', 'Обществознание'],
-        id: 1,
+        id: 1
     },
     {
-        name: "Тарасова Василиса Михайловна",
+        name: 'Тарасова Василиса Михайловна',
         trend: ['Математика', 'Обществознание'],
-        id: 2,
-
+        id: 2
     },
     {
-        name: "Вавилова Дарья Саввична",
+        name: 'Вавилова Дарья Саввична',
         trend: ['Русский', 'Обществознание'],
-        id: 3,
-
+        id: 3
     },
     {
-        name: "Кудрявцева Полина Андреевна",
+        name: 'Кудрявцева Полина Андреевна',
         trend: ['Физика', 'Обществознание'],
-        id: 4,
-
+        id: 4
     },
     {
-        name: "Сафонов Александр Платонович",
+        name: 'Сафонов Александр Платонович',
         trend: ['Химия', 'Обществознание'],
-        id: 5,
-
+        id: 5
     },
     {
-        name: "Матвеев Марк Ярославович",
+        name: 'Матвеев Марк Ярославович',
         trend: ['Информатика', 'Обществознание'],
-        id: 6,
+        id: 6
+    }
+]
 
-    },
-];
-
-function addSubmitApplication (id) {
-    if (!arrSubmitApplication.value.includes(id)) {
+function addSubmitApplication(id) {
+    if (!arrSubmitApplication.value.includes(id) && arrSubmitApplication.value.length === 0) {
         arrSubmitApplication.value.push(id)
     } else {
         arrSubmitApplication.value.splice(arrSubmitApplication.value.indexOf(id), 1)
     }
 }
 
-function submitApplication () {
-    confirmedApplication.value.push(listTeacher[arrSubmitApplication.value[0]])
+function submitApplication() {
+    const selectedTeacherId = arrSubmitApplication.value[0]
+    const selectedTeacher = listTeacher.find((teacher) => teacher.id === selectedTeacherId)
+    if (selectedTeacher) {
+        confirmedApplication.value.push(selectedTeacher)
+        console.log(confirmedApplication.value)
+    }
 }
-
 </script>
 <style lang="scss" scoped>
 .uc-contest-wrapper {
@@ -315,11 +289,11 @@ function submitApplication () {
     position: relative;
     box-sizing: border-box;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         padding: 24px 40px;
     }
 
-    @media(max-width:576px) {
+    @media (max-width: 576px) {
         padding: 24px 16px;
     }
 }
@@ -335,8 +309,7 @@ function submitApplication () {
     gap: 16px;
     flex-direction: row-reverse;
 
-
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         flex-direction: column;
     }
 }
@@ -349,7 +322,7 @@ function submitApplication () {
     gap: 24px;
     color: var(--dark);
 
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         max-width: 100%;
     }
 }
@@ -405,21 +378,19 @@ function submitApplication () {
         min-height: 200px;
     }
 
-
-    @media(max-width: 768px) {
+    @media (max-width: 768px) {
         max-width: 100%;
         min-height: 300px;
         gap: 16px;
     }
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         width: calc(100% + 32px);
         left: -16px;
         position: relative;
         max-width: unset;
         padding: 24px 16px;
     }
-
 }
 
 .uc-contest__application-title {
@@ -453,20 +424,20 @@ function submitApplication () {
     grid-template-columns: 56px 1fr 52px;
     grid-template-rows: auto;
     grid-template-areas:
-        "contest-avatar  contest-user-name  contest-btn"
-        "contest-avatar  contest-user-derections  contest-btn";
+        'contest-avatar  contest-user-name  contest-btn'
+        'contest-avatar  contest-user-derections  contest-btn';
     align-items: center;
     gap: 0 8px;
     padding: 8px 16px;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         grid-template-columns: 56px 1fr 52px;
         grid-template-areas:
-            "contest-avatar  contest-user-name  contest-user-name"
-            "contest-avatar  contest-user-derections  contest-btn";
+            'contest-avatar  contest-user-name  contest-user-name'
+            'contest-avatar  contest-user-derections  contest-btn';
     }
 
-    @media(max-width:576px) {
+    @media (max-width: 576px) {
         gap: 0;
         padding: 8px 8px;
     }
@@ -477,8 +448,8 @@ function submitApplication () {
     grid-template-columns: 56px 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-        "contest-avatar  contest-user-name "
-        "contest-avatar  contest-user-derections  ";
+        'contest-avatar  contest-user-name '
+        'contest-avatar  contest-user-derections  ';
     align-items: center;
     gap: 0 8px;
 
@@ -513,7 +484,6 @@ function submitApplication () {
     .uc-contest__user-derections {
         justify-content: center;
         flex-direction: row;
-
     }
 
     .uc-contest__user-derection {
@@ -534,7 +504,7 @@ function submitApplication () {
     border: 2px solid var(--roseBege);
     box-sizing: border-box;
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         margin-right: 8px;
     }
 }
@@ -551,14 +521,14 @@ function submitApplication () {
     gap: 16px;
     padding-bottom: 4px;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         flex-direction: column;
         gap: 8px;
     }
 }
 
 .uc-contest__user-derection {
-    color: var(--roseBege)
+    color: var(--roseBege);
 }
 
 .uc-contest__btn {
@@ -582,23 +552,23 @@ function submitApplication () {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 32px auto;
     grid-template-areas:
-        "uc-deccription uc-directions"
-        "uc-deccription  uc-info";
+        'uc-deccription uc-directions'
+        'uc-deccription  uc-info';
     padding: 16px;
     border-bottom: 2px solid var(--roseBege);
     gap: 56px 0;
 
-    @media(max-width: 1200px) {
+    @media (max-width: 1200px) {
         grid-template-columns: 1fr;
         grid-template-rows: 32px auto;
         grid-template-areas:
-            "uc-directions"
-            "uc-deccription "
-            "uc-info";
+            'uc-directions'
+            'uc-deccription '
+            'uc-info';
         gap: 20px 0;
     }
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         grid-template-rows: auto;
     }
 }
@@ -606,7 +576,7 @@ function submitApplication () {
 .uc__item:hover {
     background: var(--lightBege);
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         background: unset;
     }
 }
@@ -616,7 +586,7 @@ function submitApplication () {
     max-width: 652px;
     color: var(--dark);
 
-    @media(max-width: 1200px) {
+    @media (max-width: 1200px) {
         max-width: 100%;
     }
 }
@@ -627,11 +597,11 @@ function submitApplication () {
     display: flex;
     gap: 24px;
 
-    @media(max-width: 991px) {
+    @media (max-width: 991px) {
         gap: 16px;
     }
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         flex-wrap: wrap;
         flex-grow: 1;
         justify-content: space-between;
@@ -644,7 +614,7 @@ function submitApplication () {
     background: var(--roseBege);
     color: var(--white);
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         font-size: 12px;
     }
 }
@@ -657,14 +627,14 @@ function submitApplication () {
     justify-content: flex-end;
     align-items: flex-end;
 
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         flex-wrap: wrap;
         width: 100%;
     }
 }
 
 .uc__info-btn {
-    @media(max-width: 576px) {
+    @media (max-width: 576px) {
         flex-grow: 1;
         justify-content: center;
     }
