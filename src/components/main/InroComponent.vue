@@ -1,38 +1,29 @@
 <template>
-    <section
-        id="intro"
-        class="wrap-container"
-    >
+    <section id="intro" class="wrap-container">
         <div class="intro">
             <div class="intro__description">
-                <h1 class="intro__title h1 ">
+                <h1 class="intro__title h1">
                     Общее и дополнительное образование вместе с Соляриком!
                 </h1>
-                <p class="intro__text p1 ">
-                    Муниципальное автономное общеобразовательное учреждение «Лицей «Солярис» –
-                    одно из современных и крупнейших учреждений Саратовской области
+                <p class="intro__text p1">
+                    Муниципальное автономное общеобразовательное учреждение «Лицей «Солярис» – одно
+                    из современных и крупнейших учреждений Саратовской области
                 </p>
             </div>
 
             <div class="intro__form-container">
-                <form
-                    class="intro__form"
-                    @submit.prevent
-                >
+                <form class="intro__form" @submit.prevent>
                     <div>
                         <input
-                            v-model="login"
+                            v-model="payload.username"
                             type="text"
                             class="intro__input p2"
                             placeholder="Логин"
-                            style="margin-top: 32px;"
-                            :class="{ 'error': loginError }"
+                            style="margin-top: 32px"
+                            :class="{ error: loginError }"
                             @change="changeLogin"
-                        >
-                        <div
-                            v-if="loginError"
-                            class="form__error"
-                        >
+                        />
+                        <div v-if="loginError" class="form__error">
                             <span class="form__icon-error">
                                 <svg
                                     width="24"
@@ -47,25 +38,20 @@
                                     />
                                 </svg>
                             </span>
-                            <p class="form__text-error">
-                                Поле заполнено некорректно
-                            </p>
+                            <p class="form__text-error">Поле заполнено некорректно</p>
                         </div>
                     </div>
                     <div>
                         <input
-                            v-model="password"
+                            v-model="payload.password"
                             type="text"
                             class="intro__input p2"
                             placeholder="Пароль"
-                            style="margin-top: 8px;"
-                            :class="{ 'error': passwordError }"
+                            style="margin-top: 8px"
+                            :class="{ error: passwordError }"
                             @change="changePassword"
-                        >
-                        <div
-                            v-if="passwordError"
-                            class="form__error"
-                        >
+                        />
+                        <div v-if="passwordError" class="form__error">
                             <span class="form__icon-error">
                                 <svg
                                     width="24"
@@ -80,39 +66,25 @@
                                     />
                                 </svg>
                             </span>
-                            <p class="form__text-error">
-                                Поле заполнено некорректно
-                            </p>
+                            <p class="form__text-error">Поле заполнено некорректно</p>
                         </div>
                     </div>
-                    <button
-                        class="btn"
-                        @click="validate()"
-                    >
-                        Воити в кабинет
-                    </button>
-                    <button
-                        type="button"
-                        class="intro__form-btn btn-text"
-                        @click="modal = true"
-                    >
+                    <button class="btn" @click="validate()">Воити в кабинет</button>
+                    <button type="button" class="intro__form-btn btn-text" @click="modal = true">
                         Забыли пароль?
                     </button>
                     <img
                         class="into__bg-rays"
                         src="../../assets/image/animation-main/rays.svg"
                         alt="rays"
-                    >
+                    />
                     <img
                         class="into__bg-hare"
                         src="../../assets/image/animation-main/hare.svg"
                         alt="hare"
-                    >
+                    />
                     <transition name="show">
-                        <div
-                            v-if="modal"
-                            class="intro__modal"
-                        >
+                        <div v-if="modal" class="intro__modal">
                             <svg
                                 class="intro__modal-close"
                                 width="32"
@@ -142,8 +114,8 @@
                                 />
                             </svg>
                             <p class="intro__modal-text p1">
-                                Если вы забыли пароль от своего личного кабинета, то обратитесь
-                                к вашему классному руководителю.
+                                Если вы забыли пароль от своего личного кабинета, то обратитесь к
+                                вашему классному руководителю.
                             </p>
                         </div>
                     </transition>
@@ -155,33 +127,45 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { ref } from 'vue';
+import { reactive, ref } from 'vue'
+import { useAuthStore } from '@/stores/useAuthStore'
 const router = useRouter()
+const authStore = useAuthStore()
 
-const modal = ref(false);
-const login = ref('');
-const password = ref('');
-const loginError = ref(false);
-const passwordError = ref(false);
+const modal = ref(false)
+const payload = reactive({
+    username: '',
+    password: ''
+})
+const loginError = ref(false)
+const passwordError = ref(false)
 
-function changeLogin (evt) {
+function changeLogin(evt) {
     loginError.value = evt.target.value.length < 3 ? true : false
-
 }
-function changePassword (evt) {
+function changePassword(evt) {
     passwordError.value = evt.target.value.length < 3 ? true : false
 }
 
-function validate () {
-    if (login.value.trim() == '') {
+async function validate() {
+    if (payload.username.trim() == '') {
         loginError.value = true
     }
-    if (password.value.trim() == '') {
+    if (payload.password.trim() == '') {
         passwordError.value = true
     }
 
     if (!loginError.value && !passwordError.value) {
-        router.push('/cabinet-student');
+        try {
+            await authStore.loginUser({ ...payload })
+            if (authStore.token) {
+                router.push('/cabinet/student')
+            } else {
+                console.error('Токен отсутствует, авторизация не удалась.')
+            }
+        } catch (error) {
+            console.error('Ошибка входа:', error)
+        }
     }
 }
 </script>
@@ -213,7 +197,11 @@ function validate () {
     left: 250px;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle farthest-side at 50% 50%, rgba(221, 160, 107, 1) 0%, rgba(31, 42, 62, 1) 100%);
+    background: radial-gradient(
+        circle farthest-side at 50% 50%,
+        rgba(221, 160, 107, 1) 0%,
+        rgba(31, 42, 62, 1) 100%
+    );
     z-index: -1;
     animation: intro-gradient 0.8s ease-in-out;
 }
@@ -228,14 +216,14 @@ function validate () {
 .intro__title {
     color: var(--white);
 
-    @media(max-width:$lg) {
+    @media (max-width: $lg) {
         &.h1 {
             font-size: 48px;
             line-height: 64px;
         }
     }
 
-    @media(max-width:$md) {
+    @media (max-width: $md) {
         &.h1 {
             font-size: 24px;
             line-height: 150%;
@@ -251,14 +239,13 @@ function validate () {
     font-size: 20px;
     line-height: 150%;
 
-    @media(max-width:$lg) {
+    @media (max-width: $lg) {
         &.p1 {
             font-size: 16px;
             line-height: 150%;
         }
     }
 }
-
 
 .intro__form-container {
     padding-top: 220px;
@@ -283,7 +270,7 @@ function validate () {
     top: -180px;
     left: -426px;
     z-index: -1;
-    animation: intro-rays 1.0s ease-in-out;
+    animation: intro-rays 1s ease-in-out;
     rotate: -91deg;
 }
 
@@ -321,7 +308,7 @@ function validate () {
 }
 
 .intro__input::placeholder {
-    color: var(--roseBege)
+    color: var(--roseBege);
 }
 
 .intro__input:hover {
@@ -330,7 +317,7 @@ function validate () {
 
 .intro__input:focus {
     background: var(--white);
-    color: var(--dark)
+    color: var(--dark);
 }
 
 .intro__input:active,
@@ -377,7 +364,7 @@ function validate () {
     margin: 8px 0 0 0;
 
     .form__text-error {
-        font-size: 14px
+        font-size: 14px;
     }
 }
 
@@ -586,23 +573,27 @@ function validate () {
 
 @keyframes intro-gradient {
     from {
-        background: var(--dark)
+        background: var(--dark);
     }
 
     to {
-        background: radial-gradient(circle farthest-side at 50% 50%, rgba(221, 160, 107, 1) 0%, rgba(31, 42, 62, 1) 100%);
+        background: radial-gradient(
+            circle farthest-side at 50% 50%,
+            rgba(221, 160, 107, 1) 0%,
+            rgba(31, 42, 62, 1) 100%
+        );
     }
 }
 
 @keyframes intro-rays {
     from {
         opacity: 0;
-        rotate: 45deg
+        rotate: 45deg;
     }
 
     to {
         opacity: 1;
-        rotate: 0
+        rotate: 0;
     }
 }
 

@@ -11,8 +11,6 @@ import PortfolioPage from '@/views/cabinet/PortfolioPage.vue'
 import OfferContest from '@/views/cabinet/OfferContestPage.vue'
 import CasePortfolioPage from '@/views/cabinet/CasePortfolioPage.vue'
 
-
-
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -30,7 +28,7 @@ const router = createRouter({
                         {
                             path: '',
                             name: 'profile-student',
-                            component: ProfilePage,
+                            component: ProfilePage
                         },
                         {
                             path: 'notification',
@@ -46,7 +44,7 @@ const router = createRouter({
                                 {
                                     path: ':id',
                                     component: ContestItemPage
-                                },
+                                }
                             ]
                         },
                         {
@@ -61,7 +59,7 @@ const router = createRouter({
                                     path: ':id',
                                     name: 'shop-card',
                                     component: ShopCard
-                                },
+                                }
                             ]
                         },
                         {
@@ -73,7 +71,7 @@ const router = createRouter({
                             path: 'portfolio',
                             name: 'portfolio-student',
                             component: PortfolioPage
-                        },
+                        }
                     ]
                 },
                 {
@@ -98,7 +96,7 @@ const router = createRouter({
                                 {
                                     path: ':id',
                                     component: ContestItemPage
-                                },
+                                }
                             ]
                         },
                         {
@@ -119,9 +117,9 @@ const router = createRouter({
                     ]
                 }
             ]
-        },
+        }
     ],
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior(to, from, savedPosition) {
         if (to.hash) {
             return {
                 el: to.hash,
