@@ -1,6 +1,9 @@
 <template>
     <section class="section-contests">
-        <div v-if="user === 'teacher'" class="teacher-panel-wraper">
+        <div
+            v-if="user === 'teacher'"
+            class="teacher-panel-wraper"
+        >
             <div class="teacher-panel__container">
                 <div class="teacher-panel">
                     <div class="teacher-under-panel-group">
@@ -24,7 +27,10 @@
                                     class="teacher-panel__dropdown-sort"
                                     :options="optionSort"
                                 />
-                                <button class="btn btn-contest" @click="filterContestsByRole">
+                                <button
+                                    class="btn btn-contest"
+                                    @click="filterContestsByRole"
+                                >
                                     Мои конкурсы
                                 </button>
                             </div>
@@ -34,7 +40,10 @@
             </div>
         </div>
 
-        <div v-else class="uc-panel-wraper">
+        <div
+            v-else
+            class="uc-panel-wraper"
+        >
             <div class="uc-panel__container">
                 <div class="uc-panel">
                     <div class="uc-panel-group">
@@ -49,7 +58,10 @@
                                 class="teacher-panel__dropdown-sort"
                                 :options="optionSort"
                             />
-                            <button class="btn btn-contest" @click="filterContestsByRole">
+                            <button
+                                class="btn btn-contest"
+                                @click="filterContestsByRole"
+                            >
                                 Мои конкурсы
                             </button>
                         </div>
@@ -63,13 +75,24 @@
                 <div class="teacher-contnent">
                     <div class="teacher-subtitle__wraper">
                         <span class="teacher-subtitle__line" />
-                        <p class="teacher-subtitle__title p2">Конкурсы</p>
+                        <p class="teacher-subtitle__title p2">
+                            Конкурсы
+                        </p>
                         <span class="teacher-subtitle__line" />
                     </div>
 
-                    <div v-if="list.length" class="teacher-list">
-                        <div v-for="el in renderList" :key="el.id" class="teacher__item">
-                            <p class="teacher__decription h3">{{ el.name }}</p>
+                    <div
+                        v-if="list.length"
+                        class="teacher-list"
+                    >
+                        <div
+                            v-for="el in renderList"
+                            :key="el.id"
+                            class="teacher__item"
+                        >
+                            <p class="teacher__decription h3">
+                                {{ el.name }}
+                            </p>
                             <div class="teacher__directions">
                                 <p
                                     v-for="(item, number) in el.tags"
@@ -83,7 +106,10 @@
                                 <p class="teacher__publication p2">
                                     Дата публикации {{ el.publication_date }}
                                 </p>
-                                <button class="teacher__info-btn btn" @click="linkContest(el.id)">
+                                <button
+                                    class="teacher__info-btn btn"
+                                    @click="linkContest(el.id)"
+                                >
                                     Узнать подробнее
                                 </button>
                             </div>
@@ -91,7 +117,10 @@
                     </div>
 
                     <!-- Пустое состояние -->
-                    <p v-else class="p1 teacher-contnent-empty">
+                    <p
+                        v-else
+                        class="p1 teacher-contnent-empty"
+                    >
                         Здесь отображаются полученные конкурсы, конкурсов пока нет
                     </p>
                 </div>
@@ -133,7 +162,7 @@ const sort = ref('Новые вверху')
 const list = ref([])
 const router = useRouter()
 
-function sortContests() {
+function sortContests () {
     list.value = list.value.sort((a, b) => {
         return sort.value === 'Новые вверху'
             ? new Date(b.publication_date) - new Date(a.publication_date)
@@ -141,7 +170,7 @@ function sortContests() {
     })
 }
 
-function filterContestsByRole() {
+function filterContestsByRole () {
     if (!role.value || role.value === 'Выберите роль') {
         list.value = [...contests.value]
     } else {
@@ -150,7 +179,7 @@ function filterContestsByRole() {
     sortContests()
 }
 
-function linkContest(id) {
+function linkContest (id) {
     if (props.user === 'teacher') {
         router.push(`/cabinet/teacher/contests/${id}`)
     } else {
@@ -173,7 +202,7 @@ onMounted(async () => {
     }
 })
 
-function getRenderList(list) {
+function getRenderList (list) {
     renderList.value = list
 }
 </script>

@@ -8,7 +8,7 @@ export const useCompetitionsStore = defineStore('competitionsStore', {
         competitions: reactive([])
     }),
     actions: {
-        async fetchCompetitions() {
+        async fetchCompetitions () {
             try {
                 let { data } = await axiosR.get('/competitions/')
                 this.competitions = data

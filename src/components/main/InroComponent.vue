@@ -1,5 +1,8 @@
 <template>
-    <section id="intro" class="wrap-container">
+    <section
+        id="intro"
+        class="wrap-container"
+    >
         <div class="intro">
             <div class="intro__description">
                 <h1 class="intro__title h1">
@@ -12,7 +15,10 @@
             </div>
 
             <div class="intro__form-container">
-                <form class="intro__form" @submit.prevent>
+                <form
+                    class="intro__form"
+                    @submit.prevent
+                >
                     <div>
                         <input
                             v-model="payload.username"
@@ -22,8 +28,11 @@
                             style="margin-top: 32px"
                             :class="{ error: loginError }"
                             @change="changeLogin"
-                        />
-                        <div v-if="loginError" class="form__error">
+                        >
+                        <div
+                            v-if="loginError"
+                            class="form__error"
+                        >
                             <span class="form__icon-error">
                                 <svg
                                     width="24"
@@ -38,7 +47,9 @@
                                     />
                                 </svg>
                             </span>
-                            <p class="form__text-error">Поле заполнено некорректно</p>
+                            <p class="form__text-error">
+                                Поле заполнено некорректно
+                            </p>
                         </div>
                     </div>
                     <div>
@@ -50,8 +61,11 @@
                             style="margin-top: 8px"
                             :class="{ error: passwordError }"
                             @change="changePassword"
-                        />
-                        <div v-if="passwordError" class="form__error">
+                        >
+                        <div
+                            v-if="passwordError"
+                            class="form__error"
+                        >
                             <span class="form__icon-error">
                                 <svg
                                     width="24"
@@ -66,25 +80,39 @@
                                     />
                                 </svg>
                             </span>
-                            <p class="form__text-error">Поле заполнено некорректно</p>
+                            <p class="form__text-error">
+                                Поле заполнено некорректно
+                            </p>
                         </div>
                     </div>
-                    <button class="btn" @click="validate()">Воити в кабинет</button>
-                    <button type="button" class="intro__form-btn btn-text" @click="modal = true">
+                    <button
+                        class="btn"
+                        @click="validate()"
+                    >
+                        Воити в кабинет
+                    </button>
+                    <button
+                        type="button"
+                        class="intro__form-btn btn-text"
+                        @click="modal = true"
+                    >
                         Забыли пароль?
                     </button>
                     <img
                         class="into__bg-rays"
                         src="../../assets/image/animation-main/rays.svg"
                         alt="rays"
-                    />
+                    >
                     <img
                         class="into__bg-hare"
                         src="../../assets/image/animation-main/hare.svg"
                         alt="hare"
-                    />
+                    >
                     <transition name="show">
-                        <div v-if="modal" class="intro__modal">
+                        <div
+                            v-if="modal"
+                            class="intro__modal"
+                        >
                             <svg
                                 class="intro__modal-close"
                                 width="32"
@@ -140,14 +168,14 @@ const payload = reactive({
 const loginError = ref(false)
 const passwordError = ref(false)
 
-function changeLogin(evt) {
+function changeLogin (evt) {
     loginError.value = evt.target.value.length < 3 ? true : false
 }
-function changePassword(evt) {
+function changePassword (evt) {
     passwordError.value = evt.target.value.length < 3 ? true : false
 }
 
-async function validate() {
+async function validate () {
     if (payload.username.trim() == '') {
         loginError.value = true
     }
@@ -197,11 +225,9 @@ async function validate() {
     left: 250px;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-        circle farthest-side at 50% 50%,
-        rgba(221, 160, 107, 1) 0%,
-        rgba(31, 42, 62, 1) 100%
-    );
+    background: radial-gradient(circle farthest-side at 50% 50%,
+            rgba(221, 160, 107, 1) 0%,
+            rgba(31, 42, 62, 1) 100%);
     z-index: -1;
     animation: intro-gradient 0.8s ease-in-out;
 }
@@ -577,11 +603,9 @@ async function validate() {
     }
 
     to {
-        background: radial-gradient(
-            circle farthest-side at 50% 50%,
-            rgba(221, 160, 107, 1) 0%,
-            rgba(31, 42, 62, 1) 100%
-        );
+        background: radial-gradient(circle farthest-side at 50% 50%,
+                rgba(221, 160, 107, 1) 0%,
+                rgba(31, 42, 62, 1) 100%);
     }
 }
 

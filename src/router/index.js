@@ -10,6 +10,7 @@ import ContestItemPage from '@/views/cabinet/ContestItemPage.vue'
 import PortfolioPage from '@/views/cabinet/PortfolioPage.vue'
 import OfferContest from '@/views/cabinet/OfferContestPage.vue'
 import CasePortfolioPage from '@/views/cabinet/CasePortfolioPage.vue'
+import { useAuthStore } from '@/stores/useAuthStore'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,6 +25,7 @@ const router = createRouter({
             children: [
                 {
                     path: 'student',
+                    meta: { protected: true, role: 'student'},
                     children: [
                         {
                             path: '',
@@ -76,6 +78,7 @@ const router = createRouter({
                 },
                 {
                     path: 'teacher',
+                    meta: { protected: true, role: 'teacher'},
                     children: [
                         {
                             path: '',
@@ -119,7 +122,7 @@ const router = createRouter({
             ]
         }
     ],
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior (to, from, savedPosition) {
         if (to.hash) {
             return {
                 el: to.hash,
@@ -136,5 +139,29 @@ const router = createRouter({
         }
     }
 })
+
+
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem("token");
+    const user = useAuthStore()
+  
+    if (to.matched.some((route) => route.meta.protected && route.meta.role === 'student')) {
+        if (token && user.getUser?.category === "Ученик") {
+            next();
+        } else {
+            next("/");
+        }
+    }else if (to.matched.some((route) => route.meta.protected && route.meta.role === 'teacher')) {
+        if (token && user.getUser?.category === "Учитель") {
+            next();
+        } else {
+            next("/");
+        }
+    } else {
+        next();
+    }
+});
+
+
 
 export default router

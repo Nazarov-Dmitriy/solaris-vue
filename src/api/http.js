@@ -7,4 +7,18 @@ const axiosR = axios.create({
     }
 })
 
-export default axiosR
+axiosR.interceptors.request.use(
+    (config) => {
+        if (localStorage.getItem("token")) {
+            config.headers["Authorization"] = ` ${localStorage.getItem("token")}`;
+            config.headers["X-Requested-With"] = "XMLHttpRequest";
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+  
+export default axiosR;
+  

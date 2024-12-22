@@ -32,20 +32,6 @@ onMounted(() => {
 
     id.value = route.params.id
     contests.value = getById(+id.value)[0];
-    console.log(   contests.value);
     
 })
 </script>
-
-<!-- 
-<template>
-    <div class="cabinet-container">
-        <CabinetHeader />
-        <CabinetStudentContestsComponent />
-    </div>
-</template>
-
-<script setup>
-import CabinetStudentContestsComponent from '@/components/cabinetStudent/contests/CabinetStudent.vue'
-import CabinetHeader from '../components/cabinet/header/StudentHeader.vue'
-</script> -->

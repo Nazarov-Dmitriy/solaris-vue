@@ -3,29 +3,41 @@ import axiosR from '@/api/http'
 
 export const useAuthStore = defineStore('authStore', {
     state: () => ({
-        users: [],
+        user: null,
         token: '',
         err: ''
     }),
     getters: {
-        getUser(state) {
-            return state.users
+        getUser (state) {
+            return state.user
         }
     },
     actions: {
-        async loginUser(payload) {
+        async loginUser (payload) {
             try {
                 const res = await axiosR.post('/auth/login', payload)
-                this.users = res.data
-                console.log(res.data)
+                this.user = res.data
                 this.token = res.data.token
                 localStorage.setItem('token', this.token)
             } catch (err) {
                 this.err = err
-                if (this.err) {
-                    console.error('Ошибка авторизации:', this.err)
-                }
+                localStorage.removeItem('token')
             }
-        }
+        },
+        async autoLogin () {
+            const token = localStorage.getItem('token')
+            if (token) {
+                axiosR
+                    .get("/user/current_user")
+                    .then((res) => {
+                        this.user = res.data?.user_id
+
+                    })
+                    .catch((e) => {
+                        this.err = e
+                        localStorage.removeItem('token')
+                    })
+            }
+        },
     }
 })
