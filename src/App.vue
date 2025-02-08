@@ -1,13 +1,14 @@
-<script setup>
+<script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { useAuthStore } from './stores/useAuthStore';
 import { useRouter, useRoute } from 'vue-router'
-import { computed, watch } from 'vue';
+import { computed, inject, watch } from 'vue';
+import { useAuthStore } from './stores/useAuthStore';
+import { UserService } from './plugins/UserService';
 const router = useRouter()
 const route = useRoute()
 
 const userStore = useAuthStore()
-userStore.autoLogin()
+const userService : UserService = inject("UserService")
 
 const user = computed(() => {
     return userStore.getUser
