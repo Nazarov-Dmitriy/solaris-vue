@@ -2,10 +2,13 @@ import { defineStore } from 'pinia'
 import { User } from '@/interfaces/users'
 
 export const useAuthStore = defineStore('userStore', {
-    state: () => ({ user: {}}),
+    state: () => ({ user: {} as User}),
     getters: {
-        getUser: (state) => {
-            return state;
+        getUser: (state) : User => {
+            return state.user;
+        },
+        getToken: () : string | null => {
+            return localStorage.getItem("token") || null
         }
     },
     actions: {
@@ -13,7 +16,7 @@ export const useAuthStore = defineStore('userStore', {
             this.$state.user = user
         },
         clearUser(){
-
+            this.$state.user = {}
         }
     }
 })

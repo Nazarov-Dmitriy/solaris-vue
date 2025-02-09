@@ -85,19 +85,8 @@
                             </p>
                         </div>
                     </div>
-                    <button
-                        class="btn"
-                        @click="validate()"
-                    >
-                        Воити в кабинет
-                    </button>
-                    <button
-                        type="button"
-                        class="intro__form-btn btn-text"
-                        @click="modal = true"
-                    >
-                        Забыли пароль?
-                    </button>
+                    <ButtonComponent :config="{ label: 'Войти в кабинет', className: 'btn'}"></ButtonComponent>
+                    <ButtonComponent :config="{ label: 'Забыли пароль?', className: 'intro__form-btn btn-text'}"></ButtonComponent>
                     <img
                         class="into__bg-rays"
                         src="../../assets/image/animation-main/rays.svg"
@@ -153,12 +142,18 @@
     </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { reactive, ref } from 'vue'
-import { useAuthStore } from '@/stores/useAuthStore.ts'
+import { useAuthStore } from '@/stores/useAuthStore'
+import ButtonComponent from '../button-component/ButtonComponent.vue'
+import { FormModel } from '../form-component/form-interface'
 const router = useRouter()
 const authStore = useAuthStore()
+
+const AuthFormFields : FormModel[] = [
+
+] as FormModel[]
 
 const modal = ref(false)
 const payload = reactive({
@@ -173,28 +168,6 @@ function changeLogin (evt) {
 }
 function changePassword (evt) {
     passwordError.value = evt.target.value.length < 3 ? true : false
-}
-
-async function validate () {
-    if (payload.username.trim() == '') {
-        loginError.value = true
-    }
-    if (payload.password.trim() == '') {
-        passwordError.value = true
-    }
-
-    if (!loginError.value && !passwordError.value) {
-        try {
-            await authStore.loginUser({ ...payload })
-            if (authStore.token) {
-                router.push('/cabinet/student')
-            } else {
-                console.error('Токен отсутствует, авторизация не удалась.')
-            }
-        } catch (error) {
-            console.error('Ошибка входа:', error)
-        }
-    }
 }
 </script>
 
