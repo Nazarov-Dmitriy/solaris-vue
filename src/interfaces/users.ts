@@ -1,11 +1,17 @@
-export interface User{
+export interface User {
     email: string,
     username: string,
     password: string,
-    category: 
+    category: UserCategoryEnum
+    token: string
 }
 
-export enum UserCategorEnum{
+export interface AuthFormUser {
+    username: string,
+    password: string
+}
+
+export enum UserCategoryEnum {
     Teacher = "Учитель",
     Student = "Ученик"
 }

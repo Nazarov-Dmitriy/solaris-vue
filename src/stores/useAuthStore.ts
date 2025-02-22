@@ -1,21 +1,21 @@
 import { defineStore } from 'pinia'
-import { User } from '@/interfaces/users'
+import { AuthFormUser, User } from '@/interfaces/users'
 
 export const useAuthStore = defineStore('userStore', {
-    state: () => ({ user: {} as User}),
+    state: () => ({ user: {} as User }),
     getters: {
-        getUser: (state) : User => {
+        getUser: (state): User => {
             return state.user;
         },
-        getToken: () : string | null => {
+        getToken: (): string | null => {
             return localStorage.getItem("token") || null
         }
     },
     actions: {
-        loadUser (user){
+        loadUser(user: User) {
             this.$state.user = user
         },
-        clearUser(){
+        clearUser() {
             this.$state.user = {}
         }
     }
