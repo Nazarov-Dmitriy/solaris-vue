@@ -172,6 +172,9 @@ const onLogin = () => {
             localStorage.setItem('token', user.data.token);
             localStorage.setItem('category', user.data.category);
             authStore.loadUser(user.data);
+            userService.getCurrentUser().then((user) => {
+                authStore.loadUser(user.data);
+            });
             router.push('/cabinet');
         })
         .catch((e) => {});

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import { useRouter, useRoute } from 'vue-router';
-import { computed, watch } from 'vue';
+import { computed, onMounted, watch } from 'vue';
 import { useAuthStore } from './stores/useAuthStore';
 const router = useRouter();
 const route = useRoute();
@@ -10,6 +10,10 @@ const userStore = useAuthStore();
 
 const user = computed(() => {
     return userStore.getUser;
+});
+
+onMounted(() => {
+    userStore.setCurrentUser();
 });
 
 watch(user, () => {

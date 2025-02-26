@@ -19,7 +19,9 @@ export class UserService {
         return this._axiosR.post('/auth/login', data);
     }
 
-    public getCurrentUser(): User {
-        return this.userAuthStore.getUser
+    public getCurrentUser(): Promise<AxiosResponse<User>> {
+        return this._axiosR.get('/user/current_user')
     }
+
+    public
 }

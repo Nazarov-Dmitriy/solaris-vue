@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import ProfilePage from '@/views/cabinet/ProfilePage.vue';
-import NotificationPage from '@/views/cabinet/NotificationPage.vue';
 import ShopPage from '@/views/cabinet/shop/ShopPage.vue';
 import ShopCard from '@/views/cabinet/shop/ShopCard.vue';
 import SalesPage from '@/views/cabinet/SalesPage.vue';
@@ -9,8 +7,6 @@ import ContestItemPage from '@/views/cabinet/ContestItemPage.vue';
 import PortfolioPage from '@/views/cabinet/PortfolioPage.vue';
 import OfferContest from '@/views/cabinet/OfferContestPage.vue';
 import CasePortfolioPage from '@/views/cabinet/CasePortfolioPage.vue';
-import { useAuthStore } from '@/stores/useAuthStore.ts';
-import { UserCategoryEnum } from '@/interfaces/users';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,11 +26,15 @@ const router = createRouter({
                         {
                             path: '',
                             name: 'profile-student',
-                            component: ProfilePage,
+                            component: import(
+                                '../views/cabinet/ProfilePage.vue'
+                            ),
                         },
                         {
                             path: 'notification',
-                            component: NotificationPage,
+                            component: import(
+                                '../views/cabinet/NotificationPage.vue'
+                            ),
                         },
                         {
                             path: 'contests',
@@ -83,11 +83,15 @@ const router = createRouter({
                         {
                             path: '',
                             name: 'profile-teacher',
-                            component: ProfilePage,
+                            component: import(
+                                '../views/cabinet/ProfilePage.vue'
+                            ),
                         },
                         {
                             path: 'notification',
-                            component: NotificationPage,
+                            component: import(
+                                '../views/cabinet/NotificationPage.vue'
+                            ),
                         },
                         {
                             path: 'contests',
@@ -138,35 +142,6 @@ const router = createRouter({
             };
         }
     },
-});
-
-router.beforeEach((to, _from, next) => {
-    const token = localStorage.getItem('token');
-    const user = useAuthStore();
-
-    if (
-        to.matched.some(
-            (route) => route.meta.protected && route.meta.role === 'student',
-        )
-    ) {
-        if (token && user.getUser?.category === 'Ученик') {
-            next();
-        } else {
-            next('/');
-        }
-    } else if (
-        to.matched.some(
-            (route) => route.meta.protected && route.meta.role === 'teacher',
-        )
-    ) {
-        if (token && user.getUser?.category === 'Учитель') {
-            next();
-        } else {
-            next('/');
-        }
-    } else {
-        next();
-    }
 });
 
 export default router;

@@ -12,7 +12,11 @@ export const useAuthStore = defineStore('userStore', {
         }
     },
     actions: {
+        setCurrentUser() {
+            this.$state.user = JSON.parse(localStorage.getItem('user'))
+        },
         loadUser(user: User) {
+            localStorage.setItem('user', JSON.stringify(user))
             this.$state.user = user
         },
         clearUser() {
