@@ -5,7 +5,6 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-<<<<<<< HEAD
     plugins: [
         vue(),
     ],
@@ -17,13 +16,11 @@ export default defineConfig({
                 changeOrigin: true,
                 secure: false,
             }
-        }
-=======
-    plugins: [vue()],
-    server:{
-        port: 8100
->>>>>>> 4823b8b4f13fe82f5179143be2e111dc8a240f61
+        },
     },
+    // server:{
+    //     port: 8100
+    // },
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url))
