@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+<<<<<<< HEAD
     plugins: [
         vue(),
     ],
@@ -17,6 +18,11 @@ export default defineConfig({
                 secure: false,
             }
         }
+=======
+    plugins: [vue()],
+    server:{
+        port: 8100
+>>>>>>> 4823b8b4f13fe82f5179143be2e111dc8a240f61
     },
     resolve: {
         alias: {
@@ -28,7 +34,8 @@ export default defineConfig({
             scss: {
                 additionalData: `@import "./src/assets/styles/_variables.scss";
                     `
-            },
+            }
         }
     },
+    
 })

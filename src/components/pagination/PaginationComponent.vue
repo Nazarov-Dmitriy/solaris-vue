@@ -9,7 +9,6 @@
         >
             <li
                 class="pagination-prev"
-                :class="{ 'hidden': showPrev }"
                 @click="prevPage()"
             >
                 <svg
@@ -60,7 +59,6 @@
             </li>
             <li
                 class="pagination-next"
-                :class="{ 'hidden': showNext }"
                 @click="nextPage()"
             >
                 <svg
@@ -148,25 +146,24 @@ const showRightDots = computed(() => {
     }
 })
 
-const showPrev = computed(() => {
+// const showPrev = computed(() => {
 
-    if (params.showPiganation === 'all') {
-        return params.currentPage == 1 ? true : false
-    } else {
-        return false
-    }
-})
+//     if (params.showPiganation === 'all') {
+//         return params.currentPage == 1 ? true : false
+//     } else {
+//         return false
+//     }
+// })
 
-const showNext = computed(() => {
-    if (params.showPiganation === 'all') {
-        return params.currentPage === params.totalPage ? true : false
-    } else {
-        return false
-    }
-})
+// const showNext = computed(() => {
+//     if (params.showPiganation === 'all') {
+//         return params.currentPage === params.totalPage ? true : false
+//     } else {
+//         return false
+//     }
+// })
 
 onMounted(() => {
-    console.log(props);
     document.documentElement.style.setProperty('--piganation-main', props.color.main);
     document.documentElement.style.setProperty('--piganation-hover', props.color.hover);
 
@@ -336,7 +333,7 @@ watch(() => props.data, () => {
 .pagination-dots--left,
 .pagination-dots--right {
     user-select: none;
-    opacity: 1;
+    opacity: 0;
     cursor: pointer;
     color: var(--piganation-main);
 
