@@ -23,5 +23,4 @@ export class UserService {
         return this._axiosR.get('/user/current_user')
     }
 
-    public
 }

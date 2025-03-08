@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
-import { useRouter, useRoute } from 'vue-router';
-import { computed, onMounted, watch } from 'vue';
+import { RouterView, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
+import { computed, inject, onMounted, watch } from 'vue';
 import { useAuthStore } from './stores/useAuthStore';
-const router = useRouter();
+import { PupilService } from './plugins/PupilService';
+import { TeacherService } from './plugins/TeacherService';
+import { UserService } from './plugins/UserService';
 const route = useRoute();
+const router = useRouter();
 
 const userStore = useAuthStore();
+const pupilService: PupilService = inject('PupilService');
+const teacherService: TeacherService = inject('TeacherService');
 
 const user = computed(() => {
     return userStore.getUser;
@@ -15,9 +20,18 @@ const user = computed(() => {
 onMounted(() => {
     userStore.setCurrentUser();
 });
+console.log(user.value);
 
-watch(user, () => {
-    if (route.name === 'home' && user.value && user.value) {
+watch([user, route], () => {
+    console.log(user);
+
+    if (user.value.category === 'Учитель') {
+        teacherService.getCurrentTeacher();
+    } else if (user.value.category === 'Ученик') {
+        pupilService.getCurrentPipul();
+    }
+
+    if (route.name === 'home' && user.value) {
         if (user.value.category === 'Учитель') {
             router.push('/cabinet/teacher');
         } else if (user.value.category === 'Ученик') {

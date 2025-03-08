@@ -9,11 +9,11 @@ export const useAuthStore = defineStore('userStore', {
         },
         getToken: (): string | null => {
             return localStorage.getItem("token") || null
-        }
+        },
     },
     actions: {
         setCurrentUser() {
-            this.$state.user = JSON.parse(localStorage.getItem('user'))
+            this.$state.user = JSON.parse(localStorage.getItem('user')).user
         },
         loadUser(user: User) {
             localStorage.setItem('user', JSON.stringify(user))
