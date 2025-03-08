@@ -16,6 +16,8 @@ export class PupilService {
     public getCurrentPipul(): void {
         this._axiosR.get('/pupil/get_current_pupil').then(res => {
             if (res.status === 200) {
+                console.log(res.data);
+                
                 this.pipulStore.setUser(res.data)
             }
         });

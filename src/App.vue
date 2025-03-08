@@ -20,11 +20,8 @@ const user = computed(() => {
 onMounted(() => {
     userStore.setCurrentUser();
 });
-console.log(user.value);
 
 watch([user, route], () => {
-    console.log(user);
-
     if (user.value.category === 'Учитель') {
         teacherService.getCurrentTeacher();
     } else if (user.value.category === 'Ученик') {
