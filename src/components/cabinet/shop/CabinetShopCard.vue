@@ -8,9 +8,9 @@
                         src="@/assets/image/cabinet/image.png"
                         alt="Изображение отсутствует"
                     />
-                    <h2 class="card-header-text">Сертификат АНТИДВОЙКА</h2>
+                    <h2 class="card-header-text">{{ product.name }}</h2>
                     <div class="card-price-wraper">
-                        <p class="card-price">200</p>
+                        <p class="card-price">{{ product.price }}</p>
                         <svg
                             class="card-icon"
                             width="41"
@@ -29,24 +29,13 @@
                 <div class="card-text">
                     <p class="card-text-header h3">О товаре</p>
                     <p class="card-text-word p1">
-                        Сертификат «Антидвойка» - <br />это уникальный документ, предоставляющий
-                        ученикам школы возможность аннулировать любые полученные двойки по любым
-                        предметам. Этот сертификат служит своеобразным спасательным кругом для тех,
-                        кто допустил ошибку и стремится её исправить. Он помогает восстановить
-                        уверенность в собственных силах и продолжить обучение с новыми
-                        возможностями. <br />Кроме того, сертификат «Антидвойка» мотивирует учеников
-                        к усердной учёбе и достижению лучших результатов. Зная, что у них есть
-                        возможность исправить ошибки и улучшить свои оценки, ученики становятся
-                        более ответственными и целеустремлёнными в своём обучении. Это способствует
-                        формированию позитивного отношения к образованию и развитию навыков
-                        самоконтроля. <br />В заключение, сертификат «Антидвойка» является важным
-                        инструментом для поддержки и мотивации учеников школы. Он помогает им
-                        преодолевать трудности, исправлять ошибки и улучшать свою успеваемость,
-                        способствуя формированию успешной образовательной траектории.
+                        {{ product.description }}
                     </p>
                 </div>
                 <div class="card-buttons">
-                    <button type="button" class="cancel-btn">Отменить</button>
+                    <button type="button" class="cancel-btn" @click="$router.go(-1)">
+                        Отменить
+                    </button>
                     <div class="quantity-block">
                         <div class="quantity-text p2">Количество</div>
                         <button class="decrease h3" @click="decrement">-</button>
@@ -60,8 +49,11 @@
     </section>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { useShopStore } from '@/stores/useShop'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 const countValue = ref(1)
 
 function increment() {
@@ -74,6 +66,11 @@ function decrement() {
         return
     }
 }
+const shopStore = useShopStore()
+
+const product = computed(() =>
+    shopStore.getProducts.find((item) => item.product_id == route.params.id)
+)
 </script>
 
 <style lang="scss">

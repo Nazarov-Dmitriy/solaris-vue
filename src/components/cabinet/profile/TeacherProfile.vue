@@ -1,9 +1,9 @@
 <template>
     <section class="teachcabinet-profile">
-        <div class="teachcabinet-profile__container">
+        <div class="teachcabinet-profile__container" v-if="teacher && teacher.pupil">
             <div class="teachcabinet-profile__avatar">
                 <h2 class="teachcabinet-profile__avatar-initial h2">
-                    АИ
+                    {{ teacher.pupil.name?.charAt(0) }}{{ teacher.pupil.surname?.charAt(0) }}
                 </h2>
                 <button class="teachcabinet-profile__avatar-button">
                     <svg
@@ -41,28 +41,40 @@
             </div>
             <div class="teachcabinet-profile__wrap">
                 <p class="teachcabinet-profile__name p1">
-                    Иванов<span>Андрей Иванович</span>
+                    {{ teacher.pupil.name }} <span>{{ teacher.pupil.surname }}</span>
                 </p>
                 <p class="teachcabinet-profile__class p2">
-                    Русский язык
+                    {{ teacher.pupil.subject }}
                 </p>
                 <p class="teachcabinet-profile__text p2">
-                    Литература
+                    {{ teacher.pupil.secondary_subject }}
                 </p>
                 <p class="teachcabinet-profile__id p1">
-                    IvanovAI_Russian and literature
+                    {{ teacher.pupil.user_id }}
                 </p>
             </div>
             <img
                 class="teachcabinet-profile__img"
                 src="@/assets/image/cabinet-teacher/cabinet-teacher-solaric.svg"
                 alt="#"
-            >
+            />
         </div>
     </section>
 </template>
-<script>
+<script setup>
+import { useCabinetStore } from '@/stores/useCabinetStore'
+import { onMounted, ref } from 'vue'
+
+const teacher = ref(null)
+const cabinetStore = useCabinetStore()
+
+onMounted(async () => {
+    await cabinetStore.fetchTeacherData()
+    teacher.value = cabinetStore.getTeacherData
+    console.log('Данные учителя:', teacher.value)
+})
 </script>
+
 <style lang="scss">
 .teachcabinet-profile {
     background-color: var(--dark);

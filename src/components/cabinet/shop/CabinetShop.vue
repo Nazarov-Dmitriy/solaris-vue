@@ -2,27 +2,20 @@
     <section class="shop-container">
         <div class="shop">
             <div class="shop-list">
-                <template
-                    v-for="el in renderList"
-                    :key="el.id"
-                >
+                <template v-for="product in renderList" :key="product.product_id">
                     <div
                         class="shop-item"
-                        :class="{ 'shop-item__popular': el.popular }"
-                        @click="$router.push(`/cabinet/student/shop/${el.id}`)"
+                        :class="{ 'shop-item__popular': product.popular }"
+                        @click="$router.push(`/cabinet/student/shop/${product.product_id}`)"
                     >
-                        <img
-                            class="shop-img"
-                            src="/image.png"
-                            alt="image"
-                        >
+                        <img class="shop-img" src="/image.png" alt="image" />
                         <div class="shop-contnent">
                             <p class="shop-subtitle p1">
-                                {{ el.title }}
+                                {{ product.name }}
                             </p>
                             <div class="shop-price-wraper">
                                 <p class="shop-price h2">
-                                    {{ el.price }}
+                                    {{ product.price }}
                                 </p>
                                 <svg
                                     class="shop-icon"
@@ -43,73 +36,38 @@
                 </template>
             </div>
             <PaginationComponent
+                v-if="products.length > 0"
                 :perpage="6"
-                :data="arr"
+                :data="products"
                 :color="{ main: '#fff', hover: '#dda06b' }"
                 @set-list="getRenderList"
             />
         </div>
     </section>
 </template>
+
 <script setup>
-import PaginationComponent from '@/components/pagination/PaginationComponent.vue';
-import { ref } from 'vue';
+import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
+import { computed, ref, onMounted } from 'vue'
+import { useShopStore } from '@/stores/useShop'
 
 const renderList = ref([])
+const shopStore = useShopStore()
 
-let arr = [
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 200,
-        popular: true,
-        id: 1
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 2200,
-        id: 2
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 2300,
-        id: 3
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 100,
-        id: 4
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 500,
-        id: 5
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 240,
-        id: 6
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 600,
-        id: 7
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 800,
-        id: 8
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 200,
-        id: 9
-    },
-];
+const products = computed(() => {
+    return shopStore.getProducts.map((product) => ({
+        ...product,
+        popular: product.price > 1000
+    }))
+})
 
-function getRenderList (list) {
+function getRenderList(list) {
     renderList.value = list
 }
 
+onMounted(() => {
+    shopStore.fetchProducts()
+})
 </script>
 <style>
 .shop-container {
@@ -125,7 +83,7 @@ function getRenderList (list) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin:0 auto;
+    margin: 0 auto;
     flex-direction: column;
     gap: 24px;
     box-sizing: border-box;
@@ -153,31 +111,31 @@ function getRenderList (list) {
 }
 
 .shop-item:hover {
-    border-color: var(--orange)
+    border-color: var(--orange);
 }
 
 .shop-item:hover .shop-price-wraper {
-    color: var(--orange)
+    color: var(--orange);
 }
 
 .shop-item:hover .shop-icon path {
-    fill: var(--orange)
+    fill: var(--orange);
 }
 
 .shop-item__popular {
-    background: var(--lightBege)
+    background: var(--lightBege);
 }
 
 .shop-item__popular .shop-subtitle {
-    color: var(--dark)
+    color: var(--dark);
 }
 
 .shop-item__popular .shop-price-wraper {
-    color: var(--dark)
+    color: var(--dark);
 }
 
 .shop-item__popular .shop-icon path {
-    fill: var(--dark)
+    fill: var(--dark);
 }
 
 .shop-img {
@@ -188,7 +146,6 @@ function getRenderList (list) {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    ;
 }
 
 .shop-subtitle {
@@ -201,7 +158,6 @@ function getRenderList (list) {
     color: var(--roseBege);
     gap: 8px;
 }
-
 
 @media (max-width: 1200px) {
     .shop {
@@ -217,7 +173,6 @@ function getRenderList (list) {
         align-items: flex-start;
         gap: 8px;
     }
-
 
     .shop-img {
         aspect-ratio: 3/2;

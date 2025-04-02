@@ -127,10 +127,18 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useAuthStore } from '@/stores/useAuthStore'
+import { useCabinetStore } from '@/stores/useCabinetStore'
 const router = useRouter()
 const authStore = useAuthStore()
+const cabinetStore = useCabinetStore()
+
+const user = computed(() => cabinetStore.getUser)
+
+const userRole = computed(() => {
+    return user.value.category
+})
 
 const modal = ref(false)
 const payload = reactive({
@@ -158,8 +166,13 @@ async function validate() {
     if (!loginError.value && !passwordError.value) {
         try {
             await authStore.loginUser({ ...payload })
+
             if (authStore.token) {
-                router.push('/cabinet/student')
+                if (userRole.value === 'Ученик') {
+                    router.push('/cabinet/student')
+                } else {
+                    router.push('/cabinet/teacher')
+                }
             } else {
                 console.error('Токен отсутствует, авторизация не удалась.')
             }

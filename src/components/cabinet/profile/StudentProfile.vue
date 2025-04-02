@@ -1,9 +1,9 @@
 <template>
     <section class="cabinet-profile">
-        <div class="cabinet-profile__container">
+        <div class="cabinet-profile__container" v-if="student && student.pupil">
             <div class="cabinet-profile__avatar">
                 <h2 class="cabinet-profile__avatar-initial h2">
-                    АИ
+                    {{ student.pupil.name?.charAt(0) }}{{ student.pupil.surname?.charAt(0) }}
                 </h2>
                 <button class="cabinet-profile__avatar-button">
                     <svg
@@ -41,31 +41,37 @@
             </div>
             <div class="cabinet-profile__wrap">
                 <p class="cabinet-profile__name p1">
-                    Иванов<span>Анатолий Иванович</span>
+                    {{ student.pupil.name }} {{ student.pupil.surname }}
                 </p>
-                <p class="cabinet-profile__class p2">
-                    7A класс
-                </p>
-                <p class="cabinet-profile__text p2">
-                    ID используется для входа на сайт
-                </p>
-                <p class="cabinet-profile__id p1">
-                    IvanovAI_7a
-                </p>
+                <p class="cabinet-profile__class p2">{{ student.pupil.class_name }} класс</p>
+                <p class="cabinet-profile__text p2">ID используется для входа на сайт</p>
+                <p class="cabinet-profile__id p1">{{ student.pupil.user_id }}</p>
             </div>
+
             <img
                 class="cabinet-profile__img"
                 src="@/assets/image/cabinet-profile/cabinet-profile-solaric.png"
                 alt="#"
-            >
+            />
         </div>
     </section>
 </template>
-<script>
-export default {
 
-}
+<script setup>
+import { useCabinetStore } from '@/stores/useCabinetStore'
+import { onMounted, ref } from 'vue'
+
+const cabinetStore = useCabinetStore()
+
+const student = ref(null)
+
+onMounted(async () => {
+    await cabinetStore.fetchStudentData()
+    student.value = cabinetStore.getStudentData
+    console.log('Данные студента:', student.value)
+})
 </script>
+
 <style>
 .cabinet-profile {
     background-color: var(--dark);
