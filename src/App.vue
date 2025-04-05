@@ -5,7 +5,6 @@ import { computed, inject, onMounted, watch } from 'vue';
 import { useAuthStore } from './stores/useAuthStore';
 import { PupilService } from './plugins/PupilService';
 import { TeacherService } from './plugins/TeacherService';
-import { UserService } from './plugins/UserService';
 const route = useRoute();
 const router = useRouter();
 
@@ -22,16 +21,20 @@ onMounted(() => {
 });
 
 watch([user, route], () => {
-    if (user.value.category === 'Учитель') {
+    if (!user) {
+        router.push({ name: 'home' });
+    }
+
+    if (user.value?.category === 'Учитель') {
         teacherService.getCurrentTeacher();
-    } else if (user.value.category === 'Ученик') {
+    } else if (user.value?.category === 'Ученик') {
         pupilService.getCurrentPipul();
     }
 
     if (route.name === 'home' && user.value) {
-        if (user.value.category === 'Учитель') {
+        if (user.value?.category === 'Учитель') {
             router.push('/cabinet/teacher');
-        } else if (user.value.category === 'Ученик') {
+        } else if (user.value?.category === 'Ученик') {
             router.push('/cabinet/student');
         }
     }
@@ -39,7 +42,7 @@ watch([user, route], () => {
 </script>
 
 <template>
-    <RouterView />
+    <router-view />
 </template>
 
 <style></style>

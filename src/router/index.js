@@ -7,6 +7,7 @@ import ContestItemPage from '@/views/cabinet/ContestItemPage.vue';
 import PortfolioPage from '@/views/cabinet/PortfolioPage.vue';
 import OfferContest from '@/views/cabinet/OfferContestPage.vue';
 import CasePortfolioPage from '@/views/cabinet/CasePortfolioPage.vue';
+import MainPage from '@/views/MainPage.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +15,7 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: import('../views/MainPage.vue'),
+            component: MainPage,
         },
         {
             path: '/cabinet',
