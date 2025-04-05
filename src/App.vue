@@ -15,7 +15,7 @@ const teacherService: TeacherService = inject('TeacherService');
 const user = computed(() => {
     return userStore.getUser;
 });
-
+console.log(11111)
 onMounted(() => {
     userStore.setCurrentUser();
 });
@@ -42,7 +42,7 @@ watch([user, route], () => {
 </script>
 
 <template>
-    2
+
     <router-view />
 </template>
 
