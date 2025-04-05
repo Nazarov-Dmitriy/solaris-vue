@@ -15,7 +15,6 @@ const teacherService: TeacherService = inject('TeacherService');
 const user = computed(() => {
     return userStore.getUser;
 });
-console.log(11111)
 onMounted(() => {
     userStore.setCurrentUser();
 });
