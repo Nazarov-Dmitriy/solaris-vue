@@ -42,6 +42,7 @@ watch([user, route], () => {
 </script>
 
 <template>
+    2
     <router-view />
 </template>
 
