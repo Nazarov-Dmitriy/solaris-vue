@@ -16,7 +16,6 @@ const user = computed(() => {
     return userStore.getUser;
 });
 
-console.log(111111);
 
 onMounted(() => {
     userStore.setCurrentUser();
