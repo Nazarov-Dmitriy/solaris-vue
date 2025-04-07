@@ -27,53 +27,60 @@
 </template>
 
 <script setup>
-import { defineProps, ref, computed, defineEmits, onMounted, onBeforeUnmount } from 'vue'
-const dropDown = ref(null)
+import {
+    defineProps,
+    ref,
+    computed,
+    defineEmits,
+    onMounted,
+    onBeforeUnmount,
+} from 'vue';
+const dropDown = ref(null);
 
 const props = defineProps({
     options: {
         type: Array,
-        default: () => []
+        default: () => [],
     },
     modelValue: {
         type: String,
-        default: null
+        default: null,
     },
     additionalClass: {
         type: String,
-        default: ''
-    }
-})
-const emit = defineEmits(['update:modelValue'])
+        default: '',
+    },
+});
+const emit = defineEmits(['update:modelValue']);
 
-const selectedOption = ref(null)
+const selectedOption = ref(null);
 
-const isDropDownVisible = ref(false)
+const isDropDownVisible = ref(false);
 
 const toggleOptionSelect = (option) => {
-    selectedOption.value = option
-    emit('update:modelValue', option)
+    selectedOption.value = option;
+    emit('update:modelValue', option);
     setTimeout(() => {
-        isDropDownVisible.value = false
-    }, 100)
-}
+        isDropDownVisible.value = false;
+    }, 100);
+};
 const closeDropDown = (element) => {
     if (!dropDown.value.contains(element.target)) {
-        isDropDownVisible.value = false
+        isDropDownVisible.value = false;
     }
-}
+};
 
 const defaultValue = computed(() => {
-    return props.options[0]
-})
+    return props.options[0];
+});
 
 onMounted(() => {
-    window.addEventListener('click', closeDropDown)
-})
+    window.addEventListener('click', closeDropDown);
+});
 
 onBeforeUnmount(() => {
-    window.removeEventListener('click', closeDropDown)
-})
+    window.removeEventListener('click', closeDropDown);
+});
 </script>
 
 <style scoped>
