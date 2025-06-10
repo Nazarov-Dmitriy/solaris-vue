@@ -8,6 +8,9 @@ import router from './router';
 import UserService from './plugins/UserService';
 import TeacherService from './plugins/TeacherService';
 import PupilService from './plugins/PupilService';
+import FeedbackService from './plugins/FeedbackService';
+import ProductService from './plugins/ProductService';
+import NapramService from './plugins/NapramService';
 
 const app = createApp(App);
 
@@ -15,6 +18,9 @@ app.use(createPinia());
 app.use(UserService);
 app.use(TeacherService);
 app.use(PupilService);
+app.use(FeedbackService);
+app.use(ProductService);
+app.use(NapramService);
 app.use(router);
 
 app.mount('#app');

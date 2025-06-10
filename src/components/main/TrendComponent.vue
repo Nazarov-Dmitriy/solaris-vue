@@ -28,25 +28,25 @@
                     процесса
                 </p>
                 <div
-                    v-if="arr.length > 0"
+                    v-if="trends.length > 0"
                     class="trend__list"
                 >
                     <h2 class="trend-subtitle h2">
                         Направления
                     </h2>
                     <div
-                        v-for="el in arr"
+                        v-for="el in trends"
                         :key="el.id"
                         class="trend-item"
                     >
                         <img
-                            src="../../assets/image/trend/trendName.png"
+                            :src="el.image || '../../assets/image/trend/trendName.png'"
                             alt=""
                             class="trend-img"
                         >
 
                         <button class="trend-item-btn h3">
-                            {{ el.title }}
+                            {{ el.name }}
                         </button>
                     </div>
                 </div>
@@ -63,8 +63,29 @@
     </section>
 </template>
 
-<script setup>
-const arr = [
+<script setup lang="ts">
+import { Napram } from '@/interfaces/naprams';
+import { NapramService } from '@/plugins/NapramService';
+import { inject, watch, reactive, ref } from 'vue';
+
+
+const napramService: NapramService = inject('NapramService')
+const trends = reactive<Napram[]>([])
+const trandsPage = ref();
+
+watch(trandsPage, async () => {
+    await napramService.getNaprams()
+    .then(res => {
+        if(res.status === 200) {
+            trends.push(...res.data.data)
+            console.log(res)
+        }
+    })
+}, {immediate: true})
+
+
+
+/* const arr = [
     {
         "title": "Направление",
         'id': 1
@@ -95,7 +116,7 @@ const arr = [
         'id': 1
     },
 
-];
+]; */
 </script>
 <style>
 .trend-container {

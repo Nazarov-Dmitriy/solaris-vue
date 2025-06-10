@@ -17,7 +17,7 @@
                 >
             </div>
             <div class="feedback__form-container">
-                <form class="form">
+                <form class="form" ref="feedbackForm">
                     <label
                         class="form__label"
                         for="author-name"
@@ -253,12 +253,14 @@
     </section>
 </template>
 
-<script setup>
-import { onMounted, reactive } from 'vue';
+<script setup lang="ts">
+import { FeedbackService } from '@/plugins/FeedbackService';
+import { inject, onMounted, reactive, ref } from 'vue';
 let feedback;
 let feedbackContainer;
 let feedbackTitle;
 let feedbackImg;
+const feedbackForm = ref<HTMLFormElement | null>(null)
 const formField = reactive({
     name: '',
     phone: '',
@@ -270,6 +272,8 @@ const formField = reactive({
     textareaError: false,
     falidateForm: false,
 })
+
+const feedbackService: FeedbackService = inject('FeedbackService')
 
 onMounted(() => {
     window.addEventListener("scroll", setVisible);
@@ -347,6 +351,21 @@ function validateForm () {
     validateFeildArr.forEach(item => {
         validateField(formField[item], 'validate', item)
     })
+
+    if(!formField.nameError && !formField.emailError && !formField.phoneError && !formField.textareaError) {
+        onFeedbackSubmit()
+        .then((res) => {if(res.data.status === "success") feedbackForm.value.reset()})
+    }
+}
+
+function onFeedbackSubmit() {
+    const payload = { name: formField.name, phone: formField.phone, email: formField.email, text: formField.textarea }
+    return feedbackService
+        .sendFeedback(payload)
+        .then((status) => {
+            return status
+        })
+        .catch((e) => { return e });
 }
 
 </script>

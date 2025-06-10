@@ -1,15 +1,8 @@
 <template>
-    <section
-        id="previewshop"
-        class="previewshop"
-    >
+    <section id="previewshop" class="previewshop">
         <div class="previewshop__container">
             <div class="previewshop__description">
-                <img
-                    class="previewshop__img"
-                    src="../../assets/image/previewshop/solaric.png"
-                    alt="Солярик"
-                >
+                <img class="previewshop__img" src="../../assets/image/previewshop/solaric.png" alt="Солярик">
                 <h2 class="previewshop__title h2">
                     На что потратить Солярики?
                 </h2>
@@ -20,54 +13,64 @@
                 </p>
             </div>
             <div class="previewshop__list">
-                <template
-                    v-for="(el, ind) in arr"
-                    :key="ind"
-                >
-                    <div
-                        v-if="ind <= index"
-                        class="previewshop__card"
-                    >
-                        <img
-                            src=""
-                            alt=""
-                            class="previewshop-img"
-                        >
+                <template v-for="(el, ind) in products" :key="el.uuid">
+                    <div class="previewshop__card">
+                        <img :src="el.image_url" alt="" class="previewshop-img">
                         <div class="previewshop__card-footer">
                             <p class="previewshop__card-subtitle p1">
-                                {{ el.title }}
+                                {{ el.name }}
                             </p>
                             <p class="previewshop__card-cost h2">
                                 {{ el.price }}
-                                <img
-                                    src="../../assets/icon/valute.svg"
-                                    alt="icon valute"
-                                    class="previewshop__card-icon"
-                                >
+                                <img src="../../assets/icon/valute.svg" alt="icon valute"
+                                    class="previewshop__card-icon">
                             </p>
                         </div>
                     </div>
                 </template>
             </div>
-            <button
-                class="previewshop-btn btn"
-                @click="index += 3"
-            >
+            <button class="previewshop-btn btn" @click="index += 1">
                 Показать еще товары
             </button>
         </div>
     </section>
 </template>
 
-<script setup>
-import { onMounted, ref } from 'vue';
+<script setup lang="ts">
+import { inject, onBeforeMount, onMounted, onUpdated, reactive, ref, watch } from 'vue';
+import { ProductService } from '@/plugins/ProductService';
+import { ProductMain, ProductMainResponse } from '@/interfaces/products';
 let previewshop;
 let previewshopImg
 let previewshopText
+const productService: ProductService = inject('ProductService');
+const products = reactive<ProductMain[]>([])
 
-const index = ref(2);
+const index = ref(1);
 
-const arr = [
+watch(index, (newVal) => {
+    productService.getProductsMain(newVal)
+        .then(res => {
+            if (res.status === 200) {
+                const data = res.data.data.map((el) => {
+                    return {
+                        ...el, image_url: el.image_url.replace('localhost', 'localhost:8000') //delete this in future..
+                    }
+                })
+                return data;
+            }
+            else throw new Error()
+        })
+        .then(res => {
+            console.log(res)
+            if (res.length > 0) {
+                products.push(...res);
+            }
+        })
+        .catch(e => console.log(e))
+}, { immediate: true })
+
+/* const arr = [
     {
         "title": "Сертификат АНТИДВОЙКА",
         "price": 200,
@@ -146,7 +149,7 @@ const arr = [
         "price": 200,
         'id': 1
     },
-];
+]; */
 
 onMounted(() => {
     window.addEventListener("scroll", setVisible);
@@ -155,7 +158,7 @@ onMounted(() => {
     previewshopText = document.querySelector(".previewshop__text");
 })
 
-function setVisible () {
+function setVisible() {
     const elementPosition = previewshop.getBoundingClientRect();
     const windowHeight = window.innerHeight;
 
