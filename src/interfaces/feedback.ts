@@ -24,10 +24,18 @@ export interface Student extends User {
 } */
 
 export interface FeedbackForm {
-    name: string,
-    phone: string,
-    text: string,
-    email: string
+    name: string;
+    phone: string;
+    text: string;
+    email: string;
+}
+
+export interface FeedbackItem {
+    name: string;
+    phone: string;
+    text: string;
+    email: string;
+    date: string;
 }
 
 /* export enum UserCategoryEnum {

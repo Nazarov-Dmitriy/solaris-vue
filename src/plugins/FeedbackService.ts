@@ -1,5 +1,5 @@
 import axiosR from "@/api/http";
-import { FeedbackForm } from "@/interfaces/feedback";
+import { FeedbackForm, FeedbackItem } from "@/interfaces/feedback";
 import { AxiosResponse } from "axios";
 
 import { App } from "vue";
@@ -15,6 +15,10 @@ export class FeedbackService {
 
     public sendFeedback(data: FeedbackForm): Promise<AxiosResponse<[]>> {
         return this._axiosR.post('/user/feedback', data);
+    }
+
+    public getFeedback(): Promise<AxiosResponse<FeedbackItem[]>> {
+        return this._axiosR.get('/user/feedback')
     }
 /* 
     public getCurrentUser(): Promise<AxiosResponse<User>> {

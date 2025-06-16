@@ -50,7 +50,7 @@ const index = ref(1);
 
 watch(index, (newVal) => {
     productService.getProductsMain(newVal)
-        .then(res => {
+        /* .then(res => {
             if (res.status === 200) {
                 const data = res.data.data.map((el) => {
                     return {
@@ -60,11 +60,11 @@ watch(index, (newVal) => {
                 return data;
             }
             else throw new Error()
-        })
+        }) */
         .then(res => {
             console.log(res)
-            if (res.length > 0) {
-                products.push(...res);
+            if (res.data.data.length > 0) {
+                products.push(...res.data.data);
             }
         })
         .catch(e => console.log(e))
