@@ -1,90 +1,68 @@
 <template>
-    <section>
-        <div
-            id="contest"
-            class="contest"
-        >
-            <h2 class="contest__title h2">
-                Конкурсы сегодняшнего дня
-            </h2>
-            <div class="contest-container">
-                <div
-                    v-for="el of arr"
-                    :key="el.id"
-                    class="item-container"
-                >
-                    <div class="contest__item">
-                        <div class="contest__item-wraper">
-                            <p class="contest__item-subtitle p1">
-                                {{ el.title }}
-                            </p>
-                            <p class="contest__item-publication p2">
-                                {{ el.date_publication }}
-                            </p>
-                        </div>
-                        <svg
-                            class="contest__item-btn"
-                            :class="{ 'current': active == el.id }"
-                            width="32"
-                            height="32"
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            @click="setActive(el.id)"
-                        >
-                            <rect
-                                x="0.5"
-                                y="0.5"
-                                width="31"
-                                height="31"
-                                rx="15.5"
-                                stroke="#1F2A3E"
-                            />
-                            <path
-                                d="M14 22L20 16L14 10"
-                                stroke="#1F2A3E"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                        </svg>
-                    </div>
-                    <transition name="show">
-                        <div
-                            v-if="active === el.id"
-                            class="contest-content"
-                        >
-                            <h3 class="contest-content__title h3">
-                                {{ el.title }}
-                            </h3>
-                            <div class="contest-content__subtitle">
-                                <p class="contest-content__subtitle-text p2">
-                                    {{ el.trend }}
-                                </p>
-                                <p class="contest-content__subtitle-start p2">
-                                    начало {{ el.start_date }}
-                                </p>
-                            </div>
-                            <p class="contest-content__description p2">
-                                {{ el.descption }}
-                            </p>
-                        </div>
-                    </transition>
-                </div>
+  <section>
+    <div id="contest" class="contest">
+      <h2 class="contest__title h2">
+        Конкурсы сегодняшнего дня
+      </h2>
+      <div class="contest-container">
+        <template v-if="competitions.length > 0">
+          <div v-for="el of competitions" :key="el.id" class="item-container">
+            <div class="contest__item">
+              <div class="contest__item-wraper">
+                <p class="contest__item-subtitle p1">
+                  {{ el.name }}
+                </p>
+                <p class="contest__item-publication p2">
+                  {{ el.date_publication }}
+                </p>
+              </div>
+              <svg class="contest__item-btn" :class="{ 'current': active == el.id }" width="32" height="32"
+                viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" @click="setActive(el.id)">
+                <rect x="0.5" y="0.5" width="31" height="31" rx="15.5" stroke="#1F2A3E" />
+                <path d="M14 22L20 16L14 10" stroke="#1F2A3E" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
             </div>
-        </div>
-    </section>
+            <transition name="show">
+              <div v-if="active === el.id" class="contest-content">
+                <h3 class="contest-content__title h3">
+                  {{ el.name }}
+                </h3>
+                <div class="contest-content__subtitle">
+                  <p class="contest-content__subtitle-text p2">
+                    {{ el.tags[0] }}
+                  </p>
+                  <p class="contest-content__subtitle-start p2">
+                    начало {{ el.begin_at }}
+                  </p>
+                </div>
+                <p class="contest-content__description p2">
+                  {{ el.description_short }}
+                </p>
+              </div>
+            </transition>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
+import { CompetitionItem } from '@/interfaces/competitions';
+import { CompetitionService } from '@/plugins/CompetitionService';
+import { inject, reactive, ref } from 'vue';
 
-function setActive (ind){
-    ind !== active.value ? active.value= ind : active.value = null
+const competitionService: CompetitionService = inject('CompetitionService')
+const competitions = ref<CompetitionItem[]>([])
+competitionService.getListCompetitions().then(res => competitions.value.push(...res.data))
+console.log(competitions.value);
+function setActive(ind) {
+  ind !== active.value ? active.value = ind : active.value = null
 }
 
 const active = ref(null);
-let arr = [
+/* let arr = [
     {
         title: "Название конкурса",
         date_publication: "04.08.2024",
@@ -150,7 +128,7 @@ let arr = [
         id: 7
 
     },
-];
+]; */
 </script>
 
 <style lang="scss">
@@ -166,11 +144,11 @@ let arr = [
   color: var(--dark);
 
   @media(max-width:$lg) {
-        &.h2 {
-            font-size: 24px;
-            line-height: 36px;
-        }
+    &.h2 {
+      font-size: 24px;
+      line-height: 36px;
     }
+  }
 }
 
 .contest-container {

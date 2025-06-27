@@ -3,7 +3,7 @@
         <div class="teachcabinet-profile__container">
             <div class="teachcabinet-profile__avatar">
                 <h2 class="teachcabinet-profile__avatar-initial h2">
-                    АИ
+                    {{techerInitials}}
                 </h2>
                 <button class="teachcabinet-profile__avatar-button">
                     <svg
@@ -41,16 +41,18 @@
             </div>
             <div class="teachcabinet-profile__wrap">
                 <p class="teachcabinet-profile__name p1">
-                    Иванов<span>Андрей Иванович</span>
+                    {{teacherStore.user.surname}}<span>{{ teacherStore.user.name }} {{teacherStore.user.fathername}}</span>
                 </p>
-                <p class="teachcabinet-profile__class p2">
-                    Русский язык
-                </p>
-                <p class="teachcabinet-profile__text p2">
-                    Литература
+                <template v-if="Array.isArray(teacherStore.user.profeccion)">
+                    <p v-for="el in teacherStore.user.profeccion" class="teachcabinet-profile__class p2">
+                        {{ el }}
+                    </p>
+                </template>
+                <p v-else class="teachcabinet-profile__text p2">
+                    {{teacherStore.user.profeccion}}
                 </p>
                 <p class="teachcabinet-profile__id p1">
-                    IvanovAI_Russian and literature
+                    {{ teacherStore.user.uuid }}
                 </p>
             </div>
             <img
@@ -61,7 +63,15 @@
         </div>
     </section>
 </template>
-<script>
+<script setup>
+import { useTeacherStore } from '@/stores/useTeacherStore';
+import { computed } from 'vue';
+
+const teacherStore = useTeacherStore();
+const techerInitials = computed(() => {
+    return teacherStore.user?.name?.split('')[0] + teacherStore.user.surname?.split('')[0];
+})
+
 </script>
 <style lang="scss">
 .teachcabinet-profile {

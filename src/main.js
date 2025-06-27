@@ -11,6 +11,7 @@ import PupilService from './plugins/PupilService';
 import FeedbackService from './plugins/FeedbackService';
 import ProductService from './plugins/ProductService';
 import NapramService from './plugins/NapramService';
+import CompetitionService from './plugins/CompetitionService';
 
 const app = createApp(App);
 
@@ -21,6 +22,7 @@ app.use(PupilService);
 app.use(FeedbackService);
 app.use(ProductService);
 app.use(NapramService);
+app.use(CompetitionService)
 app.use(router);
 
 app.mount('#app');

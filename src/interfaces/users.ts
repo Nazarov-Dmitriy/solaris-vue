@@ -32,3 +32,7 @@ export enum UserCategoryEnum {
     Teacher = "Учитель",
     Student = "Ученик"
 }
+
+export interface LogoutResponse {
+    result: boolean;
+}

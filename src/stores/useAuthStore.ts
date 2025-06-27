@@ -13,7 +13,7 @@ export const useAuthStore = defineStore('userStore', {
     },
     actions: {
         setCurrentUser() {
-            this.$state.user = JSON.parse(localStorage.getItem('user'))?.user 
+            this.$state.user = JSON.parse(localStorage.getItem('user'))?.data
         },
         loadUser(user: User) {
             localStorage.setItem('user', JSON.stringify(user))
@@ -21,6 +21,9 @@ export const useAuthStore = defineStore('userStore', {
         },
         clearUser() {
             this.$state.user = {}
+            localStorage.removeItem('user')
+            localStorage.removeItem('token')
+            localStorage.removeItem('category')
         }
     }
 })

@@ -29,7 +29,7 @@
                     </div>
                 </template>
             </div>
-            <button class="previewshop-btn btn" @click="index += 1">
+            <button v-show="index * 3 === products.length" class="previewshop-btn btn" @click="index += 1">
                 Показать еще товары
             </button>
         </div>
@@ -50,17 +50,6 @@ const index = ref(1);
 
 watch(index, (newVal) => {
     productService.getProductsMain(newVal)
-        /* .then(res => {
-            if (res.status === 200) {
-                const data = res.data.data.map((el) => {
-                    return {
-                        ...el, image_url: el.image_url.replace('localhost', 'localhost:8000') //delete this in future..
-                    }
-                })
-                return data;
-            }
-            else throw new Error()
-        }) */
         .then(res => {
             console.log(res)
             if (res.data.data.length > 0) {
@@ -69,87 +58,6 @@ watch(index, (newVal) => {
         })
         .catch(e => console.log(e))
 }, { immediate: true })
-
-/* const arr = [
-    {
-        "title": "Сертификат АНТИДВОЙКА",
-        "price": 200,
-        "popular": true,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 2",
-        "price": 400,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 3",
-        "price": 600,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 4",
-        "price": 2000,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 5",
-        "price": 200,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 6",
-        "price": 200,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 7",
-        "price": 200,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 8",
-        "price": 200,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 9",
-        "price": 200,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 10",
-        "price": 200,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 11",
-        "price": 200,
-        'id': 1
-    }, {
-        "title": "Сертификат 12",
-        "price": 200,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 13",
-        "price": 200,
-        'id': 1
-    }, {
-        "title": "Сертификат 14",
-        "price": 200,
-        'id': 1
-    },
-    {
-        "title": "Сертификат 15",
-        "price": 200,
-        'id': 1
-    }, {
-        "title": "Сертификат 16",
-        "price": 200,
-        'id': 1
-    },
-]; */
 
 onMounted(() => {
     window.addEventListener("scroll", setVisible);

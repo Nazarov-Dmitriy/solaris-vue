@@ -19,11 +19,17 @@
                                 <img src="@/assets/icon/cabinet-header/bell.svg" alt="icon-bellt" />
                             </router-link>
                         </div>
-                        <p class="cabinet-header__student-initials">АИ</p>
-                        <img
-                            src="@/assets/icon/cabinet-header/pointer_down.svg"
-                            alt="icon-poiner-down"
-                        />
+                        <p class="cabinet-header__student-initials">{{techerInitials}}</p>
+                        <div class="cabinet-header__profile-options">
+                            <img
+                                ref="logoutBtn"
+                                src="@/assets/icon/cabinet-header/pointer_down.svg"
+                                alt="icon-poiner-down"
+                            />
+                            <BtnComponent v-show="logoutBtnVisible"  BtnComponent class="cabinet-header__btn cabinet-header__btn_type_logout" emit-name="action" @action="logout">
+                                Выйти
+                            </BtnComponent>
+                        </div>
                     </div>
                 </div>
 
@@ -76,19 +82,54 @@
         </Teleport>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import ModalSertificat from '@/components/modal/ModalSertificat.vue'
 
-import { ref } from 'vue'
+import { computed, inject, onMounted, onUnmounted, ref } from 'vue'
+import { useTeacherStore } from '@/stores/useTeacherStore';
+import { UserService } from '@/plugins/UserService';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { useRouter } from 'vue-router';
+
+const authService: UserService = inject('UserService');
+const authStore = useAuthStore();
+const router = useRouter();
+
+const teacherStore = useTeacherStore();
+const techerInitials = computed(() => {
+    return teacherStore.user?.name?.split('')[0] + teacherStore.user.surname?.split('')[0];
+})
 const btnMenu = ref(false)
 const menuActive = ref(false)
+const logoutBtnVisible = ref(false)
+const logoutBtn = ref(null)
 
 const sertificat = ref('')
 const validateSertificat = ref(false)
 const modal = ref(false)
 
 const user = ref({ name: 'Иванов Михаил Дмитриевич', class: '7А класс', date: '12/04/2024' })
+
+function showLogoutBtn(e) {
+    if(logoutBtnVisible.value === true || e.target !== logoutBtn.value) {
+        logoutBtnVisible.value = false;
+    } else {
+    logoutBtnVisible.value = !logoutBtnVisible.value; 
+}
+}
+
+function logout() {
+    authService.logoutUser()
+    .then((res) => { 
+        if(res.data.result === true) {
+            authStore.clearUser();
+            teacherStore.clearUser();
+            router.push('/');
+        }
+     })
+     .catch(e => console.log(e))
+}
 
 function setMenuAcive() {
     btnMenu.value = !btnMenu.value
@@ -111,8 +152,18 @@ function closeModal() {
     modal.value = false
     validateSertificat.value = false
 }
+
+onMounted(() => {
+    document.addEventListener('click', showLogoutBtn)
+})
+onUnmounted(() => {
+    document.removeEventListener('click', showLogoutBtn)
+})
 </script>
 <style lang="scss" scoped>
+.cabinet-header__profile-options {
+    display: relative;
+}
 .cabinet-header__container {
     width: 100%;
     border-bottom: 2px solid var(--roseBege);
@@ -254,6 +305,12 @@ function closeModal() {
         justify-content: center;
         align-items: center;
     }
+}
+
+.cabinet-header__btn_type_logout {
+    position: absolute;
+    top: 45px;
+    z-index: 2;
 }
 
 .cabinet-header__input {

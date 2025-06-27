@@ -17,7 +17,7 @@ export class TeacherService {
     public getCurrentTeacher(): void {
         this._axiosR.get('/teacher/get_current_teacher').then(res => {
             if (res.status === 200) {
-                this.teacherStore.setUser(res.data)
+                this.teacherStore.setUser(res.data.data)
             }
         });
     }

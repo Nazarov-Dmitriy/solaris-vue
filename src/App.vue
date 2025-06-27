@@ -17,6 +17,7 @@ const user = computed(() => {
 });
 
 console.log(111111);
+console.log(!user.value);
 
 onMounted(() => {
     userStore.setCurrentUser();
