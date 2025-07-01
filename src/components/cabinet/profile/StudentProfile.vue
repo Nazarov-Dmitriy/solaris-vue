@@ -3,7 +3,7 @@
         <div class="cabinet-profile__container">
             <div class="cabinet-profile__avatar">
                 <h2 class="cabinet-profile__avatar-initial h2">
-                    АИ
+                    {{ pupilInitials }}
                 </h2>
                 <button class="cabinet-profile__avatar-button">
                     <svg
@@ -41,16 +41,16 @@
             </div>
             <div class="cabinet-profile__wrap">
                 <p class="cabinet-profile__name p1">
-                    Иванов<span>Анатолий Иванович</span>
+                    {{ pupilStore.user.surname }}<span>{{ pupilStore.user.name }} {{ pupilStore.user.fathername }}</span>
                 </p>
                 <p class="cabinet-profile__class p2">
-                    7A класс
+                    {{ pupilStore.user.class_name }} класс
                 </p>
                 <p class="cabinet-profile__text p2">
-                    ID используется для входа на сайт
+                    ID: {{ pupilStore.user.id }}<!-- ID используется для входа на сайт -->
                 </p>
                 <p class="cabinet-profile__id p1">
-                    IvanovAI_7a
+                    {{ pupilStore.user.username }}<!-- IvanovAI_7a -->
                 </p>
             </div>
             <img
@@ -61,10 +61,15 @@
         </div>
     </section>
 </template>
-<script>
-export default {
+<script setup lang="ts">
+import { usePipulStore } from '@/stores/usePipulStore';
+import { computed } from 'vue';
 
-}
+
+const pupilStore = usePipulStore();
+const pupilInitials = computed(() => {
+    return pupilStore.user?.name?.split('')[0] + pupilStore.user.surname?.split('')[0];
+})
 </script>
 <style>
 .cabinet-profile {

@@ -12,15 +12,38 @@ export interface Teacher extends User {
     profession: string,
     name: string,
     surname: string,
-    fathername: string
+    fathername: string,
+    shop_id: number | null,
+    uuid: string,
+    competition_activities: null,
+    ball_balans: number,
+    ball_qual: number,
+    ball_atestat: number,
+    avatar_url: string | null,
 }
 
 export interface Student extends User {
-    teacher_id: string,
+    amount: number,
+    avatar_url: string,
+    class_name: string,
+    id: number,
+    level: number,
     name: string,
     surname: string,
     fathername: string,
-    shop_id: string,
+    username: string,
+    teacher_id: number,
+    reiting_class: Rating,
+    reiting_potok: Rating,
+    reiting_school: Rating;
+}
+
+export interface Rating {
+    level_max: number,
+    level_pupil: number,
+    solar_pupil: number,
+    solar_max: number,
+    solar_next: number,
 }
 
 export interface AuthFormUser {

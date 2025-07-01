@@ -10,7 +10,7 @@
                         На твоем счете
                     </p>
                     <p class="cabinet-footer__balance__price h3">
-                        500
+                        {{ pupilStore.user.amount }}
                     </p>
                     <svg
                         class="cabinet-footer__balance__coin"
@@ -83,10 +83,13 @@
                         Рейтинг в классе
                     </p>
                     <p class="cabinet-footer__text p1">
-                        1 место из 1
+                        {{ pupilStore.user.reiting_class?.level_pupil }} место из {{ pupilStore.user.reiting_class?.level_max }}
                     </p>
-                    <p class="cabinet-footer__text cabinet-footer__text_orange p2">
+                    <p v-if="pupilStore.user.reiting_class?.level_pupil === 1" class="cabinet-footer__text cabinet-footer__text_orange p2">
                         Поздравляем!
+                    </p>
+                    <p v-else class="cabinet-footer__text p2">
+                        до следующего места не хватает {{ pupilStore.user.reiting_class?.solar_next }} {{plural(pupilStore.user.reiting_class?.solar_next,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
                     </p>
                 </div>
                 <div class="cabinet-footer__rating">
@@ -94,10 +97,13 @@
                         Рейтинг в параллели
                     </p>
                     <p class="cabinet-footer__text p1">
-                        10 место из 36
+                        {{ pupilStore.user.reiting_potok?.level_pupil }} место из {{ pupilStore.user.reiting_potok?.level_max }}
                     </p>
-                    <p class="cabinet-footer__text p2">
-                        до следующего места не хватает 30 баллов
+                    <p v-if="pupilStore.user.reiting_potok?.level_pupil === 1" class="cabinet-footer__text cabinet-footer__text_orange p2">
+                        Поздравляем!
+                    </p>
+                    <p v-else class="cabinet-footer__text p2">
+                        до следующего места не хватает {{ pupilStore.user.reiting_potok?.solar_next }} {{plural(pupilStore.user.reiting_potok?.solar_next,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
                     </p>
                 </div>
                 <div class="cabinet-footer__rating">
@@ -105,10 +111,13 @@
                         Рейтинг в школе
                     </p>
                     <p class="cabinet-footer__text p1">
-                        64 место из 583
+                        {{ pupilStore.user.reiting_school?.level_pupil }} место из {{ pupilStore.user.reiting_school?.level_max }}
                     </p>
-                    <p class="cabinet-footer__text p2">
-                        до следующего места не хватает 180 баллов
+                    <p v-if="pupilStore.user.reiting_school?.level_pupil === 1" class="cabinet-footer__text cabinet-footer__text_orange p2">
+                        Поздравляем!
+                    </p>
+                    <p v-else class="cabinet-footer__text p2">
+                        до следующего места не хватает {{ pupilStore.user.reiting_school?.solar_next }} {{plural(pupilStore.user.reiting_school?.solar_next,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
                     </p>
                 </div>
             </div>
@@ -129,7 +138,12 @@
         </div>
     </footer>
 </template>
-<script setup>
+<script setup lang="ts">
+import { usePipulStore } from '@/stores/usePipulStore';
+import plural from '@/utils/plural';
+
+
+const pupilStore = usePipulStore();
 </script>
 <style lang="scss">
 .cabinet-footer {

@@ -18,7 +18,7 @@ export class PupilService {
             if (res.status === 200) {
                 console.log(res.data);
                 
-                this.pipulStore.setUser(res.data)
+                this.pipulStore.setUser(res.data.data)
             }
         });
     }

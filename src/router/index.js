@@ -27,13 +27,13 @@ const router = createRouter({
                         {
                             path: '',
                             name: 'profile-student',
-                            component: import(
+                            component: () => import(
                                 '../views/cabinet/ProfilePage.vue'
                             ),
                         },
                         {
                             path: 'notification',
-                            component: import(
+                            component: () => import(
                                 '../views/cabinet/NotificationPage.vue'
                             ),
                         },

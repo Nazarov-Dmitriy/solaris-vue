@@ -2,78 +2,53 @@
     <div class="cabinet-header__container student">
         <div class="cabinet-header ">
             <div class="cabinet-header__info">
-                <router-link
-                    to="/cabinet/student"
-                    class="cabinet-header__logo-wraper"
-                >
-                    <img
-                        src="@/assets/icon/cabinet-header/logo_cabinet.svg"
-                        class="cabinet-header__logo"
-                        alt="
-                        icon-logo"
-                    >
+                <router-link to="/cabinet/student" class="cabinet-header__logo-wraper">
+                    <img src="@/assets/icon/cabinet-header/logo_cabinet.svg" class="cabinet-header__logo" alt="
+                        icon-logo">
                     <p class="cabinet-header__logo-text p2-phone">
                         Кабинет ученика
                     </p>
-                </router-link>               
+                </router-link>
                 <div class="cabinet-header__student-info">
                     <div class="cabinet-header__notification">
-                        <router-link
-                            to="/cabinet/student/notification"
-                        >
+                        <router-link to="/cabinet/student/notification">
                             <p class="cabinet-header__notification-count p2-phone">
                                 1
                             </p>
-                            <img
-                                src="@/assets/icon/cabinet-header/bell.svg"
-                                alt="icon-bellt"
-                            >
+                            <img src="@/assets/icon/cabinet-header/bell.svg" alt="icon-bellt">
                         </router-link>
                     </div>
                     <p class="cabinet-header__student-initials">
-                        АИ
+                        {{ pupilInitials }}
                     </p>
-                    <img
-                        src="@/assets/icon/cabinet-header/pointer_down.svg"
-                        alt="icon-poiner-down"
-                    >
+                    <div class="cabinet-header__profile-options">
+                        <img ref="logoutBtn" src="@/assets/icon/cabinet-header/pointer_down.svg"
+                            alt="icon-poiner-down" />
+                        <BtnComponent v-show="logoutBtnVisible" BtnComponent
+                            class="cabinet-header__btn cabinet-header__btn_type_logout" emit-name="action"
+                            @action="logout">
+                            Выйти
+                        </BtnComponent>
+                    </div>
                 </div>
             </div>
             <div class="cabinet-header__nav">
                 <ul class="cabinet-header__list">
                     <li class="botton">
-                        <router-link
-                            to="/cabinet/student/contests"
-                            class="cabinet-header__link"
-                        >
-                            <img
-                                src="@/assets/icon/cabinet-header/contest.svg"
-                                alt="icon-shop"
-                            >
+                        <router-link to="/cabinet/student/contests" class="cabinet-header__link">
+                            <img src="@/assets/icon/cabinet-header/contest.svg" alt="icon-shop">
                             Конкурсы
                         </router-link>
                     </li>
                     <li class="botton">
-                        <router-link
-                            to="/cabinet/student/shop"
-                            class="cabinet-header__link"
-                        >
-                            <img
-                                src="@/assets/icon/cabinet-header/contest.svg"
-                                alt="icon-shop"
-                            >
+                        <router-link to="/cabinet/student/shop" class="cabinet-header__link">
+                            <img src="@/assets/icon/cabinet-header/contest.svg" alt="icon-shop">
                             Магазин
                         </router-link>
                     </li>
                     <li class="botton">
-                        <router-link
-                            to="/cabinet/student/sales"
-                            class="cabinet-header__link"
-                        >
-                            <img
-                                src="@/assets/icon/cabinet-header/сart.svg"
-                                alt="icon-shop"
-                            >
+                        <router-link to="/cabinet/student/sales" class="cabinet-header__link">
+                            <img src="@/assets/icon/cabinet-header/сart.svg" alt="icon-shop">
                             Покупки
                         </router-link>
                     </li>
@@ -82,12 +57,76 @@
         </div>
     </div>
 </template>
-<script setup>
+<script setup lang="ts">
+import BtnComponent from '@/components/btns/BtnComponent.vue';
+import { UserService } from '@/plugins/UserService';
+import { useAuthStore } from '@/stores/useAuthStore';
+import { usePipulStore } from '@/stores/usePipulStore';
+import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const authService: UserService = inject('UserService');
+const authStore = useAuthStore();
+const router = useRouter();
+
+const pupilStore = usePipulStore();
+const pupilInitials = computed(() => {
+    return pupilStore.user?.name?.split('')[0] + pupilStore.user.surname?.split('')[0];
+})
+const logoutBtnVisible = ref(false)
+const logoutBtn = ref(null)
+
+function showLogoutBtn(e) {
+    if(logoutBtnVisible.value === true || e.target !== logoutBtn.value) {
+        logoutBtnVisible.value = false;
+    } else {
+    logoutBtnVisible.value = !logoutBtnVisible.value; 
+}
+}
+
+function logout() {
+    authService.logoutUser()
+    .then((res) => { 
+        if(res.data.result === true) {
+            authStore.clearUser();
+            pupilStore.clearUser();
+            router.push('/');
+        }
+     })
+     .catch(e => console.log(e))
+}
 
 
-
+onMounted(() => {
+    document.addEventListener('click', showLogoutBtn)
+})
+onUnmounted(() => {
+    document.removeEventListener('click', showLogoutBtn)
+})
 </script>
 <style lang="scss" scoped>
+.cabinet-header__profile-options {
+    display: relative;
+}
+
+.cabinet-header__btn {
+    height: 36px;
+    padding: 6px 16px;
+
+    @media (max-width: $lg) {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.cabinet-header__btn_type_logout {
+    position: absolute;
+    top: 45px;
+    z-index: 2;
+}
+
 .cabinet-header__container {
     width: 100%;
     border-bottom: 2px solid var(--roseBege);

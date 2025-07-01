@@ -72,9 +72,10 @@
             </div>
         </div>
         <Teleport to="body">
+            <!-- smth to change here with user -->
             <ModalSertificat
                 :show="modal"
-                :user="user"
+                :user="user" 
                 :sertificat="sertificat"
                 :validate="validateSertificat"
                 @close="closeModal()"
@@ -109,7 +110,7 @@ const sertificat = ref('')
 const validateSertificat = ref(false)
 const modal = ref(false)
 
-const user = ref({ name: 'Иванов Михаил Дмитриевич', class: '7А класс', date: '12/04/2024' })
+const user = ref({ name: 'Иванов Михаил Дмитриевич', class: '7А класс', date: '12/04/2024' }) // todo: delete this
 
 function showLogoutBtn(e) {
     if(logoutBtnVisible.value === true || e.target !== logoutBtn.value) {

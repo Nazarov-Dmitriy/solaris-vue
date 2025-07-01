@@ -7,7 +7,7 @@
                 </p>
                 <div class="teachcabinet-footer__balance">
                     <p class="teachcabinet-footer__balance-price h3">
-                        500 Баллов
+                        {{ teacherStore.user?.ball_balans }} {{ plural(teacherStore.user?.ball_balans,{one: 'Балл', few: 'Балла', many: 'Баллов'}, 'ru-RU')}}
                     </p>
                 </div>
                 <p class="teachcabinet-footer__text p2">
@@ -21,7 +21,7 @@
                         Оценка качества деятельности:
                     </p>
                     <p class="teachcabinet-footer__level-text point h3">
-                        3 Баллов
+                        {{ teacherStore.user?.ball_qual }} {{ plural(teacherStore.user?.ball_qual,{one: 'Балл', few: 'Балла', many: 'Баллов'}, 'ru-RU')}}
                     </p>
                 </div>
                 <div class="teachcabinet-footer__level">
@@ -29,7 +29,7 @@
                         Аттестация:
                     </p>
                     <p class="teachcabinet-footer__level-text h3">
-                        20 Баллов
+                        {{ teacherStore.user?.ball_atestat }} {{ plural(teacherStore.user?.ball_atestat,{one: 'Балл', few: 'Балла', many: 'Баллов'}, 'ru-RU')}}
                     </p>
                 </div>
             </div>
@@ -68,7 +68,11 @@
         </div>
     </footer>
 </template>
-<script setup>
+<script setup lang="ts">
+import { useTeacherStore } from '@/stores/useTeacherStore';
+import plural from '@/utils/plural';
+
+const teacherStore = useTeacherStore();
 </script>
 <style lang="scss">
 .teachcabinet-footer {
