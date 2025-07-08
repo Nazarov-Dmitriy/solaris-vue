@@ -1,6 +1,6 @@
 <template>
     <div
-        v-if="params.totalPage > 1"
+        v-if="props.totalPages > 1"
         class="pagination__container"
     >
         <ul
@@ -9,7 +9,8 @@
         >
             <li
                 class="pagination-prev"
-                @click="prevPage()"
+                @click="setPage(props.currentPage - 1)"
+                :disabled="props.currentPage === 1"
             >
                 <svg
                     width="32"
@@ -37,7 +38,7 @@
             <li
                 class="pagination-dots--left"
                 :class="{ 'active': showLeftDots }"
-                @click="getStartPage"
+                @click="setPage(1)"
             >
                 ...
             </li>
@@ -45,21 +46,22 @@
                 v-for="item in params.getListPage"
                 :key="item"
                 class="pagination-item h3"
-                :class="{ 'active': item === params.currentPage }"
-                @click="setCurrentPage(item)"
+                :class="{ 'active': item === props.currentPage }"
+                @click="setPage(item)"
             >
                 {{ item }}
             </li>
             <li
                 class="pagination-dots--right"
                 :class="{ 'active': showRightDots }"
-                @click="getEndtPage"
+                @click="setPage(props.totalPages)"
             >
                 ...
             </li>
             <li
                 class="pagination-next"
-                @click="nextPage()"
+                @click="setPage(props.currentPage + 1)"
+                :disabled="props.currentPage === props.totalPages"
             >
                 <svg
                     width="32"
@@ -92,9 +94,17 @@
 import { computed, onMounted, reactive, watch } from 'vue';
 
 const props = defineProps({
-    perpage: {
+    perPage: {
         type: Number,
         default: 3
+    },
+    currentPage: {
+        type: Number,
+        default: 1,
+    },
+    totalPages: {
+        type: Number,
+        default: 0,
     },
     data: {
         type: Array,
@@ -117,12 +127,12 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['setList'])
+const emit = defineEmits(['setList', 'setPage'])
 
 const params = reactive({
-    totalPage: 0,
-    perPage: 3,
-    currentPage: 1,
+    //totalPage: 0,
+    //perPage: 3,
+    //currentPage: 1,
     showCountPage: 3,
     rangeCountPage: [],
     content: [],
@@ -132,7 +142,7 @@ const params = reactive({
 
 const showLeftDots = computed(() => {
     if (params.showPiganation === 'all') {
-        return params.totalPage > params.showCountPage && params.rangeCountPage[0] !== 1 ? true : false
+        return props.totalPages > params.showCountPage && params.rangeCountPage[0] !== 1 ? true : false
     } else {
         return false
     }
@@ -140,7 +150,7 @@ const showLeftDots = computed(() => {
 
 const showRightDots = computed(() => {
     if (params.showPiganation === 'all') {
-        return params.totalPage > params.showCountPage && params.rangeCountPage[1] !== params.totalPage ? true : false
+        return props.totalPages > params.showCountPage && params.rangeCountPage[1] !== props.totalPages ? true : false
     } else {
         return false
     }
@@ -167,9 +177,9 @@ onMounted(() => {
     document.documentElement.style.setProperty('--piganation-main', props.color.main);
     document.documentElement.style.setProperty('--piganation-hover', props.color.hover);
 
-    params.perPage = props.perpage;
+    //params.perPage = props.perpage;
     params.showPiganation = props.showPiganationElement;
-    getTotalPage();
+    //getTotalPage();
     getRangeCountPage();
     getContentPage()
 })
@@ -182,29 +192,33 @@ function getRangeCountPage () {
     let start;
     let end;
 
-    if (params.showCountPage > params.totalPage) {
+    if (params.showCountPage > props.totalPages) {
         start = 1;
-        end = params.totalPage;
+        end = props.totalPages;
     } else {
         let halfShowCountPage = (params.showCountPage - 1) / 2;
 
-        if (params.currentPage - halfShowCountPage <= 0) {
+        if (props.currentPage - halfShowCountPage <= 0) {
             start = 1;
             end = params.showCountPage
-        } else if (params.currentPage - halfShowCountPage > 0 && params.currentPage + halfShowCountPage <= params.totalPage) {
-            start = params.currentPage - halfShowCountPage;
-            end = params.currentPage + halfShowCountPage;
+        } else if (props.currentPage - halfShowCountPage > 0 && props.currentPage + halfShowCountPage <= props.totalPages) {
+            start = props.currentPage - halfShowCountPage;
+            end = props.currentPage + halfShowCountPage;
         } else {
-            start = params.totalPage - params.showCountPage + 1;
-            end = params.totalPage;
+            start = props.totalPages - params.showCountPage + 1;
+            end = props.totalPages;
         }
     }
     params.rangeCountPage[0] = start;
     params.rangeCountPage[1] = end;
 }
 
+function setPage(page) {
+        if(page >= 1 && page <= props.totalPages) emit('setPage', page)
+}
 
-function prevPage () {
+
+/* function prevPage () {
     if (params.currentPage > 1) params.currentPage--
 }
 
@@ -218,7 +232,7 @@ function getStartPage () {
 
 function getEndtPage () {
     params.currentPage = params.totalPage;
-}
+} */
 
 function getListPage () {
     let arr = [];
@@ -228,16 +242,16 @@ function getListPage () {
     params.getListPage = params.showPiganation === 'all' ? arr : []
 }
 
-function setCurrentPage (page) {
+/* function setCurrentPage (page) {
     params.currentPage = page;
-}
+} */
 
 function getContentPage () {
     params.content = [];
-    const startIndex = params.perPage * (params.currentPage - 1);
+    const startIndex = props.perPage * (props.currentPage - 1);
     const endIndex =
-        startIndex + params.perPage - 1 <= props.data.length - 1
-            ? startIndex + params.perPage - 1
+        startIndex + props.perPage - 1 <= props.data.length - 1
+            ? startIndex + props.perPage - 1
             : props.data.length - 1;
 
     for (let i = startIndex; i <= endIndex; i++) {
@@ -246,7 +260,7 @@ function getContentPage () {
     emit('setList', params.content)
 }
 
-watch(() => params.currentPage, () => {
+watch(() => props.currentPage, () => {
     getRangeCountPage();
     getContentPage()
 })
@@ -255,7 +269,7 @@ watch(() => params.content, () => {
 }, { deep: true })
 
 watch(() => props.data, () => {
-    getTotalPage()
+    //getTotalPage()
     getRangeCountPage();
     getContentPage()
 })

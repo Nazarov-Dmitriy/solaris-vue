@@ -15,7 +15,7 @@ export interface Teacher extends User {
     fathername: string,
     shop_id: number | null,
     uuid: string,
-    competition_activities: null,
+    competition_activities: null | unknown,
     ball_balans: number,
     ball_qual: number,
     ball_atestat: number,

@@ -24,7 +24,9 @@ onMounted(() => {
 });
 
 watch([user, route], () => {
-    if (!user) {
+    console.log(!!user.value?.token)
+    if (!user) { //!!user.value?.token
+    //console.log(!user)
         router.push({ name: 'home' });
     }
 

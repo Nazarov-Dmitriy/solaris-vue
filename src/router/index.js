@@ -145,4 +145,13 @@ const router = createRouter({
     },
 });
 
+router.beforeEach((to, from) => {
+    if(to.meta.protected && (localStorage.getItem('token') === null)){
+        return {
+            path: '/',
+            //query: {redirect: to.fullPath}
+        }
+    }
+})
+
 export default router;

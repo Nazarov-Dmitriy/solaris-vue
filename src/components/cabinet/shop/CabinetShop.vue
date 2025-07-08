@@ -3,12 +3,12 @@
         <div class="shop">
             <div class="shop-list">
                 <template
-                    v-for="el in renderList"
+                    v-for="el in products"
                     :key="el.id"
                 >
                     <div
                         class="shop-item"
-                        :class="{ 'shop-item__popular': el.popular }"
+                        :class="{ 'shop-item__popular': false }"
                         @click="$router.push(`/cabinet/student/shop/${el.id}`)"
                     >
                         <img
@@ -18,7 +18,7 @@
                         >
                         <div class="shop-contnent">
                             <p class="shop-subtitle p1">
-                                {{ el.title }}
+                                {{ el.name }}
                             </p>
                             <div class="shop-price-wraper">
                                 <p class="shop-price h2">
@@ -43,17 +43,39 @@
                 </template>
             </div>
             <PaginationComponent
-                :perpage="6"
-                :data="arr"
+                :per-page="perPage"
+                :current-page="currentPage"
+                :total-pages="totalPages"
+                :data="products"
                 :color="{ main: '#fff', hover: '#dda06b' }"
                 @set-list="getRenderList"
+                @set-page="setPage"
             />
         </div>
     </section>
 </template>
-<script setup>
+<script setup lang="ts">
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue';
-import { ref } from 'vue';
+import { ShopService } from '@/plugins/ShopService';
+import { useShopStore } from '@/stores/useShopStore';
+import { computed, inject, onMounted, ref, watch } from 'vue';
+
+const shopStore = useShopStore()
+const shopService: ShopService = inject('ShopService')
+
+const currentPage = computed(() => shopStore.currentPage)
+const products = computed(() => shopStore.getProductByPage)
+const perPage = computed(() => shopStore.perPage)
+const totalPages = computed(() => shopStore.pagesCount)
+
+onMounted(() => shopService.getProducts())
+function setPage(page) {
+    shopStore.setCurrentPage(page);
+    console.log('emited');
+    console.log(page)
+}
+
+watch(currentPage, () => { shopService.getProducts() })
 
 const renderList = ref([])
 

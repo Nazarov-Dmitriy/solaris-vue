@@ -12,6 +12,7 @@ import FeedbackService from './plugins/FeedbackService';
 import ProductService from './plugins/ProductService';
 import NapramService from './plugins/NapramService';
 import CompetitionService from './plugins/CompetitionService';
+import ShopService from './plugins/ShopService';
 
 const app = createApp(App);
 
@@ -22,7 +23,8 @@ app.use(PupilService);
 app.use(FeedbackService);
 app.use(ProductService);
 app.use(NapramService);
-app.use(CompetitionService)
+app.use(CompetitionService);
+app.use(ShopService);
 app.use(router);
 
 app.mount('#app');
