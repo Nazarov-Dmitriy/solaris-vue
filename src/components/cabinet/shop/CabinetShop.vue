@@ -71,8 +71,6 @@ const totalPages = computed(() => shopStore.pagesCount)
 onMounted(() => shopService.getProducts())
 function setPage(page) {
     shopStore.setCurrentPage(page);
-    console.log('emited');
-    console.log(page)
 }
 
 watch(currentPage, () => { shopService.getProducts() })

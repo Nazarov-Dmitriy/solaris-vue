@@ -5,7 +5,10 @@ import axiosR from '@/api/http'
 
 export const useCompetitionsStore = defineStore('competitionsStore', {
     state: () => ({
-        competitions: reactive([])
+        competitions: reactive([]),
+        perPage: 4,
+        currentPage: 1,
+        totalPages: 1
     }),
     actions: {
         async fetchCompetitions () {
@@ -15,6 +18,12 @@ export const useCompetitionsStore = defineStore('competitionsStore', {
             } catch (error) {
                 console.error('Ошибка при получении данных', error)
             }
+        },
+        setTotalPages(pages) {
+            this.totalPages = pages;
+        },
+        setCurrentPage(page) {
+            this.currentPage = page;
         }
     }
 })

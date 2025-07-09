@@ -76,7 +76,7 @@
                     <div class="teacher-subtitle__wraper">
                         <span class="teacher-subtitle__line" />
                         <p class="teacher-subtitle__title p2">
-                            Конкурсы
+                            Конкурсы {{ totalPages }}
                         </p>
                         <span class="teacher-subtitle__line" />
                     </div>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="teacher__info">
                                 <p class="teacher__publication p2">
-                                    Дата публикации {{ el.publication_date }}
+                                    Дата публикации {{ el.begin_at.split(' ')[0] }}
                                 </p>
                                 <button
                                     class="teacher__info-btn btn"
@@ -127,17 +127,20 @@
             </div>
 
             <PaginationComponent
-                :perpage="4"
+                :per-page="perPage"
                 :data="list"
+                :total-pages="totalPages"
+                :current-page="currentPage"
                 :color="{ main: '#1F2A3E', hover: '#dda06b' }"
                 @set-list="getRenderList"
+                @set-page="setPage"
             />
         </div>
     </section>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import { useRouter } from 'vue-router'
@@ -153,11 +156,15 @@ const props = defineProps({
         default: () => []
     }
 })
+const useCompetitions = useCompetitionsStore()
 
 const optionRole = ['Выберите роль', 'Журналист', 'Историк', 'Патриот', 'Юнармеец']
 const optionSort = ['Новые вверху', 'Новые внизу']
 const renderList = ref([])
 const role = ref(null)
+const perPage = computed(() => useCompetitions.perPage);
+const totalPages = computed(() => useCompetitions.totalPages);
+const currentPage = computed(() => useCompetitions.currentPage);
 const sort = ref('Новые вверху')
 const list = ref([])
 const router = useRouter()
@@ -187,7 +194,6 @@ function linkContest (id) {
     }
 }
 
-const useCompetitions = useCompetitionsStore()
 const contests = ref([])
 
 onMounted(async () => {
@@ -195,8 +201,8 @@ onMounted(async () => {
         await useCompetitions.fetchCompetitions()
         contests.value = useCompetitions.competitions
         list.value = [...contests.value]
+        useCompetitions.setTotalPages(Math.ceil(list.value.length / perPage.value))
         filterContestsByRole()
-        console.log(list.value)
     } catch (error) {
         console.error('Ошибка при получении данных', error)
     }
@@ -204,6 +210,10 @@ onMounted(async () => {
 
 function getRenderList (list) {
     renderList.value = list
+}
+
+function setPage(page) {
+    useCompetitions.setCurrentPage(page);
 }
 </script>
 
