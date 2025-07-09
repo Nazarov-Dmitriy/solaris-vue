@@ -13,8 +13,8 @@
                     >
                         <img
                             class="shop-img"
-                            src="/image.png"
-                            alt="image"
+                            :src="el.image_url"
+                            :alt="el.name"
                         >
                         <div class="shop-contnent">
                             <p class="shop-subtitle p1">
@@ -78,55 +78,6 @@ function setPage(page) {
 watch(currentPage, () => { shopService.getProducts() })
 
 const renderList = ref([])
-
-let arr = [
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 200,
-        popular: true,
-        id: 1
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 2200,
-        id: 2
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 2300,
-        id: 3
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 100,
-        id: 4
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 500,
-        id: 5
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 240,
-        id: 6
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 600,
-        id: 7
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 800,
-        id: 8
-    },
-    {
-        title: "Сертификат АНТИДВОЙКА",
-        price: 200,
-        id: 9
-    },
-];
 
 function getRenderList (list) {
     renderList.value = list

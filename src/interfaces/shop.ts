@@ -25,3 +25,8 @@ export interface ProductsPaginationResponse {
         page: MetaPages,
     }
 }
+
+export interface ProductResponse {
+    status: string,
+    data: Product,
+}

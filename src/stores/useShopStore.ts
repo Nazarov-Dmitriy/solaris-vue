@@ -9,7 +9,16 @@ export const useShopStore = defineStore('shopStore', {
         }, */
         getProductByPage: (state) => {
             return state.products.get(state.currentPage)
-        }
+        },
+
+        getProduct: (state) => {
+            return (id: number) => {
+            const product = [];
+            state.products.forEach(el => {
+                product.push(el.find(e => e.id === id))
+            });
+            return product.pop()
+        }}
     },
     actions: {
         setProducts(products: Product[], page: number) {
@@ -21,9 +30,10 @@ export const useShopStore = defineStore('shopStore', {
         setCurrentPage(page: number) {
             this.$state.currentPage = page
         },
+        /* 
         addProducts(products: Product[]) {
             this.$state.products.concat(products)
-        },/* 
+        }, *//* 
         clearProducts() {
             this.$state.products = {}
         } */
