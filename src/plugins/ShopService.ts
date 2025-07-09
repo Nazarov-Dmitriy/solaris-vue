@@ -1,7 +1,7 @@
 import axiosR from "@/api/http";/* 
 import { ProductForm } from "@/interfaces/Product"; */
 import { ProductMain, ProductMainResponse } from "@/interfaces/products";
-import { ProductResponse, ProductsPaginationResponse } from "@/interfaces/shop";
+import { CurrUserPurchasesResponse, ProductResponse, ProductsPaginationResponse } from "@/interfaces/shop";
 import { useShopStore } from "@/stores/useShopStore";
 import { AxiosResponse } from "axios";
 
@@ -33,6 +33,16 @@ export class ShopService {
     public getProductById(id: number) {
         return this._axiosR.get<ProductResponse>(`/tovars/catalogs/${id}`)
         .then((res) => {
+            if(res.status === 200) {
+                console.log(res.data)
+            }
+            return res.data.data
+        })
+    }
+
+    public getCurrentUserPurchases() {
+        return this._axiosR.get<CurrUserPurchasesResponse>('/tovars/curentuser')
+        .then(res => {
             if(res.status === 200) {
                 console.log(res.data)
             }

@@ -17,11 +17,7 @@
                 </div>
                 <template v-if="infoBuyItemInfo.length > 0">
                     <ul class="cabinet-shop-ready__list">
-                        <li
-                            v-for="el in infoBuyItemInfo"
-                            :key="el.id"
-                            class="cabinet-shop-ready__list-item"
-                        >
+                        <li v-for="el in infoBuyItemInfo" :key="el.id" class="cabinet-shop-ready__list-item">
                             <div class="cabinet-shop-ready__list-item-img">
                                 <img src="/src/assets/image/cabinet-shop/pic.png" alt="image" />
                             </div>
@@ -42,10 +38,7 @@
                         </li>
                     </ul>
                 </template>
-                <p 
-                    v-else 
-                    class="shop-empty-ready"
-                >
+                <p v-else class="shop-empty-ready">
                     У тебя сейчас нет товаров готовых к получению, ты можешь выбрать их в магазине
                 </p>
             </div>
@@ -54,37 +47,25 @@
                 <p class="cabinet-shop-history__title">
                     История покупок
                 </p>
-                <template v-if="infoBuyHistoryItem.length > 0">
+                <template v-if="productList.length > 0">
                     <ul class="cabinet-shop-history__wrapper">
-                        <li
-                            v-for="el in infoBuyHistoryItem"
-                            :key="el.id"
-                            class="cabinet-shop-history__wrapper-item"
-                        >
+                        <li v-for="el in productList" :key="el.id" class="cabinet-shop-history__wrapper-item">
                             <div class="cabinet-shop-history__wrapper-left">
-                                <img
-                                    src="/src/assets/image/cabinet-shop/solaris2.png"
-                                    alt="<?php echo $value['orderNumber'] ?>"
-                                >
+                                <img :src="el.image_url" class="cabinet-shop-history__product-img"
+                                    alt="<?php echo $value['orderNumber'] ?>">
                                 <p class="cabinet-shop-history__wrapper-price">
-                                    {{ el.amount }}
+                                    {{ el.cost }}
                                 </p>
-                                <img
-                                    src="/src/assets/image/cabinet-shop/currency.png"
-                                    alt="solaris-valute"
-                                >
+                                <img src="/src/assets/image/cabinet-shop/currency.png" alt="solaris-valute">
                             </div>
                             <div class="cabinet-shop-history__wrapper-info">
-                                <p>{{ el.orderNumber }}</p>
-                                <p>{{ el.time }} <span>заказ оплачен</span></p>
+                                <p>{{ el.name + ' №' + el.number }}</p>
+                                <p>{{ el.sale_at.split(' ')[0] }} <span>заказ оплачен</span></p>
                             </div>
                         </li>
                     </ul>
                     <div class="cabinet-shop__img-background">
-                        <img 
-                            src="@/assets/image/cabinet-shop/coinBege.png" 
-                            alt="coin" 
-                        >
+                        <img src="@/assets/image/cabinet-shop/coinBege.png" alt="coin">
                     </div>
                 </template>
                 <div v-else class="shop-empty__container">
@@ -102,21 +83,12 @@
                             Улучши свои оценки в один клик.
                         </p>
                     </div>
-                    <button
-                        class="btn shop-empty-history__btn"
-                        @click="$router.push('/cabinet-shop')"
-                    >
+                    <button class="btn shop-empty-history__btn" @click="$router.push('/cabinet-shop')">
                         В магазин
                     </button>
                 </div>
-                <div
-                    v-if="infoBuyHistoryItem.length === 0"
-                    class="cabinet-shop__img-background--empty"
-                >
-                    <img 
-                        src="@/assets/image/cabinet-shop/coinBege.png" 
-                        alt="" 
-                    >
+                <div v-if="infoBuyHistoryItem.length === 0" class="cabinet-shop__img-background--empty">
+                    <img src="@/assets/image/cabinet-shop/coinBege.png" alt="">
                 </div>
                 <span class="cabinet-shop-history__line" />
             </div>
@@ -124,7 +96,40 @@
     </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
+//TODO: Ready to recieve list api?
+import { CurrUserPurchase, Product } from '@/interfaces/shop'
+import { ShopService } from '@/plugins/ShopService'
+import { useShopStore } from '@/stores/useShopStore'
+import { inject, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const shopStore = useShopStore()
+const shopService: ShopService = inject('ShopService')
+
+const route = useRoute();
+
+const countValue = ref(1)
+const loading = ref(false);
+const productList = ref < CurrUserPurchase[] | null > (null)
+
+watch(() => +route.params.id, fetchProduct, { immediate: true })
+
+async function fetchProduct(id: number) {
+    loading.value = true
+    productList.value = null;
+    try {
+        productList.value = await shopService.getCurrentUserPurchases()
+        console.log(productList.value)
+    }
+    catch (err) {
+        console.log(err)
+    }
+    finally {
+        loading.value = false
+    }
+}
+
 const infoBuyItemInfo = [
     {
         name: 'Антидвойка',
@@ -301,16 +306,16 @@ const infoBuyHistoryItem = [
 </script>
 <style lang="scss">
 .cabinet-shop {
-  width: 100%;
-  background-color: var(--dark);
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  z-index: 0;
-  height: 100%;
-  max-height: 100%;
-  min-height: 0;
+    width: 100%;
+    background-color: var(--dark);
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+    height: 100%;
+    max-height: 100%;
+    min-height: 0;
 }
 
 .cabinet-shop-container {
@@ -336,13 +341,13 @@ const infoBuyHistoryItem = [
 }
 
 .cabinet-shop-ready {
-  background: #1f2a3e;
-  padding-top: 24px;
-  height: 100%;
-  width: 40%;
-  overflow: hidden;
-  box-sizing: border-box;
-  padding-bottom: 24px;
+    background: #1f2a3e;
+    padding-top: 24px;
+    height: 100%;
+    width: 40%;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-bottom: 24px;
 }
 
 .cabinet-shop-history {
@@ -355,6 +360,13 @@ const infoBuyHistoryItem = [
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+.cabinet-shop-history__product-img {
+    max-width: 60px;
+    max-height: 60px;
+    aspect-ratio: 1;
+    object-fit: cover;
 }
 
 .cabinet-shop-history__wrapper {
@@ -434,17 +446,17 @@ const infoBuyHistoryItem = [
 }
 
 .cabinet-shop-ready__list {
-  width: 100%;
-  overflow: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  height: 100%;
-  min-height: 100px;
-  max-height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  height: calc(100% - 148px);
+    width: 100%;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: 100%;
+    min-height: 100px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: calc(100% - 148px);
 }
 
 .cabinet-shop-ready__list::-webkit-scrollbar {
@@ -597,10 +609,10 @@ const infoBuyHistoryItem = [
 }
 
 @media (max-width: 1440px) {
-  .cabinet-shop-ready {
-    padding: 24px 0 24px 0;
-    width: 70%;
-  }
+    .cabinet-shop-ready {
+        padding: 24px 0 24px 0;
+        width: 70%;
+    }
 
     .cabinet-shop-history__title::before {
         width: 35%;
@@ -713,13 +725,13 @@ const infoBuyHistoryItem = [
         display: none;
     }
 
-  .cabinet-shop-ready {
-    width: calc(100% + 80px);
-    padding: 0 40px;
-    left: -40px;
-    max-height: 900px;
-    position: relative;
-  }
+    .cabinet-shop-ready {
+        width: calc(100% + 80px);
+        padding: 0 40px;
+        left: -40px;
+        max-height: 900px;
+        position: relative;
+    }
 
     .cabinet-shop-ready__list {
         min-height: auto;
@@ -729,16 +741,16 @@ const infoBuyHistoryItem = [
         position: relative;
     }
 
-  .cabinet-shop-ready__list::after {
-    content: "";
-    border-bottom: 2px solid #dda06b;
-    display: block;
-    height: 2px;
-    margin: 0 auto;
-    position: sticky;
-    padding-top: 10px;
-    width: 100%;
-  }
+    .cabinet-shop-ready__list::after {
+        content: "";
+        border-bottom: 2px solid #dda06b;
+        display: block;
+        height: 2px;
+        margin: 0 auto;
+        position: sticky;
+        padding-top: 10px;
+        width: 100%;
+    }
 
     .cabinet-shop-ready__list-item {
         flex-direction: row;
@@ -770,12 +782,12 @@ const infoBuyHistoryItem = [
         padding: 0 16px;
     }
 
-  .cabinet-shop-ready {
-    width: calc(100% + 32px);
-    padding: 0 16px;
-    left: -16px;
-    height: auto;
-  }
+    .cabinet-shop-ready {
+        width: calc(100% + 32px);
+        padding: 0 16px;
+        left: -16px;
+        height: auto;
+    }
 
     .cabinet-shop-history__title::before {
         width: 30%;
