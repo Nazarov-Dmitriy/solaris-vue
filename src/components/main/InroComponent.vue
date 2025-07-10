@@ -47,7 +47,7 @@
                     <div>
                         <input
                             v-model="payload.password"
-                            type="text"
+                            type="password"
                             class="intro__input p2"
                             placeholder="Пароль"
                             style="margin-top: 8px"
