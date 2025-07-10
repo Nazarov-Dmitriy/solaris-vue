@@ -8,7 +8,15 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
     plugins: [
         vue(),
-        vueDevTools()
+        vueDevTools(),
+        viteStaticCopy({
+                targets: [
+                    {
+                      src: path.resolve(__dirname, './.htaccess') , // 1 
+                      dest: './' // 2
+                     }
+                  ]
+            }),
     ],
     server: {
         port: 8080,
