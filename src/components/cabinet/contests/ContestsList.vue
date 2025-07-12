@@ -76,7 +76,7 @@
                     <div class="teacher-subtitle__wraper">
                         <span class="teacher-subtitle__line" />
                         <p class="teacher-subtitle__title p2">
-                            Конкурсы {{ totalPages }}
+                            Конкурсы
                         </p>
                         <span class="teacher-subtitle__line" />
                     </div>
