@@ -13,7 +13,7 @@
                   {{ el.name }}
                 </p>
                 <p class="contest__item-publication p2">
-                  {{ el.date_publication }}
+                  {{ el.begin_at.split(' ')[0] }}
                 </p>
               </div>
               <svg class="contest__item-btn" :class="{ 'current': active == el.id }" width="32" height="32"
@@ -33,7 +33,7 @@
                     {{ el.tags[0] }}
                   </p>
                   <p class="contest-content__subtitle-start p2">
-                    начало {{ el.begin_at }}
+                    начало {{ el.begin_at.split(' ')[0] }}
                   </p>
                 </div>
                 <p class="contest-content__description p2">

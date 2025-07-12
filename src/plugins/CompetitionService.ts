@@ -1,5 +1,5 @@
 import axiosR from "@/api/http";
-import { CompetitionResponse } from "@/interfaces/competitions";
+import { CompetitionItem, CompetitionResponse, CompetitionTagsResponse } from "@/interfaces/competitions";
 import { App } from "vue";
 
 export default {
@@ -11,7 +11,11 @@ export default {
 export class CompetitionService {
     private _axiosR = axiosR
 
-    public getListCompetitions(){
-        return this._axiosR.get<CompetitionResponse>('/competitions');
+    public async getListCompetitions(){
+        return await this._axiosR.get<CompetitionItem[]>('/competitions');
+    }
+
+    public getCompetitionsTags(){
+        return this._axiosR.get<CompetitionTagsResponse>('/competitions/tags');
     }
 }

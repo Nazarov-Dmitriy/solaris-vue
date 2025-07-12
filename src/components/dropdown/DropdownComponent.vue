@@ -1,9 +1,10 @@
 <template>
-    <div ref="dropDown" class="dashboard__dropdown-wrapper">
+    <div ref="dropDown" class="dashboard__dropdown-wrapper"
+    @click="isDropDownVisible = !isDropDownVisible"> <!-- moved here -->
         <div
             :class="[props.additionalClass, 'dropdown-selected']"
-            @click="isDropDownVisible = !isDropDownVisible"
-        >
+            
+        > <!-- in 'dropdown-selected' div was @click="isDropDownVisible = !isDropDownVisible", moved it to 'dasboard__dropdown-wrapper' for better UX, if smth breaks, better to move it back -->
             <p :class="['dropdown-selected-text']">
                 {{ selectedOption || defaultValue }}
             </p>
@@ -110,6 +111,7 @@ onBeforeUnmount(() => {
     font-weight: 400;
     outline: none;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -123,6 +125,8 @@ onBeforeUnmount(() => {
     top: 50px;
     left: -1px;
     z-index: 999;
+    max-height: 50vh;
+    overflow-y: auto;
 }
 
 .option {

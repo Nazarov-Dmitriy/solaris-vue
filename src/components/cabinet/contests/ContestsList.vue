@@ -17,22 +17,22 @@
                         </div>
                         <div class="teacher-panel-group">
                             <DropdownComponent
-                                v-model:modelValue="role"
+                                v-model:modelValue="useCompetitions.tag"
                                 class="teacher-panel__dropdown-role"
-                                :options="optionRole"
+                                :options="useCompetitions.competitionTags"
                             />
                             <div class="teacher-panel-group-down">
                                 <DropdownComponent
-                                    v-model:modelValue="sort"
+                                    v-model:modelValue="useCompetitions.sort"
                                     class="teacher-panel__dropdown-sort"
                                     :options="optionSort"
                                 />
-                                <button
+                                <!-- <button
                                     class="btn btn-contest"
                                     @click="filterContestsByRole"
                                 >
                                     Мои конкурсы
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                     </div>
@@ -48,22 +48,22 @@
                 <div class="uc-panel">
                     <div class="uc-panel-group">
                         <DropdownComponent
-                            v-model:modelValue="role"
+                            v-model:modelValue="useCompetitions.tag"
                             class="uc-panel__dropdown-role"
-                            :options="optionRole"
+                            :options="useCompetitions.competitionTags"
                         />
                         <div class="teacher-panel-group-down">
                             <DropdownComponent
-                                v-model:modelValue="sort"
+                                v-model:modelValue="useCompetitions.sort"
                                 class="teacher-panel__dropdown-sort"
                                 :options="optionSort"
                             />
-                            <button
+                            <!-- <button
                                 class="btn btn-contest"
                                 @click="filterContestsByRole"
                             >
                                 Мои конкурсы
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                 :per-page="perPage"
                 :data="list"
                 :total-pages="totalPages"
-                :current-page="currentPage"
+                :current-page="useCompetitions.currentPage"
                 :color="{ main: '#1F2A3E', hover: '#dda06b' }"
                 @set-list="getRenderList"
                 @set-page="setPage"
@@ -139,12 +139,14 @@
     </section>
 </template>
 
-<script setup>
-import { computed, onMounted, ref } from 'vue'
+<script setup lang="ts">
+import { computed, inject, onMounted, ref, watch } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import { useRouter } from 'vue-router'
 import { useCompetitionsStore } from '@/stores/useCompetitions'
+import { CompetitionService } from '@/plugins/CompetitionService'
+import { storeToRefs } from 'pinia'
 
 const props = defineProps({
     user: {
@@ -158,23 +160,17 @@ const props = defineProps({
 })
 const useCompetitions = useCompetitionsStore()
 
-const optionRole = ['Выберите роль', 'Журналист', 'Историк', 'Патриот', 'Юнармеец']
+const competitionService: CompetitionService = inject('CompetitionService')
+
 const optionSort = ['Новые вверху', 'Новые внизу']
 const renderList = ref([])
-const role = ref(null)
 const perPage = computed(() => useCompetitions.perPage);
 const totalPages = computed(() => useCompetitions.totalPages);
-const currentPage = computed(() => useCompetitions.currentPage);
-const sort = ref('Новые вверху')
-const list = ref([])
+const sort = computed(() => useCompetitions.sort)
+const list = computed(() => useCompetitions.getCompetitionsSorted)
 const router = useRouter()
 
-function sortContests () {
-    list.value = list.value.sort((a, b) => {
-        return sort.value === 'Новые вверху'
-            ? new Date(b.publication_date) - new Date(a.publication_date)
-            : new Date(a.publication_date) - new Date(b.publication_date)
-    })
+/* function sortContests () {
 }
 
 function filterContestsByRole () {
@@ -184,7 +180,7 @@ function filterContestsByRole () {
         list.value = contests.value.filter((contest) => contest.tags.includes(role.value))
     }
     sortContests()
-}
+} */
 
 function linkContest (id) {
     if (props.user === 'teacher') {
@@ -197,15 +193,26 @@ function linkContest (id) {
 const contests = ref([])
 
 onMounted(async () => {
+    competitionService.getCompetitionsTags().then(res => 
+        useCompetitions.addCompetitionsTags(res.data.data.map(el => el.name)
+    ))
+    .catch(e => console.log(e))
     try {
-        await useCompetitions.fetchCompetitions()
-        contests.value = useCompetitions.competitions
-        list.value = [...contests.value]
+        const comps = await competitionService.getListCompetitions()
+        console.log(comps.data)
+        useCompetitions.addCompetitions(comps.data)
         useCompetitions.setTotalPages(Math.ceil(list.value.length / perPage.value))
-        filterContestsByRole()
+        // filterContestsByRole()
     } catch (error) {
         console.error('Ошибка при получении данных', error)
     }
+})
+
+/* watch(sort, () => {
+    sortContests()
+}) */
+watch(list, () => {
+    useCompetitions.setTotalPages(Math.ceil(list.value.length / perPage.value))
 })
 
 function getRenderList (list) {

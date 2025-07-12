@@ -6,7 +6,7 @@
         <template v-else>
             <StudentHeader />
         </template>
-        <ContestsList :contests="contests" :user="user" />
+        <ContestsList  :user="user" />
     </div>
 </template>
 
@@ -32,8 +32,8 @@ onMounted(async () => {
     }
 
     try {
-        await useCompetitions.fetchCompetitions()
-        contests.value = useCompetitions.competitions
+        /* await useCompetitions.fetchCompetitions()
+        contests.value = useCompetitions.competitions */
     } catch (error) {
         console.error('Ошибка при получении данных', error)
     }
