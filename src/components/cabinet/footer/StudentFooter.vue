@@ -68,7 +68,7 @@
                     </p>
                 </div>
                 <p class="cabinet-footer__text p1">
-                    2500 баллов
+                    {{pupilStore.user.level}} баллов
                 </p>
                 <p class="cabinet-footer__text p2">
                     Сумма баллов по всем ролям
@@ -89,7 +89,7 @@
                         Поздравляем!
                     </p>
                     <p v-else class="cabinet-footer__text p2">
-                        до следующего места не хватает {{ pupilStore.user.reiting_class?.solar_next }} {{plural(pupilStore.user.reiting_class?.solar_next,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
+                        до следующего места не хватает {{ pupilStore.user.reiting_class?.solar_next - pupilStore.user.reiting_class?.solar_pupil }} {{plural(pupilStore.user.reiting_class?.solar_next - pupilStore.user.reiting_class?.solar_pupil,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
                     </p>
                 </div>
                 <div class="cabinet-footer__rating">
@@ -103,7 +103,7 @@
                         Поздравляем!
                     </p>
                     <p v-else class="cabinet-footer__text p2">
-                        до следующего места не хватает {{ pupilStore.user.reiting_potok?.solar_next }} {{plural(pupilStore.user.reiting_potok?.solar_next,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
+                        до следующего места не хватает {{ pupilStore.user.reiting_potok?.solar_next - pupilStore.user.reiting_potok?.solar_pupil }} {{plural(pupilStore.user.reiting_potok?.solar_next - pupilStore.user.reiting_potok?.solar_pupil,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
                     </p>
                 </div>
                 <div class="cabinet-footer__rating">
@@ -117,7 +117,7 @@
                         Поздравляем!
                     </p>
                     <p v-else class="cabinet-footer__text p2">
-                        до следующего места не хватает {{ pupilStore.user.reiting_school?.solar_next }} {{plural(pupilStore.user.reiting_school?.solar_next,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
+                        до следующего места не хватает {{ pupilStore.user.reiting_school?.solar_next - pupilStore.user.reiting_school?.solar_pupil }} {{plural(pupilStore.user.reiting_school?.solar_next - pupilStore.user.reiting_school?.solar_pupil,{one: 'балла', few: 'баллов', many: 'баллов'}, 'ru-RU')}}
                     </p>
                 </div>
             </div>

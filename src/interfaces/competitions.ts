@@ -8,6 +8,19 @@ export interface CompetitionItem {
     tags: string[],
 }
 
+export interface UserCompetitionItem {
+    id: number,
+    title: string,
+    ball: number,
+    finish_at: string,
+    begin_at: string,
+}
+
+export interface UserCompetitionItemsResponse {
+    status: string,
+    data: UserCompetitionItem[],
+}
+
 export interface CompetitionTag {
     id: number,
     name: string,

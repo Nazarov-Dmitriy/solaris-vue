@@ -1,32 +1,21 @@
 <template>
     <section class="section-contests">
-        <div
-            v-if="user === 'teacher'"
-            class="teacher-panel-wraper"
-        >
+        <div v-if="user === 'teacher'" class="teacher-panel-wraper">
             <div class="teacher-panel__container">
                 <div class="teacher-panel">
                     <div class="teacher-under-panel-group">
                         <div class="teacher-panel__btn-request">
-                            <button
-                                class="btn btn-request-contest"
-                                @click="$router.push('/cabinet/teacher/offer-contests')"
-                            >
+                            <button class="btn btn-request-contest"
+                                @click="$router.push('/cabinet/teacher/offer-contests')">
                                 Предложить конкурс
                             </button>
                         </div>
                         <div class="teacher-panel-group">
-                            <DropdownComponent
-                                v-model:modelValue="useCompetitions.tag"
-                                class="teacher-panel__dropdown-role"
-                                :options="useCompetitions.competitionTags"
-                            />
+                            <DropdownComponent v-model:modelValue="useCompetitions.tag"
+                                class="teacher-panel__dropdown-role" :options="useCompetitions.competitionTags" />
                             <div class="teacher-panel-group-down">
-                                <DropdownComponent
-                                    v-model:modelValue="useCompetitions.sort"
-                                    class="teacher-panel__dropdown-sort"
-                                    :options="optionSort"
-                                />
+                                <DropdownComponent v-model:modelValue="useCompetitions.sort"
+                                    class="teacher-panel__dropdown-sort" :options="optionSort" />
                                 <!-- <button
                                     class="btn btn-contest"
                                     @click="filterContestsByRole"
@@ -40,24 +29,15 @@
             </div>
         </div>
 
-        <div
-            v-else
-            class="uc-panel-wraper"
-        >
+        <div v-else class="uc-panel-wraper">
             <div class="uc-panel__container">
                 <div class="uc-panel">
                     <div class="uc-panel-group">
-                        <DropdownComponent
-                            v-model:modelValue="useCompetitions.tag"
-                            class="uc-panel__dropdown-role"
-                            :options="useCompetitions.competitionTags"
-                        />
+                        <DropdownComponent v-model:modelValue="useCompetitions.tag" class="uc-panel__dropdown-role"
+                            :options="useCompetitions.competitionTags" />
                         <div class="teacher-panel-group-down">
-                            <DropdownComponent
-                                v-model:modelValue="useCompetitions.sort"
-                                class="teacher-panel__dropdown-sort"
-                                :options="optionSort"
-                            />
+                            <DropdownComponent v-model:modelValue="useCompetitions.sort"
+                                class="teacher-panel__dropdown-sort" :options="optionSort" />
                             <!-- <button
                                 class="btn btn-contest"
                                 @click="filterContestsByRole"
@@ -81,24 +61,13 @@
                         <span class="teacher-subtitle__line" />
                     </div>
 
-                    <div
-                        v-if="list.length"
-                        class="teacher-list"
-                    >
-                        <div
-                            v-for="el in renderList"
-                            :key="el.id"
-                            class="teacher__item"
-                        >
+                    <div v-if="list.length" class="teacher-list">
+                        <div v-for="el in renderList" :key="el.id" class="teacher__item">
                             <p class="teacher__decription h3">
                                 {{ el.name }}
                             </p>
                             <div class="teacher__directions">
-                                <p
-                                    v-for="(item, number) in el.tags"
-                                    :key="number"
-                                    class="teacher__direction p2"
-                                >
+                                <p v-for="(item, number) in el.tags" :key="number" class="teacher__direction p2">
                                     {{ item }}
                                 </p>
                             </div>
@@ -106,10 +75,7 @@
                                 <p class="teacher__publication p2">
                                     Дата публикации {{ el.begin_at.split(' ')[0] }}
                                 </p>
-                                <button
-                                    class="teacher__info-btn btn"
-                                    @click="linkContest(el.id)"
-                                >
+                                <button class="teacher__info-btn btn" @click="linkContest(el.id)">
                                     Узнать подробнее
                                 </button>
                             </div>
@@ -117,24 +83,15 @@
                     </div>
 
                     <!-- Пустое состояние -->
-                    <p
-                        v-else
-                        class="p1 teacher-contnent-empty"
-                    >
+                    <p v-else class="p1 teacher-contnent-empty">
                         Здесь отображаются полученные конкурсы, конкурсов пока нет
                     </p>
                 </div>
             </div>
 
-            <PaginationComponent
-                :per-page="perPage"
-                :data="list"
-                :total-pages="totalPages"
-                :current-page="useCompetitions.currentPage"
-                :color="{ main: '#1F2A3E', hover: '#dda06b' }"
-                @set-list="getRenderList"
-                @set-page="setPage"
-            />
+            <PaginationComponent :per-page="perPage" :data="list" :total-pages="totalPages"
+                :current-page="useCompetitions.currentPage" :color="{ main: '#1F2A3E', hover: '#dda06b' }"
+                @set-list="getRenderList" @set-page="setPage" />
         </div>
     </section>
 </template>
@@ -182,7 +139,7 @@ function filterContestsByRole () {
     sortContests()
 } */
 
-function linkContest (id) {
+function linkContest(id) {
     if (props.user === 'teacher') {
         router.push(`/cabinet/teacher/contests/${id}`)
     } else {
@@ -193,16 +150,20 @@ function linkContest (id) {
 const contests = ref([])
 
 onMounted(async () => {
-    competitionService.getCompetitionsTags().then(res => 
-        useCompetitions.addCompetitionsTags(res.data.data.map(el => el.name)
-    ))
-    .catch(e => console.log(e))
+    if (useCompetitions.competitionTags.length <= 1) {
+        competitionService.getCompetitionsTags().then(res =>
+            useCompetitions.addCompetitionsTags(res.data.data.map(el => el.name)
+            ))
+            .catch(e => console.log(e))
+    }
     try {
-        const comps = await competitionService.getListCompetitions()
-        console.log(comps.data)
-        useCompetitions.addCompetitions(comps.data)
-        useCompetitions.setTotalPages(Math.ceil(list.value.length / perPage.value))
-        // filterContestsByRole()
+        if (useCompetitions.competitions.length === 0) {
+            const comps = await competitionService.getListCompetitions()
+            console.log(comps.data)
+            useCompetitions.addCompetitions(comps.data)
+            useCompetitions.setTotalPages(Math.ceil(list.value.length / perPage.value))
+            // filterContestsByRole()
+        }
     } catch (error) {
         console.error('Ошибка при получении данных', error)
     }
@@ -215,7 +176,7 @@ watch(list, () => {
     useCompetitions.setTotalPages(Math.ceil(list.value.length / perPage.value))
 })
 
-function getRenderList (list) {
+function getRenderList(list) {
     renderList.value = list
 }
 
@@ -338,9 +299,11 @@ function setPage(page) {
 .teacher-panel-group-down {
     display: flex;
     gap: 16px;
+
     @media (max-width: $lg) {
         width: 100%;
     }
+
     @media (max-width: $md) {
         flex-direction: column;
     }
@@ -371,6 +334,7 @@ function setPage(page) {
         width: auto;
         height: auto;
     }
+
     .dropdown-selected-text {
         min-width: 111px;
         width: 100%;
@@ -780,6 +744,7 @@ function setPage(page) {
         .btn-contest {
             margin-left: 0;
             width: 236px;
+
             @media (max-width: $lg) {
                 width: 100%;
             }
