@@ -47,7 +47,7 @@
                 <p class="cabinet-shop-history__title">
                     История покупок
                 </p>
-                <template v-if="productList.length > 0">
+                <template v-if="productList?.length > 0">
                     <ul class="cabinet-shop-history__wrapper">
                         <li v-for="el in productList" :key="el.id" class="cabinet-shop-history__wrapper-item">
                             <div class="cabinet-shop-history__wrapper-left">

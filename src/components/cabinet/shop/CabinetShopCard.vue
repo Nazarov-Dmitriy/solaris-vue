@@ -33,7 +33,7 @@
                     </p>
                 </div>
                 <div class="card-buttons">
-                    <button type="button" class="cancel-btn">Отменить</button>
+                    <button @click="() => router.back()" type="button" class="cancel-btn">Отменить</button>
                     <div class="quantity-block">
                         <div class="quantity-text p2">Количество</div>
                         <button class="decrease h3" @click="decrement">-</button>
@@ -53,12 +53,13 @@ import { Product } from '@/interfaces/shop'
 import { ShopService } from '@/plugins/ShopService'
 import { useShopStore } from '@/stores/useShopStore'
 import { inject, onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const shopStore = useShopStore()
 const shopService: ShopService = inject('ShopService')
 
 const route = useRoute();
+const router = useRouter()
 
 const countValue = ref(1)
 const loading = ref(false);

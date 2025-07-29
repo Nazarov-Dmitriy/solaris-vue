@@ -8,6 +8,28 @@ export interface CompetitionItem {
     tags: string[],
 }
 
+interface Teacher {
+    id: number,
+    profeccion: string,
+    full_name: string,
+    avatar_url: string,
+}
+
+export interface CompetitionItemById {
+    id: number,
+    title: string,
+    //author_id: number,
+    description: string,
+    task_competitions: string,
+    begin_at: string,
+    teachers: Teacher[],
+}
+
+export interface CompetitionItemByIdResponse {
+    status: string,
+    data: CompetitionItemById
+}
+
 export interface UserCompetitionItem {
     id: number,
     title: string,

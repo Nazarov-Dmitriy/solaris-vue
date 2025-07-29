@@ -7,7 +7,10 @@
                         {{ props.contests?.title }}
                     </p>
                     <div class="uc__directions">
-                        <p v-for="tag in props.contests?.tags" :key="tag" class="uc__direction p2">
+                        <!-- <p v-for="tag in props.contests?.tags" :key="tag" class="uc__direction p2">
+                            {{ tag }}
+                        </p> -->
+                        <p v-for="tag in competitionTags" :key="tag" class="uc__direction p2">
                             {{ tag }}
                         </p>
                     </div>
@@ -26,18 +29,14 @@
                         <div class="uc-contest__target">
                             <p class="uc-contest__subtitle">Цель Конкурса:</p>
                             <p class="uc-contest__text">
-                                сохранение исторической памяти о подвиге и героизме советского
-                                народа в годы Великой Отечественной войны, о воинском и трудовом
-                                подвиге наших предков через личное осмысление, традиции и судьбы
-                                семей, хранящих светлую память о своих близких, через понимание роли
-                                нашей страны в избавлении от фашизма.
+                                {{' ' + props.contests.description}}
                             </p>
                         </div>
                         <div class="uc-contest__task">
                             <p class="uc-contest__subtitle">Задачи конкурса:</p>
                             <ul class="ul-contest__list">
                                 <li class="uc-contest__list-item">
-                                    воспитание патриотизма у учащихся;
+                                    {{ props.contests.task_competitions }}
                                 </li>
                                 <li class="uc-contest__list-item">
                                     уважения к подвигу защитников Отечества;
@@ -90,7 +89,7 @@
                             </p>
                         </div>
                         <p class="uc-contest__subtitle">
-                            Заявки необходимо прислать до 6 апреля 2024 года
+                            Заявки необходимо прислать до {{props.contests.end_at}}
                         </p>
                     </div>
                     <div
@@ -105,7 +104,7 @@
                             </p>
                             <div class="uc-contest__list">
                                 <div
-                                    v-for="el in listTeacher"
+                                    v-for="el in contests.teachers"
                                     :key="el.id"
                                     class="uc-contest__cards"
                                     @click="addSubmitApplication(el.id)"
@@ -120,15 +119,20 @@
                                             class="uc-contest__avatar"
                                         />
                                         <p class="uc-contest__user-name p2">
-                                            {{ el.name }}
+                                            {{ el.full_name }}
                                         </p>
                                         <div class="uc-contest__user-derections p2">
-                                            <p
+                                            <!-- <p
                                                 v-for="item in el.trend"
                                                 :key="item"
                                                 class="uc-contest__user-derection"
                                             >
                                                 {{ item }}
+                                            </p> -->
+                                            <p
+                                                class="uc-contest__user-derection"
+                                            >
+                                                {{ el.profeccion }}
                                             </p>
                                         </div>
                                         <button class="uc-contest__btn">
@@ -210,8 +214,24 @@
         </div>
     </section>
 </template>
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { computed, inject, onMounted, ref, watch } from 'vue'
+import { useCompetitionsStore } from '@/stores/useCompetitions'
+import { CompetitionService } from '@/plugins/CompetitionService';
+
+const competitionsStore = useCompetitionsStore();
+const competitionService: CompetitionService = inject('CompetitionService');
+
+const competitionTags = computed(() => competitionsStore.currentCompetition.tags)
+onMounted(async () => {
+    if (competitionsStore.competitions.length === 0) {
+            const comps = await competitionService.getListCompetitions()
+            console.log(comps.data.find((el) => el.id === +competitionsStore.currentCompetition.id))
+            competitionsStore.addCompetitions(comps.data)
+            // filterContestsByRole()
+            competitionsStore.updateCurrentCompetitionTags(comps.data.find((el) => el.id === +competitionsStore.currentCompetition.id).tags);
+        }
+})
 
 const props = defineProps({
     contests: {
@@ -223,36 +243,43 @@ const props = defineProps({
 const arrSubmitApplication = ref([])
 const confirmedApplication = ref([])
 
-const listTeacher = [
+const listTeacher = /* computed(() => competitionsStore.currentCompetition.competition.teachers) */
+[
     {
-        name: 'Жуков Марк Никитич',
-        trend: ['История', 'Обществознание'],
-        id: 1
+        full_name: 'Жуков Марк Никитич',
+        trend: 'История' /* ['История', 'Обществознание'] */,
+        id: 1,
+        avatar_url: null,
     },
     {
-        name: 'Тарасова Василиса Михайловна',
-        trend: ['Математика', 'Обществознание'],
-        id: 2
+        full_name: 'Тарасова Василиса Михайловна',
+        trend: 'Математика' /* ['Математика', 'Обществознание'] */,
+        id: 2,
+        avatar_url: null,
     },
     {
-        name: 'Вавилова Дарья Саввична',
-        trend: ['Русский', 'Обществознание'],
-        id: 3
+        full_name: 'Вавилова Дарья Саввична',
+        trend: 'Русский' /* ['Русский', 'Обществознание'] */,
+        id: 3,
+        avatar_url: null,
     },
     {
-        name: 'Кудрявцева Полина Андреевна',
-        trend: ['Физика', 'Обществознание'],
-        id: 4
+        full_name: 'Кудрявцева Полина Андреевна',
+        trend: 'Физика'/* ['Физика', 'Обществознание'] */,
+        id: 4,
+        avatar_url: null,
     },
     {
-        name: 'Сафонов Александр Платонович',
-        trend: ['Химия', 'Обществознание'],
-        id: 5
+        full_name: 'Сафонов Александр Платонович',
+        profeccion: 'Химия'/* ['Химия', 'Обществознание'] */,
+        id: 5,
+        avatar_url: null,
     },
     {
-        name: 'Матвеев Марк Ярославович',
-        trend: ['Информатика', 'Обществознание'],
-        id: 6
+        full_name: 'Матвеев Марк Ярославович',
+        trend: 'Информатика' /* ['Информатика', 'Обществознание'] */,
+        id: 6,
+        avatar_url: null,
     }
 ]
 
