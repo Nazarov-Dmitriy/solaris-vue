@@ -1,9 +1,10 @@
 <template>
-    <div v-if="props.visible" class="modal" @click="handleCancel">
-        <div class="modal__container" @click.stop>
-            <div :class="[props.additionalClass, 'modal__content']">
+    <div v-if="props.visible" class="modal" @click="handleCancel" 
+            @keyup.esc="handleCancel">
+        <div class="modal__container" @click.stop="handleCancel">
+            <div :class="[props.additionalClass, 'modal__content']" @click.stop>
                 <div class="modal__close-btn-wrapper">
-                    <button class="modal__close-btn" @click="handleCancel">
+                    <button class="modal__close-btn" @click.stop="handleCancel">
                         <img :src="getPath('/cabinteTeacher/case/modal-close.png')" alt="Close" />
                     </button>
                 </div>
@@ -52,6 +53,7 @@ function getPath(img) {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 .modal__container {
     max-width: 1560px;

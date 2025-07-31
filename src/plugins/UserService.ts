@@ -19,6 +19,10 @@ export class UserService {
         return this._axiosR.post('/auth/login', data);
     }
 
+    public uploadAvatar(data: FormData) {
+        return this._axiosR.post('/user/avatar', data, { headers: { "Content-Type": 'multipart/form-data' } })
+    }
+
     public getCurrentUser(): Promise<AxiosResponse<User>> {
         return this._axiosR.get('/user/current_user')
     }

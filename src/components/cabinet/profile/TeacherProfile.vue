@@ -2,10 +2,11 @@
     <section class="teachcabinet-profile">
         <div class="teachcabinet-profile__container">
             <div class="teachcabinet-profile__avatar">
-                <h2 class="teachcabinet-profile__avatar-initial h2">
+                <h2 v-if="teacherStore.user.avatar_url === null" class="teachcabinet-profile__avatar-initial h2">
                     {{techerInitials}}
                 </h2>
-                <button class="teachcabinet-profile__avatar-button">
+                <img v-else class="teachcabinet-profile__avatar-img" :src="teacherStore.user.avatar_url" />
+                <button class="teachcabinet-profile__avatar-button" @click="toggleModal()">
                     <svg
                         width="32"
                         height="32"
@@ -61,11 +62,54 @@
                 alt="#"
             >
         </div>
+        <Teleport to="body">
+            <!-- smth to change here with user -->
+            <ModalComponent additional-class="modal-additional" :visible="isModalVisible" @close="toggleModal()" @toggle-modal="toggleModal()">
+                <template #title>
+                    <p class="modal-title">Выберите файл</p>
+                </template>
+                <template #text>
+                    <form id="avatarForm" v-on:submit="onSubmitAvatar">
+                        <input type="file" v-on:change="(e) => { avatarImage = e.target.files[0] }"></input>
+                    </form>
+                </template>
+                <template #btn>
+                    <button type="submit" form="avatarForm" class="botton btn"
+                        @click="">
+                        Загрузить
+                    </button>
+                </template>
+            </ModalComponent>
+        </Teleport>
     </section>
 </template>
-<script setup>
+<script setup lang="ts">
+import ModalComponent from '@/components/modal/ModalComponent.vue';
+import { UserService } from '@/plugins/UserService';
 import { useTeacherStore } from '@/stores/useTeacherStore';
-import { computed } from 'vue';
+import { computed, inject, ref } from 'vue';
+
+const userService: UserService = inject('UserService');
+
+const isModalVisible = ref(false);
+const avatarImage = ref('');
+
+const onSubmitAvatar = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('avatar', avatarImage.value);
+    userService.uploadAvatar(formData).then((res) => {
+        if (res.status === 200) {
+            console.log('avatar updated')
+        }
+        else console.error('smth went wrong')
+    });
+    toggleModal();
+}
+
+function toggleModal(){
+    isModalVisible.value = !isModalVisible.value;
+}
 
 const teacherStore = useTeacherStore();
 const techerInitials = computed(() => {
@@ -74,6 +118,29 @@ const techerInitials = computed(() => {
 
 </script>
 <style lang="scss">
+.teachcabinet-profile__avatar-img {
+    border-radius: inherit;
+}
+
+.modal-additional {
+    top: calc(50% - 144px);
+    right: calc(50% - 107px);
+    
+}
+
+@media (max-width: 576px) {
+        .modal-additional {
+            right: 16px;
+        }
+}
+
+.modal-title {
+    color: #1f2a3e;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+
 .teachcabinet-profile {
     background-color: var(--dark);
 }

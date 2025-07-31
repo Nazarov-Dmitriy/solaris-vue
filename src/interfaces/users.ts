@@ -9,7 +9,7 @@ export interface User {
 
 export interface Teacher extends User {
     teacher_id: string,
-    profession: string,
+    profeccion: string,
     name: string,
     surname: string,
     fathername: string,
