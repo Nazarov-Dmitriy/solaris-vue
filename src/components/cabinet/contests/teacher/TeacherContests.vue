@@ -18,8 +18,11 @@
                         </p>
                     </div>
                     <div class="uc__info">
-                        <p class="uc__publication p2">
+                        <!-- <p class="uc__publication p2">
                             Дата публикации {{ props.contests?.publication_date }}
+                        </p> -->
+                        <p class="uc__publication p2">
+                            Дата публикации {{ props.contests.begin_at }}
                         </p>
                         <button
                             class="uc__info-btn btn"
@@ -36,7 +39,7 @@
                                 Цель Конкурса:
                             </p>
                             <p class="uc-contest__text">
-                                {{ props.contests?.description?.aim }}
+                                {{ props.contests?.description }}
                             </p>
                         </div>
                         <div class="uc-contest__task">
@@ -44,12 +47,17 @@
                                 Задачи конкурса:
                             </p>
                             <ul class="ul-contest__list">
-                                <li
+                                <!-- <li
                                     v-for="(task, index) in props.contests?.description?.tasks"
                                     :key="index"
                                     class="uc-contest__list-item"
                                 >
                                     {{ task }}
+                                </li> -->
+                                <li
+                                    class="uc-contest__list-item"
+                                >
+                                    {{ props.contests?.task_competitions }}
                                 </li>
                             </ul>
                         </div>
@@ -74,12 +82,17 @@
                             <p class="uc-contest__subtitle">
                                 Когда проходит
                             </p>
-                            <p
+                            <!-- <p
                                 v-for="(date, index) in props.contests?.description?.date"
                                 :key="index"
                                 class="uc-contest__text"
                             >
                                 {{ date }}
+                            </p> -->
+                            <p
+                                class="uc-contest__text"
+                            >
+                                {{ `C ${props.contests.begin_at} по ${props.contests.end_at}` }}
                             </p>
                         </div>
                         <p class="uc-contest__subtitle">
@@ -145,7 +158,22 @@
 </template>
 
 <script setup>
-import { ref,  } from 'vue'
+import { useCompetitionsStore } from '@/stores/useCompetitions'
+import { computed, inject, onMounted, ref,  } from 'vue'
+
+const competitionsStore = useCompetitionsStore();
+const competitionService = inject('CompetitionService');
+
+const competitionTags = computed(() => competitionsStore.currentCompetition.tags)
+onMounted(async () => {
+    if (competitionsStore.competitions.length === 0) {
+            const comps = await competitionService.getListCompetitions()
+            console.log(comps.data.find((el) => el.id === +competitionsStore.currentCompetition.id))
+            competitionsStore.addCompetitions(comps.data)
+            // filterContestsByRole()
+            competitionsStore.updateCurrentCompetitionTags(comps.data.find((el) => el.id === +competitionsStore.currentCompetition.id).tags);
+        }
+})
 
 const props = defineProps({
     contests: {
