@@ -14,6 +14,7 @@ export const useCompetitionsStore = defineStore('competitionsStore', {
         sort: 'Новые вверху',
         tag: 'Выберите роль',
         currentCompetition: { id: null, competition: {}, tags: [] },
+        currentCompetitionParticipants: null,
     }),
     actions: {
         addCompetitions(competitions) {
@@ -45,6 +46,9 @@ export const useCompetitionsStore = defineStore('competitionsStore', {
             //console.log(this.competitions.find((el) => el.id === this.currentCompetition.id))
             console.log(tags)
             this.currentCompetition.tags = tags
+        },
+        setCurrentCompetitionParticipants(participants) {
+            this.currentCompetitionParticipants = participants
         }
     },
     getters: {

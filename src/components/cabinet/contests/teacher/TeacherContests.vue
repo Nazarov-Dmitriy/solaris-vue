@@ -10,7 +10,7 @@
                     </p>
                     <div class="uc__directions">
                         <p
-                            v-for="(tag, index) in props.contests?.tags"
+                            v-for="(tag, index) in competitionTags"
                             :key="index"
                             class="uc__direction p2"
                         >
@@ -34,6 +34,7 @@
                 </div>
                 <div class="uc-contest__content">
                     <div class="uc-contest__decription">
+                    <button v-if="props.contests?.teachers?.length === 0" @click="competitionService.postTeacherJoinContest(props.contests?.id)" class="uc__info-btn btn">У этого конкурса нет кураторов, если хотите им стать - нажмите</button>
                         <div class="uc-contest__target">
                             <p class="uc-contest__subtitle">
                                 Цель Конкурса:
@@ -157,14 +158,16 @@
     </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { CompetitionService } from '@/plugins/CompetitionService';
 import { useCompetitionsStore } from '@/stores/useCompetitions'
 import { computed, inject, onMounted, ref,  } from 'vue'
 
 const competitionsStore = useCompetitionsStore();
-const competitionService = inject('CompetitionService');
+const competitionService: CompetitionService = inject('CompetitionService');
 
 const competitionTags = computed(() => competitionsStore.currentCompetition.tags)
+const competitionParticipants = computed(() => competitionsStore.currentCompetitionParticipants)
 onMounted(async () => {
     if (competitionsStore.competitions.length === 0) {
             const comps = await competitionService.getListCompetitions()
@@ -173,6 +176,14 @@ onMounted(async () => {
             // filterContestsByRole()
             competitionsStore.updateCurrentCompetitionTags(comps.data.find((el) => el.id === +competitionsStore.currentCompetition.id).tags);
         }
+    if(competitionParticipants.value === null) {
+        competitionService.getCompetitionParticipants(props.contests.id)
+        .then((res) => {
+            if(res.status === 200){
+                competitionsStore.setCurrentCompetitionParticipants(res.data)
+            }
+        });
+    }
 })
 
 const props = defineProps({

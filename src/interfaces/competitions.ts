@@ -1,3 +1,5 @@
+import { Student } from "./users";
+
 export interface CompetitionItem {
     id: number,
     name: string,
@@ -36,6 +38,15 @@ export interface UserCompetitionItem {
     ball: number,
     finish_at: string,
     begin_at: string,
+}
+
+export interface CompetitionParticipantsResponse {
+    status: string,
+    data: Student,
+}
+
+export interface UserJoinCompetition {
+    status: string,
 }
 
 export interface UserCompetitionItemsResponse {
