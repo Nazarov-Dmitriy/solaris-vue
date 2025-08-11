@@ -42,7 +42,7 @@ export interface UserCompetitionItem {
 
 export interface CompetitionParticipantsResponse {
     status: string,
-    data: Student,
+    data: Student[],
 }
 
 export interface UserJoinCompetition {

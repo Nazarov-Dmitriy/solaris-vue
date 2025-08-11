@@ -100,8 +100,12 @@
                             {{ props.contests?.description?.end }}
                         </p>
                     </div>
-                    <div
+                    <!-- <div
                         v-if="props.contests?.hasParticipant"
+                        class="uc-contest__application"
+                    > -->
+                    <div
+                        v-if="competitionParticipants?.length > 0"
                         class="uc-contest__application"
                     >
                         <h3 class="uc-contest__application-title h3">
@@ -112,22 +116,22 @@
                         </p>
                         <div class="uc-contest__list">
                             <div
-                                v-for="el in listTeacher"
+                                v-for="el in competitionParticipants"
                                 :key="el.id"
                                 class="uc-contest__cards"
                             >
                                 <div class="uc-contest__card">
                                     <img
-                                        src="@/assets/image/user-cabinet/contest/avatar.png"
+                                        :src="el.avatar_url === null ? '/src/assets/image/user-cabinet/contest/avatar.png' : el.avatar_url"
                                         alt="avatar"
                                         class="uc-contest__avatar"
                                     >
                                     <p class="uc-contest__user-name p2">
-                                        {{ el.name }}
+                                        {{ el.name + ' ' + el.surname + ' ' + el.fathername }}
                                     </p>
                                     <div class="uc-contest__user-derections p2">
                                         <p class="uc-contest__user-derection">
-                                            {{ el.studentGroup }}
+                                            {{ el.class_name + 'класс' }}
                                         </p>
                                     </div>
                                     <button
@@ -181,6 +185,11 @@ onMounted(async () => {
         .then((res) => {
             if(res.status === 200){
                 competitionsStore.setCurrentCompetitionParticipants(res.data)
+            }
+        })
+        .catch((res) => {
+            if(res.status === 404){
+                console.log(404)
             }
         });
     }

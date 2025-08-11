@@ -114,7 +114,7 @@
                                         :class="{ active: arrSubmitApplication.includes(el.id) }"
                                     >
                                         <img
-                                            src="@/assets/image/user-cabinet/contest/avatar.png"
+                                            :src="el.avatar_url"
                                             alt="avatar"
                                             class="uc-contest__avatar"
                                         />
@@ -218,12 +218,32 @@
 import { computed, inject, onMounted, ref, watch } from 'vue'
 import { useCompetitionsStore } from '@/stores/useCompetitions'
 import { CompetitionService } from '@/plugins/CompetitionService';
+import { usePipulStore } from '@/stores/usePipulStore';
 
 const competitionsStore = useCompetitionsStore();
 const competitionService: CompetitionService = inject('CompetitionService');
+const pupilStore = usePipulStore();
 
 const competitionTags = computed(() => competitionsStore.currentCompetition.tags)
+const currentCompetitionId = computed(() => competitionsStore.currentCompetition.id)
+const currentUserId = computed(() => pupilStore.user.id)
+const isCurrUserParticipate = ref(false)
 onMounted(async () => {
+    competitionService.getCompetitionParticipants(currentCompetitionId.value)
+    .then((res) => {
+        if(res.status === 200) {
+            isCurrUserParticipate.value = res.data.data.some((pupil) => pupil.id === currentUserId.value)
+        }
+    })
+    .catch((err) => {
+        if(err.status === 422) {
+            isCurrUserParticipate.value = true;
+        }
+        else{
+            console.log('smth went wrong');
+        }
+    })
+
     if (competitionsStore.competitions.length === 0) {
             const comps = await competitionService.getListCompetitions()
             console.log(comps.data.find((el) => el.id === +competitionsStore.currentCompetition.id))
@@ -287,17 +307,26 @@ function addSubmitApplication(id) {
     if (!arrSubmitApplication.value.includes(id) && arrSubmitApplication.value.length === 0) {
         arrSubmitApplication.value.push(id)
     } else {
-        arrSubmitApplication.value.splice(arrSubmitApplication.value.indexOf(id), 1)
+        arrSubmitApplication.value.pop()
     }
 }
 
 function submitApplication() {
-    const selectedTeacherId = arrSubmitApplication.value[0]
-    const selectedTeacher = listTeacher.find((teacher) => teacher.id === selectedTeacherId)
+    const selectedTeacherId = arrSubmitApplication.value[0];
+    competitionService.postStudentJoinContest(+competitionsStore.currentCompetition.id, selectedTeacherId)
+    const selectedTeacher = props.contests.teachers.find((teacher) => teacher.id === selectedTeacherId)
+    .then((res) => {
+        if(res.status == 200) {
+            confirmedApplication.value.push(selectedTeacher);
+        }
+    })
+    
+    /* const selectedTeacher = listTeacher.find((teacher) => teacher.id === selectedTeacherId)
     if (selectedTeacher) {
         confirmedApplication.value.push(selectedTeacher)
         console.log(confirmedApplication.value)
-    }
+    } */
+   
 }
 </script>
 <style lang="scss" scoped>

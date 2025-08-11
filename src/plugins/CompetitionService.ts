@@ -34,4 +34,8 @@ export class CompetitionService {
     public async postTeacherJoinContest(competitionId: number) {
         return await this._axiosR.post<UserJoinCompetition>('/teacher/competition/userjoin', { competition_id: competitionId });
     }
+
+    public async postStudentJoinContest(competitionId: number, teacherId: number) {
+        return await this._axiosR.post<UserJoinCompetition>('/pupil/competition/userjoin', { competition_id: competitionId, nastavnik_id: teacherId });
+    }
 }
