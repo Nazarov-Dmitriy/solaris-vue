@@ -1,11 +1,11 @@
 <template>
     <template v-if="user === 'teacher'">
         <TeacherHeader />
-        <TeacherContests :contests="contests" />
+        <TeacherContests :contests="contests" @teacher-join="updateCurrCompetition" />
     </template>
     <template v-else>
         <StudentHeader />
-        <StudentContest :contests="contests" />
+        <StudentContest :contests="contests" @pupil-join="updateCurrCompetition" />
     </template>
 </template>
 
@@ -27,6 +27,11 @@ const route = useRoute();
 const id = ref();
 const contests = computed(() => useCompetitions.currentCompetition.competition)
 
+function updateCurrCompetition() {
+    competitionService.getCompetitionById(id.value)
+    .then((res) => useCompetitions.setCurrentCompetition(res.data.data))
+}
+
 onMounted(() => {
     if (route.path.includes("teacher")) {
         user.value = "teacher"
@@ -38,8 +43,9 @@ onMounted(() => {
     console.log(id.value);
     if (useCompetitions.currentCompetition.id !== id.value) {
         useCompetitions.setCurrentCompetitionId(id.value);
-        competitionService.getCompetitionById(id.value)
-            .then((res) => useCompetitions.setCurrentCompetition(res.data.data))
+        /* competitionService.getCompetitionById(id.value)
+            .then((res) => useCompetitions.setCurrentCompetition(res.data.data)) */
+        updateCurrCompetition()
     }
     //contests.value = getById(+id.value)[0];
 

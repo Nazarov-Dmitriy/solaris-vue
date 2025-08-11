@@ -228,11 +228,12 @@ import { usePipulStore } from '@/stores/usePipulStore';
 const competitionsStore = useCompetitionsStore();
 const competitionService: CompetitionService = inject('CompetitionService');
 const pupilStore = usePipulStore();
+const emit = defineEmits(['pupilJoin'])
 
 const competitionTags = computed(() => competitionsStore.currentCompetition.tags)
-const currentCompetitionId = computed(() => competitionsStore.currentCompetition.id)
+/* const currentCompetitionId = computed(() => competitionsStore.currentCompetition.id)
 const currentUserId = computed(() => pupilStore.user.id)
-const isCurrUserParticipate = ref(false)
+const isCurrUserParticipate = ref(false) */
 onMounted(async () => {
    console.log(props.contests)
 
@@ -308,8 +309,9 @@ function submitApplication() {
     const selectedTeacher = props.contests.teachers.find((teacher) => teacher.id === selectedTeacherId)
     competitionService.postStudentJoinContest(+competitionsStore.currentCompetition.id, selectedTeacherId)
     .then((res) => {
-        if(res.status == 200 || res.status === 422) {
+        if(res.status == 200 || res.status === 201 || res.status === 422) {
             confirmedApplication.value.push(selectedTeacher);
+            emit('pupilJoin');
         }
     })
     .catch((err) => {

@@ -34,7 +34,7 @@
                 </div>
                 <div class="uc-contest__content">
                     <div class="uc-contest__decription">
-                    <button v-if="props.contests?.teachers?.length === 0" @click="competitionService.postTeacherJoinContest(props.contests?.id)" class="uc__info-btn btn">У этого конкурса нет кураторов, если хотите им стать - нажмите</button>
+                    <button v-if="props.contests?.teachers?.length === 0" @click="teacherJoin" class="uc__info-btn btn">У этого конкурса нет кураторов, если хотите им стать - нажмите</button>
                         <div class="uc-contest__target">
                             <p class="uc-contest__subtitle">
                                 Цель Конкурса:
@@ -167,11 +167,27 @@ import { CompetitionService } from '@/plugins/CompetitionService';
 import { useCompetitionsStore } from '@/stores/useCompetitions'
 import { computed, inject, onMounted, ref,  } from 'vue'
 
+const emit = defineEmits(['teacherJoin'])
+
 const competitionsStore = useCompetitionsStore();
 const competitionService: CompetitionService = inject('CompetitionService');
 
 const competitionTags = computed(() => competitionsStore.currentCompetition.tags)
 const competitionParticipants = computed(() => competitionsStore.currentCompetitionParticipants)
+
+function teacherJoin() {
+    competitionService.postTeacherJoinContest(props.contests?.id)
+    .then((res) => {
+        if(res.status === 201 || res.status === 200){
+            emit('teacherJoin');
+        }
+    })
+    .catch((err) => {
+        console.log('thats ok');
+        emit('teacherJoin')
+    })
+}
+
 onMounted(async () => {
     if (competitionsStore.competitions.length === 0) {
             const comps = await competitionService.getListCompetitions()
