@@ -96,13 +96,14 @@
                         class="uc-contest__application"
                         :class="{ success: confirmedApplication.length > 0 }"
                     >
-                        <template v-if="confirmedApplication.length === 0">
+                        <!-- <template v-if="confirmedApplication.length === 0"> -->
+                        <template v-if="props.contests.in_concurs === false">
                             <h3 class="uc-contest__application-title h3">Подать заявку</h3>
                             <p class="uc-contest__application-text">
                                 Для участия в конкурсе выбери наставника, подай заявку и жди
                                 подтвержения в уведомлениях
                             </p>
-                            <div class="uc-contest__list">
+                            <div v-if="contests.teachers.length > 0" class="uc-contest__list">
                                 <div
                                     v-for="el in contests.teachers"
                                     :key="el.id"
@@ -171,6 +172,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <p v-else class="uc-contest__user-name p2">
+                                У этого конкурса пока нет наставников.
+                            </p>
                             <button
                                 class="btn uc-contest-btn"
                                 :disabled="arrSubmitApplication.length === 0"
@@ -186,19 +190,20 @@
                                 получения всех необходимых инструкций
                             </p>
                             <div class="uc-contest__application-success">
-                                <img
+                                <img v-if="props.contests.nastavnik?.avatar_url === null"
                                     src="@/assets/image/user-cabinet/contest/avatar.png"
                                     alt="avatar"
                                     class="uc-contest__avatar"
                                 />
+                                <img v-else :src="props.contests.nastavnik?.avatar_url" alt="avatar" class="uc-contest__avatar"/>
                                 <div class="uc-contest__application-wraper">
                                     <p class="uc-contest__user-name p2">
-                                        {{ confirmedApplication[0].name }}
+                                        {{ props.contests?.nastavnik?.full_name }}
                                     </p>
 
                                     <div class="uc-contest__user-derections p2">
                                         <p
-                                            v-for="item in confirmedApplication[0].trend"
+                                            v-for="item in props.contests?.nastavnik?.profeccion"
                                             :key="item"
                                             class="uc-contest__user-derection"
                                         >
@@ -229,20 +234,7 @@ const currentCompetitionId = computed(() => competitionsStore.currentCompetition
 const currentUserId = computed(() => pupilStore.user.id)
 const isCurrUserParticipate = ref(false)
 onMounted(async () => {
-    competitionService.getCompetitionParticipants(currentCompetitionId.value)
-    .then((res) => {
-        if(res.status === 200) {
-            isCurrUserParticipate.value = res.data.data.some((pupil) => pupil.id === currentUserId.value)
-        }
-    })
-    .catch((err) => {
-        if(err.status === 422) {
-            isCurrUserParticipate.value = true;
-        }
-        else{
-            console.log('smth went wrong');
-        }
-    })
+   console.log(props.contests)
 
     if (competitionsStore.competitions.length === 0) {
             const comps = await competitionService.getListCompetitions()
@@ -313,12 +305,16 @@ function addSubmitApplication(id) {
 
 function submitApplication() {
     const selectedTeacherId = arrSubmitApplication.value[0];
-    competitionService.postStudentJoinContest(+competitionsStore.currentCompetition.id, selectedTeacherId)
     const selectedTeacher = props.contests.teachers.find((teacher) => teacher.id === selectedTeacherId)
+    competitionService.postStudentJoinContest(+competitionsStore.currentCompetition.id, selectedTeacherId)
     .then((res) => {
-        if(res.status == 200) {
+        if(res.status == 200 || res.status === 422) {
             confirmedApplication.value.push(selectedTeacher);
         }
+    })
+    .catch((err) => {
+    const selectedTeacher = props.contests.teachers.find((teacher) => teacher.id === selectedTeacherId)
+        confirmedApplication.value.push(selectedTeacher)
     })
     
     /* const selectedTeacher = listTeacher.find((teacher) => teacher.id === selectedTeacherId)

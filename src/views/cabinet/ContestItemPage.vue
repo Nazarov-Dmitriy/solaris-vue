@@ -35,6 +35,7 @@ onMounted(() => {
     }
 
     id.value = route.params.id
+    console.log(id.value);
     if (useCompetitions.currentCompetition.id !== id.value) {
         useCompetitions.setCurrentCompetitionId(id.value);
         competitionService.getCompetitionById(id.value)
