@@ -5,12 +5,12 @@
                 type="text"
                 ref="input"
                 class="form-input"
-                v-model="inputValue"
+                v-model="model"
                 @focus="hidePlaceholder"
                 @blur="showPlaceholder"
                 :placeholder="props.placeholder"
             />
-            <div v-if="showCustomPlaceholder && !inputValue" class="custom-placeholder">
+            <div v-if="showCustomPlaceholder && !model" class="custom-placeholder">
                 <slot name="placeholder"></slot>
             </div>
         </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
     placeholder: {
@@ -27,20 +27,15 @@ const props = defineProps({
     }
 })
 
-const inputValue = ref('')
+const model = defineModel({ default: '' })
 const showCustomPlaceholder = ref(true)
-
-const focusInput = () => {
-    showCustomPlaceholder.value = false
-    $refs.input.focus()
-}
 
 const hidePlaceholder = () => {
     showCustomPlaceholder.value = false
 }
 
 const showPlaceholder = () => {
-    if (!inputValue.value) {
+    if (!model.value) {
         showCustomPlaceholder.value = true
     }
 }

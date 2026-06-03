@@ -60,7 +60,7 @@
                 </p>
                 <button
                     class="teachcabinet-footer__button botton btn"
-                    @click="$router.push('/cabinet/teacher/contests')"
+                    @click="$router.push('/cabinet/teacher/contests?myContests=true')"
                 >
                     Мои конкурсы
                 </button>

@@ -6,7 +6,7 @@
         >
             <input
                 ref="input"
-                v-model="inputValue"
+                v-model="model"
                 type="text"
                 class="form-input"
                 :placeholder="props.placeholder"
@@ -15,7 +15,7 @@
                 @input="formatDate"
             >
             <div
-                v-if="showCustomPlaceholder && !inputValue"
+                v-if="showCustomPlaceholder && !model"
                 class="custom-placeholder"
             >
                 <slot name="placeholder" />
@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
     placeholder: {
@@ -34,23 +34,12 @@ const props = defineProps({
     }
 })
 
-const inputValue = ref('')
+const model = defineModel({ default: '' })
 const showCustomPlaceholder = ref(true)
 const dateError = ref('')
 
-function focusInput () {
-    showCustomPlaceholder.value = false
-    $refs.input.focus()
-}
-
 function hidePlaceholder () {
     showCustomPlaceholder.value = false
-}
-
-function showPlaceholder () {
-    if (!inputValue.value) {
-        showCustomPlaceholder.value = true
-    }
 }
 
 const formatDate = (e) => {
@@ -65,16 +54,17 @@ const formatDate = (e) => {
         formattedDate = `${input.slice(0, 2)}/${input.slice(2, 4)}/${input.slice(4, 8)}`
     }
 
-    inputValue.value = formattedDate
+    model.value = formattedDate
 }
 
 const validateDate = () => {
     const datePattern = /^\d{2}\/\d{2}\/\d{4}$/
-    if (!datePattern.test(inputValue.value)) {
+    if (!datePattern.test(model.value)) {
         dateError.value = 'Введите дату в формате ДД/ММ/ГГГГ'
     } else {
         dateError.value = ''
     }
+    if (!model.value) showCustomPlaceholder.value = true
 }
 </script>
 

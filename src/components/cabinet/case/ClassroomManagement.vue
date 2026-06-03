@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div
-                        v-for="(fieldGroup, index) in fieldsGroup"
+                        v-for="(group, index) in fieldsGroup"
                         :key="index"
                         class="flex flex-col gap-4"
                     >
@@ -29,11 +29,10 @@
                         >
                             <div class="management__input-group">
                                 <label
-                                    for="eventName"
                                     class="management__label"
                                 >Наименование мероприятия</label>
                                 <DropdownComponent
-                                    id="eventName"
+                                    v-model:modelValue="group.eventName"
                                     class="management__input"
                                     additional-class="custom-dropdown-selected"
                                     :options="eventNameOptions"
@@ -45,53 +44,44 @@
                                     примечания к заполнению
                                 </p>
                                 <div class="management__input-group">
-                                    <label
-                                        for="chooseDate"
-                                        class="management__label"
-                                    >Уровень</label>
+                                    <label class="management__label">Уровень</label>
                                     <DropdownComponent
-                                        id="chooseLevel"
+                                        v-model:modelValue="group.level"
                                         class="management__input"
                                         :options="chooseLevelOptions"
                                         additional-class="custom-dropdown-selected"
                                     />
                                 </div>
                                 <div class="management__input-group">
-                                    <label
-                                        for="organise"
-                                        class="management__label"
-                                    >Организатор</label>
+                                    <label class="management__label">Организатор</label>
                                     <InputText
-                                        id="organise"
+                                        v-model="group.organizer"
                                         placeholder="Введите организатора"
                                     />
                                 </div>
                                 <div class="management__input-group">
-                                    <label
-                                        for="chooseName"
-                                        class="management__label"
-                                    >Название</label>
-
+                                    <label class="management__label">Название</label>
                                     <InputText
-                                        id="chooseName"
+                                        v-model="group.name"
                                         placeholder="Введите название"
                                     />
                                 </div>
                             </div>
                             <div class="management__form-info-wrapper">
                                 <div class="management__input-group">
-                                    <label for="#">Дата</label>
-                                    <InputDate />
+                                    <label>Дата</label>
+                                    <InputDate v-model="group.date" />
                                 </div>
                                 <div class="management__input-group">
-                                    <label for="#">Класс</label>
-                                    <InputText placeholder="Введите класс" />
+                                    <label>Класс</label>
+                                    <InputText v-model="group.classRoom" placeholder="Введите класс" />
                                 </div>
                                 <div
                                     class="management__input-group management__input-group--mobile"
                                 >
-                                    <label for="#">Классный руководитель</label>
+                                    <label>Классный руководитель</label>
                                     <InputText
+                                        v-model="group.homeroomTeacher"
                                         class="input-text"
                                         placeholder="Введите фио"
                                     />
@@ -107,21 +97,29 @@
                                 </div>
                                 <div class="management__results-input-wrapper">
                                     <div class="management__input-group">
-                                        <label
-                                            for="chooseResult"
-                                            class="management__label"
-                                        >Результат</label>
+                                        <label class="management__label">Результат</label>
                                         <DropdownComponent
-                                            id="chooseResult"
+                                            v-model:modelValue="group.result"
                                             class="management__input"
                                             additional-class="custom-dropdown-selected"
                                             :options="chooseResultOptions"
                                         />
                                     </div>
                                     <div class="management__result-btn-wrapper">
-                                        <BtnWhite class="management__btn management__result-btn">
+                                        <BtnWhite
+                                            emit-name="form-submit"
+                                            class="management__btn management__result-btn"
+                                            @form-submit="fileInputRefs[index]?.click()"
+                                        >
                                             Подтверждающий документ
                                         </BtnWhite>
+                                        <input
+                                            :ref="el => fileInputRefs[index] = el"
+                                            type="file"
+                                            multiple
+                                            class="management__file-input"
+                                            @change="handleFileChange($event, index)"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +135,7 @@
                             <BtnComponent
                                 emit-name="form-submit"
                                 class="management__footer-btn"
-                                @form-submit="toggleModal"
+                                @form-submit="saveGroup(index)"
                             >
                                 Сохранить
                             </BtnComponent>
@@ -179,8 +177,8 @@
     </section>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
@@ -188,25 +186,29 @@ import BtnComponent from '@/components/btns/BtnComponent.vue'
 import InputText from './form/InputText.vue'
 import InputDate from './form/InputDate.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
+import { useCaseSave } from '@/composables/useCaseSave'
 
-const fieldsGroup = ref([1])
-
-function addFieldsGroup () {
-    fieldsGroup.value.push(1)
-}
-
-const isModalVisible = ref(false)
-
-function toggleModal () {
-    isModalVisible.value = !isModalVisible.value
-}
-
-watch(isModalVisible, (newValue) => {
-    if (newValue) {
-        document.body.classList.add('no-scroll')
-    } else {
-        document.body.classList.remove('no-scroll')
-    }
+const {
+    groups: fieldsGroup,
+    isModalVisible,
+    fileInputRefs,
+    addGroup: addFieldsGroup,
+    toggleModal,
+    saveGroup,
+    handleFileChange,
+} = useCaseSave({
+    createEmpty: () => ({
+        eventName: '-' as string,
+        level: '-' as string,
+        organizer: '' as string,
+        name: '' as string,
+        date: '' as string,
+        classRoom: '' as string,
+        homeroomTeacher: '' as string,
+        result: '-' as string,
+        files: [] as File[],
+    }),
+    getCritery: (group) => group.eventName,
 })
 
 const eventNameOptions = ref([
@@ -223,7 +225,7 @@ const eventNameOptions = ref([
     'Результативность участия команды в спортивных соревнованиях "Президентские состязания".'
 ])
 const chooseLevelOptions = ref(['-', 'Лицейский', 'Муниципальный', 'Региональный', 'Всероссийский'])
-const chooseResultOptions = ref(['-', 'Участие', 'Победитлеь', 'Призер'])
+const chooseResultOptions = ref(['-', 'Участие', 'Победитель', 'Призер'])
 </script>
 
 <style scoped lang="scss">
@@ -407,5 +409,8 @@ const chooseResultOptions = ref(['-', 'Участие', 'Победитлеь', 
 .management__btn-wrapper {
     display: flex;
     justify-content: center;
+}
+.management__file-input {
+    display: none;
 }
 </style>

@@ -6,33 +6,33 @@
                     <p class="cabinet-shop-ready__title">
                         <span>Готовы к получению</span>
                     </p>
-                    <template v-if="infoBuyItemInfo.length > 0">
+                    <template v-if="readyItems.length > 0">
                         <p class="cabinet-shop-ready__subtitle">
                             Для получения товара покажите на одном экране свой ID и номер заказа
                         </p>
                         <h2 class="cabinet-shop-ready__login">
-                            IvanovAI_7a
+                            {{ authStore.user?.username }}
                         </h2>
                     </template>
                 </div>
-                <template v-if="infoBuyItemInfo.length > 0">
+                <template v-if="readyItems.length > 0">
                     <ul class="cabinet-shop-ready__list">
-                        <li v-for="el in infoBuyItemInfo" :key="el.id" class="cabinet-shop-ready__list-item">
+                        <li v-for="el in readyItems" :key="el.id" class="cabinet-shop-ready__list-item">
                             <div class="cabinet-shop-ready__list-item-img">
-                                <img src="/src/assets/image/cabinet-shop/pic.png" alt="image" />
+                                <img :src="el.image_url" alt="image" />
                             </div>
                             <div class="cabinet-shop-ready__list-item-info">
                                 <p class="list-item-info">
                                     {{ el.name }}
                                 </p>
                                 <p class="list-item-info">
-                                    {{ el.number }}
+                                    № {{ el.number }}
                                 </p>
                                 <p class="list-item-info">
                                     Получить
                                 </p>
                                 <p class="list-item-info">
-                                    {{ el.text }}
+                                    {{ getReadyInstruction(el) }}
                                 </p>
                             </div>
                         </li>
@@ -47,9 +47,9 @@
                 <p class="cabinet-shop-history__title">
                     История покупок
                 </p>
-                <template v-if="productList?.length > 0">
+                <template v-if="historyItems.length > 0">
                     <ul class="cabinet-shop-history__wrapper">
-                        <li v-for="el in productList" :key="el.id" class="cabinet-shop-history__wrapper-item">
+                        <li v-for="el in historyItems" :key="el.id" class="cabinet-shop-history__wrapper-item">
                             <div class="cabinet-shop-history__wrapper-left">
                                 <img :src="el.image_url" class="cabinet-shop-history__product-img"
                                     alt="<?php echo $value['orderNumber'] ?>">
@@ -60,7 +60,7 @@
                             </div>
                             <div class="cabinet-shop-history__wrapper-info">
                                 <p>{{ el.name + ' №' + el.number }}</p>
-                                <p>{{ el.sale_at.split(' ')[0] }} <span>заказ оплачен</span></p>
+                                <p>{{ el.sale_at ? el.sale_at.split(' ')[0] : '' }} <span>заказ оплачен</span></p>
                             </div>
                         </li>
                     </ul>
@@ -83,11 +83,11 @@
                             Улучши свои оценки в один клик.
                         </p>
                     </div>
-                    <button class="btn shop-empty-history__btn" @click="$router.push('/cabinet-shop')">
+                    <button class="btn shop-empty-history__btn" @click="$router.push('/cabinet/student/shop')">
                         В магазин
                     </button>
                 </div>
-                <div v-if="infoBuyHistoryItem.length === 0" class="cabinet-shop__img-background--empty">
+                <div v-if="historyItems.length === 0" class="cabinet-shop__img-background--empty">
                     <img src="@/assets/image/cabinet-shop/coinBege.png" alt="">
                 </div>
                 <span class="cabinet-shop-history__line" />
@@ -97,212 +97,45 @@
 </template>
 
 <script setup lang="ts">
-//TODO: Ready to recieve list api?
-import { CurrUserPurchase, Product } from '@/interfaces/shop'
+import { CurrUserPurchase } from '@/interfaces/shop'
 import { ShopService } from '@/plugins/ShopService'
-import { useShopStore } from '@/stores/useShopStore'
-import { inject, onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useAuthStore } from '@/stores/useAuthStore'
+import { computed, inject, onMounted, ref } from 'vue'
 
-const shopStore = useShopStore()
 const shopService: ShopService = inject('ShopService')
+const authStore = useAuthStore()
 
-const route = useRoute();
+const loading = ref(false)
+const productList = ref<CurrUserPurchase[]>([])
 
-const countValue = ref(1)
-const loading = ref(false);
-const productList = ref < CurrUserPurchase[] | null > (null)
+const readyItems = computed(() =>
+    productList.value.filter(el => !el.give_at || el.give_at === 'null')
+)
+const historyItems = computed(() =>
+    productList.value.filter(el => el.give_at && el.give_at !== 'null')
+)
 
-watch(() => +route.params.id, fetchProduct, { immediate: true })
+onMounted(fetchPurchases)
 
-async function fetchProduct(id: number) {
+async function fetchPurchases() {
     loading.value = true
-    productList.value = null;
     try {
         productList.value = await shopService.getCurrentUserPurchases()
-        console.log(productList.value)
     }
     catch (err) {
-        console.log(err)
+        console.error(err)
     }
     finally {
         loading.value = false
     }
 }
 
-const infoBuyItemInfo = [
-    {
-        name: 'Антидвойка',
-        number: '№ 2598',
-        text: 'Для активации покажи эту карточку учителю',
-        img: '/src/assets/image/cabinet-shop/pic.png',
-        id: 1
-    },
-    {
-        name: 'Значок',
-        number: '№ 3459864',
-        text: '  1 корпус - кабинет В 2012 корпус - кабинет В 208',
-        img: '/src/assets/image/cabinet-shop/icon.png',
-        id: 2
-    },
-    {
-        name: 'Значок',
-        number: '№ 3459864',
-        text: '  1 корпус - кабинет В 2012 корпус - кабинет В 208',
-        img: '/src/assets/image/cabinet-shop/icon.png',
-        id: 12
-    },
-    {
-        name: 'Значок',
-        number: '№ 3459864',
-        text: '  1 корпус - кабинет В 2012 корпус - кабинет В 208',
-        img: '/src/assets/image/cabinet-shop/icon.png',
-        id: 11
-    },
-    {
-        name: 'Значок',
-        number: '№ 3459864',
-        text: '  1 корпус - кабинет В 2012 корпус - кабинет В 208',
-        img: '/src/assets/image/cabinet-shop/icon.png',
-        id: 11
-    },
-    {
-        name: 'Значок',
-        number: '№ 3459864',
-        text: '  1 корпус - кабинет В 2012 корпус - кабинет В 208',
-        img: '/src/assets/image/cabinet-shop/icon.png',
-        id: 11
-    },
-    {
-        name: 'Значок',
-        number: '№ 3459864',
-        text: '  1 корпус - кабинет В 2012 корпус - кабинет В 208',
-        img: '/src/assets/image/cabinet-shop/icon.png',
-        id: 11
-    },
-];
-
-
-const infoBuyHistoryItem = [
-    {
-        imgSrc: '/src/assets/image/cabinet-shop/solaris2.png',
-        amount: 200,
-        orderNumber: 'Стикеры солярики № 33500967',
-        orderStatus: 'заказ оплачен',
-        time: '13.02.2024',
-        currency: '/src/assets/image/cabinet-shop/currency.png',
-        id: 1
-    },
-    {
-        imgSrc: '/src/assets/image/cabinet-shop/solaris2.png',
-        amount: 150,
-        orderNumber: 'Антидвойка № 33500967',
-        orderStatus: 'заказ оплачен',
-        time: '13.02.2024',
-        currency: '/src/assets/image/cabinet-shop/currency.png',
-        id: 13
-    },
-    {
-        imgSrc: '/src/assets/image/cabinet-shop/solaris2.png',
-        amount: 150,
-        orderNumber: 'Антидвойка № 33500967',
-        orderStatus: 'заказ оплачен',
-        time: '13.02.2024',
-        currency: '/src/assets/image/cabinet-shop/currency.png',
-        id: 11
-    },
-    {
-        imgSrc: '/src/assets/image/cabinet-shop/solaris2.png',
-        amount: 150,
-        orderNumber: 'Стикеры солярики № 33500967',
-        orderStatus: 'заказ оплачен',
-        time: '13.02.2024',
-        currency: '/src/assets/image/cabinet-shop/currency.png',
-        id: 12
-    },
-    {
-        imgSrc: '/src/assets/image/cabinet-shop/solaris2.png',
-        amount: 150,
-        orderNumber: 'Стикеры солярики № 33500967',
-        orderStatus: 'заказ оплачен',
-        time: '13.02.2024',
-        currency: '/src/assets/image/cabinet-shop/currency.png',
-        id: 15
-    },
-    {
-        imgSrc: '/src/assets/image/cabinet-shop/solaris2.png',
-        amount: 150,
-        orderNumber: 'Стикеры солярики № 33500967',
-        orderStatus: 'заказ оплачен',
-        time: '13.02.2024',
-        currency: '/src/assets/image/cabinet-shop/currency.png',
-        id: 15
-    },
-    {
-        imgSrc: '/src/assets/image/cabinet-shop/solaris2.png',
-        amount: 150,
-        orderNumber: 'Стикеры солярики № 33500967',
-        orderStatus: 'заказ оплачен',
-        time: '13.02.2024',
-        currency: '/src/assets/image/cabinet-shop/currency.png',
-        id: 15
-    },
-    {
-        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-        amount: 150,
-        orderNumber: "Стикеры солярики № 33500967",
-        orderStatus: "заказ оплачен",
-        time: "13.02.2024",
-        currency: "/src/assets/image/cabinet-shop/currency.png",
-        id: 15
-    },
-    {
-        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-        amount: 150,
-        orderNumber: "Стикеры солярики № 33500967",
-        orderStatus: "заказ оплачен",
-        time: "13.02.2024",
-        currency: "/src/assets/image/cabinet-shop/currency.png",
-        id: 15
-    },
-    {
-        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-        amount: 150,
-        orderNumber: "Стикеры солярики № 33500967",
-        orderStatus: "заказ оплачен",
-        time: "13.02.2024",
-        currency: "/src/assets/image/cabinet-shop/currency.png",
-        id: 15
-    },
-    {
-        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-        amount: 150,
-        orderNumber: "Стикеры солярики № 33500967",
-        orderStatus: "заказ оплачен",
-        time: "13.02.2024",
-        currency: "/src/assets/image/cabinet-shop/currency.png",
-        id: 15
-    },
-    {
-        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-        amount: 150,
-        orderNumber: "Стикеры солярики № 33500967",
-        orderStatus: "заказ оплачен",
-        time: "13.02.2024",
-        currency: "/src/assets/image/cabinet-shop/currency.png",
-        id: 15
-    },
-    {
-        imgSrc: "/src/assets/image/cabinet-shop/solaris2.png",
-        amount: 150,
-        orderNumber: "Стикеры солярики № 33500967",
-        orderStatus: "заказ оплачен",
-        time: "13.02.2024",
-        currency: "/src/assets/image/cabinet-shop/currency.png",
-        id: 15
-    },
-];
-
+function getReadyInstruction(item: CurrUserPurchase): string {
+    if (item.name.toLowerCase().includes('антидвойка')) {
+        return 'Для активации покажи эту карточку учителю'
+    }
+    return '1 корпус - кабинет В 201 / 2 корпус - кабинет В 208'
+}
 </script>
 <style lang="scss">
 .cabinet-shop {

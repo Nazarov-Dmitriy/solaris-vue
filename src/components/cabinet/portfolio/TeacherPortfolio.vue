@@ -39,7 +39,7 @@
                             class="teacher-portfolio-panel__dropdown-sort"
                             :options="portfolioSort"
                         />
-                        <button class="btn btn-teacher-portfolio">Добавить</button>
+                        <button class="btn btn-teacher-portfolio" @click="$router.push('/cabinet/teacher/case-portfolio')">Добавить</button>
                     </div>
                 </div>
             </div>

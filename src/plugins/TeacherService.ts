@@ -28,4 +28,8 @@ export class TeacherService {
             }
         } );
     }
+
+    public async postTeacherCase(data: FormData) {
+        return await this._axiosR.post('/teacher/keis', data);
+    }
 }

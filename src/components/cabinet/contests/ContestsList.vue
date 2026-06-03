@@ -103,7 +103,7 @@
 import { computed, inject, onMounted, ref, watch } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useCompetitionsStore } from '@/stores/useCompetitions'
 import { CompetitionService } from '@/plugins/CompetitionService'
 
@@ -118,6 +118,7 @@ const props = defineProps({
     }
 })
 const useCompetitions = useCompetitionsStore()
+const route = useRoute()
 
 const competitionService: CompetitionService = inject('CompetitionService')
 
@@ -160,6 +161,10 @@ onMounted(async () => {
         }
     } catch (error) {
         console.error('Ошибка при получении данных', error)
+    }
+
+    if (route.query.myContests === 'true') {
+        await toggleUserCompetitions()
     }
 })
 

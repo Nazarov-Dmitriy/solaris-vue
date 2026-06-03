@@ -1,5 +1,6 @@
 <template>
     <button
+        type="button"
         class="btn-orange"
         @click="submitEmit"
     >
@@ -17,10 +18,10 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['form-submit', 'offer', 'action'])
+const emit = defineEmits(['form-submit', 'offer', 'action', 'click'])
 
 function submitEmit () {
-    emit(props.emitName)
+    emit(props.emitName);
 }
 </script>
 

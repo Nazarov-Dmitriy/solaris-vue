@@ -8,7 +8,7 @@
                         <p class="p2 achievements__header-text">максимум 20 баллов</p>
                     </div>
                     <div
-                        v-for="(fieldGroup, index) in fieldsGroup"
+                        v-for="(group, index) in groups"
                         :key="index"
                         class="flex flex-col gap-4 p-4"
                     >
@@ -23,7 +23,7 @@
                                     >Наименование мероприятия</label
                                 >
                                 <DropdownComponent
-                                    id="eventName"
+                                    v-model:modelValue="group.eventName"
                                     class="achievements__input"
                                     additional-class="custom-dropdown-selected"
                                     :options="eventNameOptions"
@@ -36,7 +36,7 @@
                                 </p>
                                 <div class="achievements__input-group">
                                     <label for="chooseDate" class="achievements__label">Дата</label>
-                                    <InputDate id="chooseDate" />
+                                    <InputDate v-model="group.date" />
                                     <p v-if="dateError" class="error-message">
                                         {{ dateError }}
                                     </p>
@@ -46,7 +46,7 @@
                                         >Тип мероприятия</label
                                     >
                                     <DropdownComponent
-                                        id="chooseEventType"
+                                        v-model:modelValue="group.eventType"
                                         :options="chooseEventTypeOptions"
                                         additional-class="custom-dropdown-selected"
                                         class="achievements__input"
@@ -58,7 +58,7 @@
                                     >
 
                                     <DropdownComponent
-                                        id="chooseLevel"
+                                        v-model:modelValue="group.level"
                                         additional-class="custom-dropdown-selected"
                                         :options="chooseLevelOptions"
                                         class="achievements__input"
@@ -70,7 +70,7 @@
                                     >
 
                                     <InputText
-                                        id="orginise"
+                                        v-model="group.organizer"
                                         class="achievements__input"
                                         placeholder="Введите организатора"
                                     />
@@ -79,7 +79,7 @@
                                     <label for="name" class="achievements__label">Название</label>
 
                                     <InputText
-                                        id="name"
+                                        v-model="group.name"
                                         class="achievements__input"
                                         placeholder="Введите название"
                                     />
@@ -97,7 +97,7 @@
                                             >Результат</label
                                         >
                                         <DropdownComponent
-                                            id="chooseResult"
+                                            v-model:modelValue="group.result"
                                             class="achievements__input"
                                             additional-class="custom-dropdown-selected"
                                             :options="chooseResultOptions"
@@ -105,10 +105,19 @@
                                     </div>
                                     <div class="achievements__result-btn-wrapper">
                                         <BtnWhite
+                                            emit-name="form-submit"
                                             class="achievements__btn achievements__result-btn"
+                                            @form-submit="fileInputRefs[index]?.click()"
                                         >
                                             Подтверждающий документ
                                         </BtnWhite>
+                                        <input
+                                            :ref="el => fileInputRefs[index] = el as HTMLInputElement"
+                                            type="file"
+                                            multiple
+                                            style="display:none"
+                                            @change="handleFileChange($event, index)"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -122,18 +131,18 @@
                             <BtnComponent
                                 emit-name="form-submit"
                                 class="achievements__footer-btn"
-                                @form-submit="toggleModal"
+                                @form-submit="saveGroup(index)"
                             >
                                 Сохранить
                             </BtnComponent>
                         </div>
                         <div class="achievements__btn-wrapper">
                             <BtnWhite
-                                v-if="index === fieldsGroup.length - 1"
+                                v-if="index === groups.length - 1"
                                 emit-name="form-submit"
                                 additional-class="btn-white__text--img"
                                 class="achievements__btn"
-                                @form-submit="addFieldsGroup"
+                                @form-submit="addGroup"
                             >
                                 Добавить мероприятие
                             </BtnWhite>
@@ -162,8 +171,8 @@
     </section>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
@@ -171,26 +180,23 @@ import BtnComponent from '@/components/btns/BtnComponent.vue'
 import InputText from './form/InputText.vue'
 import InputDate from './form/InputDate.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
+import { useCaseSave } from '@/composables/useCaseSave'
 
-const fieldsGroup = ref([1])
-
-function addFieldsGroup() {
-    fieldsGroup.value.push(1)
-}
-
-const isModalVisible = ref(false)
-
-function toggleModal() {
-    isModalVisible.value = !isModalVisible.value
-}
-
-watch(isModalVisible, (newValue) => {
-    if (newValue) {
-        document.body.classList.add('no-scroll')
-    } else {
-        document.body.classList.remove('no-scroll')
-    }
+const { groups, isModalVisible, fileInputRefs, addGroup, toggleModal, saveGroup, handleFileChange } = useCaseSave({
+    createEmpty: () => ({
+        eventName: '-' as string,
+        date: '' as string,
+        eventType: '-' as string,
+        level: '-' as string,
+        organizer: '' as string,
+        name: '' as string,
+        result: '-' as string,
+        files: [] as File[],
+    }),
+    getCritery: (group) => group.eventName,
 })
+
+const dateError = ref('')
 const eventNameOptions = ref([
     '-',
     'Результативность участия обучающихся во Всероссийской олимпиаде школьников.',

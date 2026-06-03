@@ -10,7 +10,7 @@
                         <span>максимум 20 баллов</span>
                     </div>
                     <div
-                        v-for="(event, index) in events"
+                        v-for="(group, index) in groups"
                         :key="index"
                         class="top-competition__nomination"
                     >
@@ -26,25 +26,16 @@
                             class="top-competition__form"
                         >
                             <div class="top-competition__form-group">
-                                <label
-                                    for="#"
-                                    class="top-competition__form-label"
-                                >Номинация</label>
-                                <InputText>
-                                    <template #placeholder>
-                                        Введите название номинации
-                                    </template>
-                                </InputText>
+                                <label class="top-competition__form-label">Номинация</label>
+                                <InputText v-model="group.nomination" placeholder="Введите название номинации" />
                             </div>
                             <div class="top-competition__form-group">
-                                <label
-                                    for="#"
-                                    class="top-competition__form-label"
-                                >Результат</label>
+                                <label class="top-competition__form-label">Результат</label>
                                 <DropdownComponent
+                                    v-model:modelValue="group.result"
                                     class="top-competition__form-input"
                                     additional-class="custom-dropdown-selected"
-                                    :options="result"
+                                    :options="resultOptions"
                                 />
                             </div>
                         </form>
@@ -59,18 +50,18 @@
                             <BtnComponent
                                 emit-name="form-submit"
                                 class="top-competition__footer-btn"
-                                @form-submit="toggleModal"
+                                @form-submit="saveGroup(index)"
                             >
                                 Сохранить
                             </BtnComponent>
                         </div>
                         <div class="top-competition__btn-wrapper">
                             <BtnWhite
-                                v-if="index === events.length - 1"
+                                v-if="index === groups.length - 1"
                                 emit-name="form-submit"
                                 additional-class="btn-white__text--img"
                                 class="top-competition__btn"
-                                @form-submit="addNewEvent"
+                                @form-submit="addGroup"
                             >
                                 Добавить номинацию
                             </BtnWhite>
@@ -101,35 +92,25 @@
     </sections>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import InputText from './form/InputText.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
+import { useCaseSave } from '@/composables/useCaseSave'
 
-const events = ref([1])
-
-function addNewEvent () {
-    events.value.push(1)
-}
-
-const isModalVisible = ref(false)
-
-function toggleModal () {
-    isModalVisible.value = !isModalVisible.value
-}
-
-watch(isModalVisible, (newValue) => {
-    if (newValue) {
-        document.body.classList.add('no-scroll')
-    } else {
-        document.body.classList.remove('no-scroll')
-    }
+const { groups, isModalVisible, addGroup, toggleModal, saveGroup } = useCaseSave({
+    createEmpty: () => ({
+        nomination: '' as string,
+        result: '-' as string,
+        files: [] as File[],
+    }),
+    getCritery: (group) => group.nomination || 'Участие в ТОП-конкурсе',
 })
 
-const result = ref([
+const resultOptions = ref([
     '-',
     'Участие',
     'Призер/победитель',

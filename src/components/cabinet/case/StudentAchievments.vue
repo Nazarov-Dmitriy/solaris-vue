@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div
-                        v-for="(event, index) in events"
+                        v-for="(group, index) in groups"
                         :key="index"
                         class="flex flex-col gap-4"
                     >
@@ -33,7 +33,7 @@
                                     class="achievements__label"
                                 >Наименование мероприятия</label>
                                 <DropdownComponent
-                                    id="eventName"
+                                    v-model:modelValue="group.eventName"
                                     class="achievements__input"
                                     additional-class="custom-dropdown-selected"
                                     :options="eventNameOptions"
@@ -50,7 +50,7 @@
                                         class="achievements__label"
                                     >Уровень</label>
                                     <DropdownComponent
-                                        id="chooseLevel"
+                                        v-model:modelValue="group.level"
                                         class="achievements__input"
                                         additional-class="custom-dropdown-selected"
                                         :options="chooseLevelOptions"
@@ -62,7 +62,7 @@
                                         class="achievements__label"
                                     >Организатор</label>
                                     <InputText
-                                        id="organiser"
+                                        v-model="group.organizer"
                                         class="achievements__input"
                                         placeholder="Введите организатора"
                                     />
@@ -73,7 +73,7 @@
                                         class="achievements__label"
                                     >Название</label>
                                     <InputText
-                                        id="name"
+                                        v-model="group.name"
                                         class="achievements__input"
                                         placeholder="Введите название"
                                     />
@@ -94,7 +94,7 @@
                                             class="achievements__label"
                                         >Класс обучающегося</label>
                                         <DropdownComponent
-                                            id="class"
+                                            v-model:modelValue="group.classRoom"
                                             class="achievements__input"
                                             additional-class="custom-dropdown-selected"
                                             :options="classOptions"
@@ -106,7 +106,7 @@
                                             class="achievements__label"
                                         >ФИ обучающегося, группа или класс</label>
                                         <InputText
-                                            id="studentInformation"
+                                            v-model="group.studentInfo"
                                             class="achievements__input"
                                             placeholder="Введите обучающегося"
                                         />
@@ -128,7 +128,7 @@
                                             class="achievements__label"
                                         >Результат</label>
                                         <DropdownComponent
-                                            id="chooseResult"
+                                            v-model:modelValue="group.result"
                                             class="achievements__input"
                                             additional-class="custom-dropdown-selected"
                                             :options="results"
@@ -136,10 +136,19 @@
                                     </div>
                                     <div class="achievements__result-btn-wrapper">
                                         <BtnWhite
+                                            emit-name="form-submit"
                                             class="achievements__btn achievements__result-btn"
+                                            @form-submit="fileInputRefs[index]?.click()"
                                         >
                                             Подтверждающий документ
                                         </BtnWhite>
+                                        <input
+                                            :ref="el => fileInputRefs[index] = el as HTMLInputElement"
+                                            type="file"
+                                            multiple
+                                            style="display:none"
+                                            @change="handleFileChange($event, index)"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -155,18 +164,18 @@
                             <BtnComponent
                                 emit-name="form-submit"
                                 class="achievements__footer-btn"
-                                @form-submit="toggleModal"
+                                @form-submit="saveGroup(index)"
                             >
                                 Сохранить
                             </BtnComponent>
                         </div>
                         <div class="achievements__btn-wrapper">
                             <BtnWhite
-                                v-if="index === events.length - 1"
+                                v-if="index === groups.length - 1"
                                 emit-name="form-submit"
                                 additional-class="btn-white__text--img"
                                 class="achievements__btn"
-                                @form-submit="addNewEvent"
+                                @form-submit="addGroup"
                             >
                                 Добавить мероприятие
                             </BtnWhite>
@@ -197,27 +206,28 @@
     </section>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import InputText from './form/InputText.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
+import { useCaseSave } from '@/composables/useCaseSave'
 
-const isModalVisible = ref(false)
-
-function toggleModal () {
-    isModalVisible.value = !isModalVisible.value
-}
-
-watch(isModalVisible, (newValue) => {
-    if (newValue) {
-        document.body.classList.add('no-scroll')
-    } else {
-        document.body.classList.remove('no-scroll')
-    }
+const { groups, isModalVisible, fileInputRefs, addGroup, toggleModal, saveGroup, handleFileChange } = useCaseSave({
+    createEmpty: () => ({
+        eventName: '-' as string,
+        level: '-' as string,
+        organizer: '' as string,
+        name: '' as string,
+        classRoom: '-' as string,
+        studentInfo: '' as string,
+        result: '-' as string,
+        files: [] as File[],
+    }),
+    getCritery: (group) => group.eventName,
 })
 
 const eventNameOptions = ref([
@@ -247,12 +257,6 @@ const results = ref([
 
 const chooseLevelOptions = ref(['-', 'Лицейский', 'Муниципальный', 'Региональный', 'Всероссийский'])
 const classOptions = ref(['-', '1-3', '4-6', '7-11'])
-
-const events = ref([1])
-
-function addNewEvent () {
-    events.value.push(1)
-}
 </script>
 
 <style scoped lang="scss">

@@ -4,17 +4,19 @@
         <div class="propose-contest__container">
             <h3 class="propose-contest__title h3">Предложить конкурс</h3>
             <p class="p1">Опишите предлагаемый вами конкурс во всех полях.</p>
+
             <form @submit.prevent action="#" class="propose-contest__form">
                 <div class="propose-contest__form-text-inputs">
                     <div class="propose-contest__form-input-group">
                         <label for="#" class="propose-contest__form-label">Название</label>
                         <InputText
+                            v-model="name"
                             class="propose-contest__form-input"
                             placeholder="Опишите цель предлагаемого конкурса"
                         />
                     </div>
                     <div
-                        v-for="(dropdown, index) in dropdowns"
+                        v-for="(_, index) in dropdowns"
                         :key="index"
                         class="propose-contest__form-dropdown-group propose-contest__form-dropdown-group--mobile"
                     >
@@ -23,11 +25,12 @@
                         >
                         <div class="dropdown-wrapper">
                             <DropdownComponent
+                                v-model:modelValue="dropdowns[index]"
                                 class="propose-contest__form-dropdown"
-                                :options="role"
+                                :options="roleOptions"
                                 additional-class="custom-dropdown-selected"
                             />
-                            <button class="dropdown-btn" @click="addDropdown">
+                            <button class="dropdown-btn" @click.prevent="addDropdown">
                                 <img
                                     src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
                                     alt="Выбрать предмет"
@@ -39,6 +42,7 @@
                     <div class="propose-contest__form-input-group">
                         <label for="#" class="propose-contest__form-label">Описание</label>
                         <InputTextarea
+                            v-model="description"
                             class="propose-contest__form-textarea"
                             placeholder="Перечислите основные задачи конкурса"
                         />
@@ -46,7 +50,7 @@
                 </div>
                 <div class="propose-contest__form-add-file">
                     <div
-                        v-for="(dropdown, index) in dropdowns"
+                        v-for="(_, index) in dropdowns"
                         :key="index"
                         class="propose-contest__form-dropdown-group"
                     >
@@ -55,11 +59,12 @@
                         >
                         <div class="dropdown-wrapper">
                             <DropdownComponent
-                                :options="role"
+                                v-model:modelValue="dropdowns[index]"
+                                :options="roleOptions"
                                 class="propose-contest__form-dropdown"
                                 additional-class="custom-dropdown-selected"
                             />
-                            <button class="dropdown-btn" @click="addDropdown">
+                            <button class="dropdown-btn" @click.prevent="addDropdown">
                                 <img
                                     src="/public/cabinteTeacher/case/portfolio-button-svg.svg"
                                     alt="Выбрать предмет"
@@ -102,7 +107,11 @@
                                 @change="handleFileChange"
                             />
                         </div>
-                        <BtnComponent class="propose-contest__form-btn">
+                        <BtnComponent
+                            class="propose-contest__form-btn"
+                            emit-name="action"
+                            @action="submit"
+                        >
                             Отправить на согласование
                         </BtnComponent>
                         <div class="propose-contest__form-btn-info">
@@ -122,29 +131,33 @@
     </section>
 </template>
 
-<script setup>
-import { ref } from 'vue'
+<script setup lang="ts">
+import { inject, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import BtnComponent from '@/components/btns/BtnComponent.vue'
 import BtnWhite from '@/components/btns/cabinetTeacher/case/BtnWhite.vue'
 import InputText from '@/components/cabinet/case/form/InputText.vue'
 import InputTextarea from '@/components/cabinet/case/form/InputTextarea.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import TeacherHeader from '@/components/cabinet/header/TeacherHeader.vue'
+import { CompetitionService } from '@/plugins/CompetitionService'
 
-const role = ref(['-', 'Ученик', 'Учитель'])
+const competitionService: CompetitionService = inject('CompetitionService')
+const router = useRouter()
+
+const roleOptions = ['-', 'Ученик', 'Учитель']
+
+const name = ref('')
+const description = ref('')
+const dropdowns = ref(['-'])
 
 const fileInput = ref(null)
 const showFile = ref(false)
 const selectedFiles = ref([])
 
-const dropdowns = ref([1])
-
 function addDropdown() {
-    if (dropdowns.value.length >= 3) {
-        return
-    }
-    dropdowns.value.push(1)
-    console.log(dropdowns.value)
+    if (dropdowns.value.length >= 3) return
+    dropdowns.value.push('-')
 }
 
 function addFile() {
@@ -162,6 +175,30 @@ function handleFileChange(event) {
 function deleteFile(index) {
     selectedFiles.value.splice(index, 1)
     showFile.value = selectedFiles.value.length > 0
+}
+
+async function submit() {
+    const formData = new FormData()
+    formData.append('name', name.value)
+    formData.append('description', description.value)
+    dropdowns.value
+        .filter(r => r && r !== '-')
+        .forEach(r => formData.append('role[]', r))
+    if (selectedFiles.value.length > 0) {
+        formData.append('file', selectedFiles.value[0])
+    }
+
+    try {
+        await competitionService.postContestProposition(formData)
+        name.value = ''
+        description.value = ''
+        dropdowns.value = ['-']
+        selectedFiles.value = []
+        showFile.value = false
+        router.push('/cabinet/teacher/contests')
+    } catch (err) {
+        console.error(err)
+    }
 }
 </script>
 

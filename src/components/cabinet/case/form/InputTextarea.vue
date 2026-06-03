@@ -1,17 +1,18 @@
 <template>
     <div class="textarea-wrapper">
-        <textarea name="#" class="textarea" :placeholder="props.placeholder"></textarea>
+        <textarea name="#" class="textarea" :placeholder="props.placeholder" v-model="model"></textarea>
     </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 const props = defineProps({
     placeholder: {
         type: String,
         default: null
     }
 })
+
+const model = defineModel({ default: '' })
 </script>
 
 <style scoped lang="scss">
