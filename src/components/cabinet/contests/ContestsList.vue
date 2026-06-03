@@ -16,12 +16,12 @@
                             <div class="teacher-panel-group-down">
                                 <DropdownComponent v-model:modelValue="useCompetitions.sort"
                                     class="teacher-panel__dropdown-sort" :options="optionSort" />
-                                <!-- <button
+                                <button
                                     class="btn btn-contest"
-                                    @click="filterContestsByRole"
+                                    @click="toggleUserCompetitions"
                                 >
-                                    Мои конкурсы
-                                </button> -->
+                                    {{ isUserCompetitionsMode ? 'Все конкурсы' : 'Мои конкурсы' }}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -38,12 +38,12 @@
                         <div class="teacher-panel-group-down">
                             <DropdownComponent v-model:modelValue="useCompetitions.sort"
                                 class="teacher-panel__dropdown-sort" :options="optionSort" />
-                            <!-- <button
+                            <button
                                 class="btn btn-contest"
-                                @click="filterContestsByRole"
+                                @click="toggleUserCompetitions"
                             >
-                                Мои конкурсы
-                            </button> -->
+                                {{ isUserCompetitionsMode ? 'Все конкурсы' : 'Мои конкурсы' }}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -83,8 +83,11 @@
                     </div>
 
                     <!-- Пустое состояние -->
+                    <p v-else-if="isLoadingUserCompetitions" class="p1 teacher-contnent-empty">
+                        Загрузка конкурсов...
+                    </p>
                     <p v-else class="p1 teacher-contnent-empty">
-                        Здесь отображаются полученные конкурсы, конкурсов пока нет
+                        {{ isUserCompetitionsMode ? 'У вас пока нет конкурсов' : 'Здесь отображаются полученные конкурсы, конкурсов пока нет' }}
                     </p>
                 </div>
             </div>
@@ -103,7 +106,6 @@ import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import { useRouter } from 'vue-router'
 import { useCompetitionsStore } from '@/stores/useCompetitions'
 import { CompetitionService } from '@/plugins/CompetitionService'
-import { storeToRefs } from 'pinia'
 
 const props = defineProps({
     user: {
@@ -121,23 +123,15 @@ const competitionService: CompetitionService = inject('CompetitionService')
 
 const optionSort = ['Новые вверху', 'Новые внизу']
 const renderList = ref([])
+const userCompetitions = ref([])
+const isUserCompetitionsMode = ref(false)
+const isLoadingUserCompetitions = ref(false)
 const perPage = computed(() => useCompetitions.perPage);
 const totalPages = computed(() => useCompetitions.totalPages);
 const sort = computed(() => useCompetitions.sort)
-const list = computed(() => useCompetitions.getCompetitionsSorted)
+const allCompetitions = computed(() => useCompetitions.getCompetitionsSorted)
+const list = computed(() => isUserCompetitionsMode.value ? getUserCompetitionsSorted() : allCompetitions.value)
 const router = useRouter()
-
-/* function sortContests () {
-}
-
-function filterContestsByRole () {
-    if (!role.value || role.value === 'Выберите роль') {
-        list.value = [...contests.value]
-    } else {
-        list.value = contests.value.filter((contest) => contest.tags.includes(role.value))
-    }
-    sortContests()
-} */
 
 function linkContest(id) {
     if (props.user === 'teacher') {
@@ -183,6 +177,74 @@ function getRenderList(list) {
 function setPage(page) {
     useCompetitions.setCurrentPage(page);
 }
+
+async function toggleUserCompetitions() {
+    if (isUserCompetitionsMode.value) {
+        isUserCompetitionsMode.value = false
+        useCompetitions.setCurrentPage(1)
+        return
+    }
+
+    isUserCompetitionsMode.value = true
+    isLoadingUserCompetitions.value = true
+    useCompetitions.setCurrentPage(1)
+
+    try {
+        const response = await competitionService.getUserCompetitions()
+        const items = Array.isArray(response.data?.data) ? response.data.data : []
+        userCompetitions.value = items.map(mapUserCompetition)
+    } catch (error) {
+        console.error('Ошибка при получении конкурсов пользователя', error)
+        userCompetitions.value = []
+    } finally {
+        isLoadingUserCompetitions.value = false
+    }
+}
+
+function mapUserCompetition(item) {
+    return {
+        id: item.id,
+        name: item.title || 'Без названия',
+        tags: Array.isArray(item.tags) ? item.tags : [],
+        begin_at: item.begin_at || '',
+        end_at: item.finish_at || '',
+        nastavnik_name: item.nastavnik_name || '',
+        ball: item.ball ?? 0,
+        solariki: item.solariki ?? 0,
+        itog: item.itog || ''
+    }
+}
+
+function getUserCompetitionsSorted() {
+    return [...userCompetitions.value]
+        .sort((a, b) => {
+            return useCompetitions.sort === 'Новые вверху'
+                ? new Date(parseCompetitionDate(b.begin_at)).getTime() - new Date(parseCompetitionDate(a.begin_at)).getTime()
+                : new Date(parseCompetitionDate(a.begin_at)).getTime() - new Date(parseCompetitionDate(b.begin_at)).getTime()
+        })
+        .filter((el) => {
+            return useCompetitions.tag === 'Выберите роль'
+                ? el
+                : el.tags.some((tag) => tag === useCompetitions.tag)
+        })
+}
+
+function parseCompetitionDate(date) {
+    if (!date) return 0
+
+    const [day, month, rest] = date.split('.')
+    const [year, time = '00:00:00'] = (rest || '').split(' ')
+    const [hours = '0', minutes = '0', seconds = '0'] = time.split(':')
+
+    return new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hours),
+        Number(minutes),
+        Number(seconds)
+    )
+}
 </script>
 
 <style lang="scss" scoped>
@@ -190,6 +252,7 @@ function setPage(page) {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    min-height: 0;
 }
 
 .teacher-panel-wraper {
@@ -422,12 +485,19 @@ function setPage(page) {
 }
 
 .teacher-wpaper {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    min-height: 0;
     background: var(--white);
-    padding-bottom: 20px;
 }
 
 .teacher-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+    width: 100%;
     max-width: 1560px;
     padding: 24px 60px 20px 60px;
     margin: 0 auto;
@@ -445,9 +515,10 @@ function setPage(page) {
 .teacher-contnent {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
     position: relative;
     gap: 24px;
-    margin-bottom: 24px;
 }
 
 .teacher-subtitle__wraper {
@@ -471,7 +542,24 @@ function setPage(page) {
 .teacher-list {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+    overflow-y: auto;
     gap: 16px;
+}
+
+.section-contests :deep(.pagination__container) {
+    flex-shrink: 0;
+    margin-top: auto;
+    padding: 0 60px 24px;
+
+    @media (max-width: $md) {
+        padding: 0 40px 24px;
+    }
+
+    @media (max-width: 390px) {
+        padding: 0 16px 24px;
+    }
 }
 
 .teacher__item {

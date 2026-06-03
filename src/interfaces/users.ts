@@ -59,3 +59,40 @@ export enum UserCategoryEnum {
 export interface LogoutResponse {
     result: boolean;
 }
+
+export interface UserPortfolioItem {
+    id: number;
+    user: {
+        id: number;
+        name: string;
+        class: string;
+        category: string;
+    };
+    text: string;
+    roles: string[];
+    nastavnik: {
+        id: number;
+        full_name: string;
+    } | null;
+    solariki: number;
+    cost: number;
+    status: string;
+    created_at: string;
+}
+
+export interface UserPortfolioResponse {
+    status: string;
+    data: UserPortfolioItem[];
+}
+
+export interface UserMessage {
+    id: number;
+    text: string;
+    category: string;
+    watch_at: string;
+}
+
+export interface UserMessagesResponse {
+    status: string;
+    data: UserMessage[];
+}

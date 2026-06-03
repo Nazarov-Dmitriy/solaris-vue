@@ -12,8 +12,8 @@
                 <div class="cabinet-header__student-info">
                     <div class="cabinet-header__notification">
                         <router-link to="/cabinet/student/notification">
-                            <p class="cabinet-header__notification-count p2-phone">
-                                1
+                            <p v-if="notificationsStore.messagesCount > 0" class="cabinet-header__notification-count p2-phone">
+                                {{ notificationsStore.messagesCount }}
                             </p>
                             <img src="@/assets/icon/cabinet-header/bell.svg" alt="icon-bellt">
                         </router-link>
@@ -61,12 +61,14 @@
 import BtnComponent from '@/components/btns/BtnComponent.vue';
 import { UserService } from '@/plugins/UserService';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { useNotificationStore } from '@/stores/useNotificationStore';
 import { usePipulStore } from '@/stores/usePipulStore';
 import { computed, inject, onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const authService: UserService = inject('UserService');
 const authStore = useAuthStore();
+const notificationsStore = useNotificationStore();
 const router = useRouter();
 
 const pupilStore = usePipulStore();
@@ -99,9 +101,11 @@ function logout() {
 
 onMounted(() => {
     document.addEventListener('click', showLogoutBtn)
+    notificationsStore.startPolling()
 })
 onUnmounted(() => {
     document.removeEventListener('click', showLogoutBtn)
+    notificationsStore.stopPolling()
 })
 </script>
 <style lang="scss" scoped>

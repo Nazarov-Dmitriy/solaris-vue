@@ -35,7 +35,11 @@ export interface CompetitionItemByIdResponse {
 export interface UserCompetitionItem {
     id: number,
     title: string,
+    tags: string[],
+    nastavnik_name: string,
     ball: number,
+    solariki: number,
+    itog: string,
     finish_at: string,
     begin_at: string,
 }

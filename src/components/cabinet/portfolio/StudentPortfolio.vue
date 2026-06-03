@@ -6,7 +6,16 @@
                 v-model:modelValue="selected"
                 :options="option"
             />
-            <div class="uc-portfolio__table-container">
+            <p v-if="isLoading" class="uc-portfolio__message">
+                Загрузка портфолио...
+            </p>
+            <p v-else-if="errorMessage" class="uc-portfolio__message uc-portfolio__message--error">
+                {{ errorMessage }}
+            </p>
+            <p v-else-if="!data.length" class="uc-portfolio__message">
+                Портфолио пока пустое
+            </p>
+            <div v-else class="uc-portfolio__table-container">
                 <table class="uc-portfolio__table">
                     <thead>
                         <tr>
@@ -44,7 +53,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="uc-portfolio__table-container tablet">
+            <div v-if="!isLoading && !errorMessage && data.length" class="uc-portfolio__table-container tablet">
                 <table v-for="el in renderList" :key="el.id" class="uc-portfolio__table tablet">
                     <thead>
                         <tr>
@@ -83,7 +92,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="uc-portfolio__table-container mobile">
+            <div v-if="!isLoading && !errorMessage && data.length" class="uc-portfolio__table-container mobile">
                 <table v-for="el in renderList" :key="el.id" class="uc-portfolio__table mobile">
                     <thead>
                         <tr>
@@ -127,143 +136,122 @@
                 </table>
             </div>
             <PaginationComponent
-                :perpage="5"
+                v-if="!isLoading && !errorMessage && data.length"
+                :per-page="perPage"
+                :current-page="currentPage"
+                :total-pages="totalPages"
                 :data="data"
                 show-piganation-element="arrow"
                 :color="{ main: '#dda06b', hover: '#de4700' }"
                 @set-list="getRenderList"
+                @set-page="setPage"
             />
         </div>
     </section>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { computed, inject, onMounted, ref, watch } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 
-const selected = ref('')
+const userService = inject('UserService')
+
+const selected = ref('Новые вверху')
 const active = ref([])
 const activeMobile = ref([])
 const renderList = ref([])
-
-const data = [
-    {
-        id: 1,
-        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 300,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 11,
-        title: ' «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 300,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 2,
-        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 300,
-        balls: 400,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 3,
-        title: ' «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 700,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 4,
-        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 300,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 6,
-        title: '«Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 200,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 7,
-        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 500,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 8,
-        title: ' «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 500,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 9,
-        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 500,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 17,
-        title: ' «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 500,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    },
-    {
-        id: 27,
-        title: 'Городской конкурс сочинений  «Деды наших дедов – герои Отечества», посвященного 79-ойГородской конкурс сочинений  «Деды наших дедов – герои Отечества», по годовщине Победы советского народа в Великой Отечественной войне',
-        role: ['журналист', 'историк', 'патриот', 'юнармеец'],
-        money: 500,
-        balls: 200,
-        status: '1 место 1 этап',
-        teacher: 'Иванова М.И'
-    }
-]
+const data = ref([])
+const isLoading = ref(false)
+const errorMessage = ref('')
+const currentPage = ref(1)
+const perPage = 5
+const totalPages = computed(() => Math.ceil(data.value.length / perPage))
 
 const option = [
-    'сортировка 1',
-    'сортировка 2',
-    'сортировка 3',
-    'сортировка 4',
-    'сортировка 5',
-    'сортировка 6'
+    'Новые вверху',
+    'Старые вверху'
 ]
 
+onMounted(loadPortfolio)
+
 watch(selected, () => {
-    renderList.value.sort((a, b) => a - b)
+    data.value = sortPortfolio(data.value)
+    currentPage.value = 1
 })
 
 function getRenderList(list) {
     renderList.value = list
+}
+
+function setPage(page) {
+    currentPage.value = page
+}
+
+async function loadPortfolio() {
+    if (!userService) {
+        errorMessage.value = 'Сервис пользователя недоступен'
+        return
+    }
+
+    isLoading.value = true
+    errorMessage.value = ''
+
+    try {
+        const response = await userService.getUserPortfolio()
+        const items = Array.isArray(response.data?.data) ? response.data.data : []
+        data.value = sortPortfolio(items.map(mapPortfolioItem))
+    } catch (error) {
+        console.error('Portfolio loading error', error)
+        errorMessage.value = 'Не удалось загрузить портфолио'
+    } finally {
+        isLoading.value = false
+    }
+}
+
+function mapPortfolioItem(item) {
+    return {
+        id: item.id,
+        title: item.text || 'Без названия',
+        role: Array.isArray(item.roles) ? item.roles : [],
+        money: item.solariki ?? 0,
+        balls: item.cost ?? 0,
+        status: item.status || '-',
+        teacher: item.nastavnik?.full_name || '-',
+        createdAt: item.created_at
+    }
+}
+
+function sortPortfolio(list) {
+    const sortedList = [...list]
+
+    sortedList.sort((a, b) => {
+        const firstDate = getDateTime(a.createdAt)
+        const secondDate = getDateTime(b.createdAt)
+
+        return selected.value === 'Старые вверху'
+            ? firstDate - secondDate
+            : secondDate - firstDate
+    })
+
+    return sortedList
+}
+
+function getDateTime(date) {
+    if (!date) return 0
+
+    const [day, month, rest] = date.split('.')
+    const [year, time = '00:00:00'] = (rest || '').split(' ')
+    const [hours = '0', minutes = '0', seconds = '0'] = time.split(':')
+
+    return new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hours),
+        Number(minutes),
+        Number(seconds)
+    ).getTime()
 }
 
 function setActive(id) {
@@ -320,6 +308,16 @@ function setActiveMobile(id) {
 
 .uc-dropdown__portfolio {
     width: 243px;
+}
+
+.uc-portfolio__message {
+    color: var(--dark);
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.uc-portfolio__message--error {
+    color: #de4700;
 }
 
 .uc-portfolio__table-container {

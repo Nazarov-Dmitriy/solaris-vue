@@ -1,5 +1,5 @@
 import axiosR from "@/api/http";
-import { AuthFormUser, LogoutResponse, User } from "@/interfaces/users";
+import { AuthFormUser, LogoutResponse, User, UserMessagesResponse, UserPortfolioResponse } from "@/interfaces/users";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { AxiosResponse } from "axios";
 
@@ -29,6 +29,14 @@ export class UserService {
 
     public logoutUser(): Promise<AxiosResponse<LogoutResponse>> { 
         return this._axiosR.get('/auth/logout')
+    }
+
+    public getUserPortfolio(): Promise<AxiosResponse<UserPortfolioResponse>> {
+        return this._axiosR.get('/user/portfolio')
+    }
+
+    public getUserMessages(): Promise<AxiosResponse<UserMessagesResponse>> {
+        return this._axiosR.get('/user/messages')
     }
 
 }

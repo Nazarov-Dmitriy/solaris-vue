@@ -20,9 +20,10 @@
                     <div class="cabinet-header__notification">
                         <router-link to="/cabinet/student/notification">
                             <p
+                                v-if="notificationsStore.messagesCount > 0"
                                 class="cabinet-header__notification-count p2-phone"
                             >
-                                1
+                                {{ notificationsStore.messagesCount }}
                             </p>
                             <img
                                 src="@/assets/icon/cabinet-header/bell.svg"
@@ -83,10 +84,20 @@
 
 <script lang="ts" setup>
 import { HeaderConfig } from '@/interfaces/header-types';
-import { ModelRef } from 'vue';
+import { useNotificationStore } from '@/stores/useNotificationStore';
+import { ModelRef, onMounted, onUnmounted } from 'vue';
 
 const config: ModelRef<HeaderConfig> =
     defineModel<HeaderConfig>('headerConfig');
+const notificationsStore = useNotificationStore();
+
+onMounted(() => {
+    notificationsStore.startPolling();
+})
+
+onUnmounted(() => {
+    notificationsStore.stopPolling();
+})
 </script>
 
 <style lang="scss" scoped>

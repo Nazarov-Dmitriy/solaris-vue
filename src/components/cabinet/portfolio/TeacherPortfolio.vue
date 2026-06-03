@@ -52,7 +52,13 @@
                         <p class="teacher-portfolio-subtitle__title p2 text-right">Портфолио</p>
                         <span class="teacher-portfolio-subtitle__line" />
                     </div>
-                    <div v-if="teacherPortfolioContests.length > 0" class="teacher-portfolio-list">
+                    <p v-if="isLoading" class="p1 teacher-portfolio-contnent-empty">
+                        Загрузка портфолио...
+                    </p>
+                    <p v-else-if="errorMessage" class="p1 teacher-portfolio-contnent-empty teacher-portfolio-contnent-error">
+                        {{ errorMessage }}
+                    </p>
+                    <div v-else-if="teacherPortfolioContests.length > 0" class="teacher-portfolio-list">
                         <div class="teacher-portfolio__tab-header">
                             <div class="teacher-portfolio__tab-contest p2">Название конкурса</div>
                             <div class="teacher-portfolio__tab-point p2">Баллы</div>
@@ -80,126 +86,117 @@
                         </div>
                     </div>
                     <p v-else class="p1 teacher-portfolio-contnent-empty">
-                        Здесь отображаются уведомления, уведомлений пока нет
+                        Портфолио пока пустое
                     </p>
                 </div>
             </div>
             <PaginationComponent
-                :perpage="5"
+                v-if="!isLoading && !errorMessage && teacherPortfolioContests.length"
+                :per-page="perPage"
+                :current-page="currentPage"
+                :total-pages="totalPages"
                 :data="teacherPortfolioContests"
                 :color="{ main: '#1F2A3E', hover: '#dda06b' }"
                 @set-list="getRenderList"
+                @set-page="setPage"
             />
         </div>
     </section>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { computed, inject, onMounted, ref, watch } from 'vue'
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 
+const userService = inject('UserService')
+
 const renderList = ref([])
-const sort = ref([])
+const sort = ref('Новые вверху')
+const teacherPortfolioContests = ref([])
+const isLoading = ref(false)
+const errorMessage = ref('')
+const currentPage = ref(1)
+const perPage = 5
+const totalPages = computed(() => Math.ceil(teacherPortfolioContests.value.length / perPage))
 
-const teacherPortfolioContests = [
-    {
-        id: 1,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 2,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 3,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 4,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 5,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 6,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 7,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 8,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 9,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 10,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 11,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 12,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    },
-    {
-        id: 13,
-        contest:
-            'Городской конкурс сочинений «Деды наших дедов – герои Отечества», посвященного 79-ой годовщине Победы советского народа в Великой Отечественной войне',
-        points: '260',
-        contest_date: '02.03.2024'
-    }
-]
+const portfolioSort = ['Новые вверху', 'Старые вверху']
 
-const portfolioSort = ['Новые вверху', 'Cтарые вверху']
+onMounted(loadPortfolio)
+
+watch(sort, () => {
+    teacherPortfolioContests.value = sortPortfolio(teacherPortfolioContests.value)
+    currentPage.value = 1
+})
 
 function getRenderList(list) {
-    console.log(list)
     renderList.value = list
+}
+
+function setPage(page) {
+    currentPage.value = page
+}
+
+async function loadPortfolio() {
+    if (!userService) {
+        errorMessage.value = 'Сервис пользователя недоступен'
+        return
+    }
+
+    isLoading.value = true
+    errorMessage.value = ''
+
+    try {
+        const response = await userService.getUserPortfolio()
+        const items = Array.isArray(response.data?.data) ? response.data.data : []
+        teacherPortfolioContests.value = sortPortfolio(items.map(mapPortfolioItem))
+    } catch (error) {
+        console.error('Portfolio loading error', error)
+        errorMessage.value = 'Не удалось загрузить портфолио'
+    } finally {
+        isLoading.value = false
+    }
+}
+
+function mapPortfolioItem(item) {
+    return {
+        id: item.id,
+        contest: item.text || 'Без названия',
+        points: item.cost ?? 0,
+        contest_date: item.created_at || '-',
+        createdAt: item.created_at
+    }
+}
+
+function sortPortfolio(list) {
+    const sortedList = [...list]
+
+    sortedList.sort((a, b) => {
+        const firstDate = getDateTime(a.createdAt)
+        const secondDate = getDateTime(b.createdAt)
+
+        return sort.value === 'Старые вверху'
+            ? firstDate - secondDate
+            : secondDate - firstDate
+    })
+
+    return sortedList
+}
+
+function getDateTime(date) {
+    if (!date) return 0
+
+    const [day, month, rest] = date.split('.')
+    const [year, time = '00:00:00'] = (rest || '').split(' ')
+    const [hours = '0', minutes = '0', seconds = '0'] = time.split(':')
+
+    return new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hours),
+        Number(minutes),
+        Number(seconds)
+    ).getTime()
 }
 </script>
 
@@ -398,6 +395,10 @@ function getRenderList(list) {
     position: relative;
     gap: 24px;
     margin-bottom: 24px;
+}
+
+.teacher-portfolio-contnent-error {
+    color: #de4700;
 }
 
 .teacher-portfolio-subtitle__wraper {

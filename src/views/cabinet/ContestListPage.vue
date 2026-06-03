@@ -39,3 +39,13 @@ onMounted(async () => {
     }
 })
 </script>
+
+<style lang="scss" scoped>
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 0;
+    background: var(--dark);
+}
+</style>

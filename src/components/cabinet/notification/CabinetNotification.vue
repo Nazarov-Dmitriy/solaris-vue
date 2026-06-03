@@ -20,7 +20,19 @@
             <div class="notification-container">
                 <div class="notification-contnent">
                     <div
-                        v-if="notifications.length > 0"
+                        v-if="notificationsStore.isLoading"
+                        class="p1 notification-contnent-empty"
+                    >
+                        Загрузка уведомлений...
+                    </div>
+                    <div
+                        v-else-if="notificationsStore.error"
+                        class="p1 notification-contnent-empty notification-contnent-error"
+                    >
+                        {{ notificationsStore.error }}
+                    </div>
+                    <div
+                        v-else-if="notifications.length > 0"
                         class="notification-list"
                     >
                         <div
@@ -30,7 +42,7 @@
                         >
                             <div class="notification__info">
                                 <p class="notification__publication p2">
-                                    {{ el.notification_date }}
+                                    {{ el.watch_at }}
                                 </p>
                             </div>
                             <p
@@ -40,7 +52,7 @@
                                 }"
                                 @click="activeMenu(el.id)"
                             >
-                                {{ el.message }}
+                                {{ el.text }}
                             </p>
                         </div>
                     </div>
@@ -50,23 +62,33 @@
                 </div>
             </div>
             <PaginationComponent
-                :perpage="6"
+                v-if="!notificationsStore.isLoading && !notificationsStore.error && notifications.length"
+                :per-page="perPage"
+                :current-page="currentPage"
+                :total-pages="totalPages"
                 :data="notifications"
                 :color="{ main: '#1F2A3E', hover: '#dda06b' }"
                 @set-list="getRenderList"
+                @set-page="setPage"
             />
         </div>
     </section>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import PaginationComponent from '@/components/pagination/PaginationComponent.vue';
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue';
+import { useNotificationStore } from '@/stores/useNotificationStore';
 
+const notificationsStore = useNotificationStore();
 const renderList = ref([]);
-const sort = ref([]);
+const sort = ref('Новые вверху');
+const currentPage = ref(1);
+const perPage = 6;
 
 const readNotification = ref([]);
+const notifications = computed(() => sortNotifications(notificationsStore.messages));
+const totalPages = computed(() => Math.ceil(notifications.value.length / perPage));
 
 function activeMenu(id) {
     if (!readNotification.value.includes(id)) {
@@ -74,10 +96,54 @@ function activeMenu(id) {
     }
 }
 
-const notificationSort = ['Новые вверху', 'Cтарые вверху'];
+const notificationSort = ['Новые вверху', 'Старые вверху'];
+
+onMounted(() => {
+    notificationsStore.fetchMessages();
+})
+
+watch(sort, () => {
+    currentPage.value = 1;
+})
 
 function getRenderList(list) {
     renderList.value = list;
+}
+
+function setPage(page) {
+    currentPage.value = page;
+}
+
+function sortNotifications(list) {
+    const sortedList = [...list];
+
+    sortedList.sort((a, b) => {
+        const firstDate = getDateTime(a.watch_at);
+        const secondDate = getDateTime(b.watch_at);
+
+        return sort.value === 'Старые вверху'
+            ? firstDate - secondDate
+            : secondDate - firstDate;
+    });
+
+    return sortedList;
+}
+
+function getDateTime(date) {
+    if (!date) return 0;
+
+    const [day, month, rest] = date.split('.');
+    const [year, time = '00:00:00'] = (rest || '').split(' ');
+    const [hours = '0', minutes = '0', seconds = '0'] = time.split(':');
+
+    return new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hours),
+        Number(minutes),
+        Number(seconds)
+    ).getTime();
 }
 </script>
 
@@ -86,6 +152,7 @@ function getRenderList(list) {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    min-height: 0;
 
     :deep(.dashboard__dropdown-wrapper) {
         z-index: 1;
@@ -154,11 +221,19 @@ function getRenderList(list) {
 }
 
 .notification-wpaper {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    min-height: 0;
     background: var(--white);
 }
 
 .notification-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+    width: 100%;
     max-width: 1560px;
     padding: 24px 60px 20px 60px;
     margin: 0 auto;
@@ -180,15 +255,37 @@ function getRenderList(list) {
 .notification-contnent {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
     position: relative;
     gap: 24px;
-    margin-bottom: 24px;
+}
+
+.notification-contnent-error {
+    color: #de4700;
 }
 
 .notification-list {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+    overflow-y: auto;
     gap: 16px;
+}
+
+.section-notification :deep(.pagination__container) {
+    flex-shrink: 0;
+    margin-top: auto;
+    padding: 0 60px 24px;
+
+    @media (max-width: $lg) {
+        padding: 0 40px 24px;
+    }
+
+    @media (max-width: $sm) {
+        padding: 0 16px 24px;
+    }
 }
 
 .notification__item {
