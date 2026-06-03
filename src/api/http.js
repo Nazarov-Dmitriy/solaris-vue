@@ -16,6 +16,7 @@ axiosR.interceptors.request.use(
         }
         if ('put' == config.method) {
             config.method = 'post';
+            config.data = config.data || {};
             config.data['_method'] = 'put';
         }
         if ('delete' == config.method) {

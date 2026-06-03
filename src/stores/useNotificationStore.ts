@@ -44,5 +44,12 @@ export const useNotificationStore = defineStore('notificationStore', {
             clearInterval(this.pollingId)
             this.pollingId = null
         },
+        async markAsRead(messageId: number) {
+            try {
+                await axiosR.put(`/user/messages/${messageId}`)
+            } catch (error) {
+                console.error('Mark as read error', error)
+            }
+        },
     },
 })

@@ -92,7 +92,9 @@ const totalPages = computed(() => Math.ceil(notifications.value.length / perPage
 
 function activeMenu(id) {
     if (!readNotification.value.includes(id)) {
+    console.log('helllo');
         readNotification.value.push(id);
+        notificationsStore.markAsRead(id);
     }
 }
 
