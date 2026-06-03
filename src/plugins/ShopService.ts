@@ -1,7 +1,7 @@
 import axiosR from "@/api/http";/* 
 import { ProductForm } from "@/interfaces/Product"; */
 import { ProductMain, ProductMainResponse } from "@/interfaces/products";
-import { CurrUserPurchasesResponse, ProductResponse, ProductsPaginationResponse } from "@/interfaces/shop";
+import { CurrUserPurchasesResponse, ProductResponse, ProductsPaginationResponse, ProductSaleResponse } from "@/interfaces/shop";
 import { useShopStore } from "@/stores/useShopStore";
 import { AxiosResponse } from "axios";
 
@@ -47,6 +47,15 @@ export class ShopService {
                 console.log(res.data)
             }
             return res.data.data
+        })
+    }
+
+    public saleProduct(tovarCatalogId: number, count: number): Promise<AxiosResponse<ProductSaleResponse>> {
+        return this._axiosR.post('/tovars/sale', null, {
+            params: {
+                tovar_catalog_id: String(tovarCatalogId),
+                count: String(count),
+            },
         })
     }
 }

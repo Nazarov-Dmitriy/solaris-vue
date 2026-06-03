@@ -32,6 +32,9 @@
                         {{ product?.description }}
                     </p>
                 </div>
+                <p v-if="saleMessage" class="card-message" :class="{ error: saleError }">
+                    {{ saleMessage }}
+                </p>
                 <div class="card-buttons">
                     <button @click="() => router.back()" type="button" class="cancel-btn">Отменить</button>
                     <div class="quantity-block">
@@ -40,7 +43,9 @@
                         <span class="quantity h3">{{ countValue }}</span>
                         <button class="increase h3" @click="increment">+</button>
                     </div>
-                    <button type="button" class="exchange-btn">Обменять</button>
+                    <button type="button" class="exchange-btn" :disabled="saleLoading" @click="exchangeProduct">
+                        {{ saleLoading ? 'Обмен...' : 'Обменять' }}
+                    </button>
                 </div>
             </div>
             <div v-else>LOADING..</div>
@@ -63,6 +68,9 @@ const router = useRouter()
 
 const countValue = ref(1)
 const loading = ref(false);
+const saleLoading = ref(false);
+const saleMessage = ref('');
+const saleError = ref(false);
 const product = ref<Product | null>(null)
 
 watch(() => +route.params.id, fetchProduct, {immediate: true})
@@ -98,6 +106,25 @@ function decrement() {
         countValue.value--
     } else {
         return
+    }
+}
+
+async function exchangeProduct() {
+    if (!product.value || saleLoading.value) return
+
+    saleLoading.value = true
+    saleMessage.value = ''
+    saleError.value = false
+
+    try {
+        await shopService.saleProduct(product.value.id, countValue.value)
+        saleMessage.value = 'Товар успешно обменян'
+    } catch (error) {
+        console.error('Product sale error', error)
+        saleError.value = true
+        saleMessage.value = error.response.data.tovar?.[0] ?? 'Не удалось обменять товар'
+    } finally {
+        saleLoading.value = false
     }
 }
 </script>
@@ -190,6 +217,17 @@ function decrement() {
     gap: 32px;
 }
 
+.card-message {
+    width: 100%;
+    margin-bottom: 24px;
+    color: var(--roseBege);
+    text-align: center;
+
+    &.error {
+        color: var(--orange);
+    }
+}
+
 .cancel-btn {
     border: 2px solid var(--roseBege);
     width: 295px;
@@ -223,6 +261,11 @@ function decrement() {
     background-color: rgba(222, 71, 0, 1);
     color: white;
     cursor: pointer;
+
+    &:disabled {
+        opacity: .7;
+        cursor: default;
+    }
 
     &:hover {
         border: 2px solid var(--roseBege);

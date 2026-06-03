@@ -47,3 +47,9 @@ export interface CurrUserPurchasesResponse {
     status: string,
     data: CurrUserPurchase[]
 }
+
+export interface ProductSaleResponse {
+    status: string,
+    data?: unknown,
+    message?: string,
+}
