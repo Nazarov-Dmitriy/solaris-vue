@@ -3,7 +3,7 @@
         <div class="cabinet-header">
             <div class="cabinet-header__info">
                 <router-link
-                    to="/cabinet/student"
+                    :to="cabinetHomePath"
                     class="cabinet-header__logo-wraper"
                 >
                     <img
@@ -13,12 +13,12 @@
                         icon-logo"
                     />
                     <p class="cabinet-header__logo-text p2-phone">
-                        Кабинет ученика
+                        {{ cabinetTitle }}
                     </p>
                 </router-link>
                 <div class="cabinet-header__student-info">
                     <div class="cabinet-header__notification">
-                        <router-link to="/cabinet/student/notification">
+                        <router-link :to="notificationPath">
                             <p
                                 v-if="notificationsStore.messagesCount > 0"
                                 class="cabinet-header__notification-count p2-phone"
@@ -42,7 +42,7 @@
                 <ul class="cabinet-header__list">
                     <li class="botton">
                         <router-link
-                            to="/cabinet/student/contests"
+                            :to="contestsPath"
                             class="cabinet-header__link"
                         >
                             <img
@@ -52,9 +52,9 @@
                             Конкурсы
                         </router-link>
                     </li>
-                    <li class="botton">
+                    <li v-if="!isTeacherCabinet" class="botton">
                         <router-link
-                            to="/cabinet/student/shop"
+                            :to="shopPath"
                             class="cabinet-header__link"
                         >
                             <img
@@ -64,9 +64,9 @@
                             Магазин
                         </router-link>
                     </li>
-                    <li class="botton">
+                    <li v-if="!isTeacherCabinet" class="botton">
                         <router-link
-                            to="/cabinet/student/sales"
+                            :to="salesPath"
                             class="cabinet-header__link"
                         >
                             <img
@@ -74,6 +74,18 @@
                                 alt="icon-shop"
                             />
                             Покупки
+                        </router-link>
+                    </li>
+                    <li v-if="isTeacherCabinet" class="botton">
+                        <router-link
+                            to="/cabinet/teacher/case-portfolio"
+                            class="cabinet-header__link"
+                        >
+                            <img
+                                src="@/assets/icon/cabinet-header/contest.svg"
+                                alt="icon-shop"
+                            />
+                            Добавить в портфолио
                         </router-link>
                     </li>
                 </ul>
@@ -85,11 +97,24 @@
 <script lang="ts" setup>
 import { HeaderConfig } from '@/interfaces/header-types';
 import { useNotificationStore } from '@/stores/useNotificationStore';
-import { ModelRef, onMounted, onUnmounted } from 'vue';
+import { computed, ModelRef, onMounted, onUnmounted } from 'vue';
+import { useRoute } from 'vue-router';
 
 const config: ModelRef<HeaderConfig> =
     defineModel<HeaderConfig>('headerConfig');
 const notificationsStore = useNotificationStore();
+const route = useRoute();
+
+const isTeacherCabinet = computed(() => route.path.includes('/cabinet/teacher'));
+const cabinetBasePath = computed(() => isTeacherCabinet.value ? '/cabinet/teacher' : '/cabinet/student');
+const cabinetTitle = computed(() => {
+    return isTeacherCabinet.value ? 'Кабинет учителя' : 'Кабинет ученика';
+});
+const cabinetHomePath = computed(() => cabinetBasePath.value);
+const notificationPath = computed(() => `${cabinetBasePath.value}/notification`);
+const contestsPath = computed(() => `${cabinetBasePath.value}/contests`);
+const shopPath = computed(() => `${cabinetBasePath.value}/shop`);
+const salesPath = computed(() => `${cabinetBasePath.value}/sales`);
 
 onMounted(() => {
     notificationsStore.startPolling();

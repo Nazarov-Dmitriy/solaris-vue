@@ -8,6 +8,7 @@ export interface User {
 }
 
 export interface Teacher extends User {
+    id: number,
     teacher_id: string,
     profeccion: string,
     name: string,

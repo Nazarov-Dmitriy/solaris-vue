@@ -32,4 +32,14 @@ export class TeacherService {
     public async postTeacherCase(data: FormData) {
         return await this._axiosR.post('/teacher/keis', data);
     }
+
+    public async checkCertificate(number: string) {
+        return await this._axiosR.get(`/tovars/cert-check/${number}`);
+    }
+
+    public async activateCertificate(number: string) {
+        return await this._axiosR.post('/tovars/cert-activate', null, {
+            params: { number },
+        });
+    }
 }

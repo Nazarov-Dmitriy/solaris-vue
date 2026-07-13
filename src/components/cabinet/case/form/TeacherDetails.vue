@@ -16,6 +16,7 @@
             </label>
             <div v-for="(fieldGroup, index) in fieldsGroup" :key="index" class="input-group">
                 <DropdownComponent
+                    v-model:modelValue="fieldGroup.subject"
                     class="add-portfolio__form-input"
                     :additional-class="'custom-dropdown-selected'"
                     :options="subjects"
@@ -43,6 +44,7 @@
                     class="add-portfolio__form-input"
                     :additional-class="'custom-dropdown-selected'"
                     :options="options"
+                    :model-value="selectedOption"
                     @update:model-value="updateSelectedOption"
                 />
             </div>
@@ -52,8 +54,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
+
+const props = defineProps({
+    selectedOption: {
+        type: String,
+        default: ''
+    }
+})
 
 const data = ref([
     {
@@ -63,14 +72,19 @@ const data = ref([
 ])
 
 const selectedOption = ref('')
-const fieldsGroup = ref([1])
+const fieldsGroup = ref([{ subject: '-' }])
 
 function addFieldsGroup() {
     if (fieldsGroup.value.length >= subjects.length - 1) {
         return
-    } else {
-        fieldsGroup.value.push(1)
     }
+
+    const lastSubject = fieldsGroup.value[fieldsGroup.value.length - 1]?.subject
+    if (!lastSubject || lastSubject === '-') {
+        return
+    }
+
+    fieldsGroup.value.push({ subject: '-' })
 }
 
 const options = ref([
@@ -83,16 +97,54 @@ const options = ref([
     'Аттестация'
 ])
 
-const subjects = ['-', 'Математика', 'Физика', 'Химия']
+const subjects = [
+    '-',
+    'Русский язык',
+    'Литература',
+    'Математика',
+    'Алгебра',
+    'Геометрия',
+    'Информатика',
+    'Физика',
+    'Химия',
+    'Биология',
+    'География',
+    'История',
+    'Обществознание',
+    'Английский язык',
+    'Немецкий язык',
+    'Французский язык',
+    'Китайский язык',
+    'ИЗО',
+    'Музыка',
+    'Технология',
+    'Физическая культура',
+    'ОБЖ',
+    'Начальные классы'
+]
 
-const emit = defineEmits(['optionSelected'])
+const emit = defineEmits(['optionSelected', 'subjectsSelected'])
+const selectedSubjects = computed(() => {
+    return fieldsGroup.value
+        .map(group => group.subject)
+        .filter(subject => subject && subject !== '-')
+})
+
+watch(
+    () => props.selectedOption,
+    (option) => {
+        selectedOption.value = option
+    },
+    { immediate: true }
+)
 
 function updateSelectedOption(option) {
     selectedOption.value = option
 }
 
 function handleSubmit() {
-    emit('optionSelected', selectedOption.value)
+    emit('subjectsSelected', selectedSubjects.value)
+    emit('optionSelected', selectedOption.value === '-' ? '' : selectedOption.value)
 }
 
 function getPath(img) {

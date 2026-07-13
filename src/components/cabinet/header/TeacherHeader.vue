@@ -77,10 +77,14 @@
             <!-- smth to change here with user -->
             <ModalSertificat
                 :show="modal"
-                :user="user" 
                 :sertificat="sertificat"
                 :validate="validateSertificat"
+                :certificate="certificate"
+                :loading="certificateLoading"
+                :message="certificateMessage"
+                :activation-loading="certificateActivationLoading"
                 @close="closeModal()"
+                @activate="activateCertificate()"
             />
         </Teleport>
     </div>
@@ -92,11 +96,13 @@ import ModalSertificat from '@/components/modal/ModalSertificat.vue'
 import { computed, inject, onMounted, onUnmounted, ref } from 'vue'
 import { useTeacherStore } from '@/stores/useTeacherStore';
 import { UserService } from '@/plugins/UserService';
+import { TeacherService } from '@/plugins/TeacherService';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useNotificationStore } from '@/stores/useNotificationStore';
 import { useRouter } from 'vue-router';
 
 const authService: UserService = inject('UserService');
+const teacherService: TeacherService = inject('TeacherService');
 const authStore = useAuthStore();
 const notificationsStore = useNotificationStore();
 const router = useRouter();
@@ -113,8 +119,10 @@ const logoutBtn = ref(null)
 const sertificat = ref('')
 const validateSertificat = ref(false)
 const modal = ref(false)
-
-const user = ref({ name: 'Иванов Михаил Дмитриевич', class: '7А класс', date: '12/04/2024' }) // todo: delete this
+const certificate = ref(null)
+const certificateLoading = ref(false)
+const certificateActivationLoading = ref(false)
+const certificateMessage = ref('')
 
 function showLogoutBtn(e) {
     if(logoutBtnVisible.value === true || e.target !== logoutBtn.value) {
@@ -141,21 +149,53 @@ function setMenuAcive() {
     menuActive.value = !menuActive.value
 }
 
-function showModal() {
+async function showModal() {
+    certificate.value = null
+    certificateMessage.value = ''
+    validateSertificat.value = false
+    modal.value = true
+
     if (sertificat.value === '') {
-        modal.value = true
-    } else {
-        if (sertificat.value === '1234') {
-            validateSertificat.value = true
-        }
-        console.log(validateSertificat.value)
-        modal.value = true
+        certificateMessage.value = 'Введите номер сертификата'
+        return
+    }
+
+    certificateLoading.value = true
+    try {
+        const response = await teacherService.checkCertificate(sertificat.value)
+        certificate.value = response.data.data
+        validateSertificat.value = true
+    } catch (error) {
+        console.error(error)
+        certificateMessage.value = 'Такого сертификата нет'
+    } finally {
+        certificateLoading.value = false
+    }
+}
+
+async function activateCertificate() {
+    if (!sertificat.value || certificateActivationLoading.value) return
+
+    certificateActivationLoading.value = true
+    certificateMessage.value = ''
+
+    try {
+        const response = await teacherService.activateCertificate(sertificat.value)
+        certificate.value = response.data.data
+        certificateMessage.value = 'Сертификат активирован'
+    } catch (error) {
+        console.error(error)
+        certificateMessage.value = error?.response?.data?.number?.[0] ?? 'Не удалось активировать сертификат'
+    } finally {
+        certificateActivationLoading.value = false
     }
 }
 
 function closeModal() {
     modal.value = false
     validateSertificat.value = false
+    certificate.value = null
+    certificateMessage.value = ''
 }
 
 onMounted(() => {

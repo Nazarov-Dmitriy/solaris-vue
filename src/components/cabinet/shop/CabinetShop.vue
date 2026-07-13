@@ -1,14 +1,20 @@
 <template>
     <section class="shop-container">
         <div class="shop">
-            <div class="shop-list">
+            <p v-if="loading" class="shop-empty p1">
+                Загрузка товаров...
+            </p>
+            <p v-else-if="products.length === 0" class="shop-empty p1">
+                Сейчас в магазине нет доступных товаров
+            </p>
+            <div v-else class="shop-list">
                 <template
                     v-for="el in products"
                     :key="el.id"
                 >
                     <div
                         class="shop-item"
-                        :class="{ 'shop-item__popular': false }"
+                        :class="{ 'shop-item__popular': false, 'shop-item_disabled': el.count === 0 }"
                         @click="$router.push(`/cabinet/student/shop/${el.id}`)"
                     >
                         <img
@@ -18,8 +24,11 @@
                         >
                         <div class="shop-contnent">
                             <p class="shop-subtitle p1">
-                                {{ el.name }}
-                            </p>
+                            {{ el.name }}
+                        </p>
+                        <p v-if="el.count === 0" class="shop-count p2">
+                            Нет в наличии
+                        </p>
                             <div class="shop-price-wraper">
                                 <p class="shop-price h2">
                                     {{ el.price }}
@@ -64,16 +73,26 @@ const shopStore = useShopStore()
 const shopService: ShopService = inject('ShopService')
 
 const currentPage = computed(() => shopStore.currentPage)
-const products = computed(() => shopStore.getProductByPage)
+const loading = ref(false)
+const products = computed(() => shopStore.getProductByPage ?? [])
 const perPage = computed(() => shopStore.perPage)
 const totalPages = computed(() => shopStore.pagesCount)
 
-onMounted(() => shopService.getProducts())
+onMounted(loadProducts)
 function setPage(page) {
     shopStore.setCurrentPage(page);
 }
 
-watch(currentPage, () => { shopService.getProducts() })
+watch(currentPage, loadProducts)
+
+async function loadProducts() {
+    loading.value = true
+    try {
+        await shopService.getProducts()
+    } finally {
+        loading.value = false
+    }
+}
 
 const renderList = ref([])
 
@@ -127,6 +146,10 @@ function getRenderList (list) {
     border-color: var(--orange)
 }
 
+.shop-item_disabled {
+    opacity: .65;
+}
+
 .shop-item:hover .shop-price-wraper {
     color: var(--orange)
 }
@@ -164,6 +187,11 @@ function getRenderList (list) {
 
 .shop-subtitle {
     color: var(--white);
+}
+
+.shop-count,
+.shop-empty {
+    color: var(--roseBege);
 }
 
 .shop-price-wraper {

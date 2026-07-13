@@ -175,12 +175,15 @@
                             <p v-else class="uc-contest__user-name p2">
                                 У этого конкурса пока нет наставников.
                             </p>
+                            <p v-if="applicationError" class="uc-contest__application-text uc-contest__application-text--error">
+                                {{ applicationError }}
+                            </p>
                             <button
                                 class="btn uc-contest-btn"
-                                :disabled="arrSubmitApplication.length === 0"
+                                :disabled="arrSubmitApplication.length === 0 || applicationLoading"
                                 @click="submitApplication()"
                             >
-                                Подать заявку на участие
+                                {{ applicationLoading ? 'Отправка...' : 'Подать заявку на участие' }}
                             </button>
                         </template>
                         <template v-else>
@@ -255,6 +258,8 @@ const props = defineProps({
 
 const arrSubmitApplication = ref([])
 const confirmedApplication = ref([])
+const applicationError = ref('')
+const applicationLoading = ref(false)
 
 const listTeacher = /* computed(() => competitionsStore.currentCompetition.competition.teachers) */
 [
@@ -297,6 +302,7 @@ const listTeacher = /* computed(() => competitionsStore.currentCompetition.compe
 ]
 
 function addSubmitApplication(id) {
+    applicationError.value = ''
     if (!arrSubmitApplication.value.includes(id) && arrSubmitApplication.value.length === 0) {
         arrSubmitApplication.value.push(id)
     } else {
@@ -307,16 +313,22 @@ function addSubmitApplication(id) {
 function submitApplication() {
     const selectedTeacherId = arrSubmitApplication.value[0];
     const selectedTeacher = props.contests.teachers.find((teacher) => teacher.id === selectedTeacherId)
+    if (!selectedTeacherId || applicationLoading.value) return;
+
+    applicationLoading.value = true;
+    applicationError.value = '';
     competitionService.postStudentJoinContest(+competitionsStore.currentCompetition.id, selectedTeacherId)
     .then((res) => {
-        if(res.status == 200 || res.status === 201 || res.status === 422) {
+        if(res.status == 200 || res.status === 201) {
             confirmedApplication.value.push(selectedTeacher);
             emit('pupilJoin');
         }
     })
     .catch((err) => {
-    const selectedTeacher = props.contests.teachers.find((teacher) => teacher.id === selectedTeacherId)
-        confirmedApplication.value.push(selectedTeacher)
+        applicationError.value = err?.response?.data?.message || 'Не удалось отправить заявку. Попробуйте еще раз.'
+    })
+    .finally(() => {
+        applicationLoading.value = false;
     })
     
     /* const selectedTeacher = listTeacher.find((teacher) => teacher.id === selectedTeacherId)

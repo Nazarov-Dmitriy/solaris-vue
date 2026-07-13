@@ -109,11 +109,15 @@
                         </div>
                         <BtnComponent
                             class="propose-contest__form-btn"
+                            :disabled="submitLoading"
                             emit-name="action"
                             @action="submit"
                         >
-                            Отправить на согласование
+                            {{ submitLoading ? 'Отправка...' : 'Отправить на согласование' }}
                         </BtnComponent>
+                        <p v-if="formMessage" class="propose-contest__message" :class="{ error: formError }">
+                            {{ formMessage }}
+                        </p>
                         <div class="propose-contest__form-btn-info">
                             <p class="propose-contest__form-btn-info-text">
                                 Нажимая “Отправить на согласование” вы соглашаетесь с
@@ -150,6 +154,9 @@ const roleOptions = ['-', 'Ученик', 'Учитель']
 const name = ref('')
 const description = ref('')
 const dropdowns = ref(['-'])
+const submitLoading = ref(false)
+const formMessage = ref('')
+const formError = ref(false)
 
 const fileInput = ref(null)
 const showFile = ref(false)
@@ -157,6 +164,7 @@ const selectedFiles = ref([])
 
 function addDropdown() {
     if (dropdowns.value.length >= 3) return
+    if (dropdowns.value[dropdowns.value.length - 1] === '-') return
     dropdowns.value.push('-')
 }
 
@@ -178,26 +186,40 @@ function deleteFile(index) {
 }
 
 async function submit() {
+    formMessage.value = ''
+    formError.value = false
+
+    const roles = Array.from(new Set(dropdowns.value.filter(r => r && r !== '-')))
+    if (!name.value.trim() || !description.value.trim() || roles.length === 0) {
+        formError.value = true
+        formMessage.value = 'Заполните название, описание и выберите хотя бы одну роль.'
+        return
+    }
+
     const formData = new FormData()
-    formData.append('name', name.value)
-    formData.append('description', description.value)
-    dropdowns.value
-        .filter(r => r && r !== '-')
-        .forEach(r => formData.append('role[]', r))
+    formData.append('name', name.value.trim())
+    formData.append('description', description.value.trim())
+    roles.forEach(r => formData.append('role[]', r))
     if (selectedFiles.value.length > 0) {
         formData.append('file', selectedFiles.value[0])
     }
 
     try {
+        submitLoading.value = true
         await competitionService.postContestProposition(formData)
         name.value = ''
         description.value = ''
         dropdowns.value = ['-']
         selectedFiles.value = []
         showFile.value = false
+        formMessage.value = 'Предложение отправлено на согласование.'
         router.push('/cabinet/teacher/contests')
     } catch (err) {
         console.error(err)
+        formError.value = true
+        formMessage.value = 'Не удалось отправить предложение конкурса.'
+    } finally {
+        submitLoading.value = false
     }
 }
 </script>
@@ -254,6 +276,14 @@ async function submit() {
     font-size: 16px;
     line-height: 1.5;
     color: var(--dark);
+}
+
+.propose-contest__message {
+    color: var(--dark);
+
+    &.error {
+        color: var(--orange);
+    }
 }
 .propose-contest__form-dropdown-group {
     display: flex;

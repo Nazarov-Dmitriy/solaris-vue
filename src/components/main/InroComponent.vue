@@ -126,9 +126,7 @@
                                 />
                             </svg>
                             <p class="intro__modal-text p1">
-                                Если вы забыли пароль от своего личного
-                                кабинета, то обратитесь к вашему классному
-                                руководителю.
+                                Для сброса пароля и восстановления доступа обратитесь к классному руководителю или администратору системы.
                             </p>
                         </div>
                     </transition>
@@ -180,7 +178,9 @@ const onLogin = () => {
         .catch((e) => {});
 };
 
-const forgetPassword = () => {};
+const forgetPassword = () => {
+    modal.value = true;
+};
 </script>
 
 <style lang="scss">

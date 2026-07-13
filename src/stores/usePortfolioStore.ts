@@ -16,7 +16,7 @@ export type PortfolioItem = {
         full_name: string
     }
     solariki: number
-    cost: number
+    balls: number
     status: string
     created_at: string
 }

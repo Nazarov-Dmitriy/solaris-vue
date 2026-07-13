@@ -47,6 +47,9 @@
                             <h2 class="top-competition__footer-title">
                                 Предполагаемый балл: 0
                             </h2>
+                            <p v-if="errorMessage" class="top-competition__error">
+                                {{ errorMessage }}
+                            </p>
                             <BtnComponent
                                 emit-name="form-submit"
                                 class="top-competition__footer-btn"
@@ -101,13 +104,21 @@ import DropdownComponent from '@/components/dropdown/DropdownComponent.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
 import { useCaseSave } from '@/composables/useCaseSave'
 
-const { groups, isModalVisible, addGroup, toggleModal, saveGroup } = useCaseSave({
+const props = defineProps({
+    subjects: {
+        type: Array,
+        default: () => []
+    }
+})
+
+const { groups, isModalVisible, errorMessage, addGroup, toggleModal, saveGroup } = useCaseSave({
     createEmpty: () => ({
         nomination: '' as string,
         result: '-' as string,
         files: [] as File[],
     }),
     getCritery: (group) => group.nomination || 'Участие в ТОП-конкурсе',
+    getPredmets: () => props.subjects as string[],
 })
 
 const resultOptions = ref([
@@ -125,6 +136,10 @@ const resultOptions = ref([
 <style lang="scss" scoped>
 .top-competition {
     background-color: var(--white);
+}
+
+.top-competition__error {
+    color: var(--orange);
 }
 
 .top-competition__wrapper {

@@ -161,6 +161,7 @@ const selected = ref('Новые вверху')
 const active = ref([])
 const activeMobile = ref([])
 const renderList = ref([])
+const sourceData = ref([])
 const data = ref([])
 const isLoading = ref(false)
 const errorMessage = ref('')
@@ -168,15 +169,22 @@ const currentPage = ref(1)
 const perPage = 5
 const totalPages = computed(() => Math.ceil(data.value.length / perPage))
 
-const option = [
-    'Новые вверху',
-    'Старые вверху'
-]
+const option = computed(() => {
+    const roles = [...new Set(sourceData.value.flatMap(item => item.role))]
+        .filter(Boolean)
+        .sort((a, b) => a.localeCompare(b, 'ru'))
+
+    return [
+        'Новые вверху',
+        'Старые вверху',
+        ...roles.map(role => `Роль: ${role}`)
+    ]
+})
 
 onMounted(loadPortfolio)
 
 watch(selected, () => {
-    data.value = sortPortfolio(data.value)
+    applyPortfolioView()
     currentPage.value = 1
 })
 
@@ -200,7 +208,8 @@ async function loadPortfolio() {
     try {
         const response = await userService.getUserPortfolio()
         const items = Array.isArray(response.data?.data) ? response.data.data : []
-        data.value = sortPortfolio(items.map(mapPortfolioItem))
+        sourceData.value = items.map(mapPortfolioItem)
+        applyPortfolioView()
     } catch (error) {
         console.error('Portfolio loading error', error)
         errorMessage.value = 'Не удалось загрузить портфолио'
@@ -215,11 +224,21 @@ function mapPortfolioItem(item) {
         title: item.text || 'Без названия',
         role: Array.isArray(item.roles) ? item.roles : [],
         money: item.solariki ?? 0,
-        balls: item.cost ?? 0,
+        balls: item.balls ?? 0,
         status: item.status || '-',
         teacher: item.nastavnik?.full_name || '-',
         createdAt: item.created_at
     }
+}
+
+function applyPortfolioView() {
+    const selectedValue = selected.value || 'Новые вверху'
+    const rolePrefix = 'Роль: '
+    const filteredList = selectedValue.startsWith(rolePrefix)
+        ? sourceData.value.filter(item => item.role.includes(selectedValue.slice(rolePrefix.length)))
+        : sourceData.value
+
+    data.value = sortPortfolio(filteredList)
 }
 
 function sortPortfolio(list) {

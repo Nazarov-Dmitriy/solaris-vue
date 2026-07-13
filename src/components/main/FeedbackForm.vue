@@ -234,6 +234,9 @@
                     </div>
 
                     <div class="form__footer">
+                        <p v-if="submitMessage" class="form__text-error">
+                            {{ submitMessage }}
+                        </p>
                         <button
                             class="form__button button btn"
                             @click.prevent="validateForm()"
@@ -261,6 +264,7 @@ let feedbackContainer;
 let feedbackTitle;
 let feedbackImg;
 const feedbackForm = ref<HTMLFormElement | null>(null)
+const submitMessage = ref('')
 const formField = reactive({
     name: '',
     phone: '',
@@ -346,6 +350,7 @@ function changeTextarea (event) {
 }
 
 function validateForm () {
+    submitMessage.value = ''
     let validateFeildArr = ['name', 'phone', 'email', 'textarea'];
 
     validateFeildArr.forEach(item => {
@@ -354,8 +359,27 @@ function validateForm () {
 
     if(!formField.nameError && !formField.emailError && !formField.phoneError && !formField.textareaError) {
         onFeedbackSubmit()
-        .then((res) => {if(res.data.status === "success") feedbackForm.value.reset()})
+        .then((res) => {
+            if(res.data.status === "success") {
+                feedbackForm.value?.reset()
+                resetForm()
+                submitMessage.value = 'Спасибо, сообщение отправлено'
+            } else {
+                submitMessage.value = 'Не удалось отправить сообщение'
+            }
+        })
     }
+}
+
+function resetForm () {
+    formField.name = ''
+    formField.phone = ''
+    formField.email = ''
+    formField.textarea = ''
+    formField.nameError = false
+    formField.phoneError = false
+    formField.emailError = false
+    formField.textareaError = false
 }
 
 function onFeedbackSubmit() {

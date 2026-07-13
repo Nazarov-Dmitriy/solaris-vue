@@ -13,11 +13,14 @@ export const useShopStore = defineStore('shopStore', {
 
         getProduct: (state) => {
             return (id: number) => {
-            const product = [];
+            let product: Product | undefined;
             state.products.forEach(el => {
-                product.push(el.find(e => e.id === id))
+                const found = el.find(e => e.id === id);
+                if (found) {
+                    product = found;
+                }
             });
-            return product.pop()
+            return product
         }}
     },
     actions: {
@@ -30,12 +33,9 @@ export const useShopStore = defineStore('shopStore', {
         setCurrentPage(page: number) {
             this.$state.currentPage = page
         },
-        /* 
-        addProducts(products: Product[]) {
-            this.$state.products.concat(products)
-        }, *//* 
         clearProducts() {
-            this.$state.products = {}
-        } */
+            this.$state.products = new Map()
+            this.$state.pagesCount = 0
+        }
     }
 })

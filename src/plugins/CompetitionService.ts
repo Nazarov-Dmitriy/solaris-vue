@@ -39,6 +39,13 @@ export class CompetitionService {
         return await this._axiosR.post<UserJoinCompetition>('/pupil/competition/userjoin', { competition_id: competitionId, nastavnik_id: teacherId });
     }
 
+    public async removeStudentFromContest(competitionId: number, pupilId: number) {
+        return await this._axiosR.post('/teacher/concursremovestudent', {
+            competition_id: competitionId,
+            pupil_id: pupilId,
+        });
+    }
+
     public async postContestProposition(data: FormData) {
         return await this._axiosR.post('/teacher/concursproposition', data);
     }

@@ -6,6 +6,9 @@ export interface Product {
     description: string,
     price: number,
     category_id: number,
+    count: number,
+    is_autocreate?: number,
+    pvz?: string | null,
     image_url: string,
 }
 

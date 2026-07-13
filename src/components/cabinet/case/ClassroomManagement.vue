@@ -132,6 +132,9 @@
                             <h3 class="h3 management__footer-title">
                                 Предполагаемый балл: 0
                             </h3>
+                            <p v-if="errorMessage" class="p2 management__error">
+                                {{ errorMessage }}
+                            </p>
                             <BtnComponent
                                 emit-name="form-submit"
                                 class="management__footer-btn"
@@ -188,9 +191,17 @@ import InputDate from './form/InputDate.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
 import { useCaseSave } from '@/composables/useCaseSave'
 
+const props = defineProps({
+    subjects: {
+        type: Array,
+        default: () => []
+    }
+})
+
 const {
     groups: fieldsGroup,
     isModalVisible,
+    errorMessage,
     fileInputRefs,
     addGroup: addFieldsGroup,
     toggleModal,
@@ -209,6 +220,7 @@ const {
         files: [] as File[],
     }),
     getCritery: (group) => group.eventName,
+    getPredmets: () => props.subjects as string[],
 })
 
 const eventNameOptions = ref([
@@ -231,6 +243,10 @@ const chooseResultOptions = ref(['-', 'Участие', 'Победитель', 
 <style scoped lang="scss">
 .management {
     background-color: var(--white);
+}
+
+.management__error {
+    color: var(--orange);
 }
 .management__container {
     display: flex;

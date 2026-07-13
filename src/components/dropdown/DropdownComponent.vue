@@ -35,6 +35,7 @@ import {
     defineEmits,
     onMounted,
     onBeforeUnmount,
+    watch,
 } from 'vue';
 const dropDown = ref(null);
 
@@ -74,6 +75,14 @@ const closeDropDown = (element) => {
 const defaultValue = computed(() => {
     return props.options[0];
 });
+
+watch(
+    () => props.modelValue,
+    (value) => {
+        selectedOption.value = value || null;
+    },
+    { immediate: true }
+);
 
 onMounted(() => {
     window.addEventListener('click', closeDropDown);

@@ -4,21 +4,27 @@
         <div class="cabinet-container__wrapper">
             <CaseTitle />
             <div class="cabinet-container__main">
-                <TeacherDetails @option-selected="handleOptionSelected" />
+                <TeacherDetails
+                    :selected-option="selectedOption"
+                    @option-selected="handleOptionSelected"
+                    @subjects-selected="handleSubjectsSelected"
+                />
                 <template v-if="!selectedComponent">
                     <AddCase />
                 </template>
                 <component
                     :is="selectedComponent"
                     v-else
+                    :subjects="selectedSubjects"
                 />
             </div>
         </div>
     </div>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue'
+<script setup lang="ts">
+import { ref, computed, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import TeacherHeader from '@/components/cabinet/header/TeacherHeader.vue';
 import AddCase from '@/components/cabinet/case/AddCase.vue';
 import TeacherDetails from '@/components/cabinet/case/form/TeacherDetails.vue';
@@ -31,6 +37,9 @@ import TopCompetition from '@/components/cabinet/case/TopCompetition.vue';
 import AddCertification from '@/components/cabinet/case/AddCertification.vue';
 
 const selectedOption = ref('')
+const selectedSubjects = ref<string[]>([])
+const route = useRoute()
+const router = useRouter()
 
 const componentMap = {
     'Классное руководство': ClassroomManagement,
@@ -46,8 +55,26 @@ const selectedComponent = computed(() => {
 })
 
 function handleOptionSelected (option) {
-    selectedOption.value = option
+    selectedOption.value = componentMap[option] ? option : ''
+    router.replace({
+        query: {
+            ...route.query,
+            type: selectedOption.value || undefined
+        }
+    })
 }
+
+function handleSubjectsSelected(subjects) {
+    selectedSubjects.value = subjects
+}
+
+watch(
+    () => route.query.type,
+    (type) => {
+        selectedOption.value = componentMap[type] ? type : ''
+    },
+    { immediate: true }
+)
 </script>
 
 <style scoped lang="scss">

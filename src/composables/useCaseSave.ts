@@ -12,6 +12,7 @@ export function useCaseSave<T extends Record<string, unknown>>(options: {
 
     const groups = ref<T[]>([options.createEmpty()])
     const isModalVisible = ref(false)
+    const errorMessage = ref('')
     const fileInputRefs = ref<(HTMLInputElement | null)[]>([])
 
     watch(isModalVisible, (value) => {
@@ -19,6 +20,7 @@ export function useCaseSave<T extends Record<string, unknown>>(options: {
     })
 
     function addGroup() {
+        if (!isGroupReady(groups.value[groups.value.length - 1] as T)) return
         groups.value.push(options.createEmpty())
     }
 
@@ -34,13 +36,15 @@ export function useCaseSave<T extends Record<string, unknown>>(options: {
 
     async function saveGroup(index: number) {
         const group = groups.value[index] as T
+        if (!isGroupReady(group)) return
+
         const { files, ...groupData } = group as Record<string, unknown>
 
         const formData = new FormData()
-        const predmets = options.getPredmets ? options.getPredmets(group) : [options.getCritery(group)]
+        const predmets = getPredmets(group)
         const critery = options.getCritery(group).slice(0, 100)
 
-        formData.append('teacher_id', String(teacherStore.user?.user_id ?? ''))
+        formData.append('teacher_id', String(teacherStore.user?.id ?? ''))
         formData.append('critery', critery)
         predmets.forEach(p => formData.append('predmets[]', p))
         formData.append('data', JSON.stringify(groupData))
@@ -49,15 +53,42 @@ export function useCaseSave<T extends Record<string, unknown>>(options: {
 
         try {
             await teacherService?.postTeacherCase(formData)
+            errorMessage.value = ''
             toggleModal()
         } catch (err) {
             console.error(err)
+            errorMessage.value = 'Не удалось сохранить кейс. Проверьте заполнение формы и попробуйте еще раз.'
         }
+    }
+
+    function getPredmets(group: T): string[] {
+        const predmets = options.getPredmets ? options.getPredmets(group) : [options.getCritery(group)]
+
+        return predmets
+            .map(item => String(item || '').trim())
+            .filter(item => item !== '' && item !== '-')
+    }
+
+    function isGroupReady(group: T): boolean {
+        const critery = String(options.getCritery(group) || '').trim()
+        if (!critery || critery === '-') {
+            errorMessage.value = 'Выберите критерий или заполните название перед сохранением.'
+            return false
+        }
+
+        if (getPredmets(group).length === 0) {
+            errorMessage.value = 'Выберите хотя бы один предмет.'
+            return false
+        }
+
+        errorMessage.value = ''
+        return true
     }
 
     return {
         groups,
         isModalVisible,
+        errorMessage,
         fileInputRefs,
         addGroup,
         toggleModal,

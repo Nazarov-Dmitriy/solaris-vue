@@ -43,7 +43,7 @@
                         <span class="quantity h3">{{ countValue }}</span>
                         <button class="increase h3" @click="increment">+</button>
                     </div>
-                    <button type="button" class="exchange-btn" :disabled="saleLoading" @click="exchangeProduct">
+                    <button type="button" class="exchange-btn" :disabled="saleLoading || !canExchange" @click="exchangeProduct">
                         {{ saleLoading ? 'Обмен...' : 'Обменять' }}
                     </button>
                 </div>
@@ -55,13 +55,15 @@
 <script setup lang="ts">
 //TODO: loader
 import { Product } from '@/interfaces/shop'
+import { PupilService } from '@/plugins/PupilService'
 import { ShopService } from '@/plugins/ShopService'
 import { useShopStore } from '@/stores/useShopStore'
-import { inject, onMounted, ref, watch } from 'vue'
+import { computed, inject, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const shopStore = useShopStore()
 const shopService: ShopService = inject('ShopService')
+const pupilService: PupilService = inject('PupilService')
 
 const route = useRoute();
 const router = useRouter()
@@ -72,6 +74,10 @@ const saleLoading = ref(false);
 const saleMessage = ref('');
 const saleError = ref(false);
 const product = ref<Product | null>(null)
+const maxAvailableCount = computed(() => product.value?.count ?? 0)
+const canExchange = computed(() => {
+    return Boolean(product.value) && (maxAvailableCount.value === -1 || maxAvailableCount.value >= countValue.value)
+})
 
 watch(() => +route.params.id, fetchProduct, {immediate: true})
 
@@ -99,6 +105,7 @@ async function fetchProduct(id: number) {
 }
 
 function increment() {
+    if (maxAvailableCount.value !== -1 && countValue.value >= maxAvailableCount.value) return
     countValue.value++
 }
 function decrement() {
@@ -110,7 +117,7 @@ function decrement() {
 }
 
 async function exchangeProduct() {
-    if (!product.value || saleLoading.value) return
+    if (!product.value || saleLoading.value || !canExchange.value) return
 
     saleLoading.value = true
     saleMessage.value = ''
@@ -119,10 +126,13 @@ async function exchangeProduct() {
     try {
         await shopService.saleProduct(product.value.id, countValue.value)
         saleMessage.value = 'Товар успешно обменян'
+        shopStore.clearProducts()
+        pupilService.getCurrentPipul()
+        await fetchProduct(product.value.id)
     } catch (error) {
         console.error('Product sale error', error)
         saleError.value = true
-        saleMessage.value = error.response.data.tovar?.[0] ?? 'Не удалось обменять товар'
+        saleMessage.value = error?.response?.data?.tovar?.[0] ?? 'Не удалось обменять товар'
     } finally {
         saleLoading.value = false
     }

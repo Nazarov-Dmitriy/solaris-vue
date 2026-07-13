@@ -128,6 +128,9 @@
                         </p>
                         <div class="achievements__footer">
                             <h3 class="h3 achievements__footer-title">Предполагаемый балл: 0</h3>
+                            <p v-if="errorMessage" class="p2 achievements__error">
+                                {{ errorMessage }}
+                            </p>
                             <BtnComponent
                                 emit-name="form-submit"
                                 class="achievements__footer-btn"
@@ -182,7 +185,14 @@ import InputDate from './form/InputDate.vue'
 import ModalComponent from '@/components/modal/ModalComponent.vue'
 import { useCaseSave } from '@/composables/useCaseSave'
 
-const { groups, isModalVisible, fileInputRefs, addGroup, toggleModal, saveGroup, handleFileChange } = useCaseSave({
+const props = defineProps({
+    subjects: {
+        type: Array,
+        default: () => []
+    }
+})
+
+const { groups, isModalVisible, errorMessage, fileInputRefs, addGroup, toggleModal, saveGroup, handleFileChange } = useCaseSave({
     createEmpty: () => ({
         eventName: '-' as string,
         date: '' as string,
@@ -194,6 +204,7 @@ const { groups, isModalVisible, fileInputRefs, addGroup, toggleModal, saveGroup,
         files: [] as File[],
     }),
     getCritery: (group) => group.eventName,
+    getPredmets: () => props.subjects as string[],
 })
 
 const dateError = ref('')
@@ -228,6 +239,10 @@ const chooseResultOptions = ref(['-', 'Участие', 'Победитлеь', 
 <style scoped lang="scss">
 .achievements {
     background-color: var(--white);
+}
+
+.achievements__error {
+    color: var(--orange);
 }
 
 .achievements__wrapper {

@@ -6,7 +6,12 @@
             @click="closeModal"
             @keyup.esc="closeModal()"
         >
-            <div v-if="props.validate" class="activate-certificate" @click.stop>
+            <div v-if="props.loading" class="certificate__blocck-error" @click.stop>
+                <div class="certificate__error">
+                    <p class="certificate__text">Проверка сертификата...</p>
+                </div>
+            </div>
+            <div v-else-if="props.validate && props.certificate" class="activate-certificate" @click.stop>
                 <div class="modal__close-btn-wrapper">
                     <button class="modal__close-btn" @click="closeModal">
                         <img src="/public/cabinteTeacher/case/modal-close.png" alt="Close" />
@@ -16,36 +21,42 @@
                     <span>№ сертификата</span>
                 </div>
                 <div class="activate-certificate-wrapper">
-                    <span>{{ props.sertificat }}</span>
+                    <span>{{ props.certificate.number || props.sertificat }}</span>
                 </div>
                 <div class="activate-certificate-wrapper">
                     <span>ФИО ученика</span>
                 </div>
                 <div class="activate-certificate-wrapper">
-                    <span>{{ props.user.name }}</span>
+                    <span>{{ props.certificate.user?.name || '-' }}</span>
                 </div>
                 <div class="activate-certificate-wrapper">
                     <span>Класс</span>
                 </div>
                 <div class="activate-certificate-wrapper">
-                    <span>{{ props.user.class }}</span>
+                    <span>{{ props.certificate.user?.class || '-' }}</span>
                 </div>
                 <div class="activate-certificate-wrapper">
                     <span>Дата приобретения</span>
                 </div>
                 <div class="activate-certificate-wrapper">
-                    <span>{{ props.user.date }}</span>
+                    <span>{{ props.certificate.sale_at || '-' }}</span>
                 </div>
-                <div v-if="!active" class="activate-certificate-button-wrapper">
+                <div v-if="props.message" class="activate-certificate-button-wrapper activate-certificate-message">
+                    <span>{{ props.message }}</span>
+                </div>
+                <div v-if="!isActivated" class="activate-certificate-button-wrapper">
                     <span>Активация</span>
                 </div>
-                <div v-if="!active" class="activate-certificate-button-wrapper">
+                <div v-else class="activate-certificate-button-wrapper">
+                    <span>Активирован {{ props.certificate.use_at }}</span>
+                </div>
+                <div v-if="!isActivated" class="activate-certificate-button-wrapper">
                     <BtnWhite
                         class="activate-certificate-btn"
                         emit-name="action"
-                        @action="activeteSertificat()"
+                        @action="emit('activate')"
                     >
-                        Активировать
+                        {{ props.activationLoading ? 'Активация...' : 'Активировать' }}
                     </BtnWhite>
                 </div>
             </div>
@@ -57,7 +68,7 @@
                 </div>
                 <div class="certificate__error">
                     <p class="certificate__text certificate__text-error">Ошибка</p>
-                    <p class="certificate__text">Такого сертификата нет</p>
+                    <p class="certificate__text">{{ props.message || 'Такого сертификата нет' }}</p>
                 </div>
             </div>
         </div>
@@ -65,14 +76,14 @@
 </template>
 <script setup>
 import BtnWhite from '../btns/cabinetTeacher/case/BtnWhite.vue'
-import { ref } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
     show: {
         type: Boolean,
         default: false
     },
-    user: {
+    certificate: {
         type: Object,
         default: () => ({})
     },
@@ -80,19 +91,26 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    loading: {
+        type: Boolean,
+        default: false
+    },
+    activationLoading: {
+        type: Boolean,
+        default: false
+    },
+    message: {
+        type: String,
+        default: ''
+    },
     sertificat: {
         type: String,
         default: ''
     }
 })
 
-const emit = defineEmits('close')
-
-const active = ref(false)
-
-function activeteSertificat() {
-    active.value = true
-}
+const emit = defineEmits(['close', 'activate'])
+const isActivated = computed(() => Boolean(props.certificate?.use_at))
 
 function closeModal() {
     emit('close')
@@ -169,6 +187,11 @@ function closeModal() {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.activate-certificate-message {
+    grid-column: 1 / -1;
+    color: var(--orange);
 }
 
 .activate-certificate-btn {

@@ -17,16 +17,17 @@ export class ShopService {
     private _axiosR = axiosR
     private shopStore = useShopStore()
 
-    public getProducts(): Promise<AxiosResponse<ProductsPaginationResponse>> {
+    public getProducts(): Promise<void | AxiosResponse<ProductsPaginationResponse>> {
         if(this.shopStore.products.has(this.shopStore.currentPage)){
-            return;
+            return Promise.resolve();
         }else{
-        this._axiosR.get<ProductsPaginationResponse>(`/tovars/catalogs?page=${this.shopStore.currentPage}&per_page=${this.shopStore.perPage}`)
+        return this._axiosR.get<ProductsPaginationResponse>(`/tovars/catalogs?page=${this.shopStore.currentPage}&per_page=${this.shopStore.perPage}`)
         .then((res) => {
             if(res.status === 200){
                 this.shopStore.setProducts(res.data.data, this.shopStore.currentPage)
                 if(this.shopStore.pagesCount !== res.data.meta.page.last_page) this.shopStore.setPagesCount(res.data.meta.page.last_page)
             }
+            return res
         })
     }}
 
